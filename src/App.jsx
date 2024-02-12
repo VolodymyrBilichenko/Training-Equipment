@@ -1,9 +1,7 @@
-import './App.styled';
-
 export const App = () => {
   return (
     <div>
-      <h1>Start</h1>
+      <h1>Start Training Equipment</h1>
     </div>
   );
 }
