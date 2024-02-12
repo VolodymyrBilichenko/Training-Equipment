@@ -1,5 +1,6 @@
 import React from 'react'
 import { MainHero } from './components/MainHero/MainHero'
+import { MainCategories } from './components/MainCategories/MainCategories'
 
 export const Main = () => {
   return (
@@ -7,7 +8,7 @@ export const Main = () => {
 
 		<MainHero/>
 
-
+        <MainCategories/>
 	</main>
   )
 }
