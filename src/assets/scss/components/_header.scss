@@ -2,7 +2,7 @@
 	position: sticky;
 	background: var(--accent);
 	@include _992 {
-		position: static;
+		position: relative;
 		background: transparent;
 	}
 	transform: translate(0,-1px);

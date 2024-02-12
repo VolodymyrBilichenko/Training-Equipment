@@ -4157,7 +4157,7 @@ body.is-popup-active {
     }
 
     .header {
-        position: static;
+        position: relative;
         background: rgba(0,0,0,0)
     }
 
