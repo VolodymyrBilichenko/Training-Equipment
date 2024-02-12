@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Training-Equipment/static/css/main.0d0ce000.css",
-    "main.js": "/Training-Equipment/static/js/main.f9c30402.js",
+    "main.js": "/Training-Equipment/static/js/main.0e1e90bc.js",
     "static/media/Exo2-Bold.woff2": "/Training-Equipment/static/media/Exo2-Bold.a73178284d0d49ec5e58.woff2",
     "static/media/Exo2-ExtraBold.woff2": "/Training-Equipment/static/media/Exo2-ExtraBold.53385c2c82e72e803443.woff2",
     "static/media/Exo2-SemiBold.woff2": "/Training-Equipment/static/media/Exo2-SemiBold.aee67577b9101e19dcc4.woff2",
@@ -11,10 +11,10 @@
     "static/media/logo-min.svg": "/Training-Equipment/static/media/logo-min.55336e85ff9084e72ec6154f2bd56d15.svg",
     "index.html": "/Training-Equipment/index.html",
     "main.0d0ce000.css.map": "/Training-Equipment/static/css/main.0d0ce000.css.map",
-    "main.f9c30402.js.map": "/Training-Equipment/static/js/main.f9c30402.js.map"
+    "main.0e1e90bc.js.map": "/Training-Equipment/static/js/main.0e1e90bc.js.map"
   },
   "entrypoints": [
     "static/css/main.0d0ce000.css",
-    "static/js/main.f9c30402.js"
+    "static/js/main.0e1e90bc.js"
   ]
 }
