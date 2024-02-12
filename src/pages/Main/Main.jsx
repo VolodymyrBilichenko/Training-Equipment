@@ -1,6 +1,7 @@
 import React from 'react'
 import { MainHero } from './components/MainHero/MainHero'
 import { MainCategories } from './components/MainCategories/MainCategories'
+import { MainProducts } from './components/MainProducts/MainProducts'
 
 export const Main = () => {
   return (
@@ -9,6 +10,8 @@ export const Main = () => {
 		<MainHero/>
 
         <MainCategories/>
+
+        <MainProducts/>
 	</main>
   )
 }
