@@ -15,7 +15,7 @@ const imageAspectRatio = document.querySelectorAll('.image-aspect-ratio, figure'
 imageAspectRatio.forEach(imageAspectRatio => {
 	const img = imageAspectRatio.querySelector('img'), style = getComputedStyle(imageAspectRatio);
 	if(img) {
-		if(img.getAttribute('width') && img.getAttribute('height') && style.position == "relative")
+		if(img.getAttribute('width') && img.getAttribute('height') && style.position === "relative")
 		imageAspectRatio.style.setProperty('--padding-aspect-ratio', Number(img.getAttribute('height')) / Number(img.getAttribute('width')) * 100 + '%');
 	}
 	
@@ -39,23 +39,23 @@ popup.init();
 
 // =-=-=-=-=-=-=-=-=-=- <Get-device-type> -=-=-=-=-=-=-=-=-=-=-
 
-const getDeviceType = () => {
+// const getDeviceType = () => {
 
-	const ua = navigator.userAgent;
-	if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-		return "tablet";
-	}
+// 	const ua = navigator.userAgent;
+// 	if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+// 		return "tablet";
+// 	}
 
-	if (
-		/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
-		ua
-		)
-	) {
-		return "mobile";
-	}
-	return "desktop";
+// 	if (
+// 		/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
+// 		ua
+// 		)
+// 	) {
+// 		return "mobile";
+// 	}
+// 	return "desktop";
 
-};
+// };
 
 // =-=-=-=-=-=-=-=-=-=- </Get-device-type> -=-=-=-=-=-=-=-=-=-=-
 
@@ -77,7 +77,7 @@ function resize() {
 
 	header && html.style.setProperty("--height-header", header.offsetHeight + "px");
 	html.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
-	if(windowSize != window.innerWidth) {
+	if(windowSize !== window.innerWidth) {
 		html.style.setProperty("--svh", window.innerHeight * 0.01 + "px");
 	}
 	
@@ -103,7 +103,7 @@ sliders();
 
 // =-=-=-=-=-=-=-=-=-=-=-=- <sticky> -=-=-=-=-=-=-=-=-=-=-=-=
 
-new Sticky(".sticky");
+// new Sticky(".sticky");
 
 // =-=-=-=-=-=-=-=-=-=-=-=- </sticky> -=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -150,7 +150,7 @@ function updatePrice() {
 updatePrice();
 
 document.querySelectorAll('.product__length_value').forEach(input => {
-	const max = Number(input.max), min = Number(input.min);
+	const max = Number(input.max)
 
 	input.addEventListener("input", function (event) {
 		const value = Number(input.value);
@@ -194,9 +194,9 @@ document.querySelectorAll("form").forEach(form => {
 
 	inputs.forEach(input => {
 		input.addEventListener("blur", function (event) {
-			if(input.value != "") {
+			if(input.value !== "") {
 				
-				if(input.type == "tel") {
+				if(input.type === "tel") {
 					if(!validatePhoneNumber(input)) {
 						input.parentElement.classList.add("is-error");
 					} else {
@@ -204,7 +204,7 @@ document.querySelectorAll("form").forEach(form => {
 					}
 				}
 
-				if(input.type == "email") {
+				if(input.type === "email") {
 					if(!validateEmail(input)) {
 						input.parentElement.classList.add("is-error");
 					} else {

@@ -1,3 +1,5 @@
+import './assets/js/main' 
+
 export const App = () => {
   return (
     <div>
