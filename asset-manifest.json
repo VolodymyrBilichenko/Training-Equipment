@@ -1,10 +1,18 @@
 {
   "files": {
-    "main.js": "/Training-Equipment/static/js/main.25aec21d.js",
+    "main.css": "/Training-Equipment/static/css/main.19bf9b5e.css",
+    "main.js": "/Training-Equipment/static/js/main.73071e71.js",
+    "static/media/Exo2-Bold.woff2": "/Training-Equipment/static/media/Exo2-Bold.a73178284d0d49ec5e58.woff2",
+    "static/media/Exo2-ExtraBold.woff2": "/Training-Equipment/static/media/Exo2-ExtraBold.53385c2c82e72e803443.woff2",
+    "static/media/Exo2-SemiBold.woff2": "/Training-Equipment/static/media/Exo2-SemiBold.aee67577b9101e19dcc4.woff2",
+    "static/media/Exo2-Regular.woff2": "/Training-Equipment/static/media/Exo2-Regular.49b480f3ad20a5acb07c.woff2",
+    "static/media/Manrope-Regular.woff2": "/Training-Equipment/static/media/Manrope-Regular.944b32dd4a8e58c2ea41.woff2",
     "index.html": "/Training-Equipment/index.html",
-    "main.25aec21d.js.map": "/Training-Equipment/static/js/main.25aec21d.js.map"
+    "main.19bf9b5e.css.map": "/Training-Equipment/static/css/main.19bf9b5e.css.map",
+    "main.73071e71.js.map": "/Training-Equipment/static/js/main.73071e71.js.map"
   },
   "entrypoints": [
-    "static/js/main.25aec21d.js"
+    "static/css/main.19bf9b5e.css",
+    "static/js/main.73071e71.js"
   ]
 }
