@@ -1,12 +1,14 @@
+import { Main } from "../pages/Main/Main"
+
 export const routes = () => {
     return [
         {
             path: '/Training-Equipment',
-            element: 'main'
+            element: <Main/>
         },
         {
             path: '/',
-            element: 'main'
+            element: <Main/>
         },
         {
             path: '*',
