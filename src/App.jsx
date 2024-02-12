@@ -5,6 +5,7 @@ import { routes } from './routes/routes'
 import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Sprite } from './components/IconSprite/Sprite';
+import { Footer } from './components/Footer/Footer';
 
 export const App = () => {
   const [routesList] = useState(routes())
@@ -18,6 +19,8 @@ export const App = () => {
       <Routes>
         {routesList.map(route => <Route key={route.path} element={route.element} path={route.path}/>)}
       </Routes>
+
+      <Footer/>
     </>
   );
 }
