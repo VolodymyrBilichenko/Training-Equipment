@@ -1,3 +1,4 @@
+import { Error } from "../pages/Eroor/Error"
 import { Main } from "../pages/Main/Main"
 
 export const routes = () => {
@@ -12,7 +13,7 @@ export const routes = () => {
         },
         {
             path: '*',
-            element: 'qq not found'
+            element: <Error/>
         },
     ]
 }
