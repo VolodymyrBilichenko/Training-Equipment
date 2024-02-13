@@ -5,9 +5,12 @@ export const BreadCrumbs = ({ pages }) => {
     return (
         <div className="breadcrumbs container">
 			<NavLink to={'/'} className="breadcrumbs__link">Головна</NavLink>
-			<span className="breadcrumbs__separator">-</span>
-            {pages.map((item, index) => (                
-                item.route ? <NavLink to={item.route} key={index} className="breadcrumbs__link">{item.page}</NavLink> : <span key={index} className="breadcrumbs__current">{item.page}</span>
+			
+            {pages.map((item, index) => (            
+                item.route ? 
+                    <React.Fragment key={`sep-${index}`}><span className="breadcrumbs__separator">-</span><NavLink key={`nav-${index}`} to={item.route} className="breadcrumbs__link">{item.page}</NavLink></React.Fragment> 
+                    : 
+                    <React.Fragment key={`st-${index}`}><span className="breadcrumbs__separator">-</span><span key={`kk-${index}`} className="breadcrumbs__current">{item.page}</span></React.Fragment>
             ))}
 		</div>
     )
