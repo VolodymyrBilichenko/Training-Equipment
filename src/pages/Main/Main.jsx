@@ -2,6 +2,7 @@ import React from 'react'
 import { MainHero } from './components/MainHero/MainHero'
 import { MainCategories } from './components/MainCategories/MainCategories'
 import { MainProducts } from './components/MainProducts/MainProducts'
+import { MainStatistics } from './components/MainStatistics/MainStatistics'
 
 export const Main = () => {
   return (
@@ -12,6 +13,8 @@ export const Main = () => {
         <MainCategories/>
 
         <MainProducts/>
+
+        <MainStatistics/>
 	</main>
   )
 }
