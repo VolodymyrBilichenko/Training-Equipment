@@ -166,9 +166,9 @@ summary {
     pointer-events: auto
 }
 
-.splide:not(.is-overflow) .splide__pagination {
+/* .splide:not(.is-overflow) .splide__pagination {
     display: none
-}
+} */
 
 .splide__progress__bar {
     width: 0

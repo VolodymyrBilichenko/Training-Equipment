@@ -3,6 +3,7 @@ import { MainHero } from './components/MainHero/MainHero'
 import { MainCategories } from './components/MainCategories/MainCategories'
 import { MainProducts } from './components/MainProducts/MainProducts'
 import { MainStatistics } from './components/MainStatistics/MainStatistics'
+import { MainReviews } from './components/MainReviews/MainReviews'
 
 export const Main = () => {
   return (
@@ -15,6 +16,8 @@ export const Main = () => {
         <MainProducts/>
 
         <MainStatistics/>
+
+        <MainReviews/>
 	</main>
   )
 }
