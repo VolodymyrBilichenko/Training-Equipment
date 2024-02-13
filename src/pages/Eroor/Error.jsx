@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 
 import Decor from '../../assets/img/decor-hero-background.png'
 
@@ -7,6 +8,8 @@ export const Error = () => {
     return (
         <div className='main'>
             <div className="main__background" style={{backgroundImage: `url(${Decor})`, paddingTop: '24%'}} aria-hidden="true"></div>
+
+            <BreadCrumbs pages={[{page: 'Помилка 404'}]}/>
 
             <section className="not-found container">
                 <div className="not-found__col">
