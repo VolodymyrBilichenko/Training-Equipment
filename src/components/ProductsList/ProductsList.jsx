@@ -8,9 +8,9 @@ import ProductCardImg4 from '../../assets/img/product-cards/product-card-image-4
 import ProductCardImg5 from '../../assets/img/product-cards/product-card-image-5.png'
 import ProductCardImg6 from '../../assets/img/product-cards/product-card-image-6.png'
 
-export const ProductsList = () => {
+export const ProductsList = ({ClassNameList}) => {
     return (
-        <ul className="favorites__list products-list">
+        <ul className={`${ClassNameList} products-list`}>
 
             <ProductListItem 
                 ProductImg={ProductCardImg1} 

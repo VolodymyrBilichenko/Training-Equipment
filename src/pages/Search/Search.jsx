@@ -25,7 +25,7 @@ export const Search = () => {
 
             <MainHeroSearch searchPlaceholder={'Пошук'}/>
 
-            <ProductsList/>
+            <ProductsList ClassNameList={'favorites__list'}/>
         </div>
     </div>
   )
