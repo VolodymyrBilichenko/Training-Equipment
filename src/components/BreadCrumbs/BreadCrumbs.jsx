@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-export const BreadCrumbs = ({ pages }) => {
+export const BreadCrumbs = ({ pages = [] }) => {
     return (
         <div className="breadcrumbs container">
 			<NavLink to={'/'} className="breadcrumbs__link">Головна</NavLink>

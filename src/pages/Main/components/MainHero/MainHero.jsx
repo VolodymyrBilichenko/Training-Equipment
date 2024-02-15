@@ -30,7 +30,7 @@ export const MainHero = () => {
             </div>
         </div>
 
-        <MainHeroSearch/>
+        <MainHeroSearch searchPlaceholder={'Пошук по каталогу'}/>
     </section>
   )
 }
