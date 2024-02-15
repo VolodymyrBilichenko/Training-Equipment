@@ -16,9 +16,11 @@ export const App = () => {
     
       <Header/>
 
-      <Routes>
-        {routesList.map(route => <Route key={route.path} element={route.element} path={route.path}/>)}
-      </Routes>
+      <div className='main'>
+        <Routes>
+          {routesList.map(route => <Route key={route.path} element={route.element} path={route.path}/>)}
+        </Routes>
+      </div>
 
       <Footer/>
     </>
