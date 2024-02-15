@@ -5,6 +5,7 @@ import DecorElem from '../../assets/img/decor-element.png'
 import DecorHero from '../../assets/img/decor-hero-background.png'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
 import { MainHeroSearch } from '../Main/components/MainHero/components/MainHeroSearch'
+import { ProductsList } from '../../components/ProductsList/ProductsList'
 
 export const Search = () => {
   return (
@@ -24,6 +25,7 @@ export const Search = () => {
 
             <MainHeroSearch searchPlaceholder={'Пошук'}/>
 
+            <ProductsList/>
         </div>
     </div>
   )
