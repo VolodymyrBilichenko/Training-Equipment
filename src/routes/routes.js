@@ -1,3 +1,4 @@
+import { Categories } from "../pages/Categories/Categories"
 import { Error } from "../pages/Eroor/Error"
 import { Favorites } from "../pages/Favorites/Favorites"
 import { Main } from "../pages/Main/Main"
@@ -20,6 +21,10 @@ export const routes = () => {
         {
             path: '/favorites',
             element: <Favorites/>
+        },
+        {
+            path: '/categories',
+            element: <Categories/>
         },
         {
             path: '*',
