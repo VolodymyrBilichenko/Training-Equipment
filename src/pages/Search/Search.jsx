@@ -1,11 +1,12 @@
 import React from 'react'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
-
-import DecorElem from '../../assets/img/decor-element.png'
-import DecorHero from '../../assets/img/decor-hero-background.png'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
 import { MainHeroSearch } from '../Main/components/MainHero/components/MainHeroSearch'
 import { ProductsList } from '../../components/ProductsList/ProductsList'
+import { PaginationProducts } from '../../components/PaginationProducts/PaginationProducts'
+
+import DecorHero from '../../assets/img/decor-hero-background.png'
+import DecorElem from '../../assets/img/decor-element.png'
 
 export const Search = () => {
   return (
@@ -26,6 +27,8 @@ export const Search = () => {
             <MainHeroSearch searchPlaceholder={'Пошук'}/>
 
             <ProductsList ClassNameList={'favorites__list'}/>
+
+            <PaginationProducts ClassName={'favorites__pagination'}/>
         </div>
     </div>
   )
