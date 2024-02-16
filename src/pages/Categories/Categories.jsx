@@ -3,6 +3,7 @@ import React from 'react'
 import DecorHero from '../../assets/img/decor-hero-background.png'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
+import { CategoriesList } from '../../components/CategoriesList/CategoriesList'
 
 export const Categories = () => {
     return (
@@ -21,7 +22,7 @@ export const Categories = () => {
                     </p>
                 </div>
 
-                
+                <CategoriesList ClassNameList={'add-border'}/>
             </div>
         </>
     )

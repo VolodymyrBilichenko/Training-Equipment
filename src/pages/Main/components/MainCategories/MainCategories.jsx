@@ -1,6 +1,6 @@
 import React from 'react'
 import { SectionTitle } from '../../../../components/SectionTitle/SectionTitle'
-import { MainCategoriesList } from './components/MainCategoriesList/MainCategoriesList'
+import { CategoriesList } from '../../../../components/CategoriesList/CategoriesList'
 
 export const MainCategories = () => {
   return (
@@ -8,7 +8,7 @@ export const MainCategories = () => {
 
       <SectionTitle title={'Комплексні рішення <br/> щодо кабінетів'}/>
 
-      <MainCategoriesList/>
+      <CategoriesList/>
       
     </section>
   )

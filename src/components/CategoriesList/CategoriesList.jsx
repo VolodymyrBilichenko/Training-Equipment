@@ -1,20 +1,19 @@
 import React from 'react'
 
-import CategoryIc1 from '../../../../../../assets/img/categories/category-icon-1.svg'
-import CategoryIc2 from '../../../../../../assets/img/categories/category-icon-2.svg'
-import CategoryIc3 from '../../../../../../assets/img/categories/category-icon-3.svg'
-import CategoryIc4 from '../../../../../../assets/img/categories/category-icon-4.svg'
-import CategoryIc5 from '../../../../../../assets/img/categories/category-icon-5.svg'
-import CategoryIc6 from '../../../../../../assets/img/categories/category-icon-6.svg'
-import CategoryIc7 from '../../../../../../assets/img/categories/category-icon-7.svg'
-import CategoryIc8 from '../../../../../../assets/img/categories/category-icon-8.svg'
-import CategoryIc9 from '../../../../../../assets/img/categories/category-icon-9.svg'
-import CategoryIc10 from '../../../../../../assets/img/categories/category-icon-10.svg'
+import CategoryIc2 from '../../assets/img/categories/category-icon-2.svg'
+import CategoryIc1 from '../../assets/img/categories/category-icon-1.svg'
+import CategoryIc3 from '../../assets/img/categories/category-icon-3.svg'
+import CategoryIc4 from '../../assets/img/categories/category-icon-4.svg'
+import CategoryIc5 from '../../assets/img/categories/category-icon-5.svg'
+import CategoryIc6 from '../../assets/img/categories/category-icon-6.svg'
+import CategoryIc7 from '../../assets/img/categories/category-icon-7.svg'
+import CategoryIc8 from '../../assets/img/categories/category-icon-8.svg'
+import CategoryIc9 from '../../assets/img/categories/category-icon-9.svg'
+import CategoryIc10 from '../../assets/img/categories/category-icon-10.svg'
 
-
-export const MainCategoriesList = () => {
+export const CategoriesList = ({ClassNameList}) => {
     return (
-        <ul className="categories__list">
+        <ul className={`categories__list ${ClassNameList}`}>
             <li>
                 <a href="foo">
                     <img src={CategoryIc1} width="52" height="52" loading="lazy" alt="categories ic"/>
