@@ -46,11 +46,11 @@ export const ProductsList = ({ClassNameList}) => {
             {test.map(item => ( 
                 <ProductListItem
                     key={item.id}
+                    data={item}
                     // ProductImg={item.img} 
                     // ProductTitle={item.title}
                     // ProductPriceIns={item.ProductPriceIns}
                     // ProductPriceDel={item.ProductPriceDel}
-                    data={item}
                     // clickBtn={handleAddClick}
                 />
             ))}

@@ -1,3 +1,4 @@
+import { Catalog } from "../pages/Catalog/Catalog"
 import { Categories } from "../pages/Categories/Categories"
 import { Error } from "../pages/Eroor/Error"
 import { Favorites } from "../pages/Favorites/Favorites"
@@ -25,6 +26,10 @@ export const routes = () => {
         {
             path: '/categories',
             element: <Categories/>
+        },
+        {
+            path: '/catalog',
+            element: <Catalog/>
         },
         {
             path: '*',

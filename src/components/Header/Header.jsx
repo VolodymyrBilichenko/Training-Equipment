@@ -5,13 +5,13 @@ import { HeaderMain } from './components/HeaderMain/HeaderMain'
 
 export const Header = () => {
   return (
-		<header className="header">
-            
-      <HeaderMessage/>
+	<header className="header">
+		
+		<HeaderMessage/>
 
-			<HeaderPanel/>
+		<HeaderPanel/>
 
-			<HeaderMain/>
-		</header>
+		<HeaderMain/>
+	</header>
   )
 }

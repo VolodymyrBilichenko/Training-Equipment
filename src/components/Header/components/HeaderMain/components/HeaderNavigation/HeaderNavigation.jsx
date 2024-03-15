@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 export const HeaderNavigation = ({ isOpen }) => {
   return (
@@ -11,9 +12,9 @@ export const HeaderNavigation = ({ isOpen }) => {
                     </a>
                 </li>
                 <li>
-                    <a href="catalog.html">
+                    <NavLink to={'/catalog'}>
                         Каталог
-                    </a>
+                    </NavLink>
                 </li>
                 <li>
                     <a href="pricelist.html">
