@@ -3,6 +3,7 @@ import { Categories } from "../pages/Categories/Categories"
 import { Error } from "../pages/Eroor/Error"
 import { Favorites } from "../pages/Favorites/Favorites"
 import { Main } from "../pages/Main/Main"
+import { ProductCard } from "../pages/ProductCard/ProductCard"
 import { Search } from "../pages/Search/Search"
 
 export const routes = () => {
@@ -30,6 +31,10 @@ export const routes = () => {
         {
             path: '/catalog',
             element: <Catalog/>
+        },
+        {
+            path: '/product',
+            element: <ProductCard/>
         },
         {
             path: '*',
