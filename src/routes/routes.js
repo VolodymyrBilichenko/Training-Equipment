@@ -1,3 +1,4 @@
+import { Basket } from "../pages/Basket/Basket"
 import { Catalog } from "../pages/Catalog/Catalog"
 import { Categories } from "../pages/Categories/Categories"
 import { Error } from "../pages/Eroor/Error"
@@ -35,6 +36,10 @@ export const routes = () => {
         {
             path: '/product',
             element: <ProductCard/>
+        },
+        {
+            path: '/basket',
+            element: <Basket/>
         },
         {
             path: '*',
