@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Training-Equipment/static/css/main.fb963726.css",
-    "main.js": "/Training-Equipment/static/js/main.4ae3c782.js",
+    "main.js": "/Training-Equipment/static/js/main.a86723ba.js",
     "static/media/background-decor.png": "/Training-Equipment/static/media/background-decor.fdda5b24f3fe3f92cee3.png",
     "static/media/decor-hero-background.png": "/Training-Equipment/static/media/decor-hero-background.6180da1d40fc23082d1f.png",
     "static/media/decor-element.png": "/Training-Equipment/static/media/decor-element.f0b2ac4a8b46981de649.png",
@@ -35,10 +35,10 @@
     "static/media/category-icon-3.svg": "/Training-Equipment/static/media/category-icon-3.10638ce38b3da03bede9f2656e8e859a.svg",
     "static/media/category-icon-9.svg": "/Training-Equipment/static/media/category-icon-9.ded3493b7c082b3cd3dccfa5858eac68.svg",
     "main.fb963726.css.map": "/Training-Equipment/static/css/main.fb963726.css.map",
-    "main.4ae3c782.js.map": "/Training-Equipment/static/js/main.4ae3c782.js.map"
+    "main.a86723ba.js.map": "/Training-Equipment/static/js/main.a86723ba.js.map"
   },
   "entrypoints": [
     "static/css/main.fb963726.css",
-    "static/js/main.4ae3c782.js"
+    "static/js/main.a86723ba.js"
   ]
 }
