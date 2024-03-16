@@ -6,6 +6,7 @@ import { Favorites } from "../pages/Favorites/Favorites"
 import { Main } from "../pages/Main/Main"
 import { PriceList } from "../pages/PriceList/PriceList"
 import { ProductCard } from "../pages/ProductCard/ProductCard"
+import { Profile } from "../pages/Profile/Profile"
 import { Search } from "../pages/Search/Search"
 import { Сertificate } from "../pages/Сertificate/Сertificate"
 
@@ -50,6 +51,10 @@ export const routes = () => {
         {
             path: '/pricelist',
             element: <PriceList/>
+        },
+        {
+            path: '/profile',
+            element: <Profile/>
         },
         {
             path: '*',
