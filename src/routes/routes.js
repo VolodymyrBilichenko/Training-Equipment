@@ -47,6 +47,10 @@ export const routes = () => {
             element: <Сertificate/>
         },
         {
+            path: '/certificate',
+            element: <Сertificate/>
+        },
+        {
             path: '*',
             element: <Error/>
         },

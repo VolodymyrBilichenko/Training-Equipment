@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { ProductsList } from '../../components/ProductsList/ProductsList'
@@ -9,28 +9,28 @@ import SliderItemPh from '../../assets/img/product/product-image.jpg';
 
 export const ProductCard = () => {
 
-  useEffect(() => {
-    const sliders = document.querySelectorAll('.product__gallery');
+  // useEffect(() => {
+  //   const sliders = document.querySelectorAll('.product__gallery');
 
-    sliders.forEach(sliderElement => {
-      const slider = new Splide(sliderElement, {
-        type: 'fade',
-        rewind: true,
-        perPage: 1,
-        arrows: false,
-        pagination: false,
-        speed: 700,
-        easing: 'ease',
-        breakpoints: {
-          550: {
-            speed: 400,
-          },
-        },
-      });
+  //   sliders.forEach(sliderElement => {
+  //     const slider = new Splide(sliderElement, {
+  //       type: 'fade',
+  //       rewind: true,
+  //       perPage: 1,
+  //       arrows: false,
+  //       pagination: false,
+  //       speed: 700,
+  //       easing: 'ease',
+  //       breakpoints: {
+  //         550: {
+  //           speed: 400,
+  //         },
+  //       },
+  //     });
 
-      // slider.mount();
-    });
-  }, [])
+  //     // slider.mount();
+  //   });
+  // }, [])
   
   return (
     <>
