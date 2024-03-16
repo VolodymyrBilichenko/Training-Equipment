@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header/Header';
 import { Sprite } from './components/IconSprite/Sprite';
 import { Footer } from './components/Footer/Footer';
+import { LoginPopUp } from './components/LoginPopUp/LoginPopUp';
 
 export const App = () => {
   const [routesList] = useState(routes())
@@ -23,6 +24,8 @@ export const App = () => {
       </div>
 
       <Footer/>
+
+      <LoginPopUp/>
     </>
   );
 }
