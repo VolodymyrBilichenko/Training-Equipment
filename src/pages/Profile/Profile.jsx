@@ -10,28 +10,27 @@ import { ProfileInfo } from './components/ProfileInfo/ProfileInfo'
 export const Profile = () => {
   return (
     <>
-        <BackGroundDecor/>
+      <BackGroundDecor/>
 
-        <BreadCrumbs pages={[{page: 'Личный кабинет'}]}/>
+      <BreadCrumbs pages={[{page: 'Личный кабинет'}]}/>
 
-        <section className="account container">
+      <section className="account container">
 
-            <SectionTitle title={'Личный кабинет'} ClassTitle={'account__title'}/>
+        <SectionTitle title={'Личный кабинет'} ClassTitle={'account__title'}/>
 
-			<div className="account__aside" data-sticky-container>
-                <ProfileNav/>
-			</div>
+        <div className="account__aside" data-sticky-container>
+          <ProfileNav/>
+        </div>
 
-			<div className="account__main">
+        <div className="account__main">
 
-				<ProfileInfo/>
+          <ProfileInfo/>
 
-                {/* <ProfileOrders/> */}
+          {/* <ProfileOrders/> */}
 
-                {/* <ProfileBonuses/> */}
-
-			</div>
-		</section>
+          {/* <ProfileBonuses/> */}
+        </div>
+      </section>
 
     </>
   )
