@@ -4,6 +4,7 @@ import { Categories } from "../pages/Categories/Categories"
 import { Error } from "../pages/Eroor/Error"
 import { Favorites } from "../pages/Favorites/Favorites"
 import { Main } from "../pages/Main/Main"
+import { PriceList } from "../pages/PriceList/PriceList"
 import { ProductCard } from "../pages/ProductCard/ProductCard"
 import { Search } from "../pages/Search/Search"
 import { Сertificate } from "../pages/Сertificate/Сertificate"
@@ -47,8 +48,8 @@ export const routes = () => {
             element: <Сertificate/>
         },
         {
-            path: '/certificate',
-            element: <Сertificate/>
+            path: '/pricelist',
+            element: <PriceList/>
         },
         {
             path: '*',
