@@ -34,7 +34,7 @@ export const MainReviews = () => {
                                     speed: 300,
                                 }
                             }
-                        }} 
+                        }}
                     >
                         <SplideSlide className="reviews__slide splide__slide">
                             <div className="reviews__slide_col">
