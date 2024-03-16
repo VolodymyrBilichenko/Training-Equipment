@@ -6,6 +6,7 @@ import { Favorites } from "../pages/Favorites/Favorites"
 import { Main } from "../pages/Main/Main"
 import { ProductCard } from "../pages/ProductCard/ProductCard"
 import { Search } from "../pages/Search/Search"
+import { Сertificate } from "../pages/Сertificate/Сertificate"
 
 export const routes = () => {
     return [
@@ -40,6 +41,10 @@ export const routes = () => {
         {
             path: '/basket',
             element: <Basket/>
+        },
+        {
+            path: '/certificate',
+            element: <Сertificate/>
         },
         {
             path: '*',

@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux'
 import ProductCardImg1 from '../../assets/img/product-cards/product-card-image-1.png'
 import ProductCardImg2 from '../../assets/img/product-cards/product-card-image-2.png'
 import ProductCardImg3 from '../../assets/img/product-cards/product-card-image-3.png'
-// import ProductCardImg4 from '../../assets/img/product-cards/product-card-image-4.png'
-// import ProductCardImg5 from '../../assets/img/product-cards/product-card-image-5.png'
-// import ProductCardImg6 from '../../assets/img/product-cards/product-card-image-6.png'
+import ProductCardImg4 from '../../assets/img/product-cards/product-card-image-4.png'
+import ProductCardImg5 from '../../assets/img/product-cards/product-card-image-5.png'
+import ProductCardImg6 from '../../assets/img/product-cards/product-card-image-6.png'
 
 export const ProductsList = ({ClassNameList}) => {
 
@@ -37,6 +37,27 @@ export const ProductsList = ({ClassNameList}) => {
             ProductPriceIns: 600,
             ProductPriceDel: 1000,
             img: ProductCardImg3,
+        },
+        {
+            id: 'k5',
+            title: 'Globu4',
+            ProductPriceIns: 1000,
+            ProductPriceDel: 1200,
+            img: ProductCardImg4,
+        },
+        {
+            id: 'k6',
+            title: 'Globu5',
+            ProductPriceIns: 6000,
+            ProductPriceDel: 7000,
+            img: ProductCardImg5,
+        },
+        {
+            id: 'k7',
+            title: 'Globu6',
+            ProductPriceIns: 200,
+            ProductPriceDel: 500,
+            img: ProductCardImg6,
         },
     ]
 

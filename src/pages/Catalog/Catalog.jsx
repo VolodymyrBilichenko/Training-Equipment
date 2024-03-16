@@ -10,24 +10,24 @@ export const Catalog = () => {
 
         <BreadCrumbs pages={[{page: 'каталог'}]}/>
 
-        <section class="catalog container">
-			<div class="catalog__decor" aria-hidden="true">
+        <section className="catalog container">
+			<div className="catalog__decor" aria-hidden="true">
 				<picture>
 					<img src="img/decor-element.png" alt="" width="0" height="0" loading="lazy"/>
 				</picture>
 			</div>
-			<h2 class="catalog__title section-title">
+			<h2 className="catalog__title section-title">
 				Каталог
 			</h2>
-			<div class="catalog__aside" data-sticky-container>
-				<div class="catalog__categories sticky" data-margin-top="30">
-					<button class="catalog__categories_target button visible-on-mob" type="button">
+			<div className="catalog__aside" data-sticky-container>
+				<div className="catalog__categories sticky" data-margin-top="30">
+					<button className="catalog__categories_target button visible-on-mob" type="button">
 						Категории
 					</button>
-					<div class="catalog__categories_block">
+					<div className="catalog__categories_block">
 						<div>
 
-							<ul class="catalog__categories_list">
+							<ul className="catalog__categories_list">
 								<li>
 									<a href="some">
 										<span>STEM-лабораторії МОН №574</span>
@@ -164,8 +164,8 @@ export const Catalog = () => {
 					</div>
 				</div>
 			</div>
-			<div class="catalog__main">
-				<search class="catalog__search" role="search">
+			<div className="catalog__main">
+				<search className="catalog__search" role="search">
 					<form>
 						<input type="search" name="search" placeholder="Пошук по каталогу" required/>
 						<button type="submit" title="Поиск">
@@ -176,22 +176,22 @@ export const Catalog = () => {
 					</form>
 				</search>
 
-                <ProductsList ClassNameList={'catalog__list'}/>
+                <ProductsList classNameList={'catalog__list'}/>
                 
-				<div class="catalog__pagination pagination">
-					<a href="some" class="pagination__link">
+				<div className="catalog__pagination pagination">
+					<a href="some" className="pagination__link">
 						Перша
 					</a>
-					<div class="pagination__list">
+					<div className="pagination__list">
 						<a href="some">1</a>
 						<a href="some">2</a>
 						<a href="some">3</a>
-						<a href="some" class="is-current">4</a>
+						<a href="some" className="is-current">4</a>
 						<span>...</span>
 						<a href="some">8</a>
 						<a href="some">9</a>
 					</div>
-					<a href="some" class="pagination__link">
+					<a href="some" className="pagination__link">
 						Остання
 					</a>
 				</div>
