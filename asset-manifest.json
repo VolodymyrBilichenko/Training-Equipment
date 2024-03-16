@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Training-Equipment/static/css/main.fb963726.css",
-    "main.js": "/Training-Equipment/static/js/main.7f3bcf7c.js",
+    "main.js": "/Training-Equipment/static/js/main.ce2c3b13.js",
     "static/media/background-decor.png": "/Training-Equipment/static/media/background-decor.fdda5b24f3fe3f92cee3.png",
     "static/media/decor-hero-background.png": "/Training-Equipment/static/media/decor-hero-background.6180da1d40fc23082d1f.png",
     "static/media/decor-element.png": "/Training-Equipment/static/media/decor-element.f0b2ac4a8b46981de649.png",
@@ -17,6 +17,7 @@
     "static/media/Exo2-ExtraBold.woff2": "/Training-Equipment/static/media/Exo2-ExtraBold.53385c2c82e72e803443.woff2",
     "static/media/Exo2-SemiBold.woff2": "/Training-Equipment/static/media/Exo2-SemiBold.aee67577b9101e19dcc4.woff2",
     "static/media/Exo2-Regular.woff2": "/Training-Equipment/static/media/Exo2-Regular.49b480f3ad20a5acb07c.woff2",
+    "static/media/product-image.jpg": "/Training-Equipment/static/media/product-image.9506075d701e931d3536.jpg",
     "static/media/logo.png": "/Training-Equipment/static/media/logo.20c1bebd12312ba27861.png",
     "static/media/certificate-image.jpg": "/Training-Equipment/static/media/certificate-image.7371b35f76d823ff308c.jpg",
     "static/media/Manrope-Regular.woff2": "/Training-Equipment/static/media/Manrope-Regular.944b32dd4a8e58c2ea41.woff2",
@@ -34,10 +35,10 @@
     "static/media/category-icon-3.svg": "/Training-Equipment/static/media/category-icon-3.10638ce38b3da03bede9f2656e8e859a.svg",
     "static/media/category-icon-9.svg": "/Training-Equipment/static/media/category-icon-9.ded3493b7c082b3cd3dccfa5858eac68.svg",
     "main.fb963726.css.map": "/Training-Equipment/static/css/main.fb963726.css.map",
-    "main.7f3bcf7c.js.map": "/Training-Equipment/static/js/main.7f3bcf7c.js.map"
+    "main.ce2c3b13.js.map": "/Training-Equipment/static/js/main.ce2c3b13.js.map"
   },
   "entrypoints": [
     "static/css/main.fb963726.css",
-    "static/js/main.7f3bcf7c.js"
+    "static/js/main.ce2c3b13.js"
   ]
 }
