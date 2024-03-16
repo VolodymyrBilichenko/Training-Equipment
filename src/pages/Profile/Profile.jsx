@@ -3,9 +3,9 @@ import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDeco
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
 import { ProfileNav } from './components/ProfileNav/ProfileNav'
-import { ProfileBonuses } from './components/ProfileBonuses/ProfileBonuses'
+// import { ProfileBonuses } from './components/ProfileBonuses/ProfileBonuses'
 import { ProfileInfo } from './components/ProfileInfo/ProfileInfo'
-import { ProfileOrders } from './components/ProfileOrders/ProfileOrders'
+// import { ProfileOrders } from './components/ProfileOrders/ProfileOrders'
 
 export const Profile = () => {
   return (
