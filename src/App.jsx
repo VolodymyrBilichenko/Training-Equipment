@@ -7,6 +7,7 @@ import { Header } from './components/Header/Header';
 import { Sprite } from './components/IconSprite/Sprite';
 import { Footer } from './components/Footer/Footer';
 import { LoginPopUp } from './components/LoginPopUp/LoginPopUp';
+import { RegisterPopUp } from './components/RegisterPopUp/RegisterPopUp';
 // import { RegisterPopUp } from './components/RegisterPopUp/RegisterPopUp';
 
 export const PopupContext = createContext(null);
@@ -25,6 +26,8 @@ export const App = () => {
   const ModalList = () => {
     if (modal === 'login') {
       return <LoginPopUp modal={modal}/>
+    }else if (modal === 'register') {
+      return <RegisterPopUp modal={modal}/>
     }
   }
 
@@ -46,7 +49,6 @@ export const App = () => {
 
         <Footer/>
 
-        {/* <LoginPopUp modal={modal}/> */}
         {ModalList()}
 
         {/* <RegisterPopUp/> */}
