@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export const RegisterPopUp = () => {
+
+    const [firstName, setFirstName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [pass, setPass] = useState('');
+
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+
+    
+
     return (
         <div className="popup" id="register-popup" style={{display: 'none'}}>
             <div className="popup-wrapper">

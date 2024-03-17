@@ -15,7 +15,7 @@ export const App = () => {
   const [routesList] = useState(routes())
   const [modal, setModal] = useState('');
 
-  console.log(modal);
+  // console.log(modal);
 
   // const ModalList = {
   //   'login': <LoginPopUp/>,
@@ -28,13 +28,13 @@ export const App = () => {
     }
   }
 
-  console.log(ModalList);
+  // console.log(ModalList);
 
   return (
     <>
       <Sprite/>
       
-      <PopupContext.Provider value={setModal}>
+      <PopupContext.Provider value={setModal} >
 
         <Header/>
 

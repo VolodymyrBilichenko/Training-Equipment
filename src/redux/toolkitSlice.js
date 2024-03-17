@@ -7,13 +7,16 @@ const toolkitSlice = createSlice({
         user: {},
         favorites: [],
         basket: [],
-
-        
     },
     reducers: {
         setUser(state, action) {
             state.user = action.payload
         },
+        removeUser(state) {
+            state.user = {}
+        },
+
+
         setFavorites(state, action) {
             state.favorites = action.payload
         },

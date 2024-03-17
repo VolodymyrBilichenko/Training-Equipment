@@ -1,12 +1,41 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { PopupContext } from '../../App';
+import { useDispatch } from 'react-redux';
+import { getApiLink } from '../../api/getApiLink'
+import axios from 'axios';
+import { login } from '../../api/login';
 
 export const LoginPopUp = ({modal}) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [error, setError] = useState('');
+
+    const dispatch = useDispatch();
 
     const SetPopContext = useContext(PopupContext);
 
     const handleClosePopUp = () => {
         SetPopContext('');
+    }
+
+    const handleLogin = (e) => {
+        e.preventDefault()
+        setError('')
+
+        axios.post(getApiLink('/api/auth/login'), {
+            email, 
+            password
+        }).then((res) => {
+            if (res.status === 200) {
+                setEmail('')
+                setPassword('')
+
+                login(res.data, dispatch)
+                
+            }
+            console.log(res);
+        })
     }
 
     return (
@@ -23,17 +52,21 @@ export const LoginPopUp = ({modal}) => {
                         <h2 className="popup-title title">
                             Вход
                         </h2>
-                        <form method="post" className="popup-form">
+                        <form onSubmit={handleLogin} method="post" className="popup-form">
                             <label className="popup-form__item">
                                 <span className="is-required">E-mail</span>
                                 <span className="input-label">
-                                    <input type="email" name="email" required placeholder="Введите свой email" className="input"/>
+                                    <input type="email" name="email" required placeholder="Введите свой email" className="input"
+                                        value={email} onChange={(e) => setEmail(e.target.value)}
+                                    />
                                 </span>
                             </label>
                             <div className="popup-form__item">
                                 <span className="is-required">Пароль</span>
                                 <span className="input-label">
-                                    <input type="password" name="password" required placeholder="Введите пароль" className="input"/>
+                                    <input type="password" name="password" required placeholder="Введите пароль" className="input"
+                                        value={password} onChange={(e) => setPassword(e.target.value)}
+                                    />
                                     <button className="password-toggle" type="button" title="Показать/скрыть пароль">
                                         <svg width="24" height="24" viewBox="0 0 24 24">
                                             <use xlinkHref="#visibility"></use>
@@ -41,6 +74,7 @@ export const LoginPopUp = ({modal}) => {
                                     </button>
                                 </span>
                             </div>
+                            <p>{error}</p>
                             <div className="popup-form__text">
                                 <p>
                                     <a href="#reset-password-popup" className="open-popup popup-close">Забули пароль?</a>
