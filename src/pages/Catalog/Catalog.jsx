@@ -2,6 +2,7 @@ import React from 'react'
 import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { ProductsList } from '../../components/ProductsList/ProductsList'
+import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
 
 export const Catalog = () => {
   return (
@@ -16,9 +17,9 @@ export const Catalog = () => {
 					<img src="img/decor-element.png" alt="" width="0" height="0" loading="lazy"/>
 				</picture>
 			</div>
-			<h2 className="catalog__title section-title">
-				Каталог
-			</h2>
+
+			<SectionTitle title={'Каталог'} ClassTitle={'catalog__title'}/>
+			
 			<div className="catalog__aside" data-sticky-container>
 				<div className="catalog__categories sticky" data-margin-top="30">
 					<button className="catalog__categories_target button visible-on-mob" type="button">
@@ -176,7 +177,7 @@ export const Catalog = () => {
 					</form>
 				</search>
 
-                <ProductsList classNameList={'catalog__list'}/>
+                <ProductsList ClassNameList={'catalog__list'}/>
                 
 				<div className="catalog__pagination pagination">
 					<a href="some" className="pagination__link">
