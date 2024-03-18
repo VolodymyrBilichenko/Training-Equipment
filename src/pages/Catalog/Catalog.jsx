@@ -196,7 +196,7 @@ export const Catalog = () => {
 					</form>
 				</search>
 
-                <ProductsList ClassNameList={'catalog__list'} categoryId={category_id}/>
+                <ProductsList ClassNameList={'catalog__list'} />
                 
 				<div className="catalog__pagination pagination">
 					<a href="some" className="pagination__link">
