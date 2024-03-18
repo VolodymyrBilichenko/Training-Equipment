@@ -1,36 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { ProductsList } from '../../components/ProductsList/ProductsList'
 import { CartItemLength } from '../../components/CartList/components/CartItemLength'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
+import axios from 'axios'
+import { getApiLink } from '../../api/getApiLink'
+import { useParams } from 'react-router-dom'
 
 import SliderItemPh from '../../assets/img/product/product-image.jpg';
+import CreditCard from '../../assets/img/product/credit_card.svg'
+import AccBalance from '../../assets/img/product/account_balance_wallet.svg'
+import Assigment from '../../assets/img/product/assignment.svg'
 
 export const ProductCard = () => {
+  const { id } = useParams();
+  const [dataCard, setDataCard] = useState({});
 
-  // useEffect(() => {
-  //   const sliders = document.querySelectorAll('.product__gallery');
-
-  //   sliders.forEach(sliderElement => {
-  //     const slider = new Splide(sliderElement, {
-  //       type: 'fade',
-  //       rewind: true,
-  //       perPage: 1,
-  //       arrows: false,
-  //       pagination: false,
-  //       speed: 700,
-  //       easing: 'ease',
-  //       breakpoints: {
-  //         550: {
-  //           speed: 400,
-  //         },
-  //       },
-  //     });
-
-  //     // slider.mount();
-  //   });
-  // }, [])
+  useEffect(() => {
+    axios.get(getApiLink(`/api/products/${id}`))
+      .then(({data}) => {
+        setDataCard(data.data)
+      })
+      .catch((error) => {
+        console.log('dataCard undefined', error);
+      })
+  }, [id])
   
   return (
     <>
@@ -121,10 +116,10 @@ export const ProductCard = () => {
         
         <div className="product__col">
           <h2 className="product__title title">
-            Демонстраційна модель «Мозок. Анатомія людини» Learning resources
+            {dataCard.name}
           </h2>
           <span className="product__article-number">
-            Артикул 059865
+            {dataCard.article}
           </span>
           <span className="product__status in-stock">
             {/* <!-- .out-of-stock --> */}
@@ -134,10 +129,12 @@ export const ProductCard = () => {
             <div className="product__info_col">
               <div className="product__price">
                 {/* <!-- <strong></strong> --> */}
-                <ins>3 800 ₴</ins>
+                <ins>{dataCard.price} ₴</ins>
                 <del>3 800 ₴</del>
               </div>
-              <CartItemLength/>
+
+              <CartItemLength dataCard={dataCard}/>
+
             </div>
             <div className="product__info_col">
               <button className="product__add-to-cart button" type="button" aria-label="Додати до кошика">
@@ -157,15 +154,15 @@ export const ProductCard = () => {
                 <tbody>
                   <tr>
                     <td>Стан</td>
-                    <td>Новий</td>
+                    <td>{dataCard.condition}</td>
                   </tr>
                   <tr>
                     <td>Виробник</td>
-                    <td>Learning Resources</td>
+                    <td>{dataCard.producer}</td>
                   </tr>
                   <tr>
                     <td>Вага</td>
-                    <td>200 гр</td>
+                    <td>{dataCard.weight} гр</td>
                   </tr>
                 </tbody>
               </table>
@@ -174,7 +171,7 @@ export const ProductCard = () => {
               <ul className="product__paymethods">
                 <li>
                   <i>
-                    <img src="img/product/credit_card.svg" width="40" height="40" loading="lazy" alt=""/>
+                    <img src={CreditCard} width="40" height="40" loading="lazy" alt=""/>
                   </i>
                   <span>
                     Безнал
@@ -182,7 +179,7 @@ export const ProductCard = () => {
                 </li>
                 <li>
                   <i>
-                    <img src="img/product/account_balance_wallet.svg" width="40" height="40" loading="lazy" alt=""/>
+                    <img src={AccBalance} width="40" height="40" loading="lazy" alt=""/>
                   </i>
                   <span>
                     Наложенный платёж
@@ -190,7 +187,7 @@ export const ProductCard = () => {
                 </li>
                 <li>
                   <i>
-                    <img src="img/product/assignment.svg" width="40" height="40" loading="lazy" alt=""/>
+                    <img src={Assigment} width="40" height="40" loading="lazy" alt=""/>
                   </i>
                   <span>
                     По договору поставки
@@ -237,27 +234,17 @@ export const ProductCard = () => {
             </div>
           </div>
           <ul className="product__orders">
-            <li>
-              <h3>Відповідає Наказу </h3>
-              <strong>№574</strong>
-              <p>
-                Про затвердження типового переліку засобів навчання та обладнання для навчальних кабінетів і STEM-лабораторій
-              </p>
-            </li>
-            <li>
-              <h3>Відповідає Наказу </h3>
-              <strong>№574</strong>
-              <p>
-                Про затвердження типового переліку засобів навчання та обладнання для навчальних кабінетів і STEM-лабораторій
-              </p>
-            </li>
-            <li>
-              <h3>Відповідає Наказу </h3>
-              <strong>№574</strong>
-              <p>
-                Про затвердження типового переліку засобів навчання та обладнання для навчальних кабінетів і STEM-лабораторій
-              </p>
-            </li>
+
+            {dataCard.certificates?.map(certificate => (
+              <li key={certificate.id}>
+                <h3>Відповідає Наказу </h3>
+                <strong>{certificate.name}</strong>
+                <p>
+                  {certificate.description}
+                </p>
+              </li>
+            ))}
+
           </ul>
         </div>
 
@@ -266,9 +253,7 @@ export const ProductCard = () => {
             <h3>
               Опис
             </h3>
-            <p>Демонстраційна модель мозку людини наочно покаже учням його внутрішній устрій, пояснить, як частини мозку взаємодіють один з одним, допоможе розібратися у функціонуванні центральної нервової системи.</p>
-            <p>Модель складається з 31 пластикового елемента, які надійно кріпляться за допомогою шарнірів. Надзвичайна деталізація кожної частини макета, допоможе легко визначити і зіставити всі складові частини мозку: мозочок, лобова, тім'яна, скронева і потилична частки, мозолисте тіло, стовбур мозку, гіпокампу, шлуночки, інсула, смугасте тіло, внутрішня капсула, лентіформное ядро. У зібраному вигляді модель мозку має в висоту 10 см і зручно кріпиться до підставки для демонстрації. В ілюстрованій інструкції наведені назви і перераховані функції всіх частин мозку.</p>
-            <p>Компанія Learning Resources ставить перед собою завдання допомогти педагогам і батькам, надаючи високоякісні освітні продукти, які забезпечують захоплюючий навчальний процес, беручи до уваги при цьому здатності, рівень розвитку кожної дитини.</p>
+            <p>{dataCard.description}</p>
             <p>У набір входить:</p>
             <ul>
               <li>10-и см модель мозку з 31 елементів;</li>
@@ -297,7 +282,7 @@ export const ProductCard = () => {
             Рекомендованные
           </h2>
 
-          <ProductsList ClassNameList={'recommended__list'}/>
+          <ProductsList ClassNameList={'recommended__list'} />
 
         </div>
       </section>

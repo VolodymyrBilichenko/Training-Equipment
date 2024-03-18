@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { addBasketItem } from '../../../../redux/toolkitSlice';
+import { NavLink } from 'react-router-dom';
 
-// export const ProductListItem = ({ProductImg, ProductTitle, ProductPriceDel, ProductPriceIns}) => {
 export const ProductListItem = ({data}) => {
 
   const dispatch = useDispatch();
@@ -14,18 +14,18 @@ export const ProductListItem = ({data}) => {
   
   return (
     <li className="product-card">
-      <a href="product.html" className="product-card__image image-aspect-ratio" style={{paddingTop: '100%'}} aria-label="Глобус-модель 'Будова Сонця'">
+      <NavLink to={`/product/${data.id}`} className="product-card__image image-aspect-ratio" style={{paddingTop: '100%'}} aria-label="Глобус-модель 'Будова Сонця'">
         <picture>
-          <img src={data.img} alt="ProductCardImg" width="300" height="300" loading="lazy"/>
+          <img src={data.files.web_path} alt="ProductCardImg" width="300" height="300" loading="lazy"/>
         </picture>
-      </a>
+      </NavLink>
       <h3 className="product-card__title">
         <a href="product.html">
-          {data.title}
+          {data.name}
         </a>
       </h3>
       <div className="product-card__price">
-        <ins>{`${data.ProductPriceIns} ₴`}</ins>
+        <ins>{`${data.price} ₴`}</ins>
         <del>{`${data.ProductPriceDel} ₴`}</del>
       </div>
       <button onClick={handleAddClick} className="product-card__add-cart button is-min-on-mob" type="button">

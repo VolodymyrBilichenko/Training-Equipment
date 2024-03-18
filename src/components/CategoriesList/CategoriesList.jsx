@@ -11,7 +11,6 @@ export const CategoriesList = ({ClassNameList}) => {
         axios.get(getApiLink('/api/categories/get'))
             .then(({ data }) => {
                 setAllCategories(data.data);
-                console.log('cat', data.data);
             })
             .catch((error) => {
                 console.log('categories undefined', error);
@@ -23,7 +22,7 @@ export const CategoriesList = ({ClassNameList}) => {
 
             {allCategories.map((category) => (
                  <li key={category.id}>
-                    <NavLink to={'/catalog'}>
+                    <NavLink to={`/catalog/${category.id}`}>
                         <img src={getApiLink(`/api/categories/get/${category.icon_link}`)} width="52" height="52" loading="lazy" alt="categories ic"/>
                         <h3>{category.name}</h3>
                     </NavLink>

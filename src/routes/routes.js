@@ -37,7 +37,11 @@ export const routes = () => {
             element: <Catalog/>
         },
         {
-            path: '/product',
+            path: '/catalog/:id',
+            element: <Catalog/>
+        },
+        {
+            path: '/product/:id',
             element: <ProductCard/>
         },
         {
