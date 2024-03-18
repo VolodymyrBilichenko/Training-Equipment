@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ProfileInfo = () => {
+export const ProfileInfo = ({ userData }) => {
   return (
     <>
         <div className="account__block">
@@ -18,7 +18,7 @@ export const ProfileInfo = () => {
                 <div className="account__block_group">
                     <label className="account__block_item">
                         <span>ФИО Директора</span>
-                        <span className="value">Игорь Иванович</span>
+                        <span className="value">{userData.name}</span>
                     </label>
                     <label className="account__block_item">
                         <span>Название организации</span>

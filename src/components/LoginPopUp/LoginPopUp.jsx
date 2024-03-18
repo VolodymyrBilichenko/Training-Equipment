@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getApiLink } from '../../api/getApiLink'
 import axios from 'axios';
 import { login } from '../../api/login';
+import setCookie from '../../functions/setCookie';
 
 export const LoginPopUp = ({modal}) => {
     const [email, setEmail] = useState('');
@@ -34,6 +35,7 @@ export const LoginPopUp = ({modal}) => {
                 
             }
             console.log(res);
+            setCookie('cookieToken', res.data.data.token );
         })
     }
 
