@@ -1,18 +1,13 @@
 {
   "files": {
     "main.css": "/Training-Equipment/static/css/main.fb963726.css",
-    "main.js": "/Training-Equipment/static/js/main.3f77bb97.js",
+    "main.js": "/Training-Equipment/static/js/main.5650e3d4.js",
     "static/media/background-decor.png": "/Training-Equipment/static/media/background-decor.fdda5b24f3fe3f92cee3.png",
     "static/media/decor-hero-background.png": "/Training-Equipment/static/media/decor-hero-background.6180da1d40fc23082d1f.png",
     "static/media/decor-element.png": "/Training-Equipment/static/media/decor-element.f0b2ac4a8b46981de649.png",
     "static/media/certificate-image.png": "/Training-Equipment/static/media/certificate-image.7bdfd1e3d06e4aac5fef.png",
     "static/media/statistics-decor.png": "/Training-Equipment/static/media/statistics-decor.72416e4c4f264566f7ce.png",
-    "static/media/product-card-image-3.png": "/Training-Equipment/static/media/product-card-image-3.bd89ccb84d03691fea80.png",
-    "static/media/product-card-image-1.png": "/Training-Equipment/static/media/product-card-image-1.8ec2c915125b93440ba3.png",
-    "static/media/product-card-image-2.png": "/Training-Equipment/static/media/product-card-image-2.7a3ead0e28e01fee278b.png",
-    "static/media/product-card-image-6.png": "/Training-Equipment/static/media/product-card-image-6.5a826d801b336d064a25.png",
     "static/media/product-card-image-4.png": "/Training-Equipment/static/media/product-card-image-4.8b103be302f4947d588e.png",
-    "static/media/product-card-image-5.png": "/Training-Equipment/static/media/product-card-image-5.00bbfb6db92bb228f610.png",
     "static/media/Exo2-Bold.woff2": "/Training-Equipment/static/media/Exo2-Bold.a73178284d0d49ec5e58.woff2",
     "static/media/Exo2-ExtraBold.woff2": "/Training-Equipment/static/media/Exo2-ExtraBold.53385c2c82e72e803443.woff2",
     "static/media/Exo2-SemiBold.woff2": "/Training-Equipment/static/media/Exo2-SemiBold.aee67577b9101e19dcc4.woff2",
@@ -23,12 +18,15 @@
     "static/media/Manrope-Regular.woff2": "/Training-Equipment/static/media/Manrope-Regular.944b32dd4a8e58c2ea41.woff2",
     "static/media/ua-min-logo.svg": "/Training-Equipment/static/media/ua-min-logo.9db459cb1ac0080bca3f4002a29b86b6.svg",
     "static/media/logo-min.svg": "/Training-Equipment/static/media/logo-min.55336e85ff9084e72ec6154f2bd56d15.svg",
+    "static/media/account_balance_wallet.svg": "/Training-Equipment/static/media/account_balance_wallet.a3321fd3523494e8cb447336c1d47a29.svg",
+    "static/media/assignment.svg": "/Training-Equipment/static/media/assignment.f89e83347714f7c75c82a10b66f5f880.svg",
     "index.html": "/Training-Equipment/index.html",
+    "static/media/credit_card.svg": "/Training-Equipment/static/media/credit_card.7ad0c1f55ca45dca355c4eec052ae6ee.svg",
     "main.fb963726.css.map": "/Training-Equipment/static/css/main.fb963726.css.map",
-    "main.3f77bb97.js.map": "/Training-Equipment/static/js/main.3f77bb97.js.map"
+    "main.5650e3d4.js.map": "/Training-Equipment/static/js/main.5650e3d4.js.map"
   },
   "entrypoints": [
     "static/css/main.fb963726.css",
-    "static/js/main.3f77bb97.js"
+    "static/js/main.5650e3d4.js"
   ]
 }
