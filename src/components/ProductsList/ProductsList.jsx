@@ -3,24 +3,21 @@ import { ProductListItem } from './components/ProductListItem/ProductListItem'
 import { useSelector } from 'react-redux'
 import axios from 'axios';
 import { getApiLink } from '../../api/getApiLink';
-// import { addBasketItem } from '../../redux/toolkitSlice';
 
-// import ProductCardImg1 from '../../assets/img/product-cards/product-card-image-1.png'
-// import ProductCardImg2 from '../../assets/img/product-cards/product-card-image-2.png'
-// import ProductCardImg3 from '../../assets/img/product-cards/product-card-image-3.png'
-// import ProductCardImg4 from '../../assets/img/product-cards/product-card-image-4.png'
-// import ProductCardImg5 from '../../assets/img/product-cards/product-card-image-5.png'
-// import ProductCardImg6 from '../../assets/img/product-cards/product-card-image-6.png'
-
-export const ProductsList = ({ClassNameList}) => {
+export const ProductsList = ({ ClassNameList, categoryId }) => {
     const [allProducts, setAllProducts] = useState([]);
 
     const ProductData = useSelector(state => state.toolkit.basket);
 
     console.log(ProductData);
 
+    console.log(allProducts);
+
+
     useEffect(() => {
-        axios.get(getApiLink('/api/products/get'))
+        const CategoryProduct = categoryId ? `?category_id=${categoryId}` : ''
+
+        axios.get(getApiLink(`/api/products/get${CategoryProduct}`))
             .then(({ data }) => {
                 setAllProducts(data.data)
             })

@@ -17,6 +17,8 @@ export const CategoriesList = ({ClassNameList}) => {
             });
     }, [])
 
+    console.log('allCategories', allCategories);
+
     return (
         <ul className={`categories__list ${ClassNameList}`}>
 

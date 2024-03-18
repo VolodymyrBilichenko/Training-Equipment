@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { ProductsList } from '../../components/ProductsList/ProductsList'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
+import axios from 'axios'
+import { getApiLink } from '../../api/getApiLink'
+import { useParams } from 'react-router-dom'
 
 export const Catalog = () => {
+	const { category_id } = useParams();
+
+	const [categoryProducts, setCategoryProducts] = useState([]);
+
+	useEffect(() => {
+		axios.get(getApiLink(`/api/products/get?category_id=${category_id}`))
+		.then(({data}) => {
+			setCategoryProducts(data.data)
+		})
+		.catch((error) => {
+			console.log('category undefined', error);
+		})
+	}, [category_id])
+
+	console.log(categoryProducts);
+
   return (
     <>
         <BackGroundDecor/>
@@ -177,7 +196,7 @@ export const Catalog = () => {
 					</form>
 				</search>
 
-                <ProductsList ClassNameList={'catalog__list'}/>
+                <ProductsList ClassNameList={'catalog__list'} categoryId={category_id}/>
                 
 				<div className="catalog__pagination pagination">
 					<a href="some" className="pagination__link">
