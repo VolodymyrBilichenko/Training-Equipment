@@ -18,7 +18,14 @@ export const ProductCard = () => {
   const [dataCard, setDataCard] = useState({});
 
   useEffect(() => {
-    axios.get(getApiLink(`/api/products/${id}`))
+    const configHeader = {
+      headers: {
+          "ngrok-skip-browser-warning": "true",
+          "Content-Type": "application/json",
+      }
+    }
+
+    axios.get(getApiLink(`/api/products/${id}`), configHeader)
       .then(({data}) => {
         setDataCard(data.data)
       })

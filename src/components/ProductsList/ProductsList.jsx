@@ -5,7 +5,7 @@ import axios from 'axios';
 import { getApiLink } from '../../api/getApiLink';
 import { useParams } from 'react-router-dom';
 
-export const ProductsList = ({ ClassNameList, categoryId }) => {
+export const ProductsList = ({ ClassNameList }) => {
     const [allProducts, setAllProducts] = useState([]);
 	const { category_id } = useParams();
 
@@ -17,11 +17,19 @@ export const ProductsList = ({ ClassNameList, categoryId }) => {
 
 
     useEffect(() => {
+        const configHeader = {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+                "Content-Type": "application/json",
+            }
+        }
+
         const CategoryProduct = category_id ? `?category_id=${category_id}` : ''
 
-        axios.get(getApiLink(`/api/products/get${CategoryProduct}`))
+        axios.get(getApiLink(`/api/products/get${CategoryProduct}`), configHeader)
             .then(({ data }) => {
                 setAllProducts(data.data)
+                console.log('product', data.data);
             })
             .catch(error => {
                 console.log('products undefined', error);

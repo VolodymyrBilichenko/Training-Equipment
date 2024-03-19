@@ -8,7 +8,14 @@ export const CategoriesList = ({ClassNameList}) => {
     const [allCategories, setAllCategories] = useState([]);
 
     useEffect(() => {
-        axios.get(getApiLink('/api/categories/get'))
+        const configHeader = {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+                "Content-Type": "application/json",
+            }
+        }
+
+        axios.get(getApiLink('/api/categories/get'), configHeader)
             .then(({ data }) => {
                 setAllCategories(data.data);
             })
