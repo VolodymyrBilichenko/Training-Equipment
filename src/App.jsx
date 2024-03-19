@@ -8,7 +8,6 @@ import { Sprite } from './components/IconSprite/Sprite';
 import { Footer } from './components/Footer/Footer';
 import { LoginPopUp } from './components/LoginPopUp/LoginPopUp';
 import { RegisterPopUp } from './components/RegisterPopUp/RegisterPopUp';
-// import { RegisterPopUp } from './components/RegisterPopUp/RegisterPopUp';
 
 export const PopupContext = createContext(null);
 
@@ -51,7 +50,6 @@ export const App = () => {
 
         {ModalList()}
 
-        {/* <RegisterPopUp/> */}
       </PopupContext.Provider>
 
     </>
