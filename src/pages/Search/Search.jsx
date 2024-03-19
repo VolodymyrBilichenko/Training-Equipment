@@ -5,8 +5,11 @@ import { MainHeroSearch } from '../Main/components/MainHero/components/MainHeroS
 import { ProductsList } from '../../components/ProductsList/ProductsList'
 import { PaginationProducts } from '../../components/PaginationProducts/PaginationProducts'
 import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
+import { useParams } from 'react-router-dom'
 
 export const Search = () => {
+  const { search } = useParams();
+
   return (
     <>
       <BackGroundDecor/>
@@ -15,14 +18,14 @@ export const Search = () => {
 
       <div className='favorites container'>
 
-        <SectionTitle title={'Пошук по:'}/>
+        <SectionTitle title={`Пошук по: ${search}`}/>
 
         <MainHeroSearch searchPlaceholder={'Пошук'}/>
 
         <ProductsList ClassNameList={'favorites__list'}/>
 
         <PaginationProducts ClassName={'favorites__pagination'}/>
-        
+
       </div>
     </>
   )
