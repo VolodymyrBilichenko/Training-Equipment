@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { CartList } from '../../components/CartList/CartList'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
+import { useDispatch, useSelector } from 'react-redux'
+import getCookies from '../../functions/getCookies'
+import { setBasket } from '../../redux/toolkitSlice'
 
 export const Basket = () => {
+	const dispatch = useDispatch();
+	const reduxProductData = useSelector(state => state.toolkit.basket);
+
+	// const dispatchData = dispatch(setBasket(parsedCookieProductData))
+	useEffect(() => {
+		if (!getCookies('basketItem')) return; 
+		const cookieProductData = getCookies('basketItem');
+		console.log('parse', cookieProductData);
+		
+		const parsedCookieProductData = JSON.parse(cookieProductData);
+		dispatch(setBasket(parsedCookieProductData))
+
+	}, [])
+
+
   return (
     <>
         <BackGroundDecor/>
@@ -23,7 +41,7 @@ export const Basket = () => {
 				</p>
 			</div>
 
-            <CartList/>			
+            <CartList ProductData={reduxProductData}/>			
 
 			<div className="cart__footer">
 				<div className="cart__footer_col">

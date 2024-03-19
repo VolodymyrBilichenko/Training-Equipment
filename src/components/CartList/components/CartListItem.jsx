@@ -3,7 +3,7 @@ import { CartItemLength } from './CartItemLength'
 
 import ProductImg from '../../../assets/img/product-cards/product-card-image-4.png'
 
-export const CartListItem = () => {
+export const CartListItem = ({ productInfo }) => {
     return (
         <li className="cart__item" data-price-container>
             <div className="cart__item_body">
@@ -13,12 +13,12 @@ export const CartListItem = () => {
                             <img src={ProductImg} alt="" width="130" height="130" loading="lazy"/>
                         </picture>
                     </div>
-                    <h3>Колекція "Скло і вироби з нього"</h3>
-                    <span>Артикул 059865</span>
+                    <h3>{productInfo.name}</h3>
+                    <span>Артикул {productInfo.article}</span>
                 </div>
                 <div className="cart__item_price">
                     <span>Ціна</span>
-                    <b>3 800 ₴</b>
+                    <b>{productInfo.price} ₴</b>
                 </div>
                 <div className="cart__item_length">
                     <span>Кількість</span>

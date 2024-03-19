@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { ProductListItem } from './components/ProductListItem/ProductListItem'
-import { useSelector } from 'react-redux'
 import axios from 'axios';
+import { ProductListItem } from './components/ProductListItem/ProductListItem'
 import { getApiLink } from '../../api/getApiLink';
 import { useParams } from 'react-router-dom';
 
@@ -9,12 +8,6 @@ export const ProductsList = ({ ClassNameList }) => {
     const [allProducts, setAllProducts] = useState([]);
 	const { category_id } = useParams();
     const { search } = useParams();
-
-    const ProductData = useSelector(state => state.toolkit.basket);
-
-    console.log(ProductData);
-
-    console.log(allProducts);
 
 
     useEffect(() => {

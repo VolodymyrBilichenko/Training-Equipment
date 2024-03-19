@@ -21,9 +21,9 @@ export const CartItemLength = ({ dataCard }) => {
         name="product-length"
         placeholder=""
         value={quantity}
-        max={dataCard.amount_in_store}
-        min={dataCard.amount}
-        data-price-value={dataCard.price}
+        max='100'
+        min='1'
+        data-price-value='200'
         required
         className="product__length_value"
         readOnly // тепер поле буде лише для читання, оскільки використовується useState

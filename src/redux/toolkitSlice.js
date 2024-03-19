@@ -12,9 +12,6 @@ const toolkitSlice = createSlice({
         setUser(state, action) {
             state.user = action.payload
         },
-        removeUser(state) {
-            state.user = {}
-        },
 
 
         setFavorites(state, action) {
@@ -22,6 +19,9 @@ const toolkitSlice = createSlice({
         },
         addBasketItem(state, action) {
             state.basket = [...state.basket, action.payload]
+        },
+        setBasket(state, action) {
+            state.basket = action.payload
         }
         
     }
@@ -33,6 +33,7 @@ export const {
     setUser,
     setFavorites,
     addBasketItem,
+    setBasket,
     
 
 } = toolkitSlice.actions;

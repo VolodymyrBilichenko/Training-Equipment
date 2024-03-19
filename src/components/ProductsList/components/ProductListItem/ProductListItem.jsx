@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { addBasketItem } from '../../../../redux/toolkitSlice';
 import { NavLink } from 'react-router-dom';
+import setCookie from '../../../../functions/setCookie';
 
 export const ProductListItem = ({data}) => {
 
@@ -9,11 +10,14 @@ export const ProductListItem = ({data}) => {
 
   const handleAddClick = () => {
     dispatch(addBasketItem(data))
+
+    setCookie('basketItem', JSON.stringify([data.id]))
   }
   
   
   return (
     <li className="product-card">
+      <a title="Обране" class="active product-card-fav" href="/favorites" aria-current="page"><svg width="26" height="26" viewBox="0 0 48 48"><use xlinkHref="#favorite"></use></svg></a>
       <NavLink to={`/product/${data.id}`} className="product-card__image image-aspect-ratio" style={{paddingTop: '100%'}} aria-label="Глобус-модель 'Будова Сонця'">
         <picture>
           <img src={data.files.web_path} alt="ProductCardImg" width="300" height="300" loading="lazy"/>

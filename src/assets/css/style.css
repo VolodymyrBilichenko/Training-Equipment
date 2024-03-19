@@ -1963,6 +1963,17 @@ body.is-popup-active {
     font-family: var(--title-font)
 }
 
+.product-card{
+    position: relative;
+}
+
+.product-card .product-card-fav{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
 .products {
     margin-top: 80px
 }
