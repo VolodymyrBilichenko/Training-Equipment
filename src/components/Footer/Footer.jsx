@@ -1,12 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { FooterTel } from './components/FooterTel/FooterTel'
 import { FooterContacts } from './components/FooterContacts/FooterContacts'
 import { FooterSocial } from './components/FooterSocial/FooterSocial'
 
 import Logotype from '../../assets/img/logo.png' 
+import axios from 'axios'
+import { getApiLink } from '../../api/getApiLink'
 
 export const Footer = () => {
+    const [socialData, setSocialData] = useState([]);
+
+    useEffect(() => {
+        const configHeader = {
+            headers: {
+                "ngrok-skip-browser-warning": "true",
+                "Content-Type": "application/json",
+            }
+        }
+
+        axios.get(getApiLink('/api/static/data'), configHeader)
+            .then(({data}) => {
+                setSocialData(data.data);
+            })
+            .catch((error) => {
+                console.log('socialData undefined', error);
+            })
+    }, [])
+
   return (
     <footer className="footer container">
 
@@ -24,11 +45,11 @@ export const Footer = () => {
             </p>
         </div>
 
-        <FooterTel/>
+        <FooterTel socialData={socialData}/>
 
-        <FooterContacts/>
+        <FooterContacts socialData={socialData}/>
 
-        <FooterSocial/>
+        <FooterSocial socialData={socialData}/>
 
         <div className="footer__copyright">
             © 2019-2023 Навчальне Обладнання. All rights reserved

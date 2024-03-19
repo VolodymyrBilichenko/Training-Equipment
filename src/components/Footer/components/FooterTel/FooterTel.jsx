@@ -1,26 +1,20 @@
 import React from 'react'
 
-export const FooterTel = () => {
+export const FooterTel = ({ socialData }) => {
+    const socialNumbers = socialData.filter(item => item.key === 'phone_number')
+
   return (
     <div className="footer__tel">
         <h2>Телефони</h2>
         
         <ul>
-            <li>
-                <a href="tel:+380737040887">
-                    +38 (073) 704 08 87
-                </a>
-            </li>
-            <li>
-                <a href="tel:+380687040887">
-                    +38 (068) 704 08 87
-                </a>
-            </li>
-            <li>
-                <a href="tel:+380957040887">
-                    +38 (095) 704 08 87
-                </a>
-            </li>
+            {socialNumbers.map(social => (
+                <li key={social.id}>
+                    <a href={`tel:${social.value}`}>
+                        {social.value}
+                    </a>
+                </li>
+            ))}
         </ul>
     </div>
   )
