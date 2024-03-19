@@ -9,20 +9,21 @@ import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDeco
 export const Search = () => {
   return (
     <>
-        <BackGroundDecor/>
+      <BackGroundDecor/>
 
-        <BreadCrumbs pages={[{page: 'Пошук по:'}]}/>
+      <BreadCrumbs pages={[{page: 'Пошук по:'}]}/>
 
-        <div className='favorites container'>
+      <div className='favorites container'>
 
-            <SectionTitle title={'Пошук по:'}/>
+        <SectionTitle title={'Пошук по:'}/>
 
-            <MainHeroSearch searchPlaceholder={'Пошук'}/>
+        <MainHeroSearch searchPlaceholder={'Пошук'}/>
 
-            <ProductsList ClassNameList={'favorites__list'}/>
+        <ProductsList ClassNameList={'favorites__list'}/>
 
-            <PaginationProducts ClassName={'favorites__pagination'}/>
-        </div>
+        <PaginationProducts ClassName={'favorites__pagination'}/>
+        
+      </div>
     </>
   )
 }

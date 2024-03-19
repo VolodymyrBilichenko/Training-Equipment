@@ -21,7 +21,7 @@ export const routes = () => {
             element: <Main/>
         },
         {
-            path: '/search',
+            path: '/search/:search',
             element: <Search/>
         },
         {
