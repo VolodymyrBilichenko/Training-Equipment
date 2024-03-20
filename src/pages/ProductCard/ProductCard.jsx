@@ -12,22 +12,22 @@ import SliderItemPh from '../../assets/img/product/product-image.jpg';
 import CreditCard from '../../assets/img/product/credit_card.svg'
 import AccBalance from '../../assets/img/product/account_balance_wallet.svg'
 import Assigment from '../../assets/img/product/assignment.svg'
+import {addBasketItem} from "../../redux/toolkitSlice";
+import {useDispatch} from "react-redux";
+import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 export const ProductCard = () => {
     const {id} = useParams();
-    const [dataCard, setDataCard] = useState({});
+    const dispatch = useDispatch()
 
+    const [dataCard, setDataCard] = useState({});
+    const [productCount, setProductCount] = useState(0)
     const [recommendedProducts, setRecommendedProducts] = useState([])
+    const [isAddedBasket, setIsAddedBasket] = useState(false)
 
     useEffect(() => {
-        const configHeader = {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-                "Content-Type": "application/json",
-            }
-        }
 
-        axios.get(getApiLink(`/api/products/${id}`), configHeader)
+        axios.get(getApiLink(`/api/products/${id}`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setDataCard(data.data)
             })
@@ -48,6 +48,11 @@ export const ProductCard = () => {
             })
 
     }, [])
+
+    const handleAddCart = () => {
+        setIsAddedBasket(prev => !prev)
+        dispatch(addBasketItem(dataCard.id))
+    }
 
     return (
         <>
@@ -144,31 +149,31 @@ export const ProductCard = () => {
                         {dataCard.name}
                     </h2>
                     <span className="product__article-number">
-            {dataCard.article}
-          </span>
+                        {dataCard.article}
+                    </span>
                     <span className="product__status in-stock">
-            {/* <!-- .out-of-stock --> */}
                         В наличии
-          </span>
+                    </span>
                     <div className="product__info">
                         <div className="product__info_col">
                             <div className="product__price">
-                                {/* <!-- <strong></strong> --> */}
                                 <ins>{dataCard.price} ₴</ins>
                                 <del>3 800 ₴</del>
                             </div>
 
-                            <CartItemLength dataCard={dataCard}/>
+                            <CartItemLength setProductCount={setProductCount}/>
 
                         </div>
                         <div className="product__info_col">
-                            <button className="product__add-to-cart button" type="button" aria-label="Додати до кошика">
+                            <button onClick={handleAddCart} style={{background: isAddedBasket ? "#9C50B8" : ""}} className="product__add-to-cart button" type="button" aria-label="Додати до кошика">
                                 <svg width="20" height="20" viewBox="0 0 48 48">
                                     <use xlinkHref="#cart"></use>
                                 </svg>
                                 <span>
-                  Додати до кошика
-                </span>
+                                    {
+                                        isAddedBasket ? "Убрать с корзины" : "Додати до кошика"
+                                    }
+                                </span>
                             </button>
                         </div>
                     </div>

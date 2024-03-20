@@ -7,6 +7,7 @@ import axios from 'axios'
 import {getApiLink} from '../../api/getApiLink'
 import {useParams} from 'react-router-dom'
 import CatalogCategories from "./components/CatalogCategories";
+import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 export const Catalog = () => {
     const {category_id} = useParams();
@@ -15,7 +16,7 @@ export const Catalog = () => {
 
     useEffect(() => {
 
-        axios.get(getApiLink(`/api/products/get${category_id ? `?category_id=${category_id}` : ""}`))
+        axios.get(getApiLink(`/api/products/get${category_id ? `?category_id=${category_id}` : ""}`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setProducts(data.data)
             })

@@ -8,6 +8,7 @@ import {BackGroundDecor} from '../../components/BackGroundDecor/BackGroundDecor'
 import {useParams} from 'react-router-dom'
 import axios from "axios";
 import {getApiLink} from "../../api/getApiLink";
+import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 export const Search = () => {
     const {search} = useParams();
@@ -16,7 +17,7 @@ export const Search = () => {
 
     useEffect(() => {
 
-        axios.get(getApiLink(`/api/products/get${search ? `?search=${search}` : ""}`))
+        axios.get(getApiLink(`/api/products/get${search ? `?search=${search}` : ""}`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setProducts(data.data)
             })

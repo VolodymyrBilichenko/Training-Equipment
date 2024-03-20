@@ -7,6 +7,7 @@ import { PaginationProducts } from '../../components/PaginationProducts/Paginati
 import {useSelector} from "react-redux";
 import axios from "axios";
 import {getApiLink} from "../../api/getApiLink";
+import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 export const Favorites = () => {
 
@@ -15,7 +16,7 @@ export const Favorites = () => {
     const favorites = useSelector(state => state.toolkit.favorites)
 
     useEffect(() => {
-        axios.get(getApiLink(`/api/products/get`))
+        axios.get(getApiLink(`/api/products/get`), {headers: GetApiHeaders()})
             .then(({ data }) => {
                 const favoriteData = data.data.filter(item => favorites.some(fav => fav === item.id))
                 setProducts(favoriteData)

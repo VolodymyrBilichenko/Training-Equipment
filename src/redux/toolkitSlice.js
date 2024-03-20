@@ -1,4 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
+import setCookie from "../functions/setCookie";
+import getCookies from "../functions/getCookies";
 
 
 const toolkitSlice = createSlice({
@@ -23,6 +25,7 @@ const toolkitSlice = createSlice({
             } else {
                 state.favorites = [...state.favorites, action.payload]
             }
+            setCookie("favorite", JSON.stringify(state.favorites))
         },
 
         addBasketItem(state, action) {
@@ -31,9 +34,11 @@ const toolkitSlice = createSlice({
             } else {
                 state.basket = [...state.basket, action.payload]
             }
+            setCookie("basket", JSON.stringify(state.basket))
         },
         removeBasketItem(state, action) {
             state.basket = state.basket.filter(item => item !== action.payload)
+            setCookie("basket", JSON.stringify(state.basket))
         },
         setBasket(state, action) {
             state.basket = action.payload
