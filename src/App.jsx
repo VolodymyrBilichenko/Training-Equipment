@@ -8,6 +8,7 @@ import { Sprite } from './components/IconSprite/Sprite';
 import { Footer } from './components/Footer/Footer';
 import { LoginPopUp } from './components/LoginPopUp/LoginPopUp';
 import { RegisterPopUp } from './components/RegisterPopUp/RegisterPopUp';
+import { ResetPassPopUp } from './components/ResetPassPopUp/ResetPassPopUp';
 
 export const PopupContext = createContext(null);
 
@@ -27,7 +28,10 @@ export const App = () => {
       return <LoginPopUp modal={modal}/>
     }else if (modal === 'register') {
       return <RegisterPopUp modal={modal}/>
+    }else if (modal === 'resetPass') {
+      return <ResetPassPopUp modal={modal}/>
     }
+    
   }
 
   // console.log(ModalList);

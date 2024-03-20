@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PopupContext } from '../../App';
 
-export const ResetPassPopUp = () => {
+export const ResetPassPopUp = ({modal}) => {
+
+    const SetPopContext = useContext(PopupContext);
+
+    const handleClosePopUp = () => {
+        SetPopContext('');
+    }
+
     return (
-        <div className="popup" id="reset-password-popup" style={{display: 'none'}}>
+        <div className={`popup ${modal ? 'is-active' : ''}`} id="reset-password-popup" style={{display: 'block'}}>
             <div className="popup-wrapper">
-                <div className="popup-bg popup-close"></div>
+                <div onClick={handleClosePopUp} className="popup-bg popup-close"></div>
                 <div className="popup-body">
-                    <button type="button" className="popup-close-btn popup-close" title="Закрити">
+                    <button onClick={handleClosePopUp} type="button" className="popup-close-btn popup-close" title="Закрити">
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlinkHref="#close-3"></use>
                         </svg>

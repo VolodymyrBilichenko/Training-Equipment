@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import getCookies from '../../functions/getCookies';
 import { useSelector } from 'react-redux';
 import { handleRegistration } from '../../api/registration';
 import { useNavigate } from 'react-router-dom';
+import { PopupContext } from '../../App';
 
-export const RegisterPopUp = () => {
+export const RegisterPopUp = ({modal}) => {
     const navigate = useNavigate();
+    const SetPopContext = useContext(PopupContext);
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -22,12 +24,17 @@ export const RegisterPopUp = () => {
     }
 
 
+    const handleClosePopUp = () => {
+        SetPopContext('');
+    }
+
+
     return (
-        <div className="popup is-active" id="register-popup" style={{display: 'block'}}>
+        <div className={`popup ${modal ? 'is-active' : ''}`} id="register-popup" style={{display: 'block'}}>
             <div className="popup-wrapper">
-                <div className="popup-bg popup-close"></div>
+                <div onClick={handleClosePopUp} className="popup-bg popup-close"></div>
                 <div className="popup-body">
-                    <button type="button" className="popup-close-btn popup-close" title="Закрити">
+                    <button onClick={handleClosePopUp} type="button" className="popup-close-btn popup-close" title="Закрити">
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlinkHref="#close-3"></use>
                         </svg>

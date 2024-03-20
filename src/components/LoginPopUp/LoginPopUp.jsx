@@ -43,6 +43,10 @@ export const LoginPopUp = ({modal}) => {
         SetPopContext('register')
     }
 
+    const handleNavigateRes = () => {
+        SetPopContext('resetPass')
+    }
+
     return (
         <div className={`popup ${modal ? 'is-active' : ''}`} id="login-popup">
             <div className="popup-wrapper">
@@ -82,7 +86,7 @@ export const LoginPopUp = ({modal}) => {
                             <p>{error}</p>
                             <div className="popup-form__text">
                                 <p>
-                                    <a href="#reset-password-popup" className="open-popup popup-close">Забули пароль?</a>
+                                    <a href="#reset-password-popup" onClick={handleNavigateRes} className="open-popup popup-close">Забули пароль?</a>
                                     <br/><br/>
                                     <a href="#register-popup" onClick={handleNavigateReg} className="open-popup popup-close">Зареєструватися</a>
                                 </p>
