@@ -7,13 +7,14 @@ import {ProductsList} from '../../components/ProductsList/ProductsList'
 import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
 import axios from "axios";
 import {getApiLink} from "../../api/getApiLink";
+import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 export const Main = () => {
 
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        axios.get(getApiLink(`/api/products/get`))
+        axios.get(getApiLink(`/api/products/get`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setProducts(data.data)
             })

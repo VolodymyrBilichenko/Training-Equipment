@@ -2,14 +2,16 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {getApiLink} from "../../../api/getApiLink";
 import {NavLink} from "react-router-dom";
+import {GetApiHeaders} from "../../../functions/getApiHeaders";
 
 const CatalogCategories = () => {
 
     const [categoriesList, setCategoriesList] = useState([])
 
     useEffect(() => {
-        axios.get(getApiLink("/api/categories/get")).then(({data}) => {
+        axios.get(getApiLink("/api/categories/get"), {headers: GetApiHeaders()}).then(({data}) => {
             setCategoriesList(data.data)
+            console.log(data)
         }).catch(er => console.log(er))
     }, [])
 

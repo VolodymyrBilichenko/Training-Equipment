@@ -7,6 +7,7 @@ import {useSelector} from 'react-redux'
 import {PopupContext} from "../../App";
 import axios from "axios";
 import {getApiLink} from "../../api/getApiLink";
+import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 export const Basket = () => {
     const setModal = useContext(PopupContext)
@@ -21,17 +22,11 @@ export const Basket = () => {
     }
 
     useEffect(() => {
-        const configHeader = {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-                "Content-Type": "application/json",
-            }
-        }
-
-        axios.get(getApiLink('/api/products/get'), configHeader)
+        axios.get(getApiLink('/api/products/get'), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setProducts(data.data?.filter(item => basketList.some(item2 => item.id === item2)))
-                console.log(data.data?.filter(item => basketList.some(item2 => item.id === item2)))
+
+                setTotalAmount(0)
 
                 const total = data.data?.filter(item => basketList.some(item2 => item.id === item2)).reduce((amount, current) => {
                     amount += current.price
@@ -40,7 +35,6 @@ export const Basket = () => {
 
                 setTotalAmount(total)
 
-                console.log('total', total);
             })
             .catch((error) => {
                 console.log('all prod undefined', error);

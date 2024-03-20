@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import {createContext, useEffect, useState} from 'react';
 import './assets/js/main'
 import './assets/scss/style.scss'
 import { routes } from './routes/routes'
@@ -11,12 +11,18 @@ import { RegisterPopUp } from './components/RegisterPopUp/RegisterPopUp';
 import { ResetPassPopUp } from './components/ResetPassPopUp/ResetPassPopUp';
 import { OrderPopUp } from './components/OrderPopUp/OrderPopUp';
 import { ThanksPopUp } from './components/ThanksPopUp/ThanksPopUp';
+import axios from "axios";
+import {getApiLink} from "./api/getApiLink";
+import {useDispatch} from "react-redux";
+import {setBasket, setFavorites} from "./redux/toolkitSlice";
+import getCookies from "./functions/getCookies";
 
 export const PopupContext = createContext(null);
 
 export const App = () => {
   const [routesList] = useState(routes())
   const [modal, setModal] = useState('');
+  const dispatch = useDispatch()
 
   const ModalList = () => {
     if (modal === 'login') {
@@ -33,7 +39,12 @@ export const App = () => {
     
   }
 
-  // console.log(ModalList);
+  useEffect(() => {
+
+    getCookies("basket") && dispatch(setBasket(JSON.parse(getCookies("basket"))))
+    getCookies("favorite") && dispatch(setFavorites(JSON.parse(getCookies("favorite"))))
+
+  }, [])
 
   return (
     <>

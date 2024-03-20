@@ -5,7 +5,7 @@ import ProductImg from '../../../assets/img/product-cards/product-card-image-4.p
 import {useDispatch} from "react-redux";
 import {removeBasketItem} from "../../../redux/toolkitSlice";
 
-export const CartListItem = ({ productInfo }) => {
+export const CartListItem = ({ productInfo, setTotalAmount, products }) => {
 
     const dispatch = useDispatch()
 
@@ -21,7 +21,7 @@ export const CartListItem = ({ productInfo }) => {
                 <div className="cart__item_info">
                     <div className="cart__item_image">
                         <picture>
-                            <img src={ProductImg} alt="" width="130" height="130" loading="lazy"/>
+                            <img src={productInfo.files[0]?.web_path} alt="" width="130" height="130" loading="lazy"/>
                         </picture>
                     </div>
                     <h3>{productInfo.name}</h3>
@@ -34,7 +34,7 @@ export const CartListItem = ({ productInfo }) => {
                 <div className="cart__item_length">
                     <span>Кількість</span>
 
-                    <CartItemLength setProductCount={setProductCount}/>
+                    <CartItemLength products={products} setTotalAmount={setTotalAmount} productInfo={productInfo} setProductCount={setProductCount}/>
 
                 </div>
                 <div className="cart__item_total">

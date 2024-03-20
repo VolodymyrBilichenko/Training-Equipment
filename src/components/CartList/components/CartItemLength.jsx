@@ -1,19 +1,29 @@
 import React, {useEffect, useState} from 'react';
+import {useSelector} from "react-redux";
 
-export const CartItemLength = ({setProductCount}) => {
+export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, products}) => {
     const [quantity, setQuantity] = useState(1);
+
+    const basketList = useSelector(state => state.toolkit.basket);
 
     const handleIncrement = () => {
         setQuantity(prev => prev + 1);
+        setTotalAmount(prev => prev + productInfo.price)
     };
 
     const handleDecrement = () => {
+        if (quantity < 2) return;
         setQuantity(prev => prev > 1 ? prev - 1 : 1);
+        setTotalAmount(prev => prev - productInfo.price)
     };
 
     useEffect(() => {
         setProductCount(quantity)
     }, [quantity])
+
+    useEffect(() => {
+        setTotalAmount(prev => (prev - productInfo.price) + (productInfo.price * quantity))
+    }, [products])
 
     return (
         <div className="product__length">

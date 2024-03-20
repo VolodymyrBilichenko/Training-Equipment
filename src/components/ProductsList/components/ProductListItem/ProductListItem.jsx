@@ -14,7 +14,7 @@ export const ProductListItem = ({data}) => {
     const [isFavorite, setIsFavorite] = useState(favorites.some(item => item === data.id))
     const [isAddedBasket, setIsAddedBasket] = useState(basket.some(item => item === data.id))
 
-    const handleAddClick = () => {
+    const handleAddBasket = () => {
         setIsAddedBasket(prev => !prev)
         dispatch(addBasketItem(data.id))
     }
@@ -46,7 +46,7 @@ export const ProductListItem = ({data}) => {
                 <ins>{`${data.price} ₴`}</ins>
                 <del>{`${data.ProductPriceDel} ₴`}</del>
             </div>
-            <button onClick={handleAddClick} style={{background: isAddedBasket ? "#9C50B8" : ""}} className="product-card__add-cart button is-min-on-mob" type="button">
+            <button onClick={handleAddBasket} style={{background: isAddedBasket ? "#9C50B8" : ""}} className="product-card__add-cart button is-min-on-mob" type="button">
                 <svg width="20" height="20" viewBox="0 0 48 48">
                     <use xlinkHref="#cart"></use>
                 </svg>

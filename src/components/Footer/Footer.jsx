@@ -7,19 +7,15 @@ import { FooterSocial } from './components/FooterSocial/FooterSocial'
 import Logotype from '../../assets/img/logo.png' 
 import axios from 'axios'
 import { getApiLink } from '../../api/getApiLink'
+import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 export const Footer = () => {
     const [socialData, setSocialData] = useState([]);
 
     useEffect(() => {
-        const configHeader = {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-                "Content-Type": "application/json",
-            }
-        }
 
-        axios.get(getApiLink('/api/static/data'), configHeader)
+
+        axios.get(getApiLink('/api/static/data'), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setSocialData(data.data);
             })
