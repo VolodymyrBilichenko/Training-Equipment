@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 
 export const MainHeroSearch = ({searchPlaceholder}) => {
-    const [searchQuery, setSearchQuery] = useState('');
+    const { search } = useParams();
+
+    const [searchQuery, setSearchQuery] = useState(search);
     const navigate = useNavigate();
+
 
     const handleInputQuery = (evt) => {
         setSearchQuery(evt.target.value)

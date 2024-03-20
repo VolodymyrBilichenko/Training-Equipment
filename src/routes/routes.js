@@ -25,6 +25,10 @@ export const routes = () => {
             element: <Search/>
         },
         {
+            path: '/search',
+            element: <Search/>
+        },
+        {
             path: '/favorites',
             element: <Favorites/>
         },

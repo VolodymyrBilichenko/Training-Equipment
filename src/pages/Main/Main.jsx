@@ -1,28 +1,43 @@
-import React from 'react'
-import { MainHero } from './components/MainHero/MainHero'
-import { MainCategories } from './components/MainCategories/MainCategories'
-import { MainStatistics } from './components/MainStatistics/MainStatistics'
-import { MainReviews } from './components/MainReviews/MainReviews'
-import { ProductsList } from '../../components/ProductsList/ProductsList'
-import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
+import React, {useEffect, useState} from 'react'
+import {MainHero} from './components/MainHero/MainHero'
+import {MainCategories} from './components/MainCategories/MainCategories'
+import {MainStatistics} from './components/MainStatistics/MainStatistics'
+import {MainReviews} from './components/MainReviews/MainReviews'
+import {ProductsList} from '../../components/ProductsList/ProductsList'
+import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
+import axios from "axios";
+import {getApiLink} from "../../api/getApiLink";
 
 export const Main = () => {
-  return (
-    <main className="main">
 
-		  <MainHero/>
+    const [products, setProducts] = useState([])
 
-      <MainCategories/>
-      
-      <section className='products container'>
-        <SectionTitle title={'Нові освітні рішення'} />
+    useEffect(() => {
+        axios.get(getApiLink(`/api/products/get`))
+            .then(({data}) => {
+                setProducts(data.data)
+            })
+            .catch(error => {
+                console.log('products undefined', error);
+            })
+    }, [])
 
-        <ProductsList ClassNameList={'products__list'}/>
-      </section>
+    return (
+        <main className="main">
 
-      <MainStatistics/>
+            <MainHero/>
 
-      <MainReviews/>
-	  </main>
-  )
+            <MainCategories/>
+
+            <section className='products container'>
+                <SectionTitle title={'Нові освітні рішення'}/>
+
+                <ProductsList list={products} ClassNameList={'products__list'}/>
+            </section>
+
+            <MainStatistics/>
+
+            <MainReviews/>
+        </main>
+    )
 }
