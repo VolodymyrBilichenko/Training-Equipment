@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 
 const toolkitSlice = createSlice({
@@ -17,13 +17,28 @@ const toolkitSlice = createSlice({
         setFavorites(state, action) {
             state.favorites = action.payload
         },
+        addFavorite(state, action) {
+            if (state.favorites.some(item => item === action.payload)) {
+                state.favorites = state.favorites.filter(item => item !== action.payload)
+            } else {
+                state.favorites = [...state.favorites, action.payload]
+            }
+        },
+
         addBasketItem(state, action) {
-            state.basket = [...state.basket, action.payload]
+            if (state.basket?.some(item => item === action.payload)) {
+                state.basket = state.basket.filter(item => item !== action.payload)
+            } else {
+                state.basket = [...state.basket, action.payload]
+            }
+        },
+        removeBasketItem(state, action) {
+            state.basket = state.basket.filter(item => item !== action.payload)
         },
         setBasket(state, action) {
             state.basket = action.payload
         }
-        
+
     }
 })
 
@@ -32,8 +47,10 @@ export const {
 
     setUser,
     setFavorites,
+    addFavorite,
     addBasketItem,
+    removeBasketItem,
     setBasket,
-    
+
 
 } = toolkitSlice.actions;

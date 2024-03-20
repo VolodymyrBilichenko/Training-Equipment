@@ -1,32 +1,48 @@
-import React from 'react'
-import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
-import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
-import { MainHeroSearch } from '../Main/components/MainHero/components/MainHeroSearch'
-import { ProductsList } from '../../components/ProductsList/ProductsList'
-import { PaginationProducts } from '../../components/PaginationProducts/PaginationProducts'
-import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
-import { useParams } from 'react-router-dom'
+import React, {useEffect, useState} from 'react'
+import {BreadCrumbs} from '../../components/BreadCrumbs/BreadCrumbs'
+import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
+import {MainHeroSearch} from '../Main/components/MainHero/components/MainHeroSearch'
+import {ProductsList} from '../../components/ProductsList/ProductsList'
+import {PaginationProducts} from '../../components/PaginationProducts/PaginationProducts'
+import {BackGroundDecor} from '../../components/BackGroundDecor/BackGroundDecor'
+import {useParams} from 'react-router-dom'
+import axios from "axios";
+import {getApiLink} from "../../api/getApiLink";
 
 export const Search = () => {
-  const { search } = useParams();
+    const {search} = useParams();
 
-  return (
-    <>
-      <BackGroundDecor/>
+    const [products, setProducts] = useState([])
 
-      <BreadCrumbs pages={[{page: 'Пошук по:'}]}/>
+    useEffect(() => {
 
-      <div className='favorites container'>
+        axios.get(getApiLink(`/api/products/get${search ? `?search=${search}` : ""}`))
+            .then(({data}) => {
+                setProducts(data.data)
+            })
+            .catch(error => {
+                console.log('products undefined', error);
+            })
 
-        <SectionTitle title={`Пошук по: ${search}`}/>
+    }, [search])
 
-        <MainHeroSearch searchPlaceholder={'Пошук'}/>
+    return (
+        <>
+            <BackGroundDecor/>
 
-        <ProductsList ClassNameList={'favorites__list'}/>
+            <BreadCrumbs pages={[{page: 'Пошук по:'}]}/>
 
-        <PaginationProducts ClassName={'favorites__pagination'}/>
+            <div className='favorites container'>
 
-      </div>
-    </>
-  )
+                <SectionTitle title={`Пошук по: ${search}`}/>
+
+                <MainHeroSearch searchPlaceholder={'Пошук'}/>
+
+                <ProductsList list={products} ClassNameList={'favorites__list'}/>
+
+                <PaginationProducts ClassName={'favorites__pagination'}/>
+
+            </div>
+        </>
+    )
 }
