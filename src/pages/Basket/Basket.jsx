@@ -16,8 +16,8 @@ export const Basket = () => {
 
     const basketList = useSelector(state => state.toolkit.basket);
 
-    const handleOpenModal = () => {
-		setModal('order')
+    const handleOpenModal = (type) => {
+		setModal(`${type}`)
     }
 
     useEffect(() => {
@@ -114,7 +114,7 @@ export const Basket = () => {
 							Бажаю отримати на адресу електронної пошти примірник Договору поставки та Рахунок
 						</span>
                         </label>
-                        <button onClick={handleOpenModal} className="cart__submit button is-mode-1 open-popup" data-href="#order-popup"
+                        <button onClick={_ => handleOpenModal('order')} className="cart__submit button is-mode-1 open-popup" data-href="#order-popup"
                                 type="button" aria-label="Оформити замовлення">
                             <svg width="24" height="24" viewBox="0 0 48 48">
                                 <use xlinkHref="#cart"></use>
