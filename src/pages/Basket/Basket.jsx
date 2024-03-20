@@ -3,9 +3,7 @@ import {BackGroundDecor} from '../../components/BackGroundDecor/BackGroundDecor'
 import {BreadCrumbs} from '../../components/BreadCrumbs/BreadCrumbs'
 import {CartList} from '../../components/CartList/CartList'
 import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
-import {useDispatch, useSelector} from 'react-redux'
-import getCookies from '../../functions/getCookies'
-import {setBasket} from '../../redux/toolkitSlice'
+import {useSelector} from 'react-redux'
 import {PopupContext} from "../../App";
 import axios from "axios";
 import {getApiLink} from "../../api/getApiLink";
@@ -18,8 +16,8 @@ export const Basket = () => {
 
     const basketList = useSelector(state => state.toolkit.basket);
 
-    const handleOpenModal = (modal) => {
-		setModal(modal)
+    const handleOpenModal = () => {
+		setModal('order')
     }
 
     useEffect(() => {
@@ -41,6 +39,8 @@ export const Basket = () => {
                 }, 0)
 
                 setTotalAmount(total)
+
+                console.log('total', total);
             })
             .catch((error) => {
                 console.log('all prod undefined', error);
@@ -114,14 +114,14 @@ export const Basket = () => {
 							Бажаю отримати на адресу електронної пошти примірник Договору поставки та Рахунок
 						</span>
                         </label>
-                        <button className="cart__submit button is-mode-1 open-popup" data-href="#order-popup"
+                        <button onClick={handleOpenModal} className="cart__submit button is-mode-1 open-popup" data-href="#order-popup"
                                 type="button" aria-label="Оформити замовлення">
                             <svg width="24" height="24" viewBox="0 0 48 48">
                                 <use xlinkHref="#cart"></use>
                             </svg>
                             <span>
-							Оформити замовлення
-						</span>
+                                Оформити замовлення
+                            </span>
                         </button>
                     </div>
                 </div>

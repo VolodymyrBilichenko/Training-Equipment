@@ -9,19 +9,14 @@ import { Footer } from './components/Footer/Footer';
 import { LoginPopUp } from './components/LoginPopUp/LoginPopUp';
 import { RegisterPopUp } from './components/RegisterPopUp/RegisterPopUp';
 import { ResetPassPopUp } from './components/ResetPassPopUp/ResetPassPopUp';
+import { OrderPopUp } from './components/OrderPopUp/OrderPopUp';
+import { ThanksPopUp } from './components/ThanksPopUp/ThanksPopUp';
 
 export const PopupContext = createContext(null);
 
 export const App = () => {
   const [routesList] = useState(routes())
   const [modal, setModal] = useState('');
-
-  // console.log(modal);
-
-  // const ModalList = {
-  //   'login': <LoginPopUp/>,
-  //   'register': <RegisterPopUp/>,
-  // }
 
   const ModalList = () => {
     if (modal === 'login') {
@@ -30,6 +25,10 @@ export const App = () => {
       return <RegisterPopUp modal={modal}/>
     }else if (modal === 'resetPass') {
       return <ResetPassPopUp modal={modal}/>
+    }else if (modal === 'order') {
+      return <OrderPopUp modal={modal}/>
+    }else if (modal === 'thx') {
+      return <ThanksPopUp modal={modal}/>
     }
     
   }

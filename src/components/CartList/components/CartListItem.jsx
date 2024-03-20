@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { CartItemLength } from './CartItemLength'
 
 import ProductImg from '../../../assets/img/product-cards/product-card-image-4.png'

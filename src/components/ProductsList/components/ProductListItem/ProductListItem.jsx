@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {addBasketItem, addFavorite} from '../../../../redux/toolkitSlice';
 import {NavLink} from 'react-router-dom';
-import setCookie from '../../../../functions/setCookie';
 import photoPlaceholder from './../../../../assets/img/photoNotFound.jpg'
 
 export const ProductListItem = ({data}) => {

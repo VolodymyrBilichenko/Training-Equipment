@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PopupContext } from '../../App';
 
-export const OrderPopUp = () => {
+export const OrderPopUp = ({modal}) => {
+    const SetPopContext = useContext(PopupContext);
+
+    const handleClosePopUp = () => {
+        SetPopContext('');
+    }
+
+    const handleNavPopupThx = () => {
+        SetPopContext('thx')
+    }
+
+    const handleNavPopupLogin = () => {
+        SetPopContext('login')
+    }
+
+    const handleNavPopupRegister = () => {
+        SetPopContext('register')
+    }
+
     return (
-        <div className="popup" id="order-popup" style={{display: 'none'}}>
+        <div className={`popup ${modal ? 'is-active' : ''}`} id="order-popup" style={{display: 'block'}}>
             <div className="popup-wrapper">
-                <div className="popup-bg popup-close"></div>
+                <div onClick={handleClosePopUp} className="popup-bg popup-close"></div>
                 <div className="popup-body">
-                    <button type="button" className="popup-close-btn popup-close" title="Закрити">
+                    <button onClick={handleClosePopUp} type="button" className="popup-close-btn popup-close" title="Закрити">
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlinkHref="#close-3"></use>
                         </svg>
@@ -19,8 +38,8 @@ export const OrderPopUp = () => {
                             <p>
                                 Если Вы хотите получить персональную скидку или
                                 стать участником бонусной системы -
-                                <a href="#register-popup" className="open-popup popup-close">Зарегистрируйтесь</a> или
-                                <a href="#login-popup" className="open-popup popup-close">Авторизуйтесь</a>
+                                <a onClick={handleNavPopupRegister} href="#register-popup" className="open-popup popup-close">Зарегистрируйтесь</a> или
+                                <a onClick={handleNavPopupLogin} href="#login-popup" className="open-popup popup-close">Авторизуйтесь</a>
                                 в личном кабинете, прежде чем оформить этот заказ
                             </p>
                         </div>
@@ -48,7 +67,7 @@ export const OrderPopUp = () => {
                                     Бажаю отримати на адресу електронної пошти примірник Договору поставки та Рахунок
                                 </span>
                             </label>
-                            <button className="popup-form__submit button is-mode-1" type="submit">
+                            <button onClick={handleNavPopupThx} className="popup-form__submit button is-mode-1" type="submit">
                                 Оформити замовлення
                             </button>
                         </form>

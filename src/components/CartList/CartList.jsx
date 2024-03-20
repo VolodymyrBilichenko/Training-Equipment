@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { CartListItem } from './components/CartListItem'
-import axios from 'axios'
-import { getApiLink } from '../../api/getApiLink'
 
 export const CartList = ({ products, setTotalAmount }) => {
 
