@@ -1,13 +1,14 @@
 import React, {useState} from 'react'
 import { CartItemLength } from './CartItemLength'
 
-import ProductImg from '../../../assets/img/product-cards/product-card-image-4.png'
 import {useDispatch} from "react-redux";
 import {removeBasketItem} from "../../../redux/toolkitSlice";
 
 export const CartListItem = ({ productInfo, setTotalAmount, products }) => {
 
     const dispatch = useDispatch()
+
+    console.log('productInfo' ,productInfo);
 
     const handleDeleteItem = () => {
         dispatch(removeBasketItem(productInfo.id))

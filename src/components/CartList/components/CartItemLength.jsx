@@ -6,24 +6,29 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
 
     const basketList = useSelector(state => state.toolkit.basket);
 
+    console.log(basketList);
+
     const handleIncrement = () => {
         setQuantity(prev => prev + 1);
+        if (!setTotalAmount) return;
         setTotalAmount(prev => prev + productInfo.price)
     };
 
     const handleDecrement = () => {
         if (quantity < 2) return;
         setQuantity(prev => prev > 1 ? prev - 1 : 1);
+        if (!setTotalAmount) return;
         setTotalAmount(prev => prev - productInfo.price)
     };
 
     useEffect(() => {
         setProductCount(quantity)
-    }, [quantity])
+    }, [quantity, setProductCount])
 
     useEffect(() => {
+        if(!setTotalAmount) return;
         setTotalAmount(prev => (prev - productInfo.price) + (productInfo.price * quantity))
-    }, [products])
+    }, [products, setTotalAmount, productInfo, quantity])
 
     return (
         <div className="product__length">

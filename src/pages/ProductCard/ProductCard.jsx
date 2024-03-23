@@ -161,7 +161,7 @@ export const ProductCard = () => {
                                 <del>3 800 ₴</del>
                             </div>
 
-                            <CartItemLength setProductCount={setProductCount}/>
+                            <CartItemLength setProductCount={setProductCount} productCount={productCount}/>
 
                         </div>
                         <div className="product__info_col">

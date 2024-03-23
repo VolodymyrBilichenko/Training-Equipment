@@ -54,8 +54,8 @@ export const Basket = () => {
                 <div className="cart__note">
                     <p>
                         Если Вы хотите получить персональную скидку или стать участником бонусной системы -
-                        <a onClick={_ => handleOpenModal("register")} className="open-popup">Зарегистрируйтесь</a> или
-                        <a onClick={_ => handleOpenModal("login")} className="open-popup">Авторизуйтесь</a> в личном кабинете, прежде чем
+                        <button onClick={_ => handleOpenModal("register")} className="open-popup">Зарегистрируйтесь</button> или
+                        <button onClick={_ => handleOpenModal("login")} className="open-popup">Авторизуйтесь</button> в личном кабинете, прежде чем
                         оформить этот заказ
                     </p>
                 </div>

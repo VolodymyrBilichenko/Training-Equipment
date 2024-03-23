@@ -6,6 +6,7 @@ export const CartList = ({ products, setTotalAmount }) => {
 
   const basketList = useSelector(state => state.toolkit.basket);
 
+  
   return (
     <ul className="cart__list" data-price-sum-container-id="cart-list">
       {products?.filter(item => basketList.some(item2 => item.id === item2))?.map(productItem => (

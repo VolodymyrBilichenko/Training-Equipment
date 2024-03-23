@@ -1,6 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
 import setCookie from "../functions/setCookie";
-import getCookies from "../functions/getCookies";
 
 
 const toolkitSlice = createSlice({
