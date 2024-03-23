@@ -39,14 +39,13 @@ export const ProductCard = () => {
 
     useEffect(() => {
 
-        axios.get(getApiLink(`/api/products/get`))
+        axios.get(getApiLink(`/api/products/get`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setRecommendedProducts(data.data)
             })
             .catch(error => {
                 console.log('products undefined', error);
             })
-
     }, [])
 
     const handleAddCart = () => {

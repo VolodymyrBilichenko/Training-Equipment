@@ -1,23 +1,3 @@
-// import axios from "axios";
-// import { getApiLink } from "./getApiLink";
-// import { setUser } from "../redux/toolkitSlice";
-
-// export const login = (data, dispatch) => {
-// console.log(data);
-//     let tokenParts = data.token;
-//     let encodedPayload = tokenParts[1];
-//     let decodedPayload = atob(encodedPayload);
-//     let payloadObj = JSON.parse(decodedPayload);
-
-//     axios.defaults.headers.get['Authorization'] = `Bearer ${data.token}`
-//     axios.get(getApiLink(`/api/user/${payloadObj.id}`), {
-//         id: payloadObj.id
-//     }).then((res) => {
-//         dispatch(setUser(res.data))
-//     })
-// }
-
-
 import axios from "axios";
 import { getApiLink } from "./getApiLink";
 import { setUser } from "../redux/toolkitSlice";

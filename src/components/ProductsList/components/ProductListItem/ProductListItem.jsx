@@ -8,6 +8,8 @@ export const ProductListItem = ({data}) => {
 
     const dispatch = useDispatch();
 
+    // console.log('data', data);
+
     const favorites = useSelector(state => state.toolkit.favorites)
     const basket = useSelector(state => state.toolkit.basket)
 
