@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import { changeBasketItem } from '../../../redux/toolkitSlice';
 
 export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, products}) => {
     const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
-
-    const basketList = useSelector(state => state.toolkit.basket);
 
     console.log(productInfo);
 

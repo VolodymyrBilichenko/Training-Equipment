@@ -1339,6 +1339,7 @@ input[type=password] {
     gap: 15px
 }
 
+.header__add-nav button,
 .header__add-nav a {
     display: flex;
     align-items: center;
@@ -1349,6 +1350,7 @@ input[type=password] {
     color: var(--white)
 }
 
+.header__add-nav button svg,
 .header__add-nav a svg {
     width: 80%;
     height: 80%
@@ -4270,10 +4272,12 @@ body.is-popup-active {
         width: auto
     }
 
+    .header__add-nav button,
     .header__add-nav a {
         background: rgba(67,50,95,.8)
     }
 
+    .header__add-nav button svg,
     .header__add-nav a svg {
         width: 60%;
         height: 60%
@@ -4695,6 +4699,7 @@ body.is-popup-active {
         font-size: 1rem
     }
 
+    .header__add-nav button,
     .header__add-nav a {
         width: 46px;
         height: 46px
@@ -4827,6 +4832,7 @@ body.is-popup-active {
         transition: color .2s ease
     }
 
+    .header__add-nav button:hover,.header__drop-down--list a:active,
     .header__add-nav a:hover,.header__drop-down--list a:active {
         background: var(--accent-hover)
     }
@@ -4835,14 +4841,17 @@ body.is-popup-active {
         color: var(--accent-active)
     }
 
+    .header__add-nav button,
     .header__add-nav a {
         transition: background .2s ease,color .2s ease
     }
 
+    .header__add-nav button:hover,
     .header__add-nav a:hover {
         color: var(--white)
     }
 
+    .header__add-nav button:active,
     .header__add-nav a:active {
         background: var(--accent-active)
     }

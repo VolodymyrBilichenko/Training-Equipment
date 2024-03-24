@@ -1,25 +1,30 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { PopupContext } from '../../../../../../App';
+import getCookies from '../../../../../../functions/getCookies';
 
 export const HeaderAddNavDesk = () => {
+    const navigate = useNavigate();
 
-    const handlePopUpClick = () => {
-        SetPopContext('login');
+
+    const handlePopUpClick = () => {        
+        if (getCookies('cookieToken')) {
+            navigate('/profile');
+        } else SetPopContext('login');
     }
 
-
     const SetPopContext = useContext(PopupContext);
+
 
     return (
         <div className="header__add-nav visible-on-desktop">
             <ul>
                 <li>
-                    <a href="#login-popup" onClick={handlePopUpClick} className="open-popup" title="Акаунт">
+                    <button onClick={handlePopUpClick} className="open-popup" title="Акаунт">
                         <svg width="26" height="26" viewBox="0 0 48 48">
                             <use xlinkHref="#user"></use>
                         </svg>
-                    </a>
+                    </button>
                 </li>
                 <li>
                     <NavLink to={'/favorites'} title="Обране">
