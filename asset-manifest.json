@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Training-Equipment/static/css/main.7f69d7b2.css",
-    "main.js": "/Training-Equipment/static/js/main.087a005c.js",
+    "main.css": "/Training-Equipment/static/css/main.8b52fd4f.css",
+    "main.js": "/Training-Equipment/static/js/main.faf76b82.js",
     "static/media/background-decor.png": "/Training-Equipment/static/media/background-decor.fdda5b24f3fe3f92cee3.png",
     "static/media/decor-hero-background.png": "/Training-Equipment/static/media/decor-hero-background.6180da1d40fc23082d1f.png",
     "static/media/decor-element.png": "/Training-Equipment/static/media/decor-element.f0b2ac4a8b46981de649.png",
@@ -22,11 +22,11 @@
     "static/media/assignment.svg": "/Training-Equipment/static/media/assignment.f89e83347714f7c75c82a10b66f5f880.svg",
     "index.html": "/Training-Equipment/index.html",
     "static/media/credit_card.svg": "/Training-Equipment/static/media/credit_card.7ad0c1f55ca45dca355c4eec052ae6ee.svg",
-    "main.7f69d7b2.css.map": "/Training-Equipment/static/css/main.7f69d7b2.css.map",
-    "main.087a005c.js.map": "/Training-Equipment/static/js/main.087a005c.js.map"
+    "main.8b52fd4f.css.map": "/Training-Equipment/static/css/main.8b52fd4f.css.map",
+    "main.faf76b82.js.map": "/Training-Equipment/static/js/main.faf76b82.js.map"
   },
   "entrypoints": [
-    "static/css/main.7f69d7b2.css",
-    "static/js/main.087a005c.js"
+    "static/css/main.8b52fd4f.css",
+    "static/js/main.faf76b82.js"
   ]
 }
