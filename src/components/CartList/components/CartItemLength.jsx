@@ -1,17 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import { changeBasketItem } from '../../../redux/toolkitSlice';
 
 export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, products}) => {
     const [quantity, setQuantity] = useState(1);
+    const dispatch = useDispatch();
 
     const basketList = useSelector(state => state.toolkit.basket);
 
-    console.log(basketList);
+    console.log(productInfo);
 
     const handleIncrement = () => {
         setQuantity(prev => prev + 1);
         if (!setTotalAmount) return;
         setTotalAmount(prev => prev + productInfo.price)
+
+        dispatch(changeBasketItem({
+            count: 1,
+            product_id: productInfo.id,
+        }))
     };
 
     const handleDecrement = () => {
@@ -19,6 +26,11 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
         setQuantity(prev => prev > 1 ? prev - 1 : 1);
         if (!setTotalAmount) return;
         setTotalAmount(prev => prev - productInfo.price)
+
+        dispatch(changeBasketItem({
+            count: -1,
+            product_id: productInfo.id,
+        }))
     };
 
     useEffect(() => {

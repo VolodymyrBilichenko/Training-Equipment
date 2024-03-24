@@ -34,12 +34,7 @@ export const OrderPopUp = ({modal}) => {
         e.preventDefault();
 
         const dataToSend = {
-            "products": [
-                {
-                    "product_id": basketItems.id,
-                    "product_amount": 4
-                },
-            ],
+            "products": basketItems,
             "email_not_auth_user": email,
             "phone_not_auth_user": phone,
 

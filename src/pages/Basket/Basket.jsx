@@ -25,11 +25,11 @@ export const Basket = () => {
         axios.get(getApiLink('/api/products/get'), {headers: GetApiHeaders()})
             .then(({data}) => {
 
-                setProducts(data.data?.filter(item => basketList.some(item2 => item.id === item2)))
+                setProducts(data.data)
 
                 setTotalAmount(0)
 
-                const total = data.data?.filter(item => basketList.some(item2 => item.id === item2)).reduce((amount, current) => {
+                const total = data.data?.filter(item => basketList.some(item2 => item.id === item2.product_id)).reduce((amount, current) => {
                     amount += current.price
                     return amount
                 }, 0)

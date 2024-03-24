@@ -29,9 +29,12 @@ const toolkitSlice = createSlice({
 
         addBasketItem(state, action) {
             if (state.basket?.some(item => item === action.payload)) {
-                state.basket = state.basket.filter(item => item !== action.payload)
+                state.basket = state.basket.filter(item => item.product_id !== action.payload)
             } else {
-                state.basket = [...state.basket, action.payload]
+                state.basket = [...state.basket, {
+                    product_id: action.payload,
+                    product_amount: 1,
+                }]
             }
             setCookie("basket", JSON.stringify(state.basket))
         },
@@ -40,7 +43,21 @@ const toolkitSlice = createSlice({
             setCookie("basket", JSON.stringify(state.basket))
         },
         setBasket(state, action) {
-            state.basket = action.payload
+            // state.basket = action.payload
+        },
+        changeBasketItem(state, action) {
+            const newBasketList = state.basket.map(item => {
+                if (item.product_id === action.payload.product_id) {
+                    return {
+                        product_id: item.product_id,
+                        product_amount: item.product_amount + action.payload.count,
+                    }
+                } else {
+                    return item;
+                }
+            })
+
+            state.basket = newBasketList
         }
 
     }
@@ -55,6 +72,7 @@ export const {
     addBasketItem,
     removeBasketItem,
     setBasket,
+    changeBasketItem,
 
 
 } = toolkitSlice.actions;
