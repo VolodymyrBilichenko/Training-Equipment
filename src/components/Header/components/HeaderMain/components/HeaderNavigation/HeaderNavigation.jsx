@@ -7,9 +7,9 @@ export const HeaderNavigation = ({ isOpen }) => {
         <div className="header__nav--body">
             <ul className="header__nav--list">
                 <li>
-                    <a href="about-us.html">
+                    <NavLink to={'/about'}>
                         Про компанію
-                    </a>
+                    </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/catalog'}>
@@ -22,9 +22,9 @@ export const HeaderNavigation = ({ isOpen }) => {
                     </NavLink>
                 </li>
                 <li>
-                    <a href="about-us.html#consultation">
+                    <NavLink to={'/about#consultation'}>
                         Консультація з підготовки до тендеру
-                    </a>
+                    </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/certificate'}>

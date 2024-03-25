@@ -1,3 +1,4 @@
+import { AboutUs } from "../pages/AboutUs/AboutUs"
 import { Basket } from "../pages/Basket/Basket"
 import { Catalog } from "../pages/Catalog/Catalog"
 import { Categories } from "../pages/Categories/Categories"
@@ -51,6 +52,10 @@ export const routes = () => {
         {
             path: '/basket',
             element: <Basket/>
+        },
+        {
+            path: '/about',
+            element: <AboutUs/>
         },
         {
             path: '/certificate',
