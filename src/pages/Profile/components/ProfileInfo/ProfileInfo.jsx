@@ -1,6 +1,8 @@
 import React from 'react'
 
 export const ProfileInfo = ({ userData }) => {
+
+    console.log('userData', userData);
   return (
     <>
         <div className="account__block">
@@ -22,11 +24,11 @@ export const ProfileInfo = ({ userData }) => {
                     </label>
                     <label className="account__block_item">
                         <span>Название организации</span>
-                        <span className="value">Игорь Иванович</span>
+                        <span className="value">{userData.organization}</span>
                     </label>
                     <label className="account__block_item">
                         <span>E-mail *</span>
-                        <span className="value">sdfkjh@gmail.com</span>
+                        <span className="value">{userData.email}</span>
                     </label>
                     <label className="account__block_item">
                         <span>Код ЄДРПОУ/ІПН</span>
@@ -34,7 +36,7 @@ export const ProfileInfo = ({ userData }) => {
                     </label>
                     <label className="account__block_item">
                         <span>Телефон *</span>
-                        <span className="value">+38 (099) 440 33 43</span>
+                        <span className="value">{userData.phone_number}</span>
                     </label>
                     <label className="account__block_item">
                         <span>ФИО Контактного лица</span>

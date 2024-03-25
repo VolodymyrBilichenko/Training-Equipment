@@ -31,7 +31,7 @@ export const Search = () => {
         <>
             <BackGroundDecor/>
 
-            <BreadCrumbs pages={[{page: 'Пошук по:'}]}/>
+            <BreadCrumbs pages={[{page: `Пошук по: ${search}`}]}/>
 
             <div className='favorites container'>
 

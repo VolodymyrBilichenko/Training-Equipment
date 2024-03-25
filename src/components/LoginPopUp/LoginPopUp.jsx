@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { PopupContext } from '../../App';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { getApiLink } from '../../api/getApiLink'
 import axios from 'axios';
-import { login } from '../../api/login';
+// import { login } from '../../api/login';
 import setCookie from '../../functions/setCookie';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ export const LoginPopUp = ({modal}) => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const SetPopContext = useContext(PopupContext);
 
@@ -33,7 +33,7 @@ export const LoginPopUp = ({modal}) => {
                 setEmail('')
                 setPassword('')
 
-                login(res.data, dispatch)
+                // login(res.data, dispatch)
                 
             }
             console.log(res);

@@ -592,6 +592,7 @@ body {
     display: flex
 }
 
+.aside_nav button,
 .aside_nav a,.button {
     font-family: var(--title-font);
     color: var(--white);
@@ -879,13 +880,17 @@ section {
     border-radius: 20px
 }
 
+
+.aside_nav button,
 .aside_nav a {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 5px 25px;
     font-size: .875rem;
-    font-weight: 600
+    font-weight: 600;
+    background: transparent;
+    width: 100%;
 }
 
 .main-title,.min-title,.title {
@@ -893,15 +898,18 @@ section {
     font-family: var(--title-font)
 }
 
+.aside_nav button.is-current,
 .aside_nav a.is-current {
     color: var(--accent-hover)
 }
 
+.aside_nav button.is-current svg,
 .aside_nav a.is-current svg {
     background: rgba(217,217,217,.2);
     color: var(--white)
 }
 
+.aside_nav button svg,
 .aside_nav a svg {
     width: 20px;
     height: 20px;
@@ -4775,26 +4783,32 @@ body.is-popup-active {
         opacity: 1
     }
 
+    .aside_nav button,
     .aside_nav a {
         transition: color .2s ease
     }
 
+    .aside_nav button:hover,
     .aside_nav a:hover {
         color: var(--accent-hover)
     }
 
+    .aside_nav button:hover svg,
     .aside_nav a:hover svg {
         color: var(--white)
     }
 
+    .aside_nav button:active,
     .aside_nav a:active {
         color: var(--accent-active)
     }
 
+    .aside_nav button:active svg,.password-toggle:hover,
     .aside_nav a:active svg,.password-toggle:hover {
         color: var(--white)
     }
 
+    .aside_nav button svg,
     .aside_nav a svg {
         transition: background .2s ease
     }

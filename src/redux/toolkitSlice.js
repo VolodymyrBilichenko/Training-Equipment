@@ -39,7 +39,7 @@ const toolkitSlice = createSlice({
             setCookie("basket", JSON.stringify(state.basket))
         },
         removeBasketItem(state, action) {
-            state.basket = state.basket.filter(item => item !== action.payload)
+            state.basket = state.basket.filter(item => item.product_id !== action.payload)
             setCookie("basket", JSON.stringify(state.basket))
         },
         setBasket(state, action) {

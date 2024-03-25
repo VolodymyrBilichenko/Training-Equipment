@@ -3,7 +3,7 @@ import React from 'react'
 export const PaginationProducts = ({ClassName}) => {
   return (
     <div className={`${ClassName} pagination`}>
-        <a href="foo" className="pagination__link">
+        {/* <a href="foo" className="pagination__link">
             Перша
         </a>
         <div className="pagination__list">
@@ -17,7 +17,7 @@ export const PaginationProducts = ({ClassName}) => {
         </div>
         <a href="foo" className="pagination__link">
             Остання
-        </a>
+        </a> */}
     </div>
   )
 }

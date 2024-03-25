@@ -3,15 +3,18 @@ import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDeco
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
 import { ProfileNav } from './components/ProfileNav/ProfileNav'
-// import { ProfileBonuses } from './components/ProfileBonuses/ProfileBonuses'
+import { ProfileBonuses } from './components/ProfileBonuses/ProfileBonuses'
 import { ProfileInfo } from './components/ProfileInfo/ProfileInfo'
 import axios from 'axios'
 import { getApiLink } from '../../api/getApiLink'
 import getCookies from '../../functions/getCookies'
-// import { ProfileOrders } from './components/ProfileOrders/ProfileOrders'
+import { ProfileOrders } from './components/ProfileOrders/ProfileOrders'
 
 export const Profile = () => {
   const [userProf, setUserProf] = useState({});
+  const [profileInfo, setProfileInfo] = useState(true);
+  const [profileOrders, setProfileOrders] = useState(false);
+  const [profileBonus, setProfileBonus] = useState(false); 
 
   useEffect(() => {
     axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('cookieToken')}` 
@@ -24,6 +27,24 @@ export const Profile = () => {
       })
   }, [])
 
+  const handleProfInfoClick = () => {
+    setProfileInfo(true);
+    setProfileOrders(false);
+    setProfileBonus(false);
+  }
+
+  const handleProfOrdersClick = () => {
+    setProfileInfo(false);
+    setProfileOrders(true);
+    setProfileBonus(false);
+  }
+
+  const handleProfBonusClick = () => {
+    setProfileInfo(false);
+    setProfileOrders(false);
+    setProfileBonus(true);
+  }
+
   return (
     <>
       <BackGroundDecor/>
@@ -35,16 +56,23 @@ export const Profile = () => {
         <SectionTitle title={'Личный кабинет'} ClassTitle={'account__title'}/>
 
         <div className="account__aside" data-sticky-container>
-          <ProfileNav/>
+
+          <ProfileNav
+            onProfInfo={handleProfInfoClick}
+            onProfOrders={handleProfOrdersClick}
+            onProfBonus={handleProfBonusClick}
+          />
+
         </div>
 
         <div className="account__main">
 
-          <ProfileInfo userData={userProf}/>
+          {profileInfo && <ProfileInfo userData={userProf}/>}
 
-          {/* <ProfileOrders/> */}
+          {profileOrders && <ProfileOrders/>}
 
-          {/* <ProfileBonuses/> */}
+          {profileBonus && <ProfileBonuses/>}
+
         </div>
       </section>
 

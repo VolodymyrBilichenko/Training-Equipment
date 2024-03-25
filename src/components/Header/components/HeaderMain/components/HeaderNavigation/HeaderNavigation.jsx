@@ -17,9 +17,9 @@ export const HeaderNavigation = ({ isOpen }) => {
                     </NavLink>
                 </li>
                 <li>
-                    <a href="pricelist.html">
+                    <NavLink to={'/pricelist'}>
                         Прайс
-                    </a>
+                    </NavLink>
                 </li>
                 <li>
                     <a href="about-us.html#consultation">
@@ -27,9 +27,9 @@ export const HeaderNavigation = ({ isOpen }) => {
                     </a>
                 </li>
                 <li>
-                    <a href="certificates-and-orders.html">
+                    <NavLink to={'/certificate'}>
                         Сертифікати та накази
-                    </a>
+                    </NavLink>
                 </li>
             </ul>
             <div className="header__add visible-on-mob">
