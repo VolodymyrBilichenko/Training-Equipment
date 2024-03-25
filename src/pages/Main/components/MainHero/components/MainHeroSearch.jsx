@@ -22,7 +22,7 @@ export const MainHeroSearch = ({searchPlaceholder}) => {
         <search className="index-hero__search">
             <form className="index-hero__search--form" method="post" onSubmit={handleSubmit}>
                 <label>
-                    <input onChange={handleInputQuery} type="search" name="search" placeholder={searchPlaceholder} value={searchQuery}/>
+                    <input onChange={handleInputQuery} type="search" name="search" placeholder={searchPlaceholder} value={searchQuery} required/>
                 </label>
                 <button type="submit" title="Пошук">
                     <svg width="26" height="26" viewBox="0 0 48 48">

@@ -5,14 +5,25 @@ import {ProductsList} from '../../components/ProductsList/ProductsList'
 import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
 import axios from 'axios'
 import {getApiLink} from '../../api/getApiLink'
-import {useParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import CatalogCategories from "./components/CatalogCategories";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
+import { PaginationProducts } from '../../components/PaginationProducts/PaginationProducts'
 
 export const Catalog = () => {
-    const {category_id} = useParams();
+    const {category_id, search} = useParams();
+    const navigate = useNavigate();
 
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
+    const [searchQuery, setSearchQuery] = useState(search);
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+
+        if (!searchQuery) return;
+
+        navigate(`/search/${searchQuery}`)
+    }
 
     useEffect(() => {
 
@@ -57,8 +68,8 @@ export const Catalog = () => {
                 </div>
                 <div className="catalog__main">
                     <search className="catalog__search" role="search">
-                        <form>
-                            <input type="search" name="search" placeholder="Пошук по каталогу" required/>
+                        <form onSubmit={handleSubmit}>
+                            <input onChange={e => setSearchQuery(e.target.value)} type="search" name="search" placeholder="Пошук по каталогу" required/>
                             <button type="submit" title="Поиск">
                                 <svg width="26" height="26" viewBox="0 0 48 48">
                                     <use xlinkHref="#search"></use>
@@ -69,25 +80,10 @@ export const Catalog = () => {
 
                     <ProductsList list={products} ClassNameList={'catalog__list'}/>
 
-                    <div className="catalog__pagination pagination">
-                        <a href="some" className="pagination__link">
-                            Перша
-                        </a>
-                        <div className="pagination__list">
-                            <a href="some">1</a>
-                            <a href="some">2</a>
-                            <a href="some">3</a>
-                            <a href="some" className="is-current">4</a>
-                            <span>...</span>
-                            <a href="some">8</a>
-                            <a href="some">9</a>
-                        </div>
-                        <a href="some" className="pagination__link">
-                            Остання
-                        </a>
-                    </div>
+                    <PaginationProducts/>
                 </div>
             </section>
         </>
     )
 }
+

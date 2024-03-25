@@ -45,8 +45,8 @@ export const ProductListItem = ({data}) => {
                 </NavLink>
             </h3>
             <div className="product-card__price">
-                <ins>{`${data.price} ₴`}</ins>
-                <del>{`${data.ProductPriceDel} ₴`}</del>
+                <ins>{`${data.original_price} ₴`}</ins>
+                <del>{`${data.price === null ? '' : data.price + ' ₴'}`}</del>
             </div>
             <button onClick={handleAddBasket} style={{background: isAddedBasket ? "#9C50B8" : ""}} className="product-card__add-cart button is-min-on-mob" type="button">
                 <svg width="20" height="20" viewBox="0 0 48 48">
