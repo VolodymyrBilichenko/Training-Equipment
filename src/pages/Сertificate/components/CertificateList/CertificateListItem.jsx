@@ -7,7 +7,7 @@ export const CertificateListItem = ({ sertificate }) => {
     <li className="certificates__card">
         <a href="some" className="certificates__card_image ">
             <picture>
-                <img src={SertificateImg} alt="certificate ph" width="299" height="423" loading="lazy"/>
+                <img src={sertificate.files[0].web_path} alt="certificate ph" width="299" height="423" loading="lazy"/>
             </picture>
         </a>
         <a href="some" className="certificates__card_name">

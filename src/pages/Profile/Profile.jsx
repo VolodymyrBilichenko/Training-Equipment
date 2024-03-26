@@ -9,6 +9,7 @@ import axios from 'axios'
 import { getApiLink } from '../../api/getApiLink'
 import getCookies from '../../functions/getCookies'
 import { ProfileOrders } from './components/ProfileOrders/ProfileOrders'
+import { GetApiHeaders } from '../../functions/getApiHeaders'
 
 export const Profile = () => {
   const [userProf, setUserProf] = useState({});
@@ -18,7 +19,7 @@ export const Profile = () => {
 
   useEffect(() => {
     axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('cookieToken')}` 
-    axios.get(getApiLink('/api/user/profile'))
+    axios.get(getApiLink('/api/user/profile'), {headers: GetApiHeaders()})
       .then(({data}) => {
         setUserProf(data.data)
       })
