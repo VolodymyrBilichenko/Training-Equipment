@@ -20,7 +20,7 @@ const CatalogCategories = () => {
 
             {
                 categoriesList.map(cat =>
-                    <li>
+                    <li key={cat.id}>
                         <NavLink to={`/catalog/${cat.id}`}>
                             <span>
                                 {cat.name}

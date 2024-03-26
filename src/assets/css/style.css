@@ -2543,6 +2543,10 @@ body.is-popup-active {
     content: ""
 }
 
+.about-us{
+    /* overflow: hidden; */
+}
+
 .product__length_plus::after {
     -webkit-transform: translate(-50%,-50%) rotate(90deg);
     transform: translate(-50%,-50%) rotate(90deg)
@@ -3182,7 +3186,7 @@ body.is-popup-active {
 }
 
 .about-us__consultation::before {
-    content: "";
+    /* content: ""; */
     position: absolute;
     left: 50%;
     top: 50%;

@@ -82,7 +82,7 @@ section {
 .main {
 	//overflow: hidden;
 	&:not(.disable-visible) {
-		overflow: hidden;
+		// overflow: auto;
 	}
 
 	flex: 1 0 auto;

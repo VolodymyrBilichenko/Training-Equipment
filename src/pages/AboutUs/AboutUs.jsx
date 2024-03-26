@@ -61,7 +61,7 @@ export const AboutUs = () => {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#delivery" onClick={handleSmoothScroll}> 
+                                    <a href="#deliv" onClick={handleSmoothScroll}> 
                                         Доставка
                                     </a>
                                 </li>
@@ -99,7 +99,7 @@ export const AboutUs = () => {
                                 </div>
                             </article>
 
-                            <article id="delivery">
+                            <article id="deliv">
                                 <h3>Доставка</h3>
                                 <p>{dataDelivery.length > 0 ? dataDelivery[0].value : ''}</p>
                             </article>
