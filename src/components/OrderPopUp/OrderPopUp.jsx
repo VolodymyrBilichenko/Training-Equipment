@@ -52,7 +52,7 @@ export const OrderPopUp = ({modal}) => {
         const apiString = getCookies("cookieToken") ? "/api/orders/createFromAuthUser" : "/api/order/create"
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies("cookieToken")}`;
-        axios.post(getApiLink(apiString), !getCookies("cookieToken") && dataToSend, {headers: GetApiHeaders()})
+        axios.post(getApiLink(apiString), dataToSend, {headers: GetApiHeaders()})
             .then(({data}) => {
                 console.log(data);
                 handleNavPopupThx();
