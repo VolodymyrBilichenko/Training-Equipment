@@ -2,20 +2,15 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getApiLink } from '../../api/getApiLink'
 import { NavLink } from 'react-router-dom';
+import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 export const CategoriesList = ({ClassNameList}) => {
 
     const [allCategories, setAllCategories] = useState([]);
 
     useEffect(() => {
-        const configHeader = {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-                "Content-Type": "application/json",
-            }
-        }
 
-        axios.get(getApiLink('/api/categories/get?active=1'), configHeader)
+        axios.get(getApiLink('/api/categories/get?active=1'), {headers: GetApiHeaders()})
             .then(({ data }) => {
                 setAllCategories(data.data);
 

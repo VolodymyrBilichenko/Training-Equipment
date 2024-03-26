@@ -1,16 +1,25 @@
-import React, { useContext, useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { PopupContext } from '../../App';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { getApiLink } from '../../api/getApiLink';
+import {GetApiHeaders} from "../../functions/getApiHeaders";
+import getCookies from "../../functions/getCookies";
+import setCookie from "../../functions/setCookie";
 
 export const OrderPopUp = ({modal}) => {
     const SetPopContext = useContext(PopupContext);
     const basketItems = useSelector(state => state.toolkit.basket);
+    const user = useSelector(state => state.toolkit.user)
 
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState(user?.email ?? "");
+    const [phone, setPhone] = useState(user?.phone_number ?? "");
     const [checkedBill, setCheckedBill] = useState(false);
+
+    useEffect(() => {
+        setEmail(user?.email)
+        setPhone(user?.phone_number)
+    }, [user])
 
     console.log('basketItems', basketItems);
 
@@ -40,17 +49,14 @@ export const OrderPopUp = ({modal}) => {
 
         }
 
-        const configHeader = {
-            headers: {
-                "ngrok-skip-browser-warning": "true",
-                "Content-Type": "application/json",
-            }
-        }
+        const apiString = getCookies("cookieToken") ? "/api/orders/createFromAuthUser" : "/api/order/create"
 
-        axios.post(getApiLink('/api/order/create'), dataToSend, configHeader)
+        axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies("cookieToken")}`;
+        axios.post(getApiLink(apiString), !getCookies("cookieToken") && dataToSend, {headers: GetApiHeaders()})
             .then(({data}) => {
                 console.log(data);
                 handleNavPopupThx();
+                setCookie("basket", "")
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -84,13 +90,13 @@ export const OrderPopUp = ({modal}) => {
                             <label className="popup-form__item">
                                 <span className="is-required">E-mail</span>
                                 <span className="input-label">
-                                    <input type="email" onChange={(e) => setEmail(e.target.value)} name="email" required placeholder="Введите свой email" className="input"/>
+                                    <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} name="email" required placeholder="Введите свой email" className="input"/>
                                 </span>
                             </label>
                             <label className="popup-form__item">
                                 <span className="is-required">Телефон</span>
                                 <span className="input-label">
-                                    <input type="tel" onChange={(e) => setPhone(e.target.value)} name="phone" required placeholder="Введите номер телефона" className="input"/>
+                                    <input type="tel" onChange={(e) => setPhone(e.target.value)} value={phone} name="phone" required placeholder="Введите номер телефона" className="input"/>
                                 </span>
                             </label>
                             <label className="popup-form__checkbox checkbox">

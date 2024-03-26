@@ -8,12 +8,16 @@ const toolkitSlice = createSlice({
         user: {},
         favorites: [],
         basket: [],
+        allProducts: []
     },
     reducers: {
         setUser(state, action) {
             state.user = action.payload
         },
 
+        setAllProducts(state, action) {
+            state.allProducts = action.payload
+        },
 
         setFavorites(state, action) {
             state.favorites = action.payload
@@ -28,25 +32,50 @@ const toolkitSlice = createSlice({
         },
 
         addBasketItem(state, action) {
+            // if (state.basket?.some(item => item !== action.payload)) {
+            //     const newArray = state.basket.filter(item => {
+            //         if (item.product_id === action.payload.product_id) {
+            //             return {
+            //                 ...item,
+            //                 product_amount: item.product_amount + action.payload.product_amount
+            //             }
+            //         } else {
+            //             return item
+            //         }
+            //     })
+            //
+            //     state.basket = newArray
+            // } else {
+            //     state.basket = [...state.basket, action.payload]
+            // }
+
             if (state.basket?.some(item => item === action.payload)) {
-                state.basket = state.basket.filter(item => item.product_id !== action.payload)
+                state.basket = state.basket.map(item => {
+                    if (item.product_id === action.payload.product_id) {
+                        return {
+                            ...item,
+                            product_amount: item.product_amount + action.payload.product_amount
+                        }
+                    } else {
+                        return item
+                    }
+                })
             } else {
-                state.basket = [...state.basket, {
-                    product_id: action.payload,
-                    product_amount: 1,
-                }]
+                state.basket = [...state.basket, action.payload]
             }
+
             setCookie("basket", JSON.stringify(state.basket))
+
         },
         removeBasketItem(state, action) {
             state.basket = state.basket.filter(item => item.product_id !== action.payload)
             setCookie("basket", JSON.stringify(state.basket))
         },
         setBasket(state, action) {
-            // state.basket = action.payload
+            state.basket = action.payload
         },
         changeBasketItem(state, action) {
-            const newBasketList = state.basket.map(item => {
+            state.basket = state.basket.map(item => {
                 if (item.product_id === action.payload.product_id) {
                     return {
                         product_id: item.product_id,
@@ -57,7 +86,8 @@ const toolkitSlice = createSlice({
                 }
             })
 
-            state.basket = newBasketList
+
+            setCookie("basket", JSON.stringify(state.basket))
         }
 
     }
@@ -67,6 +97,7 @@ export default toolkitSlice.reducer;
 export const {
 
     setUser,
+    setAllProducts,
     setFavorites,
     addFavorite,
     addBasketItem,

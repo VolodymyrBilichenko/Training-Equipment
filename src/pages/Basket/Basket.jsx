@@ -8,6 +8,7 @@ import {PopupContext} from "../../App";
 import axios from "axios";
 import {getApiLink} from "../../api/getApiLink";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
+import getCookies from "../../functions/getCookies";
 
 export const Basket = () => {
     const setModal = useContext(PopupContext)
@@ -29,12 +30,10 @@ export const Basket = () => {
 
                 setTotalAmount(0)
 
-                const total = data.data?.filter(item => basketList.some(item2 => item.id === item2.product_id)).reduce((amount, current) => {
-                    amount += current.price
-                    return amount
-                }, 0)
+                document.querySelectorAll(".cart__item_total b").forEach(item => {
+                    setTotalAmount(prev => prev + +item.textContent)
+                })
 
-                setTotalAmount(total)
 
             })
             .catch((error) => {
@@ -52,14 +51,16 @@ export const Basket = () => {
 
                 <SectionTitle title={'Корзина'}/>
 
-                <div className="cart__note">
+                {!getCookies("cookieToken") && <div className="cart__note">
                     <p>
                         Если Вы хотите получить персональную скидку или стать участником бонусной системы -
-                        <button onClick={_ => handleOpenModal("register")} className="open-popup">Зарегистрируйтесь</button> или
-                        <button onClick={_ => handleOpenModal("login")} className="open-popup">Авторизуйтесь</button> в личном кабинете, прежде чем
+                        <button onClick={_ => handleOpenModal("register")}
+                                className="open-popup">Зарегистрируйтесь</button> или
+                        <button onClick={_ => handleOpenModal("login")} className="open-popup">Авторизуйтесь</button> в
+                        личном кабинете, прежде чем
                         оформить этот заказ
                     </p>
-                </div>
+                </div>}
 
                 <CartList setTotalAmount={setTotalAmount} products={products}/>
 
