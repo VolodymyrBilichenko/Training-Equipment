@@ -11,7 +11,7 @@ import {addBasketItem} from "../../redux/toolkitSlice";
 import {useDispatch} from "react-redux";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
 
-// import SliderItemPh from '../../assets/img/product/product-image.jpg';
+import SliderItemPh from '../../assets/img/product/product-image.jpg';
 import CreditCard from '../../assets/img/product/credit_card.svg'
 import AccBalance from '../../assets/img/product/account_balance_wallet.svg'
 import Assigment from '../../assets/img/product/assignment.svg'
@@ -146,9 +146,7 @@ export const ProductCard = () => {
                     </div>
                 </div> */}
 
-                {/* <div className="product__col"> */}
                     <ProductSwiper/>
-                {/* </div> */}
 
                 <div className="product__col">
                     <h2 className="product__title title">
@@ -234,7 +232,7 @@ export const ProductCard = () => {
                     </div>
                 </div>
 
-                {/* <div className="product__col">
+                <div className="product__col">
                     <div className="product__gallery_nav splide on-desktop">
                         <div className="product__gallery_nav_track splide__track">
                             <ul className="product__gallery_nav_list splide__list">
@@ -282,7 +280,7 @@ export const ProductCard = () => {
                         ))}
 
                     </ul>
-                </div> */}
+                </div>
 
                 <div className="product__col">
                     <div className="product__description">
