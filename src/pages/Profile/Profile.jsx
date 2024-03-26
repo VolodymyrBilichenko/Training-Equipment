@@ -7,6 +7,7 @@ import {ProfileBonuses} from './components/ProfileBonuses/ProfileBonuses'
 import {ProfileInfo} from './components/ProfileInfo/ProfileInfo'
 import {ProfileOrders} from './components/ProfileOrders/ProfileOrders'
 
+
 export const Profile = () => {
     const [profileInfo, setProfileInfo] = useState(true);
     const [profileOrders, setProfileOrders] = useState(false);
