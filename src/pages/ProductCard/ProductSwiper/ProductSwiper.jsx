@@ -99,7 +99,7 @@ export const ProductSwiper = () => {
                         freeMode={true}
                         watchSlidesProgress={true}
                         modules={[FreeMode, Navigation, Thumbs]}
-                        className="mySwiper"
+                        className="mySwiper product__swiper_nav"
                     >
                         <SwiperSlide>
                             <img src="https://swiperjs.com/demos/images/nature-1.jpg" alt='1'/>
