@@ -1,16 +1,16 @@
 import React from 'react'
 
-export const OrderListItem = () => {
+export const OrderListItem = ({ precept }) => {
   return (
     <li className="orders__card">
-        <a href="some" className="orders__card_body" target="_blank">
+        <a href={`${precept.link}`} className="orders__card_body" target="_blank" rel="noreferrer">
             <div className="orders__card_number">
-                <strong>5124</strong>
+                <strong>{precept.number}</strong>
                 <span>Наказ №</span>
             </div>
             <div className="orders__card_text">
                 <p>
-                    “Про затвердження Типового переліку засобів навчання та обладнання для навчальних кабінетів і STEM-лабораторій»
+                    {precept.description}
                 </p>
             </div>
             <i className="orders__card_link_icon" title="Детальніше">

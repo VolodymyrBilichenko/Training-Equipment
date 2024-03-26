@@ -1,40 +1,67 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
 import { OrderList } from './components/OrderList/OrderList'
 import { CertificateList } from './components/CertificateList/CertificateList'
+import axios from 'axios'
+import { getApiLink } from '../../api/getApiLink'
+import { GetApiHeaders } from '../../functions/getApiHeaders'
 
 export const Сertificate = () => {
-  return (
-    <>
-        <BackGroundDecor />
+	const [sertificatData, setSertificatData] = useState([]);
+	const [preceptsData, setPreceptsData] = useState([]);
 
-        <section className="certificate_orders">
+	useEffect(() => {
+		axios.get(getApiLink('/api/certificates/get'), {headers: GetApiHeaders()})
+			.then(({data}) => {
+				setSertificatData(data.data);
+			})
+			.catch((error) => {
+				console.error('error data sertificate', error);
+			})
 
-            <SectionTitle title={'Сертификаты и приказы'}/>
+		axios.get(getApiLink('/api/precepts/get'), {headers: GetApiHeaders()})
+			.then(({data}) => {
+				setPreceptsData(data.data);
+			})
+			.catch((error) => {
+				console.error('error data precepts', error);
+			})
+	}, [])
 
-			<article className="certificate_orders__orders orders container">
-				<h3 className="orders__title title">
-					Накази
-				</h3>
+	console.log(sertificatData);
 
-                <OrderList/>
 
-			</article>
-			<article className="certificate_orders__certificates certificates container">
-				<div className="certificates__decor" aria-hidden="true">
-					<picture>
-						<img src="img/decor-element.png" alt="" width="0" height="0" loading="lazy"/>
-					</picture>
-				</div>
-				<div className="certificates__container">
-					<h3 className="certificates__title title">Сертификаты</h3>
+	return (
+		<>
+			<BackGroundDecor />
 
-                    <CertificateList/>
+			<section className="certificate_orders">
 
-				</div>
-			</article>
-		</section>
-    </>
-  )
+				<SectionTitle title={'Сертификаты и приказы'} ClassTitle={'certificate_orders__title container'}/>
+
+				<article className="certificate_orders__orders orders container">
+					<h3 className="orders__title title">
+						Накази
+					</h3>
+
+					<OrderList preceptsData={preceptsData}/>
+
+				</article>
+				<article className="certificate_orders__certificates certificates container">
+					<div className="certificates__decor" aria-hidden="true">
+						<picture>
+							<img src="img/decor-element.png" alt="" width="0" height="0" loading="lazy"/>
+						</picture>
+					</div>
+					<div className="certificates__container">
+						<h3 className="certificates__title title">Сертификаты</h3>
+
+						<CertificateList sertificatData={sertificatData}/>
+
+					</div>
+				</article>
+			</section>
+		</>
+	)
 }

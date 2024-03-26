@@ -1,17 +1,14 @@
 import React from 'react'
 import { CertificateListItem } from './CertificateListItem'
 
-export const CertificateList = () => {
+export const CertificateList = ({ sertificatData }) => {
   return (
     <ul className="certificates__list">
 
-        <CertificateListItem/>
-
-        <CertificateListItem/>
-
-        <CertificateListItem/>
-
-        <CertificateListItem/>
+      {sertificatData.map((sertificate) => (
+        
+        <CertificateListItem key={sertificate.id} sertificate={sertificate}/>
+      ))}
 
     </ul>
   )

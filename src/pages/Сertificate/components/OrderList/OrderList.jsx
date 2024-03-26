@@ -1,16 +1,14 @@
 import React from 'react'
 import { OrderListItem } from './OrderListItem'
 
-export const OrderList = () => {
+export const OrderList = ({ preceptsData }) => {
   return (
     <ul className="orders__list">
-        <OrderListItem/>
-        <OrderListItem/>
-        <OrderListItem/>
-        <OrderListItem/>
-        <OrderListItem/>
-        <OrderListItem/>
-        <OrderListItem/>
+
+      {preceptsData.map(precept => (
+        <OrderListItem key={precept.id} precept={precept}/>
+      ))}
+
     </ul>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 import SertificateImg from '../../../../assets/img/certificates/certificate-image.jpg'
 
-export const CertificateListItem = () => {
+export const CertificateListItem = ({ sertificate }) => {
   return (
     <li className="certificates__card">
         <a href="some" className="certificates__card_image ">
@@ -11,8 +11,7 @@ export const CertificateListItem = () => {
             </picture>
         </a>
         <a href="some" className="certificates__card_name">
-            Санитарно-эпидемиологическое
-            заключение (СЭС)
+            {sertificate.description}
         </a>
     </li>
   )
