@@ -1,5 +1,8 @@
 import axios from "axios"
 import { getApiLink } from "./getApiLink"
+import {useDispatch} from "react-redux";
+import {setUser} from "../redux/toolkitSlice";
+import setCookie from "../functions/setCookie";
 
 export const handleRegistration = (
     e,
@@ -13,7 +16,9 @@ export const handleRegistration = (
     setEmail,
     setPhone,
     setPass,
-    navigate
+    navigate,
+    dispatch,
+    SetPopContext
 ) => {
     e.preventDefault()
 
@@ -33,9 +38,16 @@ export const handleRegistration = (
             setPhone('')
             setPass('')
 
+            console.log(res.data)
+
             setTimeout(() => {
-                navigate('/')
+                navigate('/profile')
+                dispatch(setUser(res.data.data))
+                setCookie('cookieToken', res.data.data.token );
+                SetPopContext("")
             }, 2000)
+
+
         }
     }).catch(err => {
         setError(err.response.data.message)

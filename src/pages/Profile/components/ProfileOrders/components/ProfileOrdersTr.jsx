@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ProfileOrdersTr = () => {
+export const ProfileOrdersTr = ({itemData}) => {
   return (
     <tr>
         <td>

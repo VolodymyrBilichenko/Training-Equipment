@@ -1,12 +1,13 @@
-import React, { useContext, useState } from 'react'
+import React, {useContext, useState} from 'react'
 import getCookies from '../../functions/getCookies';
-import { useSelector } from 'react-redux';
-import { handleRegistration } from '../../api/registration';
-import { useNavigate } from 'react-router-dom';
-import { PopupContext } from '../../App';
+import {useDispatch, useSelector} from 'react-redux';
+import {handleRegistration} from '../../api/registration';
+import {useNavigate} from 'react-router-dom';
+import {PopupContext} from '../../App';
 
 export const RegisterPopUp = ({modal}) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch()
     const SetPopContext = useContext(PopupContext);
 
     const [name, setName] = useState('');
@@ -34,7 +35,8 @@ export const RegisterPopUp = ({modal}) => {
             <div className="popup-wrapper">
                 <div onClick={handleClosePopUp} className="popup-bg popup-close"></div>
                 <div className="popup-body">
-                    <button onClick={handleClosePopUp} type="button" className="popup-close-btn popup-close" title="Закрити">
+                    <button onClick={handleClosePopUp} type="button" className="popup-close-btn popup-close"
+                            title="Закрити">
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlinkHref="#close-3"></use>
                         </svg>
@@ -45,44 +47,53 @@ export const RegisterPopUp = ({modal}) => {
                         </h2>
                         <div className="popup-text">
                             <p>
-                                Регистрация позволит Вам получить накопительную скидку и купить следующий заказ по более выгодной цене
+                                Регистрация позволит Вам получить накопительную скидку и купить следующий заказ по более
+                                выгодной цене
                             </p>
                         </div>
-                        <form onSubmit={e => handleRegistration(e, 
-                                name,
-                                email,
-                                phone,
-                                pass,
-                                setSuccess,
-                                setError,
-                                setName,
-                                setEmail,
-                                setPhone,
-                                setPass,
-                                navigate,
-                            )} method="post" className="popup-form">
+                        <form onSubmit={e => handleRegistration(e,
+                            name,
+                            email,
+                            phone,
+                            pass,
+                            setSuccess,
+                            setError,
+                            setName,
+                            setEmail,
+                            setPhone,
+                            setPass,
+                            navigate,
+                            dispatch,
+                            SetPopContext
+                        )} method="post" className="popup-form">
                             <label className="popup-form__item">
                                 <span className="is-required">ФИО Контактного лица</span>
                                 <span className="input-label">
-                                    <input value={name} onChange={(e) => setName(e.target.value)} type="text" name="name" required placeholder="Введите имя" defaultValue="Игорь Иванович" className="input"/>
+                                    <input value={name} onChange={(e) => setName(e.target.value)} type="text"
+                                           name="name" required placeholder="Введите имя" defaultValue="Игорь Иванович"
+                                           className="input"/>
                                 </span>
                             </label>
                             <label className="popup-form__item">
                                 <span className="is-required">E-mail</span>
                                 <span className="input-label">
-                                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" required placeholder="Введите свой email" className="input"/>
+                                    <input value={email} onChange={(e) => setEmail(e.target.value)} type="email"
+                                           name="email" required placeholder="Введите свой email" className="input"/>
                                 </span>
                             </label>
                             <label className="popup-form__item">
                                 <span className="is-required">Телефон</span>
                                 <span className="input-label">
-                                    <input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel" name="phone" required placeholder="Введите номер телефона" className="input"/>
+                                    <input value={phone} onChange={(e) => setPhone(e.target.value)} type="tel"
+                                           name="phone" required placeholder="Введите номер телефона"
+                                           className="input"/>
                                 </span>
                             </label>
                             <div className="popup-form__item">
                                 <span className="is-required">Пароль</span>
                                 <span className="input-label">
-                                    <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" name="password" required placeholder="Введите пароль" className="input"/>
+                                    <input value={pass} onChange={(e) => setPass(e.target.value)} type="password"
+                                           name="password" required placeholder="Введите пароль" className="input"/>
                                     <button className="password-toggle" type="button" title="Показать/скрыть пароль">
                                         <svg width="24" height="24" viewBox="0 0 24 24">
                                             <use xlinkHref="#visibility"></use>

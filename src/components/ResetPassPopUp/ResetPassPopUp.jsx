@@ -1,12 +1,30 @@
-import React, { useContext } from 'react'
-import { PopupContext } from '../../App';
+import React, {useContext, useState} from 'react'
+import {PopupContext} from '../../App';
+import axios from "axios";
+import {getApiLink} from "../../api/getApiLink";
+import {GetApiHeaders} from "../../functions/getApiHeaders";
+import getCookies from "../../functions/getCookies";
 
 export const ResetPassPopUp = ({modal}) => {
 
     const SetPopContext = useContext(PopupContext);
+    const [email, setEmail] = useState("")
+    const [isSuccessSent, setIsSuccessSent] = useState(false)
 
     const handleClosePopUp = () => {
         SetPopContext('');
+    }
+
+
+    const handleSendToReset = (e) => {
+        e.preventDefault()
+
+        axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
+        axios.post(getApiLink("/api/auth/password-reset"), {email}, {headers: GetApiHeaders()}).then(({data}) => {
+
+            if (data.data === "success") setIsSuccessSent(true)
+
+        }).catch(er => console.log(er))
     }
 
     return (
@@ -14,7 +32,8 @@ export const ResetPassPopUp = ({modal}) => {
             <div className="popup-wrapper">
                 <div onClick={handleClosePopUp} className="popup-bg popup-close"></div>
                 <div className="popup-body">
-                    <button onClick={handleClosePopUp} type="button" className="popup-close-btn popup-close" title="Закрити">
+                    <button onClick={handleClosePopUp} type="button" className="popup-close-btn popup-close"
+                            title="Закрити">
                         <svg width="24" height="24" viewBox="0 0 24 24">
                             <use xlinkHref="#close-3"></use>
                         </svg>
@@ -28,17 +47,25 @@ export const ResetPassPopUp = ({modal}) => {
                                 Введите свою почту и мы отправим вам письмо с временным паролем
                             </p>
                         </div>
-                        <form method="post" className="popup-form">
-                            <label className="popup-form__item">
-                                <span className="is-required">E-mail</span>
-                                <span className="input-label">
-                                    <input type="email" name="email" required placeholder="Введите свой email" className="input"/>
+                        {!isSuccessSent ? <form onSubmit={handleSendToReset} method="post" className="popup-form">
+                                <label className="popup-form__item">
+                                    <span className="is-required">E-mail</span>
+                                    <span className="input-label">
+                                    <input type="email" name="email" onChange={e => setEmail(e.target.value)}
+                                           value={email} required placeholder="Введите свой email" className="input"/>
                                 </span>
-                            </label>
-                            <button className="popup-form__submit button is-mode-1" type="submit">
-                                Продолжить
-                            </button>
-                        </form>
+                                </label>
+                                <button className="popup-form__submit button is-mode-1" type="submit">
+                                    Продолжить
+                                </button>
+                            </form>
+                            :
+                            <div className="popup-text">
+                                <br/>
+                                <p>
+                                    Вам на почту была отправлена инструкция по замене пароля
+                                </p>
+                            </div>}
                     </div>
                 </div>
             </div>

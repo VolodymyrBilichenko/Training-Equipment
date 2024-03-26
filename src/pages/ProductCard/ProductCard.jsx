@@ -15,13 +15,14 @@ import SliderItemPh from '../../assets/img/product/product-image.jpg';
 import CreditCard from '../../assets/img/product/credit_card.svg'
 import AccBalance from '../../assets/img/product/account_balance_wallet.svg'
 import Assigment from '../../assets/img/product/assignment.svg'
+import getCookies from "../../functions/getCookies";
 
 export const ProductCard = () => {
     const {id} = useParams();
     const dispatch = useDispatch()
 
     const [dataCard, setDataCard] = useState({});
-    const [productCount, setProductCount] = useState(0)
+    const [productCount, setProductCount] = useState(1)
     const [recommendedProducts, setRecommendedProducts] = useState([])
     const [isAddedBasket, setIsAddedBasket] = useState(false)
 
@@ -48,11 +49,20 @@ export const ProductCard = () => {
             .catch(error => {
                 console.log('products undefined', error);
             })
+
     }, [])
 
     const handleAddCart = () => {
+        const dataItem = {
+            "product_id": dataCard.id,
+            "product_amount": productCount
+        }
+
+        axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
+        axios.post(getApiLink("/api/bucket/add"), dataItem, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
+
         setIsAddedBasket(prev => !prev)
-        dispatch(addBasketItem(dataCard.id))
+        dispatch(addBasketItem(dataItem))
     }
 
     return (
@@ -258,14 +268,12 @@ export const ProductCard = () => {
 
                         </div>
                         <div className="product__info_col">
-                            <button onClick={handleAddCart} style={{background: isAddedBasket ? "#9C50B8" : ""}} className="product__add-to-cart button" type="button" aria-label="Додати до кошика">
+                            <button onClick={handleAddCart} className="product__add-to-cart button" type="button" aria-label="Додати до кошика">
                                 <svg width="20" height="20" viewBox="0 0 48 48">
                                     <use xlinkHref="#cart"></use>
                                 </svg>
                                 <span>
-                                    {
-                                        isAddedBasket ? "Убрать с корзины" : "Додати до кошика"
-                                    }
+                                    Додати до кошика
                                 </span>
                             </button>
                         </div>

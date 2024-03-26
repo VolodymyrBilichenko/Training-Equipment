@@ -1,10 +1,23 @@
 import React, { useState } from 'react'
+import {useNavigate} from "react-router-dom";
+import setCookie from "../../../../functions/setCookie";
+import {useDispatch} from "react-redux";
+import {setUser} from "../../../../redux/toolkitSlice";
 
 export const ProfileNav = ({ onProfInfo, onProfOrders, onProfBonus }) => {
 	const [activeTab, setActiveTab] = useState('Личные данные');
 
 	const handleClickTab = (tabName) => {
 		setActiveTab(tabName)
+	}
+
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+
+	const handleExit = () => {
+		navigate("/")
+		setCookie("cookieToken", "")
+		dispatch(setUser({}))
 	}
 
 	return (
@@ -46,12 +59,13 @@ export const ProfileNav = ({ onProfInfo, onProfOrders, onProfBonus }) => {
 				</button>
 			</li>
 			<li>
-				<a href="some" aria-label="Електронні освітні ресурси">
-					<span>Електронні освітні ресурси</span>
-					<svg width="20" height="20" viewBox="0 0 20 20">
-						<use xlinkHref="#arrow-next"></use>
-					</svg>
-				</a>
+				<br/>
+				<button onClick={handleExit} aria-label="Електронні освітні ресурси">
+					<span>Выйти</span>
+					{/*<svg width="20" height="20" viewBox="0 0 20 20">*/}
+					{/*	<use xlinkHref="#arrow-next"></use>*/}
+					{/*</svg>*/}
+				</button>
 			</li>
 		</ul>
 	)

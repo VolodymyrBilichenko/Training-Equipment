@@ -8,20 +8,11 @@ import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
 import axios from "axios";
 import {getApiLink} from "../../api/getApiLink";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
+import {useSelector} from "react-redux";
 
 export const Main = () => {
 
-    const [products, setProducts] = useState([])
-
-    useEffect(() => {
-        axios.get(getApiLink(`/api/products/get`), {headers: GetApiHeaders()})
-            .then(({data}) => {
-                setProducts(data.data)
-            })
-            .catch(error => {
-                console.log('products undefined', error);
-            })
-    }, [])
+    const products = useSelector(state => state.toolkit.allProducts)
 
     return (
         <main className="main">

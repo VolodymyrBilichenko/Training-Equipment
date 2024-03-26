@@ -6,12 +6,15 @@ import axios from 'axios';
 // import { login } from '../../api/login';
 import setCookie from '../../functions/setCookie';
 import { useNavigate } from 'react-router-dom';
+import {setUser} from "../../redux/toolkitSlice";
+import {useDispatch} from "react-redux";
 
 export const LoginPopUp = ({modal}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     // const dispatch = useDispatch();
 
@@ -33,8 +36,8 @@ export const LoginPopUp = ({modal}) => {
                 setEmail('')
                 setPassword('')
 
-                // login(res.data, dispatch)
-                
+                dispatch(setUser(res.data.data))
+
             }
             console.log(res);
             setCookie('cookieToken', res.data.data.token );

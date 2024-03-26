@@ -11,21 +11,12 @@ import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 export const Favorites = () => {
 
-    const [products, setProducts] = useState([])
-
     const favorites = useSelector(state => state.toolkit.favorites)
+    const allProducts = useSelector(state => state.toolkit.allProducts)
 
-    useEffect(() => {
-        axios.get(getApiLink(`/api/products/get`), {headers: GetApiHeaders()})
-            .then(({ data }) => {
-                const favoriteData = data.data.filter(item => favorites.some(fav => fav === item.id))
-                setProducts(favoriteData)
-            })
-            .catch(error => {
-                console.log('products undefined', error);
-            })
-    }, [favorites])
+    const favoritesList = allProducts.filter(item => favorites.some(item2 => item2 === item.id))
 
+    console.log(favoritesList)
 
     return (
         <>
@@ -41,7 +32,7 @@ export const Favorites = () => {
                     Желаю получить Коммерческое предложение по Email для товаров в Избранное
                 </a>
 
-                <ProductsList list={products} ClassNameList={'favorites__list'}/>
+                <ProductsList list={favoritesList} ClassNameList={'favorites__list'}/>
 
                 <PaginationProducts ClassName={'favorites__pagination'}/>
             </div>
