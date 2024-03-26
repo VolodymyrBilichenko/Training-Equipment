@@ -39,7 +39,10 @@ export const ProductCard = () => {
 
     }, [id])
 
+    console.log(dataCard.files);
+
     console.log('dataCard',dataCard);
+    console.log('dataCardFILES',dataCard.files);
 
     useEffect(() => {
 
@@ -76,87 +79,8 @@ export const ProductCard = () => {
             }, {page: 'Демонстраційна модель «Мозок. Анатомія людини» Learning resources'}]}/>
 
             <section className="product container">
-                {/* <div className="product__col">
 
-                    <div className="product__gallery splide">
-                        <div className="product__gallery_track splide__track">
-                            <Splide className="product__gallery_list splide__list "
-                                    options={{}}
-                            >
-
-                                <SplideSlide className="product__gallery_slide splide__slide">
-                                    <div className="product__gallery_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="519" height="519" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </SplideSlide>
-
-                                <SplideSlide className="product__gallery_slide splide__slide">
-                                    <div className="product__gallery_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="519" height="519" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </SplideSlide>
-
-                                <SplideSlide className="product__gallery_slide splide__slide">
-                                    <div className="product__gallery_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="519" height="519" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </SplideSlide>
-
-                                <SplideSlide className="product__gallery_slide splide__slide">
-                                    <div className="product__gallery_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="519" height="519" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </SplideSlide>
-
-                            </Splide>
-                        </div>
-                    </div>
-
-                    <div className="product__gallery_nav splide on-mob">
-                        <div className="product__gallery_nav_track splide__track">
-                            <ul className="product__gallery_nav_list splide__list">
-                                <li className="product__gallery_nav_slide splide__slide">
-                                    <div className="product__gallery_nav_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </li>
-                                <li className="product__gallery_nav_slide splide__slide">
-                                    <div className="product__gallery_nav_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </li>
-                                <li className="product__gallery_nav_slide splide__slide">
-                                    <div className="product__gallery_nav_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </li>
-                                <li className="product__gallery_nav_slide splide__slide">
-                                    <div className="product__gallery_nav_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div> */}
-
-                    <ProductSwiper/>
+                    <ProductSwiper dataCard={dataCard.files}/>
 
                 <div className="product__col">
                     <h2 className="product__title title">
