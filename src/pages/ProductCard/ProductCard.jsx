@@ -146,7 +146,9 @@ export const ProductCard = () => {
                     </div>
                 </div> */}
 
-                <ProductSwiper/>
+                {/* <div className="product__col"> */}
+                    <ProductSwiper/>
+                {/* </div> */}
 
                 <div className="product__col">
                     <h2 className="product__title title">

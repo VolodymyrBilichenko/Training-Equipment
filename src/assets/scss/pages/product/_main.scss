@@ -523,4 +523,17 @@
 			list-style-type: disc;
 		}
 	}
+
+	// .product__swiper
+
+	&__swiper{
+		width: 100%;
+		max-width: 500px;
+		height: 500px;
+		margin: 0;
+
+		.swiper{
+			margin: 0 !important;
+		}
+	}
 }

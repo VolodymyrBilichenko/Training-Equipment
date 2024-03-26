@@ -1,7 +1,5 @@
 import React from 'react'
 
-import SertificateImg from '../../../../assets/img/certificates/certificate-image.jpg'
-
 export const CertificateListItem = ({ sertificate }) => {
   return (
     <li className="certificates__card">

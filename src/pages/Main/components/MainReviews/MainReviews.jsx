@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 // import '@splidejs/react-splide/css';
 import { SectionTitle } from '../../../../components/SectionTitle/SectionTitle'
-
-import Sertificate from '../../../../assets/img/index/reviews/certificate-image.png'
 import axios from 'axios';
 import { getApiLink } from '../../../../api/getApiLink';
 import { GetApiHeaders } from '../../../../functions/getApiHeaders';
