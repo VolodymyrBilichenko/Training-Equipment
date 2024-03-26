@@ -7,14 +7,14 @@ import {Splide, SplideSlide} from '@splidejs/react-splide'
 import axios from 'axios'
 import {getApiLink} from '../../api/getApiLink'
 import {useParams} from 'react-router-dom'
+import {addBasketItem} from "../../redux/toolkitSlice";
+import {useDispatch} from "react-redux";
+import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 import SliderItemPh from '../../assets/img/product/product-image.jpg';
 import CreditCard from '../../assets/img/product/credit_card.svg'
 import AccBalance from '../../assets/img/product/account_balance_wallet.svg'
 import Assigment from '../../assets/img/product/assignment.svg'
-import {addBasketItem} from "../../redux/toolkitSlice";
-import {useDispatch} from "react-redux";
-import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 export const ProductCard = () => {
     const {id} = useParams();
@@ -36,6 +36,8 @@ export const ProductCard = () => {
             })
 
     }, [id])
+
+    console.log('dataCard',dataCard);
 
     useEffect(() => {
 
@@ -63,11 +65,11 @@ export const ProductCard = () => {
             }, {page: 'Демонстраційна модель «Мозок. Анатомія людини» Learning resources'}]}/>
 
             <section className="product container">
-                <div className="product__col">
+                {/* <div className="product__col">
 
                     <div className="product__gallery splide">
                         <div className="product__gallery_track splide__track">
-                            <Splide className="product__gallery_list splide__list"
+                            <Splide className="product__gallery_list splide__list "
                                     options={{}}
                             >
 
@@ -141,6 +143,98 @@ export const ProductCard = () => {
                             </ul>
                         </div>
                     </div>
+                </div> */}
+
+                <div className="product__col">
+                    <div className="product__gallery splide2">
+                        <div className="product__gallery_track splide__track">
+                            <Splide className="product__gallery_list splide__list"
+                                options={{
+                                    rewind: true,
+                                    autoWidth: true,
+                                    fixedWidth: "90px",
+                                    arrows: false,
+                                    pagination: false,
+                                    
+                                    gap: 16,
+                                    isNavigation: true,
+                                    mediaQuery: "min",
+                            
+                                    breakpoints: {
+                                        992: {
+                                            speed: 700,
+                                            easing: "ease",
+                                        }
+                                    }
+                                }}
+                            >
+
+                                <SplideSlide className="product__gallery_slide splide__slide">
+                                    <div className="product__gallery_image image-aspect-ratio">
+                                        <picture>
+                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
+                                        </picture>
+                                    </div>
+                                </SplideSlide>
+                                <SplideSlide className="product__gallery_slide splide__slide">
+                                    <div className="product__gallery_image image-aspect-ratio">
+                                        <picture>
+                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
+                                        </picture>
+                                    </div>
+                                </SplideSlide>
+                                <SplideSlide className="product__gallery_slide splide__slide">
+                                    <div className="product__gallery_image image-aspect-ratio">
+                                        <picture>
+                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
+                                        </picture>
+                                    </div>
+                                </SplideSlide>
+                                <SplideSlide className="product__gallery_slide splide__slide">
+                                    <div className="product__gallery_image image-aspect-ratio">
+                                        <picture>
+                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
+                                        </picture>
+                                    </div>
+                                </SplideSlide>
+
+                            </Splide>
+                        </div>
+                    </div>
+                    {/* <div class="product__gallery_nav splide on-mob">
+                        <div class="product__gallery_nav_track splide__track">
+                            <ul class="product__gallery_nav_list splide__list">
+                                <li class="product__gallery_nav_slide splide__slide">
+                                    <div class="product__gallery_nav_image image-aspect-ratio">
+                                        <picture>
+                                            <img src="img/product/product-image.jpg" alt="" width="90" height="90" loading="lazy"/>
+                                        </picture>
+                                    </div>
+                                </li>
+                                <li class="product__gallery_nav_slide splide__slide">
+                                    <div class="product__gallery_nav_image image-aspect-ratio">
+                                        <picture>
+                                            <img src="img/product/product-image.jpg" alt="" width="90" height="90" loading="lazy"/>
+                                        </picture>
+                                    </div>
+                                </li>
+                                <li class="product__gallery_nav_slide splide__slide">
+                                    <div class="product__gallery_nav_image image-aspect-ratio">
+                                        <picture>
+                                            <img src="img/product/product-image.jpg" alt="" width="90" height="90" loading="lazy"/>
+                                        </picture>
+                                    </div>
+                                </li>
+                                <li class="product__gallery_nav_slide splide__slide">
+                                    <div class="product__gallery_nav_image image-aspect-ratio">
+                                        <picture>
+                                            <img src="img/product/product-image.jpg" alt="" width="90" height="90" loading="lazy"/>
+                                        </picture>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> */}
                 </div>
 
                 <div className="product__col">
@@ -156,8 +250,8 @@ export const ProductCard = () => {
                     <div className="product__info">
                         <div className="product__info_col">
                             <div className="product__price">
-                                <ins>{dataCard.price} ₴</ins>
-                                <del>3 800 ₴</del>
+                                <ins>{dataCard.original_price} ₴</ins>
+                                <del>{`${dataCard.price === null ? '' : dataCard.price + ' ₴'}`}</del>
                             </div>
 
                             <CartItemLength setProductCount={setProductCount} productCount={productCount}/>
@@ -227,7 +321,7 @@ export const ProductCard = () => {
                     </div>
                 </div>
 
-                <div className="product__col">
+                {/* <div className="product__col">
                     <div className="product__gallery_nav splide on-desktop">
                         <div className="product__gallery_nav_track splide__track">
                             <ul className="product__gallery_nav_list splide__list">
@@ -264,18 +358,18 @@ export const ProductCard = () => {
                     </div>
                     <ul className="product__orders">
 
-                        {dataCard.certificates?.map(certificate => (
-                            <li key={certificate.id}>
+                        {dataCard.precepts?.map(precept => (
+                            <li key={precept.id}>
                                 <h3>Відповідає Наказу </h3>
-                                <strong>{certificate.name}</strong>
+                                <strong>{precept.number}</strong>
                                 <p>
-                                    {certificate.description}
+                                    {precept.description}
                                 </p>
                             </li>
                         ))}
 
                     </ul>
-                </div>
+                </div> */}
 
                 <div className="product__col">
                     <div className="product__description">

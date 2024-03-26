@@ -11,8 +11,8 @@ import { RegisterPopUp } from './components/RegisterPopUp/RegisterPopUp';
 import { ResetPassPopUp } from './components/ResetPassPopUp/ResetPassPopUp';
 import { OrderPopUp } from './components/OrderPopUp/OrderPopUp';
 import { ThanksPopUp } from './components/ThanksPopUp/ThanksPopUp';
-import {useDispatch} from "react-redux";
-import {setBasket, setFavorites} from "./redux/toolkitSlice";
+import { useDispatch } from "react-redux";
+import { setBasket, setFavorites } from "./redux/toolkitSlice";
 import getCookies from "./functions/getCookies";
 
 export const PopupContext = createContext(null);
