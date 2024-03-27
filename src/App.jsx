@@ -1,6 +1,7 @@
 import {createContext, useEffect, useState} from 'react';
 import './assets/js/main'
 import './assets/scss/style.scss'
+import 'react-toastify/dist/ReactToastify.css';
 import {routes} from './routes/routes'
 import {Route, Routes} from 'react-router-dom';
 import {Header} from './components/Header/Header';
@@ -18,6 +19,7 @@ import axios from "axios";
 import {getApiLink} from "./api/getApiLink";
 import setCookie from "./functions/setCookie";
 import {GetApiHeaders} from "./functions/getApiHeaders";
+import {ToastContainer} from "react-toastify";
 
 export const PopupContext = createContext(null);
 
@@ -97,6 +99,8 @@ export const App = () => {
                 <Footer/>
 
                 {ModalList()}
+
+                <ToastContainer/>
 
             </PopupContext.Provider>
 

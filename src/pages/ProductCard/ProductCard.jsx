@@ -17,6 +17,7 @@ import AccBalance from '../../assets/img/product/account_balance_wallet.svg'
 import Assigment from '../../assets/img/product/assignment.svg'
 import getCookies from "../../functions/getCookies";
 import { ProductSwiper } from './ProductSwiper/ProductSwiper'
+import {toast} from "react-toastify";
 
 export const ProductCard = () => {
     const {id} = useParams();
@@ -64,6 +65,8 @@ export const ProductCard = () => {
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
         axios.post(getApiLink("/api/bucket/add"), dataItem, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
+
+        toast.success("Товар успешно добавлен в корзину")
 
         setIsAddedBasket(prev => !prev)
         dispatch(addBasketItem(dataItem))

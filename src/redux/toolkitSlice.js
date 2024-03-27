@@ -32,24 +32,8 @@ const toolkitSlice = createSlice({
         },
 
         addBasketItem(state, action) {
-            // if (state.basket?.some(item => item !== action.payload)) {
-            //     const newArray = state.basket.filter(item => {
-            //         if (item.product_id === action.payload.product_id) {
-            //             return {
-            //                 ...item,
-            //                 product_amount: item.product_amount + action.payload.product_amount
-            //             }
-            //         } else {
-            //             return item
-            //         }
-            //     })
-            //
-            //     state.basket = newArray
-            // } else {
-            //     state.basket = [...state.basket, action.payload]
-            // }
 
-            if (state.basket?.some(item => item === action.payload)) {
+            if (state.basket?.some(item => item.product_id === action.payload.product_id)) {
                 state.basket = state.basket.map(item => {
                     if (item.product_id === action.payload.product_id) {
                         return {
