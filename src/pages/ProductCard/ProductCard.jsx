@@ -18,6 +18,7 @@ import Assigment from '../../assets/img/product/assignment.svg'
 import getCookies from "../../functions/getCookies";
 import { ProductSwiper } from './ProductSwiper/ProductSwiper'
 import {toast} from "react-toastify";
+import HTMLReactParser from "html-react-parser";
 
 export const ProductCard = () => {
     const {id} = useParams();
@@ -25,7 +26,7 @@ export const ProductCard = () => {
 
     const [dataCard, setDataCard] = useState({});
     const [productCount, setProductCount] = useState(1)
-    const [recommendedProducts, setRecommendedProducts] = useState([])
+    // const [recommendedProducts, setRecommendedProducts] = useState([])
     const [isAddedBasket, setIsAddedBasket] = useState(false)
 
     useEffect(() => {
@@ -40,28 +41,13 @@ export const ProductCard = () => {
 
     }, [id])
 
-    console.log(dataCard.files);
-
-    console.log('dataCard',dataCard);
-    console.log('dataCardFILES',dataCard.files);
-
-    useEffect(() => {
-
-        axios.get(getApiLink(`/api/products/get`), {headers: GetApiHeaders()})
-            .then(({data}) => {
-                setRecommendedProducts(data.data)
-            })
-            .catch(error => {
-                console.log('products undefined', error);
-            })
-
-    }, [])
-
     const handleAddCart = () => {
         const dataItem = {
             "product_id": dataCard.id,
             "product_amount": productCount
         }
+
+        if(productCount > dataCard?.amount_in_store) return toast.error("На данный момент такого количества товара на складе нет")
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
         axios.post(getApiLink("/api/bucket/add"), dataItem, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
@@ -121,18 +107,18 @@ export const ProductCard = () => {
                             <table className="product__characteristics">
                                 <caption>Характеристики</caption>
                                 <tbody>
-                                <tr>
+                                {dataCard?.condition && <tr>
                                     <td>Стан</td>
                                     <td>{dataCard.condition}</td>
-                                </tr>
-                                <tr>
+                                </tr>}
+                                {dataCard?.producer && <tr>
                                     <td>Виробник</td>
                                     <td>{dataCard.producer}</td>
-                                </tr>
-                                <tr>
+                                </tr>}
+                                {dataCard?.weight && <tr>
                                     <td>Вага</td>
                                     <td>{dataCard.weight} гр</td>
-                                </tr>
+                                </tr>}
                                 </tbody>
                             </table>
                         </div>
@@ -202,9 +188,9 @@ export const ProductCard = () => {
                             </ul>
                         </div>
                     </div>
-                    <ul className="product__orders">
+                    {dataCard?.precepts && <ul className="product__orders">
 
-                        {dataCard.precepts?.map(precept => (
+                        {dataCard?.precepts?.map(precept => (
                             <li key={precept.id}>
                                 <h3>Відповідає Наказу </h3>
                                 <strong>{precept.number}</strong>
@@ -214,7 +200,7 @@ export const ProductCard = () => {
                             </li>
                         ))}
 
-                    </ul>
+                    </ul>}
                 </div>
 
                 <div className="product__col">
@@ -222,24 +208,13 @@ export const ProductCard = () => {
                         <h3>
                             Опис
                         </h3>
-                        <p>{dataCard.description}</p>
-                        <p>У набір входить:</p>
-                        <ul>
-                            <li>10-и см модель мозку з 31 елементів;</li>
-                            <li>Підставка для демонстрації;</li>
-                            <li>Ілюстрована інструкція по збірці.</li>
-                        </ul>
-                        <p>Матеріал - пластик.</p>
-                        <p>Вік - 8-12 років.</p>
-                        <p>Вага - 200 гр.</p>
-                        <p>Розмір упаковки - 22 * 17 * 5 см.</p>
-                        <p>Виробник - Learning Resources, США.</p>
+                        {HTMLReactParser(dataCard?.description ?? "")}
                     </div>
                 </div>
             </section>
 
 
-            <section className="recommended container">
+            {!!dataCard?.recommended_products?.length && <section className="recommended container">
                 <div className="recommended__decor" aria-hidden="true">
                     <picture>
                         <img src="img/decor-element.png" alt="" width="0" height="0" loading="lazy"/>
@@ -250,10 +225,10 @@ export const ProductCard = () => {
                         Рекомендованные
                     </h2>
 
-                    <ProductsList list={recommendedProducts} ClassNameList={'recommended__list'}/>
+                    <ProductsList list={dataCard?.recommended_products} ClassNameList={'recommended__list'}/>
 
                 </div>
-            </section>
+            </section>}
         </>
     )
 }

@@ -34,12 +34,16 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
         if (quantity < 2) return;
         setQuantity(prev => prev > 1 ? prev - 1 : 1);
         if (!setTotalAmount) return;
+        console.log(productInfo)
         setTotalAmount(prev => prev - productInfo.original_price)
 
+        const dataItem = {
+            "product_id": productInfo.id,
+            "product_amount": 1
+        }
+
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
-        axios.post(getApiLink("/api/bucket/remove"), {
-            "product_id": productInfo.id
-        }, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
+        axios.post(getApiLink("/api/bucket/remove"), dataItem, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
 
         dispatch(changeBasketItem({
             count: -1,

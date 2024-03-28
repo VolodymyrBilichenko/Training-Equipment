@@ -22,14 +22,14 @@ export const Basket = () => {
 		setModal(`${type}`)
     }
 
-    useEffect(() => {
-        // setTotalAmount(0)
-        //
-        // document.querySelectorAll(".cart__item_total b").forEach(item => {
-        //     setTotalAmount(prev => prev + +item.textContent)
-        // })
-
-    }, [basketList, allProducts])
+    // useEffect(() => {
+    //     // setTotalAmount(0)
+    //     //
+    //     // document.querySelectorAll(".cart__item_total b").forEach(item => {
+    //     //     setTotalAmount(prev => prev + +item.textContent)
+    //     // })
+    //
+    // }, [basketList, allProducts])
 
     return (
         <>
