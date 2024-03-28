@@ -561,6 +561,7 @@
 			}
 		}
 
+		button,
 		a {
 			display: flex;
 			align-items: center;
@@ -569,6 +570,7 @@
 			width: 36px; height: 36px;
 			border-radius: 50%;
 			color: var(--white);
+			background: transparent;
 
 			svg {
 				width: 80%; height: 80%;

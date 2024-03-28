@@ -4232,7 +4232,7 @@ body.is-popup-active {
     }
 
     .header__block {
-        padding-top: 30px;
+        /* padding-top: 30px; */
         padding-bottom: 30px;
         gap: 0
     }
