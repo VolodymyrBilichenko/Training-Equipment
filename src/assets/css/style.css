@@ -610,7 +610,7 @@ body.is-mobile-menu-active {
 }
 
 .image-aspect-ratio img {
-    position: absolute;
+    position: static;
     left: 0;
     top: 0;
     width: 100%;
@@ -5128,4 +5128,27 @@ body.is-popup-active {
     .footer__contacts a:hover,.footer__social a:hover,.footer__tel a:hover {
         color: var(--accent-hover)
     }
+}
+
+
+
+.swiper-wrapper{
+    padding-bottom: 50px !important;
+}
+
+.swiper-pagination-bullet{
+    height: 10px !important;
+    width: 10px !important;
+    padding: 2px !important;
+    border: 2px solid #7f469b !important;
+}
+
+.reviews__slide{
+    border-radius: 20px 0 0 20px !important;
+}
+.reviews__slide:nth-child(even){
+    border-radius: 0 20px 20px 0 !important;
+}
+.reviews__slide:last-child{
+    border-radius: 20px 0 0 20px !important;
 }
