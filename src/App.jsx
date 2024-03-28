@@ -2,7 +2,7 @@ import {createContext, useEffect, useState} from 'react';
 import './assets/js/main'
 import './assets/scss/style.scss'
 import {routes} from './routes/routes'
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
 import {Header} from './components/Header/Header';
 import {Sprite} from './components/IconSprite/Sprite';
 import {Footer} from './components/Footer/Footer';
@@ -18,13 +18,20 @@ import axios from "axios";
 import {getApiLink} from "./api/getApiLink";
 import setCookie from "./functions/setCookie";
 import {GetApiHeaders} from "./functions/getApiHeaders";
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export const PopupContext = createContext(null);
 
 export const App = () => {
+    const location = useLocation();
     const [routesList] = useState(routes())
     const [modal, setModal] = useState('');
     const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false);
+
+    const toggleLoader = (value) => {
+        setLoading(value);
+    }
 
     const ModalList = () => {
         if (modal === 'login') {
@@ -43,6 +50,7 @@ export const App = () => {
 
 
     useEffect(() => {
+        window.scrollTo(0, 0)
 
         getCookies("basket") && dispatch(setBasket(JSON.parse(getCookies("basket"))))
         getCookies("favorite") && dispatch(setFavorites(JSON.parse(getCookies("favorite"))))
@@ -78,25 +86,42 @@ export const App = () => {
                 console.log('user undefined', error);
             })
 
-    }, [dispatch])
+    }, [dispatch, location])
 
     return (
         <>
             <Sprite/>
 
+            {loading && ''}
+
             <PopupContext.Provider value={setModal}>
 
                 <Header/>
 
-                <div className='main'>
-                    <Routes>
-                        {routesList.map(route => <Route key={route.path} element={route.element} path={route.path}/>)}
-                    </Routes>
-                </div>
+                <TransitionGroup component={null}>
+                    <CSSTransition key={location.pathname} classNames='fade' timeout={300} onEnter={() => toggleLoader(true)} onExited={() => toggleLoader(false)}>
+                    
+                        <div className='main'>
+                            <Routes location={location}>
+                                {routesList.map(route => <Route key={route.path} element={route.element} path={route.path}/>)}
+                            </Routes>
+                        </div>
+
+                    </CSSTransition>
+                </TransitionGroup>
 
                 <Footer/>
 
-                {ModalList()}
+                <CSSTransition
+                    in={modal === 'login'}
+                    timeout={500}
+                    classNames="popup"
+                    unmountOnExit
+                >
+                    <>
+                        {ModalList()}
+                    </>
+                </CSSTransition>
 
             </PopupContext.Provider>
 
