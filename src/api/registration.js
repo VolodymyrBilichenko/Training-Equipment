@@ -1,6 +1,5 @@
 import axios from "axios"
-import { getApiLink } from "./getApiLink"
-import {useDispatch} from "react-redux";
+import { getApiLink } from "./getApiLink";
 import {setUser} from "../redux/toolkitSlice";
 import setCookie from "../functions/setCookie";
 

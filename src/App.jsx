@@ -78,7 +78,7 @@ export const App = () => {
                 console.log('user undefined', error);
             })
 
-    }, [])
+    }, [dispatch])
 
     return (
         <>

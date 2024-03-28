@@ -103,12 +103,14 @@ export const ProductCard = () => {
 
                         </div>
                         <div className="product__info_col">
-                            <button onClick={handleAddCart} className="product__add-to-cart button" type="button" aria-label="Додати до кошика">
+                            <button onClick={handleAddCart} className="product__add-to-cart button" style={{background: isAddedBasket ? "#9C50B8" : ""}} type="button" aria-label="Додати до кошика">
                                 <svg width="20" height="20" viewBox="0 0 48 48">
                                     <use xlinkHref="#cart"></use>
                                 </svg>
                                 <span>
-                                    Додати до кошика
+                                    {
+                                        isAddedBasket ? "Удалить с корзины" : "Додати до кошика"
+                                    }
                                 </span>
                             </button>
                         </div>
