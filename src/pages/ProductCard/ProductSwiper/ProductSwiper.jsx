@@ -20,7 +20,6 @@ export const ProductSwiper = ({ dataCard }) => {
                     '--swiper-navigation-color': '#fff',
                     '--swiper-pagination-color': '#fff',
                     margin: '0',
-                    maxWidth: 'none',
                     width: '100%',
                     maxWidth: '520px',
                 }}

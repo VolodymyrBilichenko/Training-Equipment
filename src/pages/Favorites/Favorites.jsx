@@ -1,13 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
 import { ProductsList } from '../../components/ProductsList/ProductsList'
 import { PaginationProducts } from '../../components/PaginationProducts/PaginationProducts'
 import {useSelector} from "react-redux";
-import axios from "axios";
-import {getApiLink} from "../../api/getApiLink";
-import {GetApiHeaders} from "../../functions/getApiHeaders";
 
 export const Favorites = () => {
 

@@ -55,7 +55,7 @@ export const ProductListItem = ({data}) => {
                 </svg>
             </button>
             <NavLink to={`/product/${data.id}`} className="product-card__image image-aspect-ratio"
-                     style={{paddingTop: '100%'}} aria-label="Глобус-модель 'Будова Сонця'">
+                      aria-label="Глобус-модель 'Будова Сонця'">
                 <picture>
                     <img src={data.files[0]?.web_path ?? photoPlaceholder} alt="ProductCardImg" width="300" height="300"
                          loading="lazy"/>

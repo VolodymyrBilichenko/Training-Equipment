@@ -6,6 +6,9 @@ import axios from 'axios'
 import { getApiLink } from '../../api/getApiLink'
 import { GetApiHeaders } from '../../functions/getApiHeaders'
 
+import AboutPh from '../../assets/img/about-us/about-us-image.png'
+import { MainReviews } from '../Main/components/MainReviews/MainReviews'
+
 export const AboutUs = () => {
     const [staticData, setStaticData] = useState([]);
 
@@ -93,7 +96,7 @@ export const AboutUs = () => {
                                     </div>
                                     <div className="about-us__content_col">
                                         <picture className="image-aspect-ratio">
-                                            <img src="img/about-us/about-us-image.png" alt="" width="482" height="482" loading="lazy"/>
+                                            <img src={AboutPh} alt="" width="482" height="482" loading="lazy"/>
                                         </picture>
                                     </div>
                                 </div>
@@ -129,6 +132,8 @@ export const AboutUs = () => {
                         </div>
                     </div>
                 </div>
+                <MainReviews id="reviews"/>
+
             </section>  
         </>
     )
