@@ -6,6 +6,7 @@ import { getApiLink } from '../../api/getApiLink';
 import {GetApiHeaders} from "../../functions/getApiHeaders";
 import getCookies from "../../functions/getCookies";
 import setCookie from "../../functions/setCookie";
+import {toast} from "react-toastify";
 
 export const OrderPopUp = ({modal}) => {
     const SetPopContext = useContext(PopupContext);
@@ -60,6 +61,8 @@ export const OrderPopUp = ({modal}) => {
             })
             .catch(error => {
                 console.error('Error:', error);
+
+                if(error.response.data.error.message.some(mes => mes === "Not enough amount of product in store to add into basket")) return toast.error("У одного из товаров не достаточное количество для заказа")
             });
     }
 

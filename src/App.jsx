@@ -1,6 +1,7 @@
 import {createContext, useEffect, useState} from 'react';
 import './assets/js/main'
 import './assets/scss/style.scss'
+import 'react-toastify/dist/ReactToastify.css';
 import {routes} from './routes/routes'
 import {Route, Routes, useLocation} from 'react-router-dom';
 import {Header} from './components/Header/Header';
@@ -18,6 +19,7 @@ import axios from "axios";
 import {getApiLink} from "./api/getApiLink";
 import setCookie from "./functions/setCookie";
 import {GetApiHeaders} from "./functions/getApiHeaders";
+import {ToastContainer} from "react-toastify";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export const PopupContext = createContext(null);
@@ -78,7 +80,6 @@ export const App = () => {
         axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('cookieToken')}`
         axios.get(getApiLink('/api/bucket/get'))
             .then(({data}) => {
-                console.log(data)
                 setCookie("basket", JSON.stringify(data.data.products))
                 dispatch(setBasket(data.data.products))
             })
@@ -122,6 +123,8 @@ export const App = () => {
                         {ModalList()}
                     </>
                 </CSSTransition>
+
+                <ToastContainer/>
 
             </PopupContext.Provider>
 

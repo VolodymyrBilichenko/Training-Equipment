@@ -1,17 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { changeBasketItem } from '../../../redux/toolkitSlice';
+import axios from "axios";
+import {getApiLink} from "../../../api/getApiLink";
+import {GetApiHeaders} from "../../../functions/getApiHeaders";
+import getCookies from "../../../functions/getCookies";
 
-export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, products, productCount}) => {
+export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, productCount}) => {
     const [quantity, setQuantity] = useState(productCount ?? 1);
     const dispatch = useDispatch();
 
-    console.log(productInfo);
+    const allProducts = useSelector(state => state.toolkit.allProducts)
 
     const handleIncrement = () => {
         setQuantity(prev => prev + 1);
         if (!setTotalAmount) return;
-        setTotalAmount(prev => prev + productInfo.price)
+        setTotalAmount(prev => prev + productInfo.original_price)
+
+        const dataItem = {
+            "product_id": productInfo.id,
+            "product_amount": 1
+        }
+        axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
+        axios.post(getApiLink("/api/bucket/add"), dataItem, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
 
         dispatch(changeBasketItem({
             count: 1,
@@ -23,7 +34,16 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
         if (quantity < 2) return;
         setQuantity(prev => prev > 1 ? prev - 1 : 1);
         if (!setTotalAmount) return;
-        setTotalAmount(prev => prev - productInfo.price)
+        console.log(productInfo)
+        setTotalAmount(prev => prev - productInfo.original_price)
+
+        const dataItem = {
+            "product_id": productInfo.id,
+            "product_amount": 1
+        }
+
+        axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
+        axios.post(getApiLink("/api/bucket/remove"), dataItem, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
 
         dispatch(changeBasketItem({
             count: -1,
@@ -37,8 +57,9 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
 
     useEffect(() => {
         if(!setTotalAmount) return;
-        setTotalAmount(prev => (prev - productInfo.price) + (productInfo.price * quantity))
-    }, [products, setTotalAmount, productInfo, quantity])
+
+        setTotalAmount(prev => prev + productInfo.original_price * quantity)
+    }, [allProducts])
 
     return (
         <div className="product__length">

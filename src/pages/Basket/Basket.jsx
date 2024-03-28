@@ -14,32 +14,22 @@ export const Basket = () => {
     const setModal = useContext(PopupContext)
 
     const [totalAmount, setTotalAmount] = useState(0)
-    const [products, setProducts] = useState([])
 
+    const allProducts = useSelector(state => state.toolkit.allProducts)
     const basketList = useSelector(state => state.toolkit.basket);
 
     const handleOpenModal = (type) => {
 		setModal(`${type}`)
     }
 
-    useEffect(() => {
-        axios.get(getApiLink('/api/products/get'), {headers: GetApiHeaders()})
-            .then(({data}) => {
-
-                setProducts(data.data)
-
-                setTotalAmount(0)
-
-                document.querySelectorAll(".cart__item_total b").forEach(item => {
-                    setTotalAmount(prev => prev + +item.textContent)
-                })
-
-
-            })
-            .catch((error) => {
-                console.log('all prod undefined', error);
-            })
-    }, [basketList])
+    // useEffect(() => {
+    //     // setTotalAmount(0)
+    //     //
+    //     // document.querySelectorAll(".cart__item_total b").forEach(item => {
+    //     //     setTotalAmount(prev => prev + +item.textContent)
+    //     // })
+    //
+    // }, [basketList, allProducts])
 
     return (
         <>
@@ -62,7 +52,7 @@ export const Basket = () => {
                     </p>
                 </div>}
 
-                <CartList setTotalAmount={setTotalAmount} products={products}/>
+                <CartList setTotalAmount={setTotalAmount} products={allProducts}/>
 
                 <div className="cart__footer">
                     <div className="cart__footer_col">

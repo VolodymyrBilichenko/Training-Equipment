@@ -22,6 +22,8 @@ export const CartListItem = ({productInfo, setTotalAmount, products}) => {
             "product_id": productInfo.id
         }, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
 
+        setTotalAmount(prev => prev - productInfo.original_price * productCount)
+
         dispatch(removeBasketItem(productInfo.id))
     }
 
