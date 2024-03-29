@@ -8,11 +8,13 @@ import setCookie from '../../functions/setCookie';
 import { useNavigate } from 'react-router-dom';
 import {setUser} from "../../redux/toolkitSlice";
 import {useDispatch} from "react-redux";
+import { Style } from 'domelementtype';
 
 export const LoginPopUp = ({modal}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [showPass, setShowPass] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
@@ -20,6 +22,10 @@ export const LoginPopUp = ({modal}) => {
 
     const handleClosePopUp = () => {
         SetPopContext('');
+    }
+
+    const handleShowPass = () => {
+        setShowPass(!showPass);
     }
 
     const handleLogin = (e) => {
@@ -78,10 +84,10 @@ export const LoginPopUp = ({modal}) => {
                             <div className="popup-form__item">
                                 <span className="is-required">Пароль</span>
                                 <span className="input-label">
-                                    <input type="password" name="password" required placeholder="Введите пароль" className="input"
+                                    <input type={showPass ? 'text' : 'password'} name="password" required placeholder="Введите пароль" className="input"
                                         value={password} onChange={(e) => setPassword(e.target.value)}
                                     />
-                                    <button className="password-toggle" type="button" title="Показать/скрыть пароль">
+                                    <button className={showPass ? 'password-toggle password-toggle_active' : 'password-toggle'} onClick={handleShowPass} type="button" title="Показать/скрыть пароль">
                                         <svg width="24" height="24" viewBox="0 0 24 24">
                                             <use xlinkHref="#visibility"></use>
                                         </svg>
@@ -91,9 +97,9 @@ export const LoginPopUp = ({modal}) => {
                             <p>{error}</p>
                             <div className="popup-form__text">
                                 <p>
-                                    <a href="#reset-password-popup" onClick={handleNavigateRes} className="open-popup popup-close">Забули пароль?</a>
+                                    <button onClick={handleNavigateRes} className="open-popup popup-close">Забули пароль?</button>
                                     <br/><br/>
-                                    <a href="#register-popup" onClick={handleNavigateReg} className="open-popup popup-close">Зареєструватися</a>
+                                    <button onClick={handleNavigateReg} className="open-popup popup-close">Зареєструватися</button>
                                 </p>
                             </div>
                             <button className="popup-form__submit button is-mode-1" type="submit">

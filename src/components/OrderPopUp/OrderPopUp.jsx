@@ -84,8 +84,8 @@ export const OrderPopUp = ({modal}) => {
                             <p>
                                 Если Вы хотите получить персональную скидку или
                                 стать участником бонусной системы -
-                                <a onClick={handleNavPopupRegister} href="#register-popup" className="open-popup popup-close">Зарегистрируйтесь</a> или
-                                <a onClick={handleNavPopupLogin} href="#login-popup" className="open-popup popup-close">Авторизуйтесь</a>
+                                <button onClick={handleNavPopupRegister} className="open-popup popup-close">Зарегистрируйтесь</button> или 
+                                <button onClick={handleNavPopupLogin} className="open-popup popup-close">Авторизуйтесь</button>
                                 в личном кабинете, прежде чем оформить этот заказ
                             </p>
                         </div>
