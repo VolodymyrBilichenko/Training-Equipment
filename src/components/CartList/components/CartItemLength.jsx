@@ -33,8 +33,8 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
     const handleDecrement = () => {
         if (quantity < 2) return;
         setQuantity(prev => prev > 1 ? prev - 1 : 1);
+
         if (!setTotalAmount) return;
-        console.log(productInfo)
         setTotalAmount(prev => prev - productInfo.original_price)
 
         const dataItem = {

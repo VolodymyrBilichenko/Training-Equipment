@@ -16,6 +16,7 @@ export const Search = () => {
     const [products, setProducts] = useState([])
 
     useEffect(() => {
+        if(!search) return;
 
         axios.get(getApiLink(`/api/products/get${search ? `?search=${search}` : ""}`), {headers: GetApiHeaders()})
             .then(({data}) => {

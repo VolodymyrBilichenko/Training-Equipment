@@ -16,20 +16,10 @@ export const Basket = () => {
     const [totalAmount, setTotalAmount] = useState(0)
 
     const allProducts = useSelector(state => state.toolkit.allProducts)
-    const basketList = useSelector(state => state.toolkit.basket);
 
     const handleOpenModal = (type) => {
 		setModal(`${type}`)
     }
-
-    // useEffect(() => {
-    //     // setTotalAmount(0)
-    //     //
-    //     // document.querySelectorAll(".cart__item_total b").forEach(item => {
-    //     //     setTotalAmount(prev => prev + +item.textContent)
-    //     // })
-    //
-    // }, [basketList, allProducts])
 
     return (
         <>
