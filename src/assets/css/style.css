@@ -2298,6 +2298,14 @@ body.is-popup-active {
     border-radius: 20px
 }
 
+.catalog__categories_list a.is-current{
+    color: #9C50B8;
+}
+.catalog__categories_list a.is-current i{
+    background: rgba(217, 217, 217, .2);
+    color: #fff;
+}
+
 .catalog__categories_list a {
     display: flex;
     align-items: center;
