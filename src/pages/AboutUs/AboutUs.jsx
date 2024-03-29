@@ -24,7 +24,7 @@ export const AboutUs = () => {
       
         const scrollOptions = {
           behavior: 'smooth',
-          block: 'center',
+          block: 'start',
         };
       
         targetElement.scrollIntoView(scrollOptions);

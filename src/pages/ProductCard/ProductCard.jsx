@@ -3,7 +3,6 @@ import {BackGroundDecor} from '../../components/BackGroundDecor/BackGroundDecor'
 import {BreadCrumbs} from '../../components/BreadCrumbs/BreadCrumbs'
 import {ProductsList} from '../../components/ProductsList/ProductsList'
 import {CartItemLength} from '../../components/CartList/components/CartItemLength'
-// import {Splide, SplideSlide} from '@splidejs/react-splide'
 import axios from 'axios'
 import {getApiLink} from '../../api/getApiLink'
 import {useParams} from 'react-router-dom'
@@ -132,27 +131,35 @@ export const ProductCard = () => {
                                         <img src={CreditCard} width="40" height="40" loading="lazy" alt=""/>
                                     </i>
                                     <span>
-                    Безнал
-                  </span>
+                                        Безнал
+                                    </span>
                                 </li>
                                 <li>
                                     <i>
                                         <img src={AccBalance} width="40" height="40" loading="lazy" alt=""/>
                                     </i>
                                     <span>
-                    Наложенный платёж
-                  </span>
+                                        Наложенный платёж
+                                    </span>
                                 </li>
                                 <li>
                                     <i>
                                         <img src={Assigment} width="40" height="40" loading="lazy" alt=""/>
                                     </i>
                                     <span>
-                    По договору поставки
-                  </span>
+                                        По договору поставки
+                                    </span>
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                    <div className='product__info'>
+                    <div className="product__description">
+                        <h3>
+                            Опис
+                        </h3>
+                        {HTMLReactParser(dataCard?.description ?? "")}
+                    </div>
                     </div>
                 </div>
 
@@ -206,14 +213,9 @@ export const ProductCard = () => {
                     </ul>}
                 </div>
 
-                <div className="product__col">
-                    <div className="product__description">
-                        <h3>
-                            Опис
-                        </h3>
-                        {HTMLReactParser(dataCard?.description ?? "")}
-                    </div>
-                </div>
+                {/* <div className="product__col">
+                    
+                </div> */}
             </section>
 
 
