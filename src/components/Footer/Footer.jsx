@@ -8,6 +8,7 @@ import Logotype from '../../assets/img/logo.png'
 import axios from 'axios'
 import { getApiLink } from '../../api/getApiLink'
 import {GetApiHeaders} from "../../functions/getApiHeaders";
+import {toast} from "react-toastify";
 
 export const Footer = () => {
     const [socialData, setSocialData] = useState([]);
@@ -20,6 +21,7 @@ export const Footer = () => {
                 setSocialData(data.data);
             })
             .catch((error) => {
+                toast.error("Возникла неизведанная ошибка")
                 console.log('socialData undefined', error);
             })
     }, [])

@@ -13,13 +13,13 @@ import {ResetPassPopUp} from './components/ResetPassPopUp/ResetPassPopUp';
 import {OrderPopUp} from './components/OrderPopUp/OrderPopUp';
 import {ThanksPopUp} from './components/ThanksPopUp/ThanksPopUp';
 import {useDispatch} from "react-redux";
-import {setAllProducts, setBasket, setFavorites, setUser} from "./redux/toolkitSlice";
+import {setAllCategories, setAllProducts, setBasket, setFavorites, setUser} from "./redux/toolkitSlice";
 import getCookies from "./functions/getCookies";
 import axios from "axios";
 import {getApiLink} from "./api/getApiLink";
 import setCookie from "./functions/setCookie";
 import {GetApiHeaders} from "./functions/getApiHeaders";
-import {ToastContainer} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export const PopupContext = createContext(null);
@@ -63,6 +63,17 @@ export const App = () => {
                 dispatch(setAllProducts(data.data))
             })
             .catch(error => {
+                toast.error("Возникла неизведанная ошибка")
+                console.log('products undefined', error);
+            })
+
+        // GET ALL CATEGORIES
+        axios.get(getApiLink(`/api/categories/get?active=1`), {headers: GetApiHeaders()})
+            .then(({data}) => {
+                dispatch(setAllCategories(data.data))
+            })
+            .catch(error => {
+                toast.error("Возникла неизведанная ошибка")
                 console.log('products undefined', error);
             })
 
@@ -73,6 +84,7 @@ export const App = () => {
                 dispatch(setUser(data.data))
             })
             .catch((error) => {
+                toast.error("Возникла неизведанная ошибка")
                 console.log('user undefined', error);
             })
 
@@ -85,6 +97,7 @@ export const App = () => {
                 dispatch(setBasket(data.data.products))
             })
             .catch((error) => {
+                toast.error("Возникла неизведанная ошибка")
                 console.log('user undefined', error);
             })
 

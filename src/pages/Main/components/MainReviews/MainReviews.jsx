@@ -8,6 +8,7 @@ import { SectionTitle } from '../../../../components/SectionTitle/SectionTitle'
 import axios from 'axios';
 import { getApiLink } from '../../../../api/getApiLink';
 import { GetApiHeaders } from '../../../../functions/getApiHeaders';
+import {toast} from "react-toastify";
 
 export const MainReviews = () => {
     const [reviewsData, setReviewsData] = useState([]);
@@ -18,6 +19,7 @@ export const MainReviews = () => {
                 setReviewsData(data.data)
             })
             .catch((error) => {
+                toast.error("Возникла неизведанная ошибка")
                 console.error('error reviews data', error);
             })
     }, [])

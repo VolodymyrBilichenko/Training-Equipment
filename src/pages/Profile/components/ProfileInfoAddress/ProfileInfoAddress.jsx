@@ -4,6 +4,7 @@ import getCookies from "../../../../functions/getCookies";
 import {getApiLink} from "../../../../api/getApiLink";
 import {GetApiHeaders} from "../../../../functions/getApiHeaders";
 import {useSelector} from "react-redux";
+import {toast} from "react-toastify";
 
 const ProfileInfoAddress = () => {
 
@@ -59,7 +60,7 @@ const ProfileInfoAddress = () => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies("cookieToken")}`;
         axios.put(getApiLink("/api/user/update"), dataBody, {headers: GetApiHeaders()}).then(({data}) => {
             handleEdit()
-        }).catch(er => console.log(er))
+        }).catch(er => toast.error("Возникла неизведанная ошибка"))
     }
 
     return (
