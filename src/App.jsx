@@ -80,6 +80,7 @@ export const App = () => {
         axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('cookieToken')}`
         axios.get(getApiLink('/api/bucket/get'))
             .then(({data}) => {
+                console.log(data)
                 setCookie("basket", JSON.stringify(data.data.products))
                 dispatch(setBasket(data.data.products))
             })
