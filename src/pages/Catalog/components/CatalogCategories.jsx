@@ -1,27 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
-import {getApiLink} from "../../../api/getApiLink";
 import {NavLink, useParams} from "react-router-dom";
-import {GetApiHeaders} from "../../../functions/getApiHeaders";
+import {useSelector} from "react-redux";
 
 export const CatalogCategories = () => {
     const {category_id} = useParams();
     const [categoriesList, setCategoriesList] = useState([]);
 
-    console.log(category_id);
-
-    useEffect(() => {
-        axios.get(getApiLink("/api/categories/get"), {headers: GetApiHeaders()}).then(({data}) => {
-            setCategoriesList(data.data)
-            console.log(data)
-        }).catch(er => console.log(er))
-    }, [])
+    const allCategories = useSelector(state => state.toolkit.allCategories)
 
     return (
         <ul className="catalog__categories_list">
 
             {
-                categoriesList.map(cat =>
+                allCategories.map(cat =>
                     <li key={cat.id}>
                         <NavLink to={`/catalog/${cat.id}`} className={({isActive}) => isActive ? 'is-current' : '' }>
                             <span>

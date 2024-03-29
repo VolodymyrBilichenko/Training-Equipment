@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {ProfileOrdersTr} from './components/ProfileOrdersTr'
 import axios from "axios";
 import {getApiLink} from "../../../../api/getApiLink";
+import {toast} from "react-toastify";
 
 export const ProfileOrders = () => {
 
@@ -10,7 +11,7 @@ export const ProfileOrders = () => {
     useEffect(() => {
         axios.get(getApiLink("/api/orders/get")).then(({data}) => {
             setOrdersList(data.data)
-        }).catch(er => console.log(er))
+        }).catch(er => toast.error("Возникла неизведанная ошибка"))
     }, [])
 
     return (

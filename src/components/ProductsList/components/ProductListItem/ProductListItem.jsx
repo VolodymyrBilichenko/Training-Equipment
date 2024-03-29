@@ -19,25 +19,16 @@ export const ProductListItem = ({data}) => {
     const [isAddedBasket, setIsAddedBasket] = useState(basket.some(item => item.product_id === data.id))
 
     const handleAddBasket = () => {
-        if (isAddedBasket) {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
-            axios.post(getApiLink("/api/bucket/remove"), {
-                "product_id": data.id
-            }, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
+        axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
+        axios.post(getApiLink("/api/bucket/add"), {
+            "product_id": data.id,
+            "product_amount": 1
+        }, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
 
-            dispatch(removeBasketItem(data.id))
-        } else {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
-            axios.post(getApiLink("/api/bucket/add"), {
-                "product_id": data.id,
-                "product_amount": 1
-            }, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
-
-            dispatch(addBasketItem({
-                product_id: data.id,
-                product_amount: 1
-            }))
-        }
+        dispatch(addBasketItem({
+            product_id: data.id,
+            product_amount: 1
+        }))
 
         setIsAddedBasket(prev => !prev)
     }
@@ -70,15 +61,14 @@ export const ProductListItem = ({data}) => {
                 <ins>{`${data.original_price} ₴`}</ins>
                 <del>{`${data.price === null ? '' : data.price + ' ₴'}`}</del>
             </div>
-            <button onClick={handleAddBasket} style={{background: isAddedBasket ? "#9C50B8" : ""}}
+            {/*style={{background: isAddedBasket ? "#9C50B8" : ""}}*/}
+            <button onClick={handleAddBasket}
                     className="product-card__add-cart button is-min-on-mob" type="button">
                 <svg width="20" height="20" viewBox="0 0 48 48">
                     <use xlinkHref="#cart"></use>
                 </svg>
                 <span>
-                    {
-                        isAddedBasket ? "Удалить с корзины" : "Додати до кошика"
-                    }
+                    Додати до кошика
                 </span>
             </button>
         </li>

@@ -6,6 +6,7 @@ import { CertificateList } from './components/CertificateList/CertificateList'
 import axios from 'axios'
 import { getApiLink } from '../../api/getApiLink'
 import { GetApiHeaders } from '../../functions/getApiHeaders'
+import {toast} from "react-toastify";
 
 export const Сertificate = () => {
 	const [sertificatData, setSertificatData] = useState([]);
@@ -17,6 +18,7 @@ export const Сertificate = () => {
 				setSertificatData(data.data);
 			})
 			.catch((error) => {
+				toast.error("Возникла неизведанная ошибка")
 				console.error('error data sertificate', error);
 			})
 
@@ -25,6 +27,7 @@ export const Сertificate = () => {
 				setPreceptsData(data.data);
 			})
 			.catch((error) => {
+				toast.error("Возникла неизведанная ошибка")
 				console.error('error data precepts', error);
 			})
 	}, [])

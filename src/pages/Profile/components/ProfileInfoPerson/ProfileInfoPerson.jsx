@@ -4,6 +4,7 @@ import {getApiLink} from "../../../../api/getApiLink";
 import {GetApiHeaders} from "../../../../functions/getApiHeaders";
 import getCookies from "../../../../functions/getCookies";
 import {useSelector} from "react-redux";
+import {toast} from "react-toastify";
 
 const ProfileInfoPerson = () => {
 
@@ -21,12 +22,12 @@ const ProfileInfoPerson = () => {
 
     useEffect(() => {
 
-        setName(userData?.name ?? "–")
-        setEmail(userData?.email ?? "–")
-        setOrganizationName(userData?.organization?.name ?? "–")
-        setDocumentCode(userData?.organization?.document_code ?? "–")
-        setPhone(userData?.phone_number ?? "–")
-        setHeadMasterName(userData?.organization?.contact_person ?? "–")
+        setName(userData?.name)
+        setEmail(userData?.email)
+        setOrganizationName(userData?.organization?.name)
+        setDocumentCode(userData?.organization?.document_code)
+        setPhone(userData?.phone_number)
+        setHeadMasterName(userData?.organization?.contact_person)
 
     }, [userData])
 
@@ -51,11 +52,23 @@ const ProfileInfoPerson = () => {
             "phone_number": phone,
             "organization": {
                 "name": organizationName,
-                "document_code": documentCode,
+                "document_code": +documentCode,
                 "contact_person": headMasterName,
             }
         }
 
+        console.log(organizationName, userData?.organization?.name)
+
+        organizationName === userData?.organization?.name && delete dataBody?.organization?.name
+        documentCode === userData?.organization?.document_code && delete dataBody?.organization?.document_code
+        headMasterName === userData?.organization?.contact_person && delete dataBody?.organization?.contact_person
+
+        if(organizationName === userData?.organization?.name && documentCode === userData?.organization?.document_code && headMasterName === userData?.organization?.contact_person) {
+            delete dataBody.organization
+        }
+
+        phone === userData.phone_number && delete dataBody.phone_number
+        name === userData.name && delete dataBody.name
         email === userData.email && delete dataBody.email
         delete dataBody.updated_at
         delete dataBody.created_at
@@ -64,7 +77,7 @@ const ProfileInfoPerson = () => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies("cookieToken")}`;
         axios.put(getApiLink("/api/user/update"), dataBody, {headers: GetApiHeaders()}).then(({data}) => {
             handleEdit()
-        }).catch(er => console.log(er))
+        }).catch(er => toast.error("Возникла неизведанная ошибка"))
     }
 
     return (
@@ -85,37 +98,37 @@ const ProfileInfoPerson = () => {
                         <label className="account__block_item">
                             <span>ФИО Директора</span>
                             <span className="value">
-                                {headMasterName}
+                                {headMasterName ?? "–"}
                             </span>
                         </label>
                         <label className="account__block_item">
                             <span>Название организации</span>
                             <span className="value">
-                                {organizationName}
+                                {organizationName ?? "–"}
                             </span>
                         </label>
                         <label className="account__block_item">
                             <span>E-mail *</span>
                             <span className="value">
-                                {email}
+                                {email ?? "–"}
                             </span>
                         </label>
                         <label className="account__block_item">
                             <span>Код ЄДРПОУ/ІПН</span>
                             <span className="value">
-                                {documentCode}
+                                {documentCode ?? "–"}
                             </span>
                         </label>
                         <label className="account__block_item">
                             <span>Телефон *</span>
                             <span className="value">
-                                {phone}
+                                {phone ?? "–"}
                             </span>
                         </label>
                         <label className="account__block_item">
                             <span>ФИО Контактного лица</span>
                             <span className="value">
-                                {name}
+                                {name ?? "–"}
                             </span>
                         </label>
                     </div> :
@@ -125,7 +138,7 @@ const ProfileInfoPerson = () => {
                             <span>ФИО Директора</span>
                             <span className="input-label">
                                 <input type="text" name="name-director" placeholder="Введите имя директора"
-                                       value={headMasterName} onChange={e => setHeadMasterName(e.target.value)} required
+                                       value={headMasterName} onChange={e => setHeadMasterName(e.target.value)}
                                        className="input"/>
                             </span>
                         </label>
@@ -134,7 +147,7 @@ const ProfileInfoPerson = () => {
                             <span className="input-label">
                                 <input type="text" name="company-name" placeholder="Введите название организации"
                                        value={organizationName} onChange={e => setOrganizationName(e.target.value)}
-                                       required className="input"/>
+                                       className="input"/>
                             </span>
                         </label>
                         <label className="account__block_item">
@@ -148,7 +161,7 @@ const ProfileInfoPerson = () => {
                             <span>Код ЄДРПОУ/ІПН</span>
                             <span className="input-label">
                                 <input type="text" name="code" placeholder="Введите код ЄДРПОУ/ІПН" value={documentCode}
-                                       onChange={e => setDocumentCode(e.target.value)} required className="input"/>
+                                       onChange={e => setDocumentCode(e.target.value)} className="input"/>
                             </span>
                         </label>
                         <label className="account__block_item">
@@ -162,7 +175,7 @@ const ProfileInfoPerson = () => {
                             <span>ФИО Контактного лица</span>
                             <span className="input-label">
                                 <input type="text" name="contact-name" placeholder="Введите имя контактного лица"
-                                       value={name} onChange={e => setName(e.target.value)} required className="input"/>
+                                       value={name} onChange={e => setName(e.target.value)} className="input"/>
                             </span>
                         </label>
                         <div className="account__block_footer">

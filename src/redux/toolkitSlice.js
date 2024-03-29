@@ -8,7 +8,8 @@ const toolkitSlice = createSlice({
         user: {},
         favorites: [],
         basket: [],
-        allProducts: []
+        allProducts: [],
+        allCategories: []
     },
     reducers: {
         setUser(state, action) {
@@ -17,6 +18,9 @@ const toolkitSlice = createSlice({
 
         setAllProducts(state, action) {
             state.allProducts = action.payload
+        },
+        setAllCategories(state, action) {
+            state.allCategories = action.payload
         },
 
         setFavorites(state, action) {
@@ -82,6 +86,7 @@ export const {
 
     setUser,
     setAllProducts,
+    setAllCategories,
     setFavorites,
     addFavorite,
     addBasketItem,

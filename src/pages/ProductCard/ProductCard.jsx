@@ -36,6 +36,7 @@ export const ProductCard = () => {
                 setDataCard(data.data)
             })
             .catch((error) => {
+                toast.error("Возникла неизведанная ошибка")
                 console.log('dataCard undefined', error);
             })
 

@@ -4,6 +4,7 @@ import axios from "axios";
 import {getApiLink} from "../../api/getApiLink";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
 import getCookies from "../../functions/getCookies";
+import {toast} from "react-toastify";
 
 export const ResetPassPopUp = ({modal}) => {
 
@@ -24,7 +25,7 @@ export const ResetPassPopUp = ({modal}) => {
 
             if (data.data === "success") setIsSuccessSent(true)
 
-        }).catch(er => console.log(er))
+        }).catch(er => toast.error("Возникла неизведанная ошибка"))
     }
 
     return (

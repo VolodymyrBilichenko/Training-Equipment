@@ -3,6 +3,7 @@ import { HeaderPanelPhone } from './components/HeaderPanelPhone/HeaderPanelPhone
 import { HeaderPanelLanguage } from './components/HeaderPanelLanguage/HeaderPanelLanguage'
 import axios from 'axios';
 import { getApiLink } from '../../../../api/getApiLink';
+import {toast} from "react-toastify";
 
 export const HeaderPanel = () => {
     const [staticData, setStaticData] = useState([]);
@@ -25,6 +26,7 @@ export const HeaderPanel = () => {
                 console.log('contact', data.data);
             })
             .catch((error) => {
+                toast.error("Возникла неизведанная ошибка")
                 console.log('staticData undefined', error);
             })
     }, [])

@@ -8,6 +8,7 @@ import { GetApiHeaders } from '../../functions/getApiHeaders'
 
 import AboutPh from '../../assets/img/about-us/about-us-image.png'
 import { MainReviews } from '../Main/components/MainReviews/MainReviews'
+import {toast} from "react-toastify";
 
 export const AboutUs = () => {
     const [staticData, setStaticData] = useState([]);
@@ -37,6 +38,7 @@ export const AboutUs = () => {
                 setStaticData(data.data)
             })
             .catch((error) => {
+                toast.error("Возникла неизведанная ошибка")
                 console.error('static data error', error);
             })
     }, [])
