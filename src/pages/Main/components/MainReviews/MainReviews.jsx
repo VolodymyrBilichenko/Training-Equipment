@@ -9,7 +9,7 @@ import axios from 'axios';
 import { getApiLink } from '../../../../api/getApiLink';
 import { GetApiHeaders } from '../../../../functions/getApiHeaders';
 
-export const MainReviews = () => {
+export const MainReviews = ({id}) => {
     const [reviewsData, setReviewsData] = useState([]);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export const MainReviews = () => {
     console.log(reviewsData);
 
     return (
-        <section className="reviews container">
+        <section className="reviews container" id={id}>
 
             <SectionTitle title={'Відгуки'}/>
 

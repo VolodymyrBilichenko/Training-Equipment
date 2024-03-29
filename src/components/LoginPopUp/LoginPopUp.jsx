@@ -16,8 +16,6 @@ export const LoginPopUp = ({modal}) => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
-    // const dispatch = useDispatch();
-
     const SetPopContext = useContext(PopupContext);
 
     const handleClosePopUp = () => {
