@@ -17,6 +17,7 @@ export const RegisterPopUp = ({modal}) => {
 
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [showPass, setShowPass] = useState(false);
 
     const userInfo = useSelector(state => state.toolkit.user)
     const isLogin = getCookies('token')
@@ -27,6 +28,10 @@ export const RegisterPopUp = ({modal}) => {
 
     const handleClosePopUp = () => {
         SetPopContext('');
+    }
+
+    const handleShowPass = () => {
+        setShowPass(!showPass);
     }
 
 
@@ -92,9 +97,9 @@ export const RegisterPopUp = ({modal}) => {
                             <div className="popup-form__item">
                                 <span className="is-required">Пароль</span>
                                 <span className="input-label">
-                                    <input value={pass} onChange={(e) => setPass(e.target.value)} type="password"
+                                    <input value={pass} onChange={(e) => setPass(e.target.value)} type={showPass ? 'text' : 'password'}
                                            name="password" required placeholder="Введите пароль" className="input"/>
-                                    <button className="password-toggle" type="button" title="Показать/скрыть пароль">
+                                    <button className={showPass ? 'password-toggle password-toggle_active' : 'password-toggle'} onClick={handleShowPass} type="button" title="Показать/скрыть пароль">
                                         <svg width="24" height="24" viewBox="0 0 24 24">
                                             <use xlinkHref="#visibility"></use>
                                         </svg>

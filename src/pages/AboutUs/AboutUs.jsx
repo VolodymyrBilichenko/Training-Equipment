@@ -134,6 +134,7 @@ export const AboutUs = () => {
                         </div>
                     </div>
                 </div>
+
                 <MainReviews id="reviews"/>
 
             </section>  

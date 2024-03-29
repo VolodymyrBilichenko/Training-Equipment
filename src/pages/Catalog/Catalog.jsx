@@ -6,7 +6,7 @@ import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
 import axios from 'axios'
 import {getApiLink} from '../../api/getApiLink'
 import {useNavigate, useParams} from 'react-router-dom'
-import CatalogCategories from "./components/CatalogCategories";
+import {CatalogCategories} from "./components/CatalogCategories";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
 import { PaginationProducts } from '../../components/PaginationProducts/PaginationProducts'
 

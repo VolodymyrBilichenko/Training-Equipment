@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://VolodymyrBilichenko.github.io/Training-Equipment",
   "dependencies": {
+    "@fancyapps/ui": "^5.0.35",
     "@reduxjs/toolkit": "^2.2.1",
     "@splidejs/react-splide": "^0.7.12",
     "@testing-library/jest-dom": "^5.17.0",

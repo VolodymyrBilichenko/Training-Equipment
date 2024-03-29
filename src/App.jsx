@@ -114,11 +114,13 @@ export const App = () => {
                 <Header/>
 
                 <TransitionGroup component={null}>
-                    <CSSTransition key={location.pathname} classNames='fade' timeout={300} onEnter={() => toggleLoader(true)} onExited={() => toggleLoader(false)}>
-                    
+                    <CSSTransition key={location.pathname} classNames='fade' timeout={300}
+                                   onEnter={() => toggleLoader(true)} onExited={() => toggleLoader(false)}>
+
                         <div className='main'>
                             <Routes location={location}>
-                                {routesList.map(route => <Route key={route.path} element={route.element} path={route.path}/>)}
+                                {routesList.map(route => <Route key={route.path} element={route.element}
+                                                                path={route.path}/>)}
                             </Routes>
                         </div>
 
@@ -127,16 +129,7 @@ export const App = () => {
 
                 <Footer/>
 
-                <CSSTransition
-                    in={modal === 'login'}
-                    timeout={500}
-                    classNames="popup"
-                    unmountOnExit
-                >
-                    <>
-                        {ModalList()}
-                    </>
-                </CSSTransition>
+                {ModalList()}
 
                 <ToastContainer/>
 

@@ -1610,7 +1610,7 @@ body.is-popup-active {
     display: flex;
     align-items: center;
     padding: 10px;
-    z-index: 6;
+    z-index: 20;
     transition: opacity .4s ease,visibility .4s ease
 }
 
@@ -1671,8 +1671,10 @@ body.is-popup-active {
     line-height: normal
 }
 
+.popup-text button,
 .popup-text a {
-    color: #b672cf
+    color: #b672cf;
+    background: transparent;
 }
 
 .popup-close-btn {
@@ -1709,8 +1711,10 @@ body.is-popup-active {
     margin: 0 auto
 }
 
-.popup-form__text a {
-    color: #b672cf
+.popup-form__text button {
+    color: #b672cf;
+    background: transparent;
+    
 }
 
 .popup-form__checkbox {
@@ -2292,6 +2296,14 @@ body.is-popup-active {
     padding: 15px;
     background: var(--accent);
     border-radius: 20px
+}
+
+.catalog__categories_list a.is-current{
+    color: #9C50B8;
+}
+.catalog__categories_list a.is-current i{
+    background: rgba(217, 217, 217, .2);
+    color: #fff;
 }
 
 .catalog__categories_list a {
@@ -4232,7 +4244,7 @@ body.is-popup-active {
     }
 
     .header__block {
-        /* padding-top: 30px; */
+        padding-top: 30px;
         padding-bottom: 30px;
         gap: 0
     }
@@ -4811,6 +4823,10 @@ body.is-popup-active {
     .aside_nav a:active svg,.password-toggle:hover {
         color: var(--white)
     }
+    
+    .password-toggle_active {
+        color: var(--white)
+    }
 
     .aside_nav button svg,
     .aside_nav a svg {
@@ -4846,6 +4862,7 @@ body.is-popup-active {
         transition: background .2s ease
     }
 
+    .breadcrumbs__link,.header__nav--list>li>a,.pagination__link,.pagination__list a,.popup-text button,
     .breadcrumbs__link,.header__nav--list>li>a,.pagination__link,.pagination__list a,.popup-text a {
         transition: color .2s ease
     }
@@ -4898,10 +4915,12 @@ body.is-popup-active {
         color: var(--grey)
     }
 
+    .popup-text button:hover, 
     .popup-text a:hover {
         color: var(--accent-hover)
     }
 
+    .popup-text button:active,
     .popup-text a:active {
         color: var(--accent-active)
     }
@@ -4918,15 +4937,15 @@ body.is-popup-active {
         background: rgba(35,28,49,.7)
     }
 
-    .popup-form__text a {
+    .popup-form__text button {
         transition: color .2s ease
     }
 
-    .popup-form__text a:hover {
+    .popup-form__text button:hover {
         color: var(--accent-hover)
     }
 
-    .popup-form__text a:active {
+    .popup-form__text button:active {
         color: var(--accent-active)
     }
 
@@ -5141,7 +5160,19 @@ body.is-popup-active {
     height: 10px !important;
     width: 10px !important;
     padding: 2px !important;
-    border: 2px solid #7f469b !important;
+    position: relative !important;
+}
+.swiper-pagination-bullet:after{
+    content: '' !important;
+    display: block !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    border: 1px solid #7f469b !important;
+    position: absolute !important;
+    top: -3px !important;
+    left: -3px !important;
 }
 
 .reviews__slide{

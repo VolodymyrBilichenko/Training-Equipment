@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
-import {getApiLink} from "../../../api/getApiLink";
-import {NavLink} from "react-router-dom";
-import {GetApiHeaders} from "../../../functions/getApiHeaders";
+import {NavLink, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 
-const CatalogCategories = () => {
+export const CatalogCategories = () => {
+    const {category_id} = useParams();
+    const [categoriesList, setCategoriesList] = useState([]);
 
     const allCategories = useSelector(state => state.toolkit.allCategories)
 
@@ -15,7 +14,7 @@ const CatalogCategories = () => {
             {
                 allCategories.map(cat =>
                     <li key={cat.id}>
-                        <NavLink to={`/catalog/${cat.id}`}>
+                        <NavLink to={`/catalog/${cat.id}`} className={({isActive}) => isActive ? 'is-current' : '' }>
                             <span>
                                 {cat.name}
                             </span>
@@ -32,5 +31,3 @@ const CatalogCategories = () => {
         </ul>
     );
 };
-
-export default CatalogCategories;
