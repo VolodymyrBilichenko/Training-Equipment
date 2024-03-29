@@ -113,9 +113,9 @@ export const App = () => {
 
                 <Header/>
 
-                <TransitionGroup component={null}>
-                    <CSSTransition key={location.pathname} classNames='fade' timeout={300}
-                                   onEnter={() => toggleLoader(true)} onExited={() => toggleLoader(false)}>
+                {/* <TransitionGroup component={null}> */}
+                    {/* <CSSTransition key={location.pathname} classNames='fade' timeout={300} */}
+                                   {/* onEnter={() => toggleLoader(true)} onExited={() => toggleLoader(false)}> */}
 
                         <div className='main'>
                             <Routes location={location}>
@@ -124,8 +124,8 @@ export const App = () => {
                             </Routes>
                         </div>
 
-                    </CSSTransition>
-                </TransitionGroup>
+                    {/* </CSSTransition> */}
+                {/* </TransitionGroup> */}
 
                 <Footer/>
 

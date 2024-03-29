@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -9,9 +9,31 @@ import axios from 'axios';
 import { getApiLink } from '../../../../api/getApiLink';
 import { GetApiHeaders } from '../../../../functions/getApiHeaders';
 import {toast} from "react-toastify";
+import { Fancybox as NativeFancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 export const MainReviews = ({id}) => {
     const [reviewsData, setReviewsData] = useState([]);
+
+    const Fancybox = (props) => {
+        const containerRef = useRef(null);
+      
+        useEffect(() => {
+          const container = containerRef.current;
+      
+          const delegate = props.delegate || "[data-fancybox]";
+          const options = props.options || {};
+      
+          NativeFancybox.bind(container, delegate, options);
+      
+          return () => {
+            NativeFancybox.unbind(container);
+            NativeFancybox.close();
+          };
+        });
+      
+        return <div ref={containerRef}>{props.children}</div>;
+    }
 
     useEffect(() => {
         axios.get(getApiLink('/api/reviews/get'), {headers: GetApiHeaders()})
@@ -71,20 +93,28 @@ export const MainReviews = ({id}) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="reviews__slide_col">
-                            <div className="reviews__certificate">
-                                <div className="reviews__certificate_image">
-                                    {reviewItem.file && (
-                                            <picture>
-                                                <img src={reviewItem.file.web_path} alt="Sertificate" width="276" height="285" loading="lazy"/>
-                                            </picture>
-                                        )}
-                                </div>
-                                <a href="foo" className="reviews__certificate_link">
-                                    ДИвитися подяку
+                        <Fancybox
+                            options={{
+                                Carousel: {
+                                    infinite: false,
+                                },
+                            }}
+                        >
+                            
+                            <div className="reviews__slide_col">
+                                <div className="reviews__certificate">
+                                <a href={reviewItem.file && reviewItem.file.web_path} className="reviews__certificate_link" data-fancybox="gallery">
+                                    <div className="reviews__certificate_image">
+                                        {reviewItem.file && (
+                                                    <img src={reviewItem.file.web_path} alt="Sertificate" width="276" height="285" loading="lazy"/>
+                                            )}
+                                    </div>
+                                    
+                                        ДИвитися подяку
                                 </a>
+                                </div>
                             </div>
-                        </div>
+                        </Fancybox>
                     </SwiperSlide>
                 ))}
             </Swiper>
