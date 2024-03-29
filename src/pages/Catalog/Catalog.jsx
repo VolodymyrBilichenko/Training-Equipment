@@ -26,7 +26,6 @@ export const Catalog = () => {
     }
 
     useEffect(() => {
-        if(!category_id) return;
 
         axios.get(getApiLink(`/api/products/get${category_id ? `?category_id=${category_id}` : ""}`), {headers: GetApiHeaders()})
             .then(({data}) => {

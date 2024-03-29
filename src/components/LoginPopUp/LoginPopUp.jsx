@@ -8,7 +8,6 @@ import setCookie from '../../functions/setCookie';
 import { useNavigate } from 'react-router-dom';
 import {setUser} from "../../redux/toolkitSlice";
 import {useDispatch} from "react-redux";
-import { Style } from 'domelementtype';
 
 export const LoginPopUp = ({modal}) => {
     const [email, setEmail] = useState('');

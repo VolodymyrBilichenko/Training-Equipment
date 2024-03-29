@@ -1,13 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {BackGroundDecor} from '../../components/BackGroundDecor/BackGroundDecor'
 import {BreadCrumbs} from '../../components/BreadCrumbs/BreadCrumbs'
 import {CartList} from '../../components/CartList/CartList'
 import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
 import {useSelector} from 'react-redux'
 import {PopupContext} from "../../App";
-import axios from "axios";
-import {getApiLink} from "../../api/getApiLink";
-import {GetApiHeaders} from "../../functions/getApiHeaders";
 import getCookies from "../../functions/getCookies";
 
 export const Basket = () => {

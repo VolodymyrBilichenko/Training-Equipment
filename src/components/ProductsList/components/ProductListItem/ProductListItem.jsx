@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {addBasketItem, addFavorite, removeBasketItem} from '../../../../redux/toolkitSlice';
+import {addBasketItem, addFavorite} from '../../../../redux/toolkitSlice';
 import {NavLink} from 'react-router-dom';
 import photoPlaceholder from './../../../../assets/img/photoNotFound.jpg'
 import axios from "axios";

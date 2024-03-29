@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {NavLink, useParams} from "react-router-dom";
+import React from 'react';
+import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 export const CatalogCategories = () => {
-    const {category_id} = useParams();
-    const [categoriesList, setCategoriesList] = useState([]);
 
     const allCategories = useSelector(state => state.toolkit.allCategories)
 

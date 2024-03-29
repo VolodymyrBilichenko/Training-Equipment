@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-import { getApiLink } from '../../api/getApiLink'
+import React from 'react'
 import { NavLink } from 'react-router-dom';
-import {GetApiHeaders} from "../../functions/getApiHeaders";
 import {useSelector} from "react-redux";
 
 export const CategoriesList = ({ClassNameList}) => {
