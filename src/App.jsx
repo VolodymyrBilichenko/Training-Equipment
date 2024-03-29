@@ -20,7 +20,7 @@ import {getApiLink} from "./api/getApiLink";
 import setCookie from "./functions/setCookie";
 import {GetApiHeaders} from "./functions/getApiHeaders";
 import {ToastContainer} from "react-toastify";
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 export const PopupContext = createContext(null);
 
@@ -80,6 +80,7 @@ export const App = () => {
         axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('cookieToken')}`
         axios.get(getApiLink('/api/bucket/get'))
             .then(({data}) => {
+                console.log(data)
                 setCookie("basket", JSON.stringify(data.data.products))
                 dispatch(setBasket(data.data.products))
             })
@@ -100,11 +101,13 @@ export const App = () => {
                 <Header/>
 
                 <TransitionGroup component={null}>
-                    <CSSTransition key={location.pathname} classNames='fade' timeout={300} onEnter={() => toggleLoader(true)} onExited={() => toggleLoader(false)}>
-                    
+                    <CSSTransition key={location.pathname} classNames='fade' timeout={300}
+                                   onEnter={() => toggleLoader(true)} onExited={() => toggleLoader(false)}>
+
                         <div className='main'>
                             <Routes location={location}>
-                                {routesList.map(route => <Route key={route.path} element={route.element} path={route.path}/>)}
+                                {routesList.map(route => <Route key={route.path} element={route.element}
+                                                                path={route.path}/>)}
                             </Routes>
                         </div>
 
@@ -113,16 +116,7 @@ export const App = () => {
 
                 <Footer/>
 
-                <CSSTransition
-                    in={modal === 'login'}
-                    timeout={500}
-                    classNames="popup"
-                    unmountOnExit
-                >
-                    <>
-                        {ModalList()}
-                    </>
-                </CSSTransition>
+                {ModalList()}
 
                 <ToastContainer/>
 

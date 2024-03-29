@@ -19,7 +19,8 @@ export const CartListItem = ({productInfo, setTotalAmount, products}) => {
     const handleDeleteItem = () => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
         axios.post(getApiLink("/api/bucket/remove"), {
-            "product_id": productInfo.id
+            "product_id": productInfo.id,
+            "product_amount": productCount
         }, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
 
         setTotalAmount(prev => prev - productInfo.original_price * productCount)
