@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {CartItemLength} from './CartItemLength'
-
 import {useDispatch, useSelector} from "react-redux";
 import {removeBasketItem} from "../../../redux/toolkitSlice";
 import axios from "axios";
 import getCookies from "../../../functions/getCookies";
 import {getApiLink} from "../../../api/getApiLink";
 import {GetApiHeaders} from "../../../functions/getApiHeaders";
+import photoPlaceholder from '../../../assets/img/photoNotFound.jpg'
 
 export const CartListItem = ({productInfo, setTotalAmount, products}) => {
 
@@ -38,7 +38,7 @@ export const CartListItem = ({productInfo, setTotalAmount, products}) => {
                 <div className="cart__item_info">
                     <div className="cart__item_image">
                         <picture>
-                            <img src={productInfo.files[0]?.web_path} alt="" width="130" height="130" loading="lazy"/>
+                            <img src={productInfo.files[0]?.web_path ?? photoPlaceholder} alt="" width="130" height="130" loading="lazy"/>
                         </picture>
                     </div>
                     <h3>{productInfo.name}</h3>

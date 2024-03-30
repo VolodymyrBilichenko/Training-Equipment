@@ -7,6 +7,7 @@ import axios from "axios";
 import {getApiLink} from "../../../../api/getApiLink";
 import {GetApiHeaders} from "../../../../functions/getApiHeaders";
 import getCookies from "../../../../functions/getCookies";
+import {toast} from "react-toastify";
 
 export const ProductListItem = ({data}) => {
 
@@ -18,6 +19,8 @@ export const ProductListItem = ({data}) => {
     const [isFavorite, setIsFavorite] = useState(favorites.some(item => item === data.id))
     const [isAddedBasket, setIsAddedBasket] = useState(basket.some(item => item.product_id === data.id))
 
+    console.log('isAddedBasket',isAddedBasket);
+
     const handleAddBasket = () => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
         axios.post(getApiLink("/api/bucket/add"), {
@@ -27,8 +30,10 @@ export const ProductListItem = ({data}) => {
 
         dispatch(addBasketItem({
             product_id: data.id,
-            product_amount: 1
+            product_amount: 1,
         }))
+
+        toast.success("Товар успешно добавлен в корзину")
 
         setIsAddedBasket(prev => !prev)
     }
