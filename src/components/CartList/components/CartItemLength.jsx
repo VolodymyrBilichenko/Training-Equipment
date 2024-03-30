@@ -59,7 +59,7 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
         if(!setTotalAmount) return;
 
         setTotalAmount(prev => prev + productInfo.original_price * quantity)
-    }, [allProducts, productInfo.original_price, quantity, setTotalAmount])
+    }, [allProducts])
 
     return (
         <div className="product__length">

@@ -11,6 +11,8 @@ import {toast} from "react-toastify";
 
 export const ProductListItem = ({data}) => {
 
+    console.log(data);
+
     const dispatch = useDispatch();
 
     const favorites = useSelector(state => state.toolkit.favorites)
