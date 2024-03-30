@@ -20,7 +20,7 @@ import {getApiLink} from "./api/getApiLink";
 import setCookie from "./functions/setCookie";
 import {GetApiHeaders} from "./functions/getApiHeaders";
 import {toast, ToastContainer} from "react-toastify";
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 export const PopupContext = createContext(null);
 
@@ -50,6 +50,9 @@ export const App = () => {
 
     }
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [location])
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -77,31 +80,35 @@ export const App = () => {
                 console.log('products undefined', error);
             })
 
+        if (getCookies('cookieToken')) {
         // GET USER IF WE HAVE COOKIE
-        axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('cookieToken')}`
-        axios.get(getApiLink('/api/user/profile'))
-            .then(({data}) => {
-                dispatch(setUser(data.data))
-            })
-            .catch((error) => {
-                toast.error("Возникла неизведанная ошибка")
-                console.log('user undefined', error);
-            })
+            axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('cookieToken')}`
+            axios.get(getApiLink('/api/user/profile'))
+                .then(({data}) => {
+                    dispatch(setUser(data.data))
+                })
+                .catch((error) => {
+                    toast.error("Возникла неизведанная ошибка")
+                    console.log('user undefined', error);
+                })
+        }
 
         // GET USER BASKET IF WE HAVE COOKIE
-        axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('cookieToken')}`
-        axios.get(getApiLink('/api/bucket/get'))
-            .then(({data}) => {
-                console.log(data)
-                setCookie("basket", JSON.stringify(data.data.products))
-                dispatch(setBasket(data.data.products))
-            })
-            .catch((error) => {
-                toast.error("Возникла неизведанная ошибка")
-                console.log('user undefined', error);
-            })
+        if (getCookies('cookieToken')) {
+            axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('cookieToken')}`
+            axios.get(getApiLink('/api/bucket/get'))
+                .then(({data}) => {
+                    console.log(data)
+                    setCookie("basket", JSON.stringify(data.data.products))
+                    dispatch(setBasket(data.data.products))
+                })
+                .catch((error) => {
+                    toast.error("Возникла неизведанная ошибка")
+                    console.log('user undefined', error);
+                })
+        }
 
-    }, [])
+    }, [getCookies('cookieToken')])
 
     return (
         <>
