@@ -1471,11 +1471,13 @@ input[type=password] {
     text-transform: uppercase
 }
 
+.pagination__link,.pagination__list button,.pagination__list span,
 .pagination__link,.pagination__list a,.pagination__list span {
     font-weight: 700;
     color: var(--white);
     font-family: var(--title-font);
-    line-height: 110%
+    line-height: 110%;
+    background: transparent;
 }
 
 .pagination {
@@ -1502,16 +1504,19 @@ input[type=password] {
     grid-row: 1
 }
 
+.pagination__list button,.pagination__list span,
 .pagination__list a,.pagination__list span {
     padding: 2.5px 7.5px;
     display: inline-block;
     position: relative
 }
 
+.pagination__list button.is-current,
 .pagination__list a.is-current {
     pointer-events: none
 }
 
+.pagination__list button.is-current::after,
 .pagination__list a.is-current::after {
     content: "";
     position: absolute;
@@ -1525,6 +1530,7 @@ input[type=password] {
     border-radius: 50%
 }
 
+.pagination__list button.is-current::before,
 .pagination__list a.is-current::before {
     content: "";
     position: absolute;
@@ -4870,6 +4876,8 @@ body.is-popup-active {
         transition: background .2s ease
     }
 
+    .breadcrumbs__link,.header__nav--list>li>a,.pagination__link,.pagination__list button,.popup-text button,
+    .breadcrumbs__link,.header__nav--list>li>a,.pagination__link,.pagination__list button,.popup-text a,
     .breadcrumbs__link,.header__nav--list>li>a,.pagination__link,.pagination__list a,.popup-text button,
     .breadcrumbs__link,.header__nav--list>li>a,.pagination__link,.pagination__list a,.popup-text a {
         transition: color .2s ease
@@ -4916,10 +4924,12 @@ body.is-popup-active {
         color: var(--grey)
     }
 
+    .pagination__list button:not(.is-current):hover,
     .pagination__list a:not(.is-current):hover {
         color: var(--accent-hover)
     }
 
+    .pagination__list button:not(.is-current):active,
     .pagination__list a:not(.is-current):active {
         color: var(--grey)
     }

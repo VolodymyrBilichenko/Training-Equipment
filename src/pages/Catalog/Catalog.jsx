@@ -15,6 +15,7 @@ export const Catalog = () => {
     const navigate = useNavigate();
 
     const [products, setProducts] = useState([]);
+    const [metaProduct, setMetaProduct] = useState({});
     const [searchQuery, setSearchQuery] = useState(search);
 
     const handleSubmit = (evt) => {
@@ -25,17 +26,32 @@ export const Catalog = () => {
         navigate(`/search/${searchQuery}`)
     }
 
+    const handlePage = (pageLink) => {
+        console.log(pageLink);
+        axios.get(pageLink, {headers: GetApiHeaders()})
+          .then(({data}) => {
+            setMetaProduct(data)
+            setProducts(data.data)
+          })
+          .catch(error => {
+            console.log('products undefined', error);
+          })
+    }
+
     useEffect(() => {
 
-        axios.get(getApiLink(`/api/products/get${category_id ? `?category_id=${category_id}` : ""}`), {headers: GetApiHeaders()})
+        axios.get(getApiLink(`/api/products/get${category_id ? `?category_id=${category_id}&page=1` : "?page=1"}`), {headers: GetApiHeaders()})
             .then(({data}) => {
-                setProducts(data.data)
+                setProducts(data.data)                
+                setMetaProduct(data)
             })
             .catch(error => {
                 console.log('products undefined', error);
             })
 
     }, [category_id])
+
+    
 
     return (
         <>
@@ -80,7 +96,7 @@ export const Catalog = () => {
 
                     <ProductsList list={products} ClassNameList={'catalog__list'}/>
 
-                    <PaginationProducts/>
+                    <PaginationProducts meta={metaProduct.meta} handlePage={handlePage}/>
                 </div>
             </section>
         </>
