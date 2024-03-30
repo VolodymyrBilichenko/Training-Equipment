@@ -1228,7 +1228,8 @@ input[type=password] {
     gap: 7px;
     color: var(--white);
     font-weight: 700;
-    background: rgba(0,0,0,0)
+    background: rgba(0,0,0,0);
+    text-transform: uppercase;
 }
 
 .header__drop-down--block {
@@ -1244,6 +1245,12 @@ input[type=password] {
     visibility: hidden
 }
 
+.header__drop-down--list button {
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+}
+.header__drop-down--list button,
 .header__drop-down--list a {
     color: var(--white);
     display: block;
@@ -4791,6 +4798,7 @@ body.is-popup-active {
         background: var(--accent-hover)
     }
 
+    .header__drop-down--list button:hover,
     .button:active,.header__drop-down--list a:hover {
         background: var(--accent-active)
     }
@@ -4867,6 +4875,7 @@ body.is-popup-active {
         transition: color .2s ease
     }
 
+    .header__drop-down--list button:active,
     .header__add-nav button:hover,.header__drop-down--list a:active,
     .header__add-nav a:hover,.header__drop-down--list a:active {
         background: var(--accent-hover)

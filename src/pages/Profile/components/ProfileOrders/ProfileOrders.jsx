@@ -7,10 +7,12 @@ import {toast} from "react-toastify";
 export const ProfileOrders = () => {
 
     const [ordersList, setOrdersList] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         axios.get(getApiLink("/api/orders/get")).then(({data}) => {
             setOrdersList(data.data)
+            setIsLoading(false)
         }).catch(er => toast.error("Возникла неизведанная ошибка"))
     }, [])
 
@@ -32,7 +34,13 @@ export const ProfileOrders = () => {
                 <tbody>
 
                 {
-                    ordersList?.map(item => <ProfileOrdersTr key={item?.id} itemData={item}/>)
+                    !isLoading ? ordersList.length ?
+                        
+                            ordersList?.map(item => <ProfileOrdersTr key={item?.id} itemData={item}/>) :
+
+                            <p><br/>Заказов нет</p> :
+
+                        <p><br/>Загрузка...</p>
                 }
 
                 </tbody>

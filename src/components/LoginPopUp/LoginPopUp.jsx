@@ -96,9 +96,9 @@ export const LoginPopUp = ({modal}) => {
                             <p>{error}</p>
                             <div className="popup-form__text">
                                 <p>
-                                    <button onClick={handleNavigateRes} className="open-popup popup-close">Забули пароль?</button>
+                                    <button onClick={handleNavigateRes} type={"button"} className="open-popup popup-close">Забули пароль?</button>
                                     <br/><br/>
-                                    <button onClick={handleNavigateReg} className="open-popup popup-close">Зареєструватися</button>
+                                    <button onClick={handleNavigateReg} type={"button"} className="open-popup popup-close">Зареєструватися</button>
                                 </p>
                             </div>
                             <button className="popup-form__submit button is-mode-1" type="submit">
