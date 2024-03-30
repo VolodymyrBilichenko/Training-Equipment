@@ -20,7 +20,7 @@ import {getApiLink} from "./api/getApiLink";
 import setCookie from "./functions/setCookie";
 import {GetApiHeaders} from "./functions/getApiHeaders";
 import {toast, ToastContainer} from "react-toastify";
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
+// import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 export const PopupContext = createContext(null);
 
@@ -29,11 +29,11 @@ export const App = () => {
     const [routesList] = useState(routes())
     const [modal, setModal] = useState('');
     const dispatch = useDispatch()
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
 
-    const toggleLoader = (value) => {
-        setLoading(value);
-    }
+    // const toggleLoader = (value) => {
+    //     setLoading(value);
+    // }
 
     const ModalList = () => {
         if (modal === 'login') {
@@ -53,6 +53,8 @@ export const App = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [location])
+
+    const hasCookieToken = getCookies('cookieToken');
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -80,9 +82,9 @@ export const App = () => {
                 console.log('products undefined', error);
             })
 
-        if (getCookies('cookieToken')) {
+        if (hasCookieToken) {
         // GET USER IF WE HAVE COOKIE
-            axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('cookieToken')}`
+            axios.defaults.headers.get['Authorization'] = `Bearer ${hasCookieToken}`
             axios.get(getApiLink('/api/user/profile'))
                 .then(({data}) => {
                     dispatch(setUser(data.data))
@@ -94,8 +96,8 @@ export const App = () => {
         }
 
         // GET USER BASKET IF WE HAVE COOKIE
-        if (getCookies('cookieToken')) {
-            axios.defaults.headers.get['Authorization'] = `Bearer ${getCookies('cookieToken')}`
+        if (hasCookieToken) {
+            axios.defaults.headers.get['Authorization'] = `Bearer ${hasCookieToken}`
             axios.get(getApiLink('/api/bucket/get'))
                 .then(({data}) => {
                     console.log(data)
@@ -108,13 +110,13 @@ export const App = () => {
                 })
         }
 
-    }, [getCookies('cookieToken')])
+    }, [hasCookieToken, dispatch])
 
     return (
         <>
             <Sprite/>
 
-            {loading && ''}
+            {/* {loading && ''} */}
 
             <PopupContext.Provider value={setModal}>
 

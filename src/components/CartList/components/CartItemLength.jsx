@@ -53,13 +53,13 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
 
     useEffect(() => {
         setProductCount(quantity)
-    }, [])
+    }, [quantity, setProductCount])
 
     useEffect(() => {
         if(!setTotalAmount) return;
 
         setTotalAmount(prev => prev + productInfo.original_price * quantity)
-    }, [allProducts])
+    }, [allProducts, productInfo.original_price, quantity, setTotalAmount])
 
     return (
         <div className="product__length">

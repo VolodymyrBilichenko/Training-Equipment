@@ -1,31 +1,8 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import { createRoot } from 'react-dom/client';
 import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
+import { useTranslation} from "react-i18next";
 
-// i18n
-//     .use(initReactI18next)
-//     .init({
-//         resources: {
-//             en: {
-//                 translation: {
-//                     "about_company": "About company"
-//                 }
-//             },
-//             ru: {
-//                 translation: {
-//                     "about_company": "Про компанію"
-//                 }
-//             }
-//         },
-//         lng: "en",
-//         fallbackLng: "en",
-//
-//         interpolation: {
-//             escapeValue: false
-//         }
-//     });
 
 export const HeaderNavigation = ({isOpen}) => {
 

@@ -35,7 +35,7 @@ export const ProductSwiper = ({ dataCard }) => {
                         {dataCard?.map(item => (                            
                             <SwiperSlide className="product__swiper_slide" key={item.id}>
                                 <div className="product__swiper_image">
-                                    <img src={item.web_path ? item.web_path : ''} alt=''/>
+                                    <img src={item.web_path ? item.web_path : ''} alt='prod ph'/>
                                 </div>
                             </SwiperSlide>
                         ))}
@@ -52,48 +52,14 @@ export const ProductSwiper = ({ dataCard }) => {
                     >
                         {dataCard?.map(items => (
                             <SwiperSlide key={items.id}>
-                                <img src={items.web_path ? items.web_path : ''} alt='1'/>
+                                <img src={items.web_path ? items.web_path : ''} alt='prod ph'/>
                             </SwiperSlide>
                         ))}
                     </Swiper>
                 </>
 
-            ) : <img src={photoPlaceholder}/>}
+            ) : <img src={photoPlaceholder} alt='prod ph'/>}
 
-            {/* <div class="product__gallery_nav splide on-mob">
-                <div class="product__gallery_nav_track splide__track">
-                    <ul class="product__gallery_nav_list splide__list">
-                        <li class="product__gallery_nav_slide splide__slide">
-                            <div class="product__gallery_nav_image image-aspect-ratio">
-                                <picture>
-                                    <img src="img/product/product-image.jpg" alt="" width="90" height="90" loading="lazy"/>
-                                </picture>
-                            </div>
-                        </li>
-                        <li class="product__gallery_nav_slide splide__slide">
-                            <div class="product__gallery_nav_image image-aspect-ratio">
-                                <picture>
-                                    <img src="img/product/product-image.jpg" alt="" width="90" height="90" loading="lazy"/>
-                                </picture>
-                            </div>
-                        </li>
-                        <li class="product__gallery_nav_slide splide__slide">
-                            <div class="product__gallery_nav_image image-aspect-ratio">
-                                <picture>
-                                    <img src="img/product/product-image.jpg" alt="" width="90" height="90" loading="lazy"/>
-                                </picture>
-                            </div>
-                        </li>
-                        <li class="product__gallery_nav_slide splide__slide">
-                            <div class="product__gallery_nav_image image-aspect-ratio">
-                                <picture>
-                                    <img src="img/product/product-image.jpg" alt="" width="90" height="90" loading="lazy"/>
-                                </picture>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div> */}
         </div>   
     )
 }
