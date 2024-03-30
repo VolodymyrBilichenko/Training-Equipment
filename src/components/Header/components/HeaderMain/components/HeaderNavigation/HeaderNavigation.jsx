@@ -6,11 +6,28 @@ import { useTranslation} from "react-i18next";
 
 export const HeaderNavigation = ({isOpen}) => {
 
-    const { t } = useTranslation()
+    const { t } = useTranslation();
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang)
     }
+
+    // const scrollToAnchor = () => {
+    //     const hash = window.location.hash;
+    //     if (hash) {
+    //         const anchor = document.querySelector(hash);
+    //         setTimeout(() => {
+    //             if (anchor) {
+    //                 anchor.scrollIntoView({ behavior: 'smooth' });
+    //             }
+    //         }, 2000); // Задержка 2 секунды
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     scrollToAnchor();
+    //     window.addEventListener('hashchange', scrollToAnchor);
+    // }, []);
 
     return (
         <nav className={'header__nav ' + (isOpen ? 'is-mobile-menu-active' : '')}>

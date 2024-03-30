@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {addBasketItem, addFavorite} from '../../../../redux/toolkitSlice';
+import {addBasketItem, addFavorite, removeFavorite} from '../../../../redux/toolkitSlice';
 import {NavLink} from 'react-router-dom';
 import photoPlaceholder from './../../../../assets/img/photoNotFound.jpg'
 import axios from "axios";
@@ -39,8 +39,16 @@ export const ProductListItem = ({data}) => {
     }
 
     const handleFavorite = () => {
-        setIsFavorite(prev => !prev)
-        dispatch(addFavorite(data.id))
+        if (!isFavorite) {
+            dispatch(addFavorite(data.id));
+            setIsFavorite(true);
+            toast.success("Товар успішно додано до обраних");
+        } else {
+            dispatch(removeFavorite(data.id))
+            // setIsFavorite(prev => !prev)
+            setIsFavorite(false);
+            toast.error("Товар видалено з обраних");
+        }
     }
 
     return (

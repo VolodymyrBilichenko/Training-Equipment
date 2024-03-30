@@ -34,6 +34,9 @@ const toolkitSlice = createSlice({
             }
             setCookie("favorite", JSON.stringify(state.favorites))
         },
+        removeFavorite(state, action) {
+            state.favorites = state.favorites.filter((item) => item !== action.payload);
+        },
 
         addBasketItem(state, action) {
 
@@ -93,6 +96,7 @@ export const {
     removeBasketItem,
     setBasket,
     changeBasketItem,
+    removeFavorite,
 
 
 } = toolkitSlice.actions;
