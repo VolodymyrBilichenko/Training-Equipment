@@ -34,6 +34,8 @@ export const AboutUs = () => {
     const location = useLocation()
 
     const scrollToSection = () => {
+        if(!location.hash) return;
+
         const targetElement = document.querySelector(location.hash);
 
         const scrollOptions = {

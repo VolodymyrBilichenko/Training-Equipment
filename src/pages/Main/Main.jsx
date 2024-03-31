@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {MainHero} from './components/MainHero/MainHero'
 import {MainCategories} from './components/MainCategories/MainCategories'
 import {MainStatistics} from './components/MainStatistics/MainStatistics'
