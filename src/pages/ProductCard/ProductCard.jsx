@@ -15,7 +15,7 @@ import CreditCard from '../../assets/img/product/credit_card.svg'
 import AccBalance from '../../assets/img/product/account_balance_wallet.svg'
 import Assigment from '../../assets/img/product/assignment.svg'
 import getCookies from "../../functions/getCookies";
-import { ProductSwiper } from './ProductSwiper/ProductSwiper'
+import {ProductSwiper} from './ProductSwiper/ProductSwiper'
 import {toast} from "react-toastify";
 import HTMLReactParser from "html-react-parser";
 
@@ -25,18 +25,20 @@ export const ProductCard = () => {
 
     const [dataCard, setDataCard] = useState({});
     const [productCount, setProductCount] = useState(1)
-    // const [recommendedProducts, setRecommendedProducts] = useState([])
     const [isAddedBasket, setIsAddedBasket] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
 
         axios.get(getApiLink(`/api/products/${id}`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setDataCard(data.data)
+                setIsLoading(false)
             })
             .catch((error) => {
                 toast.error("Возникла неизведанная ошибка")
                 console.log('dataCard undefined', error);
+                setIsLoading(false)
             })
 
     }, [id])
@@ -47,7 +49,7 @@ export const ProductCard = () => {
             "product_amount": productCount
         }
 
-        if(productCount > dataCard?.amount_in_store) return toast.error("На данный момент такого количества товара на складе нет")
+        if (productCount > dataCard?.amount_in_store) return toast.error("На данный момент такого количества товара на складе нет")
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
         axios.post(getApiLink("/api/bucket/add"), dataItem, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
@@ -67,9 +69,9 @@ export const ProductCard = () => {
                 page: 'Каталог'
             }, {page: 'Демонстраційна модель «Мозок. Анатомія людини» Learning resources'}]}/>
 
-            <section className="product container">
+            {!!Object.keys(dataCard).length && <section className="product container">
 
-                    <ProductSwiper dataCard={dataCard.files}/>
+                <ProductSwiper dataCard={dataCard.files}/>
 
                 <div className="product__col">
                     <h2 className="product__title title">
@@ -92,14 +94,15 @@ export const ProductCard = () => {
 
                         </div>
                         <div className="product__info_col">
-                            <button onClick={handleAddCart} className="product__add-to-cart button" style={{background: isAddedBasket ? "#9C50B8" : ""}} type="button" aria-label="Додати до кошика">
+                            {/*style={{background: isAddedBasket ? "#9C50B8" : ""}}*/}
+                            <button onClick={handleAddCart} className="product__add-to-cart button"
+                                    type="button"
+                                    aria-label="Додати до кошика">
                                 <svg width="20" height="20" viewBox="0 0 48 48">
                                     <use xlinkHref="#cart"></use>
                                 </svg>
                                 <span>
-                                    {
-                                        isAddedBasket ? "Удалить с корзины" : "Додати до кошика"
-                                    }
+                                    Додати до кошика
                                 </span>
                             </button>
                         </div>
@@ -154,12 +157,12 @@ export const ProductCard = () => {
                         </div>
                     </div>
                     <div className='product__info'>
-                    <div className="product__description">
-                        <h3>
-                            Опис
-                        </h3>
-                        {HTMLReactParser(dataCard?.description ?? "")}
-                    </div>
+                        <div className="product__description">
+                            <h3>
+                                Опис
+                            </h3>
+                            {HTMLReactParser(dataCard?.description ?? "")}
+                        </div>
                     </div>
                 </div>
 
@@ -214,9 +217,9 @@ export const ProductCard = () => {
                 </div>
 
                 {/* <div className="product__col">
-                    
+
                 </div> */}
-            </section>
+            </section>}
 
 
             {!!dataCard?.recommended_products?.length && <section className="recommended container">
@@ -230,7 +233,8 @@ export const ProductCard = () => {
                         Рекомендованные
                     </h2>
 
-                    <ProductsList list={dataCard?.recommended_products} ClassNameList={'recommended__list'}/>
+                    <ProductsList isLoading={isLoading} list={dataCard?.recommended_products}
+                                  ClassNameList={'recommended__list'}/>
 
                 </div>
             </section>}

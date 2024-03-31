@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
-import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
-import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
+import React, {useEffect, useState} from 'react'
+import {BackGroundDecor} from '../../components/BackGroundDecor/BackGroundDecor'
+import {BreadCrumbs} from '../../components/BreadCrumbs/BreadCrumbs'
+import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
 import axios from 'axios'
-import { getApiLink } from '../../api/getApiLink'
-import { GetApiHeaders } from '../../functions/getApiHeaders'
+import {getApiLink} from '../../api/getApiLink'
+import {GetApiHeaders} from '../../functions/getApiHeaders'
 
 import AboutPh from '../../assets/img/about-us/about-us-image.png'
-import { MainReviews } from '../Main/components/MainReviews/MainReviews'
+import {MainReviews} from '../Main/components/MainReviews/MainReviews'
 import {toast} from "react-toastify";
+import {useLocation} from "react-router-dom";
 
 export const AboutUs = () => {
     const [staticData, setStaticData] = useState([]);
@@ -17,24 +18,41 @@ export const AboutUs = () => {
     const dataDelivery = staticData.filter(item => item.key === 'delivery');
     const dataPayment = staticData.filter(item => item.key === 'payment');
 
-    const handleSmoothScroll = (event) => {
-        event.preventDefault();
-        const targetId = event.target.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-      
+    // const handleSmoothScroll = (event) => {
+    //     event?.preventDefault();
+    //     const targetId = event.target.getAttribute('href');
+    //     const targetElement = document.querySelector(targetId);
+    //
+    //     const scrollOptions = {
+    //         behavior: 'smooth',
+    //         block: 'start',
+    //     };
+    //
+    //     targetElement.scrollIntoView(scrollOptions);
+    // };
+
+    const location = useLocation()
+
+    const scrollToSection = () => {
+        const targetElement = document.querySelector(location.hash);
+
         const scrollOptions = {
-          behavior: 'smooth',
-          block: 'start',
+            behavior: 'smooth',
+            block: 'start',
         };
-      
+
         targetElement.scrollIntoView(scrollOptions);
-      };
-    
+    }
 
     useEffect(() => {
-        axios.get(getApiLink('/api/static/data'), {headers: GetApiHeaders()} )
+        setTimeout(scrollToSection, 1)
+    }, [location])
+
+
+    useEffect(() => {
+        axios.get(getApiLink('/api/static/data'), {headers: GetApiHeaders()})
             .then(({data}) => {
-                console.log('static', data.data);
+                setTimeout(scrollToSection, 100)
                 setStaticData(data.data)
             })
             .catch((error) => {
@@ -61,27 +79,32 @@ export const AboutUs = () => {
                         <nav className="about-us__aside_nav sticky" data-margin-top="30">
                             <ul>
                                 <li>
-                                    <a href="#about-us" onClick={handleSmoothScroll}>
+                                    {/*onClick={handleSmoothScroll}*/}
+                                    <a href="#about-us">
                                         Про нас
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#deliv" onClick={handleSmoothScroll}> 
+                                    {/*onClick={handleSmoothScroll}*/}
+                                    <a href="#deliv">
                                         Доставка
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#payment" onClick={handleSmoothScroll}>
+                                    {/*onClick={handleSmoothScroll}*/}
+                                    <a href="#payment">
                                         Оплата
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#consultation" onClick={handleSmoothScroll}>
+                                    {/*onClick={handleSmoothScroll}*/}
+                                    <a href="#consultation">
                                         Консультация
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#reviews" onClick={handleSmoothScroll}>
+                                    {/*onClick={handleSmoothScroll}*/}
+                                    <a href="#reviews">
                                         Відгуки
                                     </a>
                                 </li>
@@ -113,7 +136,7 @@ export const AboutUs = () => {
                                 <h3>Оплата</h3>
                                 <p>{dataPayment.length > 0 ? dataPayment[0].value : ''}</p>
                             </article>
-                            
+
                         </div>
                         <div className="about-us__consultation consultation" id="consultation">
                             <div className="consultation__body">
@@ -126,8 +149,10 @@ export const AboutUs = () => {
                                     </p>
                                 </div>
                                 <form className="consultation__form">
-                                    <label className="input-label"><input className="input" type="text" name="name" placeholder="Ім’я" required/></label>
-                                    <label className="input-label"><input className="input" type="tel" name="phone" placeholder="Телефон" required/></label>
+                                    <label className="input-label"><input className="input" type="text" name="name"
+                                                                          placeholder="Ім’я" required/></label>
+                                    <label className="input-label"><input className="input" type="tel" name="phone"
+                                                                          placeholder="Телефон" required/></label>
                                     <button type="submit" className="button is-mode-1">Відправити</button>
                                 </form>
                             </div>
@@ -137,7 +162,7 @@ export const AboutUs = () => {
 
                 <MainReviews id="reviews"/>
 
-            </section>  
+            </section>
         </>
     )
 }

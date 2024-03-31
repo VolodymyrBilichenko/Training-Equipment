@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
@@ -13,7 +13,14 @@ export const Favorites = () => {
 
     const favoritesList = allProducts.filter(item => favorites.some(item2 => item2 === item.id))
 
-    console.log(favoritesList)
+    const [isLoading, setIsLoading] = useState(true)
+
+
+    useEffect(() => {
+        if(!favorites.length && !allProducts.length && !favoritesList.length) return;
+
+        setIsLoading(false)
+    }, [favoritesList])
 
     return (
         <>
@@ -29,7 +36,7 @@ export const Favorites = () => {
                     Желаю получить Коммерческое предложение по Email для товаров в Избранное
                 </a>
 
-                <ProductsList list={favoritesList} ClassNameList={'favorites__list'}/>
+                <ProductsList isLoading={isLoading} list={favoritesList} ClassNameList={'favorites__list'}/>
 
                 <PaginationProducts ClassName={'favorites__pagination'}/>
             </div>

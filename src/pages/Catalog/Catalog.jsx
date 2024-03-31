@@ -25,14 +25,18 @@ export const Catalog = () => {
         navigate(`/search/${searchQuery}`)
     }
 
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
+        setIsLoading(true)
 
         axios.get(getApiLink(`/api/products/get${category_id ? `?category_id=${category_id}` : ""}`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setProducts(data.data)
+                setIsLoading(false)
             })
             .catch(error => {
                 console.log('products undefined', error);
+                setIsLoading(false)
             })
 
     }, [category_id])
@@ -78,7 +82,7 @@ export const Catalog = () => {
                         </form>
                     </search>
 
-                    <ProductsList list={products} ClassNameList={'catalog__list'}/>
+                    <ProductsList list={products} ClassNameList={'catalog__list'} isLoading={isLoading}/>
 
                     <PaginationProducts/>
                 </div>

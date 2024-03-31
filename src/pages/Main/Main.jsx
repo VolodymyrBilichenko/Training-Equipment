@@ -12,7 +12,13 @@ import {useSelector} from "react-redux";
 
 export const Main = () => {
 
-    const products = useSelector(state => state.toolkit.allProducts)
+    const allProducts = useSelector(state => state.toolkit.allProducts)
+
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        setIsLoading(false)
+    }, [allProducts])
 
     return (
         <main className="main">
@@ -24,7 +30,7 @@ export const Main = () => {
             <section className='products container'>
                 <SectionTitle title={'Нові освітні рішення'}/>
 
-                <ProductsList list={products} ClassNameList={'products__list'}/>
+                <ProductsList list={allProducts.slice(0, 8)} isLoading={isLoading} ClassNameList={'products__list'}/>
             </section>
 
             <MainStatistics/>
