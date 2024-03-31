@@ -1,14 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { PopupContext } from '../../App';
-import { useSelector } from 'react-redux';
+import {PopupContext} from '../../App';
+import {useSelector} from 'react-redux';
 import axios from 'axios';
-import { getApiLink } from '../../api/getApiLink';
+import {getApiLink} from '../../api/getApiLink';
 import {GetApiHeaders} from "../../functions/getApiHeaders";
 import getCookies from "../../functions/getCookies";
 import setCookie from "../../functions/setCookie";
 import {toast} from "react-toastify";
 
-export const OrderPopUp = ({modal}) => {
+export const OrderPopUp = ({handleClosePopUp}) => {
     const SetPopContext = useContext(PopupContext);
     const basketItems = useSelector(state => state.toolkit.basket);
     const user = useSelector(state => state.toolkit.user)
@@ -21,12 +21,6 @@ export const OrderPopUp = ({modal}) => {
         setEmail(user?.email)
         setPhone(user?.phone_number)
     }, [user])
-
-    console.log('basketItems', basketItems);
-
-    const handleClosePopUp = () => {
-        SetPopContext('');
-    }
 
     const handleNavPopupThx = () => {
         SetPopContext('thx')
@@ -62,62 +56,68 @@ export const OrderPopUp = ({modal}) => {
             .catch(error => {
                 console.error('Error:', error);
 
-                if(error.response.data.error.message.some(mes => mes === "Not enough amount of product in store to add into basket")) return toast.error("У одного из товаров не достаточное количество для заказа")
+                if (error.response.data.error.message.some(mes => mes === "Not enough amount of product in store to add into basket")) return toast.error("У одного из товаров не достаточное количество для заказа")
             });
     }
 
     return (
-        <div className={`popup ${modal ? 'is-active' : ''}`} id="order-popup" style={{display: 'block'}}>
-            <div className="popup-wrapper">
-                <div onClick={handleClosePopUp} className="popup-bg popup-close"></div>
-                <div className="popup-body">
-                    <button onClick={handleClosePopUp} type="button" className="popup-close-btn popup-close" title="Закрити">
-                        <svg width="24" height="24" viewBox="0 0 24 24">
-                            <use xlinkHref="#close-3"></use>
-                        </svg>
-                    </button>
-                    <div className="popup-container">
-                        <h2 className="popup-title title">
-                            Оформление заказа
-                        </h2>
-                        <div className="popup-text">
-                            <p>
-                                Если Вы хотите получить персональную скидку или
-                                стать участником бонусной системы -
-                                <button onClick={handleNavPopupRegister} className="open-popup popup-close">Зарегистрируйтесь</button> или 
-                                <button onClick={handleNavPopupLogin} className="open-popup popup-close">Авторизуйтесь</button>
-                                в личном кабинете, прежде чем оформить этот заказ
-                            </p>
-                        </div>
-                        <form method="post" onSubmit={handleFormSubmit} className="popup-form">
-                            <label className="popup-form__item">
-                                <span className="is-required">E-mail</span>
-                                <span className="input-label">
-                                    <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} name="email" required placeholder="Введите свой email" className="input"/>
+        <div className="popup-wrapper">
+            <div onClick={handleClosePopUp} className="popup-bg popup-close"></div>
+            <div className="popup-body">
+                <button onClick={handleClosePopUp} type="button" className="popup-close-btn popup-close"
+                        title="Закрити">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <use xlinkHref="#close-3"></use>
+                    </svg>
+                </button>
+                <div className="popup-container">
+                    <h2 className="popup-title title">
+                        Оформление заказа
+                    </h2>
+                    <div className="popup-text">
+                        <p>
+                            Если Вы хотите получить персональную скидку или
+                            стать участником бонусной системы -
+                            <button onClick={handleNavPopupRegister}
+                                    className="open-popup popup-close">Зарегистрируйтесь</button> или
+                            <button onClick={handleNavPopupLogin}
+                                    className="open-popup popup-close">Авторизуйтесь</button>
+                            в личном кабинете, прежде чем оформить этот заказ
+                        </p>
+                    </div>
+                    <form method="post" onSubmit={handleFormSubmit} className="popup-form">
+                        <label className="popup-form__item">
+                            <span className="is-required">E-mail</span>
+                            <span className="input-label">
+                                    <input type="email" onChange={(e) => setEmail(e.target.value)} value={email}
+                                           name="email" required placeholder="Введите свой email" className="input"/>
                                 </span>
-                            </label>
-                            <label className="popup-form__item">
-                                <span className="is-required">Телефон</span>
-                                <span className="input-label">
-                                    <input type="tel" onChange={(e) => setPhone(e.target.value)} value={phone} name="phone" required placeholder="Введите номер телефона" className="input"/>
+                        </label>
+                        <label className="popup-form__item">
+                            <span className="is-required">Телефон</span>
+                            <span className="input-label">
+                                    <input type="tel" onChange={(e) => setPhone(e.target.value)} value={phone}
+                                           name="phone" required placeholder="Введите номер телефона"
+                                           className="input"/>
                                 </span>
-                            </label>
-                            <label className="popup-form__checkbox checkbox">
-                                <input type="checkbox" checked={checkedBill} onChange={(e) => setCheckedBill(e.target.checked)} name="receive-email" className="checkbox-input"/>
-                                <span className="checkbox-element">
+                        </label>
+                        <label className="popup-form__checkbox checkbox">
+                            <input type="checkbox" checked={checkedBill}
+                                   onChange={(e) => setCheckedBill(e.target.checked)} name="receive-email"
+                                   className="checkbox-input"/>
+                            <span className="checkbox-element">
                                     <svg width="17" height="17" viewBox="0 0 17 17">
                                         <use xlinkHref="#check"></use>
                                     </svg>
                                 </span>
-                                <span className="checkbox-text">
+                            <span className="checkbox-text">
                                     Бажаю отримати на адресу електронної пошти примірник Договору поставки та Рахунок
                                 </span>
-                            </label>
-                            <button className="popup-form__submit button is-mode-1" type="submit">
-                                Оформити замовлення
-                            </button>
-                        </form>
-                    </div>
+                        </label>
+                        <button className="popup-form__submit button is-mode-1" type="submit">
+                            Оформити замовлення
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

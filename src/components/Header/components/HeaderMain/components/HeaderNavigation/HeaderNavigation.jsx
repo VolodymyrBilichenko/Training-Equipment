@@ -12,23 +12,6 @@ export const HeaderNavigation = ({isOpen}) => {
         i18n.changeLanguage(lang)
     }
 
-    // const scrollToAnchor = () => {
-    //     const hash = window.location.hash;
-    //     if (hash) {
-    //         const anchor = document.querySelector(hash);
-    //         setTimeout(() => {
-    //             if (anchor) {
-    //                 anchor.scrollIntoView({ behavior: 'smooth' });
-    //             }
-    //         }, 2000); // Задержка 2 секунды
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     scrollToAnchor();
-    //     window.addEventListener('hashchange', scrollToAnchor);
-    // }, []);
-
     return (
         <nav className={'header__nav ' + (isOpen ? 'is-mobile-menu-active' : '')}>
             <div className="header__nav--body">
@@ -92,7 +75,9 @@ export const HeaderNavigation = ({isOpen}) => {
                             <svg width="20" height="20" viewBox="0 0 48 48">
                                 <use xlinkHref="#language"></use>
                             </svg>
-                            <span>UA</span>
+                            <span>
+                                {i18n.language}
+                            </span>
                             <svg width="20" height="20" viewBox="0 0 48 48">
                                 <use xlinkHref="#drop-down-arrow"></use>
                             </svg>

@@ -41,7 +41,7 @@ export const PriceList = () => {
 						</svg>
 					</i>
 				</a>
-				<div className="pricelist__block">
+				{!!priceData.length && <div className="pricelist__block">
 					<h3 className="pricelist__block_title title">
 						Прайси по категоріям
 					</h3>
@@ -61,10 +61,10 @@ export const PriceList = () => {
 								</a>
 							</li>
 						))}
-						
+
 					</ul>
 
-				</div>
+				</div>}
 			</section>
 		</>
 	)

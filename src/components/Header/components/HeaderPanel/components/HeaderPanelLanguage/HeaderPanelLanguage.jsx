@@ -1,6 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {initReactI18next} from "react-i18next";
-// import {useTranslation} from "react-i18next";
 import i18n from "i18next";
 
 import ENLang from './../../../../../../languages/en.json'
@@ -21,8 +20,8 @@ i18n
                 translation: UALang
             }
         },
-        lng: "en",
-        fallbackLng: "en",
+        lng: "ua",
+        fallbackLng: "ua",
 
         interpolation: {
             escapeValue: false
@@ -31,10 +30,11 @@ i18n
 
 export const HeaderPanelLanguage = () => {
 
-    // const {t} = useTranslation()
+    const [lang, setLang] = useState(i18n.language)
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang)
+        setLang(lang)
     }
 
     return (
@@ -44,7 +44,7 @@ export const HeaderPanelLanguage = () => {
                     <use xlinkHref="#language"></use>
                 </svg>
                 <span>
-                    {i18n.language}
+                    {lang}
                 </span>
                 <svg width="20" height="20" viewBox="0 0 48 48">
                     <use xlinkHref="#drop-down-arrow"></use>
