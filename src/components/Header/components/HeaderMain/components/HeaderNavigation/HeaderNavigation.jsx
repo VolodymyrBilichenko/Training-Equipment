@@ -1,39 +1,33 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import { createRoot } from 'react-dom/client';
 import i18n from "i18next";
-import { useTranslation, initReactI18next } from "react-i18next";
+import { useTranslation} from "react-i18next";
 
-// i18n
-//     .use(initReactI18next)
-//     .init({
-//         resources: {
-//             en: {
-//                 translation: {
-//                     "about_company": "About company"
-//                 }
-//             },
-//             ru: {
-//                 translation: {
-//                     "about_company": "Про компанію"
-//                 }
-//             }
-//         },
-//         lng: "en",
-//         fallbackLng: "en",
-//
-//         interpolation: {
-//             escapeValue: false
-//         }
-//     });
 
 export const HeaderNavigation = ({isOpen}) => {
 
-    const { t } = useTranslation()
+    const { t } = useTranslation();
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang)
     }
+
+    // const scrollToAnchor = () => {
+    //     const hash = window.location.hash;
+    //     if (hash) {
+    //         const anchor = document.querySelector(hash);
+    //         setTimeout(() => {
+    //             if (anchor) {
+    //                 anchor.scrollIntoView({ behavior: 'smooth' });
+    //             }
+    //         }, 2000); // Задержка 2 секунды
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     scrollToAnchor();
+    //     window.addEventListener('hashchange', scrollToAnchor);
+    // }, []);
 
     return (
         <nav className={'header__nav ' + (isOpen ? 'is-mobile-menu-active' : '')}>

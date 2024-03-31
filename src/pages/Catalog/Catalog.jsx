@@ -15,6 +15,7 @@ export const Catalog = () => {
     const navigate = useNavigate();
 
     const [products, setProducts] = useState([]);
+    const [metaProduct, setMetaProduct] = useState({});
     const [searchQuery, setSearchQuery] = useState(search);
 
     const handleSubmit = (evt) => {
@@ -26,13 +27,25 @@ export const Catalog = () => {
     }
 
     const [isLoading, setIsLoading] = useState(true)
+    const handlePage = (pageLink) => {
+        console.log(pageLink);
+        axios.get(pageLink, {headers: GetApiHeaders()})
+          .then(({data}) => {
+            setMetaProduct(data)
+            setProducts(data.data)
+          })
+          .catch(error => {
+            console.log('products undefined', error);
+          })
+    }
     useEffect(() => {
         setIsLoading(true)
 
-        axios.get(getApiLink(`/api/products/get${category_id ? `?category_id=${category_id}` : ""}`), {headers: GetApiHeaders()})
+        axios.get(getApiLink(`/api/products/get${category_id ? `?category_id=${category_id}&page=1` : "?page=1"}`), {headers: GetApiHeaders()})
             .then(({data}) => {
-                setProducts(data.data)
                 setIsLoading(false)
+                setProducts(data.data)                
+                setMetaProduct(data)
             })
             .catch(error => {
                 console.log('products undefined', error);
@@ -40,6 +53,8 @@ export const Catalog = () => {
             })
 
     }, [category_id])
+
+    
 
     return (
         <>
@@ -84,7 +99,7 @@ export const Catalog = () => {
 
                     <ProductsList list={products} ClassNameList={'catalog__list'} isLoading={isLoading}/>
 
-                    <PaginationProducts/>
+                    <PaginationProducts meta={metaProduct.meta} handlePage={handlePage}/>
                 </div>
             </section>
         </>

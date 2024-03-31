@@ -1,23 +1,44 @@
 import React from 'react'
 
-export const PaginationProducts = ({ClassName}) => {
+export const PaginationProducts = ({ClassName, meta, handlePage}) => {
+
+  // console.log(meta.current_page);
+  const processedLinks = meta?.links?.map((link, index) => {
+    if (index === 0) {
+      return {
+        ...link,
+        label: 'Перша'
+      };
+    } else if (index === meta.links.length - 1) {
+      return {
+        ...link,
+        label: 'Остання'
+      };
+    } else {
+      return {
+        ...link,
+        label: link.label.replace('&laquo;', '')
+      };
+    }
+  });
+
+  const shouldDisplayPagination = meta?.total > 15;
+
+  if (!shouldDisplayPagination) {
+    return null;
+  }
+
   return (
+
     <div className={`${ClassName} pagination`}>
-        {/* <a href="foo" className="pagination__link">
-            Перша
-        </a>
         <div className="pagination__list">
-            <a href="foo">1</a>
-            <a href="foo">2</a>
-            <a href="foo">3</a>
-            <a href="foo" className="is-current">4</a>
-            <span>...</span>
-            <a href="foo">8</a>
-            <a href="foo">9</a>
+          {processedLinks?.map((item, index) => (
+            <button key={index} 
+              className={item.active ? 'is-current' : ''} 
+              onClick={_=> handlePage(item.url)}>{item.label}
+            </button>
+          ))}
         </div>
-        <a href="foo" className="pagination__link">
-            Остання
-        </a> */}
     </div>
   )
 }

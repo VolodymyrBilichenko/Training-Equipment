@@ -1,13 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {MainHero} from './components/MainHero/MainHero'
 import {MainCategories} from './components/MainCategories/MainCategories'
 import {MainStatistics} from './components/MainStatistics/MainStatistics'
 import {MainReviews} from './components/MainReviews/MainReviews'
 import {ProductsList} from '../../components/ProductsList/ProductsList'
 import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
-import axios from "axios";
-import {getApiLink} from "../../api/getApiLink";
-import {GetApiHeaders} from "../../functions/getApiHeaders";
 import {useSelector} from "react-redux";
 
 export const Main = () => {

@@ -53,7 +53,7 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
 
     useEffect(() => {
         setProductCount(quantity)
-    }, [])
+    }, [quantity, setProductCount])
 
     useEffect(() => {
         if(!setTotalAmount) return;

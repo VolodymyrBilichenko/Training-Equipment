@@ -1,14 +1,17 @@
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {addBasketItem, addFavorite} from '../../../../redux/toolkitSlice';
+import {addBasketItem, addFavorite, removeFavorite} from '../../../../redux/toolkitSlice';
 import {NavLink} from 'react-router-dom';
 import photoPlaceholder from './../../../../assets/img/photoNotFound.jpg'
 import axios from "axios";
 import {getApiLink} from "../../../../api/getApiLink";
 import {GetApiHeaders} from "../../../../functions/getApiHeaders";
 import getCookies from "../../../../functions/getCookies";
+import {toast} from "react-toastify";
 
 export const ProductListItem = ({data}) => {
+
+    console.log(data);
 
     const dispatch = useDispatch();
 
@@ -17,6 +20,8 @@ export const ProductListItem = ({data}) => {
 
     const [isFavorite, setIsFavorite] = useState(favorites.some(item => item === data.id))
     const [isAddedBasket, setIsAddedBasket] = useState(basket.some(item => item.product_id === data.id))
+
+    console.log('isAddedBasket',isAddedBasket);
 
     const handleAddBasket = () => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
@@ -27,15 +32,25 @@ export const ProductListItem = ({data}) => {
 
         dispatch(addBasketItem({
             product_id: data.id,
-            product_amount: 1
+            product_amount: 1,
         }))
+
+        toast.success("Товар успешно добавлен в корзину")
 
         setIsAddedBasket(prev => !prev)
     }
 
     const handleFavorite = () => {
-        setIsFavorite(prev => !prev)
-        dispatch(addFavorite(data.id))
+        if (!isFavorite) {
+            dispatch(addFavorite(data.id));
+            setIsFavorite(true);
+            toast.success("Товар успішно додано до обраних");
+        } else {
+            dispatch(removeFavorite(data.id))
+            // setIsFavorite(prev => !prev)
+            setIsFavorite(false);
+            toast.error("Товар видалено з обраних");
+        }
     }
 
     return (

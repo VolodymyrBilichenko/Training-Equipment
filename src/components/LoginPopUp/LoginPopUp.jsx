@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { PopupContext } from '../../App';
-// import { useDispatch } from 'react-redux';
 import { getApiLink } from '../../api/getApiLink'
 import axios from 'axios';
-// import { login } from '../../api/login';
 import setCookie from '../../functions/setCookie';
 import { useNavigate } from 'react-router-dom';
 import {setUser} from "../../redux/toolkitSlice";
 import {useDispatch} from "react-redux";
+import { toast } from 'react-toastify';
 
 export const LoginPopUp = ({modal}) => {
     const [email, setEmail] = useState('');
@@ -46,6 +45,9 @@ export const LoginPopUp = ({modal}) => {
             setCookie('cookieToken', res.data.data.token );
             navigate('/profile');
             handleClosePopUp();
+        }).catch(error => {
+            console.error(error);
+            toast.error("Неправильні дані для входу. Будь ласка, перевірте свої дані та спробуйте ще раз.");
         })
     }
 

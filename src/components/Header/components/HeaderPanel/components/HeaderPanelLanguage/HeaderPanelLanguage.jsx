@@ -1,5 +1,6 @@
 import React from 'react'
-import {initReactI18next, useTranslation} from "react-i18next";
+import {initReactI18next} from "react-i18next";
+// import {useTranslation} from "react-i18next";
 import i18n from "i18next";
 
 import ENLang from './../../../../../../languages/en.json'
@@ -30,7 +31,7 @@ i18n
 
 export const HeaderPanelLanguage = () => {
 
-    const {t} = useTranslation()
+    // const {t} = useTranslation()
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang)
