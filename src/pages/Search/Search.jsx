@@ -14,6 +14,7 @@ export const Search = () => {
     const {search} = useParams();
 
     const [products, setProducts] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         if(!search) return;
@@ -21,9 +22,11 @@ export const Search = () => {
         axios.get(getApiLink(`/api/products/get${search ? `?search=${search}` : ""}`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setProducts(data.data)
+                setIsLoading(false)
             })
             .catch(error => {
                 console.log('products undefined', error);
+                setIsLoading(false)
             })
 
     }, [search])
@@ -40,7 +43,7 @@ export const Search = () => {
 
                 <MainHeroSearch searchPlaceholder={'Пошук'}/>
 
-                <ProductsList list={products} ClassNameList={'favorites__list'}/>
+                <ProductsList isLoading={isLoading} list={products} ClassNameList={'favorites__list'}/>
 
                 <PaginationProducts ClassName={'favorites__pagination'}/>
 

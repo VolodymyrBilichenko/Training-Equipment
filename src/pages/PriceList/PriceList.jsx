@@ -26,6 +26,7 @@ export const PriceList = () => {
 
 			<BreadCrumbs pages={[{page: 'Прайс-лист'}]}/>
 
+
 			<section className="pricelist container">
 
 				<SectionTitle title={'Прайс-лист'} ClassTitle={'pricelist__title'}/>

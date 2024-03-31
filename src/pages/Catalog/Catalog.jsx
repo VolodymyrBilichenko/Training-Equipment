@@ -26,6 +26,7 @@ export const Catalog = () => {
         navigate(`/search/${searchQuery}`)
     }
 
+    const [isLoading, setIsLoading] = useState(true)
     const handlePage = (pageLink) => {
         console.log(pageLink);
         axios.get(pageLink, {headers: GetApiHeaders()})
@@ -37,16 +38,18 @@ export const Catalog = () => {
             console.log('products undefined', error);
           })
     }
-
     useEffect(() => {
+        setIsLoading(true)
 
         axios.get(getApiLink(`/api/products/get${category_id ? `?category_id=${category_id}&page=1` : "?page=1"}`), {headers: GetApiHeaders()})
             .then(({data}) => {
+                setIsLoading(false)
                 setProducts(data.data)                
                 setMetaProduct(data)
             })
             .catch(error => {
                 console.log('products undefined', error);
+                setIsLoading(false)
             })
 
     }, [category_id])
@@ -94,7 +97,7 @@ export const Catalog = () => {
                         </form>
                     </search>
 
-                    <ProductsList list={products} ClassNameList={'catalog__list'}/>
+                    <ProductsList list={products} ClassNameList={'catalog__list'} isLoading={isLoading}/>
 
                     <PaginationProducts meta={metaProduct.meta} handlePage={handlePage}/>
                 </div>

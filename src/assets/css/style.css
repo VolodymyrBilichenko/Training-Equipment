@@ -19,7 +19,11 @@ progress,sub,sup {
 }
 
 body {
-    margin: 0
+    margin: 0;
+}
+
+*{
+    scroll-behavior: smooth;
 }
 
 details,main {

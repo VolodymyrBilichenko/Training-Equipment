@@ -36,6 +36,9 @@
 
 .product-card {
 
+	display: flex;
+	flex-direction: column;
+
 	// .product-card__image
 
 	&__image {
@@ -106,7 +109,8 @@
 	// .product-card__price
 
 	&__price {
-		margin-top: 15px;
+		padding-top: 15px !important;
+		margin-top: auto !important;
 
 		display: flex;
 		align-items: center;

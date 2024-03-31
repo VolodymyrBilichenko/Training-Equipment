@@ -32,9 +32,6 @@ export const Сertificate = () => {
 			})
 	}, [])
 
-	console.log(sertificatData);
-
-
 	return (
 		<>
 			<BackGroundDecor />
@@ -43,15 +40,15 @@ export const Сertificate = () => {
 
 				<SectionTitle title={'Сертификаты и приказы'} ClassTitle={'certificate_orders__title container'}/>
 
-				<article className="certificate_orders__orders orders container">
+				{!!preceptsData.length && <article className="certificate_orders__orders orders container">
 					<h3 className="orders__title title">
 						Накази
 					</h3>
 
 					<OrderList preceptsData={preceptsData}/>
 
-				</article>
-				<article className="certificate_orders__certificates certificates container">
+				</article>}
+				{!!sertificatData.length && <article className="certificate_orders__certificates certificates container">
 					<div className="certificates__decor" aria-hidden="true">
 						<picture>
 							<img src="img/decor-element.png" alt="" width="0" height="0" loading="lazy"/>
@@ -63,7 +60,7 @@ export const Сertificate = () => {
 						<CertificateList sertificatData={sertificatData}/>
 
 					</div>
-				</article>
+				</article>}
 			</section>
 		</>
 	)
