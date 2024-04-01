@@ -7,12 +7,12 @@ export const PaginationProducts = ({ClassName, meta, handlePage}) => {
     if (index === 0) {
       return {
         ...link,
-        label: 'Перша'
+        label: 'Предыдущая'
       };
     } else if (index === meta.links.length - 1) {
       return {
         ...link,
-        label: 'Остання'
+        label: 'Следущая'
       };
     } else {
       return {

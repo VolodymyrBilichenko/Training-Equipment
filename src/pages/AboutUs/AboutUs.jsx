@@ -18,19 +18,6 @@ export const AboutUs = () => {
     const dataDelivery = staticData.filter(item => item.key === 'delivery');
     const dataPayment = staticData.filter(item => item.key === 'payment');
 
-    // const handleSmoothScroll = (event) => {
-    //     event?.preventDefault();
-    //     const targetId = event.target.getAttribute('href');
-    //     const targetElement = document.querySelector(targetId);
-    //
-    //     const scrollOptions = {
-    //         behavior: 'smooth',
-    //         block: 'start',
-    //     };
-    //
-    //     targetElement.scrollIntoView(scrollOptions);
-    // };
-
     const location = useLocation()
 
     const scrollToSection = () => {

@@ -8,7 +8,7 @@ import {getApiLink} from '../../api/getApiLink'
 import {useNavigate, useParams} from 'react-router-dom'
 import {CatalogCategories} from "./components/CatalogCategories";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
-import { PaginationProducts } from '../../components/PaginationProducts/PaginationProducts'
+import {PaginationProducts} from '../../components/PaginationProducts/PaginationProducts'
 
 export const Catalog = () => {
     const {category_id, search} = useParams();
@@ -28,15 +28,18 @@ export const Catalog = () => {
 
     const [isLoading, setIsLoading] = useState(true)
     const handlePage = (pageLink) => {
-        console.log(pageLink);
+        setIsLoading(true)
+        window.scrollTo(0,0)
         axios.get(pageLink, {headers: GetApiHeaders()})
-          .then(({data}) => {
-            setMetaProduct(data)
-            setProducts(data.data)
-          })
-          .catch(error => {
-            console.log('products undefined', error);
-          })
+            .then(({data}) => {
+                setMetaProduct(data)
+                setProducts(data.data)
+                setIsLoading(false)
+            })
+            .catch(error => {
+                console.log('products undefined', error);
+                setIsLoading(false)
+            })
     }
     useEffect(() => {
         setIsLoading(true)
@@ -44,7 +47,7 @@ export const Catalog = () => {
         axios.get(getApiLink(`/api/products/get${category_id ? `?category_id=${category_id}&page=1` : "?page=1"}`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setIsLoading(false)
-                setProducts(data.data)                
+                setProducts(data.data)
                 setMetaProduct(data)
             })
             .catch(error => {
@@ -54,7 +57,6 @@ export const Catalog = () => {
 
     }, [category_id])
 
-    
 
     return (
         <>
@@ -88,7 +90,8 @@ export const Catalog = () => {
                 <div className="catalog__main">
                     <search className="catalog__search" role="search">
                         <form onSubmit={handleSubmit}>
-                            <input onChange={e => setSearchQuery(e.target.value)} type="search" name="search" placeholder="Пошук по каталогу" required/>
+                            <input onChange={e => setSearchQuery(e.target.value)} type="search" name="search"
+                                   placeholder="Пошук по каталогу" required/>
                             <button type="submit" title="Поиск">
                                 <svg width="26" height="26" viewBox="0 0 48 48">
                                     <use xlinkHref="#search"></use>
