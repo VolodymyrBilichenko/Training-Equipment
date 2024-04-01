@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {useNavigate, useParams} from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export const MainHeroSearch = ({searchPlaceholder}) => {
     const { search } = useParams();
@@ -14,6 +15,12 @@ export const MainHeroSearch = ({searchPlaceholder}) => {
     
     const handleSubmit = (evt) => {
         evt.preventDefault();
+
+        const trimmedQuery = searchQuery.trim();
+        if (trimmedQuery.length === 0) {
+            toast.error('Пошуковий запит не може бути порожнім')
+            return;
+        }
 
         navigate(`/search/${searchQuery}`)
     }

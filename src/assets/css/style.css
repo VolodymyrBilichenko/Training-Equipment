@@ -2774,7 +2774,8 @@ body.is-popup-active {
 }
 
 .cart__note button {
-    color: #b672cf
+    color: #b672cf;
+    background: transparent;
 }
 
 .cart__group {

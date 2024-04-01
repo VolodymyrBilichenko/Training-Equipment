@@ -13,9 +13,11 @@ import {toast} from "react-toastify";
 export const Footer = () => {
     const [socialData, setSocialData] = useState([]);
 
+    const socDataTxt = socialData.filter(item => item.key === 'footer')
+
+    console.log(socDataTxt);
+
     useEffect(() => {
-
-
         axios.get(getApiLink('/api/static/data'), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setSocialData(data.data);
@@ -38,9 +40,7 @@ export const Footer = () => {
         </div>
 
         <div className="footer__text">
-            <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-            </p>
+            {socDataTxt.length > 0 && <p>{socDataTxt[0].value}</p>}
         </div>
 
         <FooterTel socialData={socialData}/>

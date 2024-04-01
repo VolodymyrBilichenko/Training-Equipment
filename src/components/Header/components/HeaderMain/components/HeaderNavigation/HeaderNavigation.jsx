@@ -1,16 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {NavLink} from 'react-router-dom'
 import i18n from "i18next";
 import { useTranslation} from "react-i18next";
+import { GetApiHeaders } from '../../../../../../functions/getApiHeaders';
+import axios from 'axios';
+import { getApiLink } from '../../../../../../api/getApiLink';
+import { toast } from 'react-toastify';
 
 
-export const HeaderNavigation = ({isOpen}) => {
+export const HeaderNavigation = ({ isOpen, handleOpen }) => {
+    const [staticData, setStaticData] = useState([]);
+
+    const phoneStaticData = staticData.filter(item => item.key === "phone_number")
+    const addresStaticData = staticData.filter(item => item.key === "address")
+    const workStaticData = staticData.filter(item => item.key === "working_hours")
 
     const { t } = useTranslation();
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang)
     }
+
+    useEffect(() => {
+
+        axios.get(getApiLink('/api/static/data'), {headers: GetApiHeaders()})
+            .then(({data}) => {
+                setStaticData(data.data);
+                console.log('contact', data.data);
+            })
+            .catch((error) => {
+                toast.error("Возникла неизведанная ошибка")
+                console.log('staticData undefined', error);
+            })
+    }, [])
 
     return (
         <nav className={'header__nav ' + (isOpen ? 'is-mobile-menu-active' : '')}>
@@ -45,32 +67,20 @@ export const HeaderNavigation = ({isOpen}) => {
                 </ul>
                 <div className="header__add visible-on-mob">
                     <ul className="header__tel">
-                        <li>
-                            <a href="tel:+380737040887">
-                                <svg width="20" height="20" viewBox="0 0 48 48">
-                                    <use xlinkHref="#tel"></use>
-                                </svg>
-                                <span>
-                                +380 (73) 704-08-87
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="tel:+380957040887">
-                            <span>
-                                +380 (95) 704-08-87
-                            </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="tel:+380687040887">
-                            <span>
-                                +380 (68) 704-08-87
-                            </span>
-                            </a>
-                        </li>
+                        {phoneStaticData?.map(item => (
+                            <li key={item.id}>
+                                <a href={`tel:${item.value}`}>
+                                    <svg width="20" height="20" viewBox="0 0 48 48">
+                                        <use xlinkHref="#tel"></use>
+                                    </svg>
+                                    <span>
+                                        {item.value}
+                                    </span>
+                                </a>
+                            </li>
+                        ))}
                     </ul>
-                    <div className="header__drop-down">
+                    <div className={'header__drop-down ' + (!isOpen ? 'is-active' : '')} onClick={handleOpen}>
                         <button className="header__drop-down--target" type="button">
                             <svg width="20" height="20" viewBox="0 0 48 48">
                                 <use xlinkHref="#language"></use>
@@ -112,13 +122,13 @@ export const HeaderNavigation = ({isOpen}) => {
                         <svg width="20" height="20" viewBox="0 0 48 48">
                             <use xlinkHref="#map-point"></use>
                         </svg>
-                        <b>Украина, Чернигов, ул. Старобелоусская, 63</b>
+                        <b>{addresStaticData.length > 0 && addresStaticData[0].value}</b>
                     </div>
                     <div className="header__info">
                         <svg width="20" height="20" viewBox="0 0 48 48">
                             <use xlinkHref="#time"></use>
                         </svg>
-                        <b>ПН-ПТ с 09:00 до 18:00</b>
+                        <b>{workStaticData.length > 0 && workStaticData[0].value}</b>
                     </div>
                 </div>
             </div>

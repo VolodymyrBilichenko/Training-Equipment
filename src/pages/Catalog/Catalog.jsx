@@ -9,6 +9,7 @@ import {useNavigate, useParams} from 'react-router-dom'
 import {CatalogCategories} from "./components/CatalogCategories";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
 import {PaginationProducts} from '../../components/PaginationProducts/PaginationProducts'
+import { toast } from 'react-toastify'
 
 export const Catalog = () => {
     const {category_id, search} = useParams();
@@ -22,6 +23,12 @@ export const Catalog = () => {
         evt.preventDefault();
 
         if (!searchQuery) return;
+
+        const trimmedQuery = searchQuery.trim();
+        if (trimmedQuery.length === 0) {
+            toast.error('Пошуковий запит не може бути порожнім')
+            return;
+        }
 
         navigate(`/search/${searchQuery}`)
     }

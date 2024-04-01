@@ -58,7 +58,7 @@ export const ProductSwiper = ({ dataCard }) => {
                     </Swiper>
                 </>
 
-            ) : <img src={photoPlaceholder} alt='prod ph'/>}
+            ) : <img src={photoPlaceholder} style={{width: '100%'}} alt='prod ph'/>}
 
         </div>   
     )

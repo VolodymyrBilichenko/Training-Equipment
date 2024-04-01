@@ -167,7 +167,7 @@ export const ProductCard = () => {
                 </div>
 
                 <div className="product__col">
-                    <div className="product__gallery_nav splide on-desktop">
+                    {/* <div className="product__gallery_nav splide on-desktop">
                         <div className="product__gallery_nav_track splide__track">
                             <ul className="product__gallery_nav_list splide__list">
                                 <li className="product__gallery_nav_slide splide__slide">
@@ -200,7 +200,7 @@ export const ProductCard = () => {
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div> */}
                     {dataCard?.precepts && <ul className="product__orders">
 
                         {dataCard?.precepts?.map(precept => (
@@ -215,10 +215,6 @@ export const ProductCard = () => {
 
                     </ul>}
                 </div>
-
-                {/* <div className="product__col">
-
-                </div> */}
             </section>}
 
 
@@ -233,8 +229,7 @@ export const ProductCard = () => {
                         Рекомендованные
                     </h2>
 
-                    <ProductsList isLoading={isLoading} list={dataCard?.recommended_products}
-                                  ClassNameList={'recommended__list'}/>
+                    <ProductsList isLoading={isLoading} list={dataCard?.recommended_products} ClassNameList={'recommended__list'}/>
 
                 </div>
             </section>}

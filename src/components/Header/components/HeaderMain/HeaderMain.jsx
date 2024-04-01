@@ -34,7 +34,7 @@ export const HeaderMain = () => {
 
         <HeaderAddNavMob/>
 
-        <HeaderNavigation isOpen={isOpen}/>
+        <HeaderNavigation isOpen={isOpen} handleOpen={handleOpen}/>
 
         <HeaderAddNavDesk/>
 
