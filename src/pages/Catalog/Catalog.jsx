@@ -51,7 +51,7 @@ export const Catalog = () => {
     useEffect(() => {
         setIsLoading(true)
 
-        axios.get(getApiLink(`/api/products/get${category_id ? `?category_id=${category_id}&page=1` : "?page=1"}`), {headers: GetApiHeaders()})
+        axios.get(getApiLink(`/api/products/get?active=1${category_id ? `&category_id=${category_id}&page=1` : "&page=1"}`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setIsLoading(false)
                 setProducts(data.data)

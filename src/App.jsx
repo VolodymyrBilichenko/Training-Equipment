@@ -44,7 +44,7 @@ export const App = () => {
         getCookies("favorite") && dispatch(setFavorites(JSON.parse(getCookies("favorite"))))
 
         // GET ALL PRODUCTS
-        axios.get(getApiLink(`/api/products/get`), {headers: GetApiHeaders()})
+        axios.get(getApiLink(`/api/products/get?active=1`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 dispatch(setAllProducts(data.data))
             })

@@ -92,7 +92,6 @@ export const ProductCard = () => {
 
                         </div>
                         <div className="product__info_col">
-                            style={{background: isAddedBasket ? "" : ""}}
                             <button onClick={handleAddCart} className="product__add-to-cart button"
                                     type="button"
                                     aria-label="Додати до кошика">
