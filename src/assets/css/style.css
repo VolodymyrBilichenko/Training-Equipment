@@ -5023,7 +5023,8 @@ body.is-popup-active {
         background: var(--accent-circle-gradient);
         pointer-events: none;
         opacity: 0;
-        visibility: hidden
+        visibility: hidden;
+        z-index: -1;
     }
 
     .product-card__title a,.reviews__certificate_link {
