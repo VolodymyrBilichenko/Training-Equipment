@@ -55,8 +55,8 @@ export const MainReviews = ({id}) => {
 
 			
             <Swiper
-                slidesPerView={2}
-                slidesPerGroup={2}
+                slidesPerView={1}
+                slidesPerGroup={1}
                 spaceBetween={0}               
                 pagination={{
                     clickable: true,
@@ -71,9 +71,15 @@ export const MainReviews = ({id}) => {
                     '--swiper-pagination-color': '#fff',
                     '--swiper-pagination-border': '1px solid #7f469b',
                 }}
+                breakpoints={{
+                    768: {
+                        slidesPerView: 2,
+                        slidesPerGroup: 2,
+                    },
+                }}
             >
                 {reviewsData.map(reviewItem => (
-                    <SwiperSlide className="reviews__slide" key={reviewItem.id} style={{border: '1px solid #7f469b', marginRight: '0'}}>
+                    <SwiperSlide className="reviews__slide" key={reviewItem.id} style={{border: '1px solid #7f469b', marginRight: '0', height: 'auto'}}>
                         <div className="reviews__slide_col">
                             <svg width="36" height="39" viewBox="0 0 39 36">
                                 <use xlinkHref="#quote"></use>
@@ -104,9 +110,9 @@ export const MainReviews = ({id}) => {
                             <div className="reviews__slide_col">
                                 <div className="reviews__certificate">
                                 <a href={reviewItem.file && reviewItem.file.web_path} className="reviews__certificate_link" data-fancybox="gallery">
-                                    <div className="reviews__certificate_image">
+                                    <div>
                                         {reviewItem.file && (
-                                                    <img src={reviewItem.file.web_path} alt="Sertificate" width="276" height="285" loading="lazy"/>
+                                                    <img src={reviewItem.file.web_path} alt="Sertificate" width="100%" loading="lazy" style={{marginBottom: "10px"}}/>
                                             )}
                                     </div>
                                     
