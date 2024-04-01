@@ -9,8 +9,6 @@ import {useParams} from 'react-router-dom'
 import {addBasketItem} from "../../redux/toolkitSlice";
 import {useDispatch} from "react-redux";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
-
-import SliderItemPh from '../../assets/img/product/product-image.jpg';
 import CreditCard from '../../assets/img/product/credit_card.svg'
 import AccBalance from '../../assets/img/product/account_balance_wallet.svg'
 import Assigment from '../../assets/img/product/assignment.svg'
@@ -94,7 +92,7 @@ export const ProductCard = () => {
 
                         </div>
                         <div className="product__info_col">
-                            {/*style={{background: isAddedBasket ? "#9C50B8" : ""}}*/}
+                            style={{background: isAddedBasket ? "" : ""}}
                             <button onClick={handleAddCart} className="product__add-to-cart button"
                                     type="button"
                                     aria-label="Додати до кошика">
