@@ -49,7 +49,6 @@ export const ProductListItem = ({data}) => {
             dispatch(removeFavorite(data.id))
             // setIsFavorite(prev => !prev)
             setIsFavorite(false);
-            toast.error("Товар видалено з обраних");
         }
     }
 

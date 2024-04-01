@@ -20,6 +20,7 @@ import {getApiLink} from "./api/getApiLink";
 import setCookie from "./functions/setCookie";
 import {GetApiHeaders} from "./functions/getApiHeaders";
 import {toast, ToastContainer} from "react-toastify";
+import {Modals} from "./components/Modals/Modals";
 // import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 export const PopupContext = createContext(null);
@@ -29,26 +30,6 @@ export const App = () => {
     const [routesList] = useState(routes())
     const [modal, setModal] = useState('');
     const dispatch = useDispatch()
-    // const [loading, setLoading] = useState(false);
-
-    // const toggleLoader = (value) => {
-    //     setLoading(value);
-    // }
-
-    const ModalList = () => {
-        if (modal === 'login') {
-            return <LoginPopUp modal={modal}/>
-        } else if (modal === 'register') {
-            return <RegisterPopUp modal={modal}/>
-        } else if (modal === 'resetPass') {
-            return <ResetPassPopUp modal={modal}/>
-        } else if (modal === 'order') {
-            return <OrderPopUp modal={modal}/>
-        } else if (modal === 'thx') {
-            return <ThanksPopUp modal={modal}/>
-        }
-
-    }
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -138,7 +119,7 @@ export const App = () => {
 
                 <Footer/>
 
-                {ModalList()}
+                <Modals modal={modal} />
 
                 <ToastContainer/>
 
