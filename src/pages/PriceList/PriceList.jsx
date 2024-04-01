@@ -9,6 +9,11 @@ import { GetApiHeaders } from '../../functions/getApiHeaders'
 export const PriceList = () => {
 	const [priceData, setPriceData] = useState([]);
 
+	const fullPriceArray = priceData.filter(item => item.category === null);
+	const fullPrice = fullPriceArray.length > 0 ? fullPriceArray[0] : null;
+
+	console.log(fullPrice);
+
 	useEffect(() => {
 		axios.get(getApiLink('/api/price-list/get'), {headers: GetApiHeaders()})
 			.then(({data}) => {
@@ -31,9 +36,9 @@ export const PriceList = () => {
 
 				<SectionTitle title={'Прайс-лист'} ClassTitle={'pricelist__title'}/>
 
-				<a href="some" className="pricelist__item">
+				<a href={fullPrice && fullPrice.file && fullPrice.file.web_path} className="pricelist__item">
 					<span>
-						Скачати повниій прайс
+						Скачати повний прайс
 					</span>
 					<i>
 						<svg width="26" height="26" viewBox="0 0 26 26">
@@ -47,11 +52,11 @@ export const PriceList = () => {
 					</h3>
 
 					<ul className="pricelist__list">
-						{priceData.map(item => (
+						{priceData.filter(item => item.category !== null)?.map(item => (
 							<li key={item.id}>
 								<a href={item.file.web_path} className="pricelist__item">
 									<span>
-										{item.category.name}
+										{item.category ? item.category.name : ''}
 									</span>
 									<i>
 										<svg width="26" height="26" viewBox="0 0 26 26">
