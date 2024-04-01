@@ -2457,6 +2457,11 @@ body.is-popup-active {
     gap: 30px
 }
 
+.product__info_border{
+    padding-bottom: 30px;
+    border-bottom: 1px solid #6b5294;
+}
+
 .cart__group_head,.cart__note,.product__info+.product__info,.recommended__container,.recommended__list {
     margin-top: 40px
 }

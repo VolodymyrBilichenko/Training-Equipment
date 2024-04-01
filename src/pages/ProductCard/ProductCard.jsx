@@ -104,7 +104,7 @@ export const ProductCard = () => {
                             </button>
                         </div>
                     </div>
-                    <div className="product__info">
+                    <div className="product__info product__info_border">
                         <div className="product__info_col">
                             <table className="product__characteristics">
                                 <caption>Характеристики</caption>
@@ -164,40 +164,6 @@ export const ProductCard = () => {
                 </div>
 
                 <div className="product__col">
-                    {/* <div className="product__gallery_nav splide on-desktop">
-                        <div className="product__gallery_nav_track splide__track">
-                            <ul className="product__gallery_nav_list splide__list">
-                                <li className="product__gallery_nav_slide splide__slide">
-                                    <div className="product__gallery_nav_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </li>
-                                <li className="product__gallery_nav_slide splide__slide">
-                                    <div className="product__gallery_nav_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </li>
-                                <li className="product__gallery_nav_slide splide__slide">
-                                    <div className="product__gallery_nav_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </li>
-                                <li className="product__gallery_nav_slide splide__slide">
-                                    <div className="product__gallery_nav_image image-aspect-ratio">
-                                        <picture>
-                                            <img src={SliderItemPh} alt="" width="90" height="90" loading="lazy"/>
-                                        </picture>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> */}
                     {dataCard?.precepts && <ul className="product__orders">
 
                         {dataCard?.precepts?.map(precept => (
