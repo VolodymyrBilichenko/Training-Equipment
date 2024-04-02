@@ -104,14 +104,7 @@ export const RegisterPopUp = ({handleClosePopUp}) => {
                                 </span>
                         </div>
                         {error && <p style={{color: "red"}}>{error}</p>}
-                        {success && <p style={{color: "green"}}>{success}</p>}
-                        <div className="popup-form__text">
-                            <p>
-                                <button onClick={_ => SetPopContext('login')} type={"button"}
-                                        className="open-popup popup-close">Войти
-                                </button>
-                            </p>
-                        </div>
+                        {success && <p style={{color: "green"}}>{success}</p>}                        
                         <div className="popup-form__text">
                             <p>
                                 Регестрируясь на сайте Вы соглашаетесь на <a href="#">обработку личных данных</a>
@@ -120,6 +113,13 @@ export const RegisterPopUp = ({handleClosePopUp}) => {
                         <button className="popup-form__submit button is-mode-1" type="submit">
                             Відправити
                         </button>
+                        <div className="popup-form__text">
+                            <p>
+                                <button onClick={_ => SetPopContext('login')} type={"button"}
+                                        className="open-popup popup-close">Войти
+                                </button>
+                            </p>
+                        </div>
                     </form>
                 </div>
             </div>

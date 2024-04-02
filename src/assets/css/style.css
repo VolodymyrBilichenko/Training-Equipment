@@ -1716,8 +1716,8 @@ body.is-popup-active {
     flex-direction: column;
     max-width: 376px;
     margin: 0 auto;
-    gap: 20px;
-    padding-top: 30px
+    gap: 10px;
+    padding-top: 10px
 }
 
 .popup-form__text {
@@ -3784,7 +3784,7 @@ body.is-popup-active {
     }
 
     .popup-text {
-        font-size: 1rem
+        font-size: 12px
     }
 
     .popup-close-btn {
