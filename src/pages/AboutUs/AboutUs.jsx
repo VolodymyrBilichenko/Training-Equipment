@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {BackGroundDecor} from '../../components/BackGroundDecor/BackGroundDecor'
 import {BreadCrumbs} from '../../components/BreadCrumbs/BreadCrumbs'
 import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
@@ -10,15 +10,20 @@ import AboutPh from '../../assets/img/about-us/about-us-image.png'
 import {MainReviews} from '../Main/components/MainReviews/MainReviews'
 import {toast} from "react-toastify";
 import {useLocation} from "react-router-dom";
+import { PopupContext } from '../../App'
+import getCookies from '../../functions/getCookies'
 
 export const AboutUs = () => {
+    const SetPopContext = useContext(PopupContext);
     const [staticData, setStaticData] = useState([]);
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
 
     const dataAboutUs = staticData.filter(item => item.key === 'about_us');
     const dataDelivery = staticData.filter(item => item.key === 'delivery');
     const dataPayment = staticData.filter(item => item.key === 'payment');
 
-    const location = useLocation()
+    const location = useLocation();
 
     const scrollToSection = () => {
         if(!location.hash) return;
@@ -33,8 +38,35 @@ export const AboutUs = () => {
         targetElement.scrollIntoView(scrollOptions);
     }
 
+    const handleNavPopupThx = () => {
+        SetPopContext('thx')
+    }
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+
+        const dataToSend = {
+            "phone": phone,
+            "name": name,
+        }
+
+        axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies("cookieToken")}`;
+        axios.post(getApiLink('/api/consultation/create-request'), dataToSend, {headers: GetApiHeaders()})
+            .then(({data}) => {
+                console.log(data);
+                handleNavPopupThx(); 
+
+                setName("");
+                setPhone("");          
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });        
+    }  
+
+
     useEffect(() => {
-        setTimeout(scrollToSection, 1)
+        setTimeout(scrollToSection, 1);
     }, [location])
 
 
@@ -137,11 +169,13 @@ export const AboutUs = () => {
                                         Введите свои контактные данные и наш менеджер свяжется с вами
                                     </p>
                                 </div>
-                                <form className="consultation__form">
-                                    <label className="input-label"><input className="input" type="text" name="name"
-                                                                          placeholder="Ім’я" required/></label>
-                                    <label className="input-label"><input className="input" type="tel" name="phone"
-                                                                          placeholder="Телефон" required/></label>
+                                <form className="consultation__form" onSubmit={handleFormSubmit}>
+                                    <label className="input-label">
+                                        <input className="input" onChange={e => setName(e.target.value)} type="text" name="name" placeholder="Ім’я" required/>
+                                    </label>
+                                    <label className="input-label">
+                                        <input className="input" onChange={e => setPhone(e.target.value)} type="tel" name="phone" placeholder="Телефон" required/>
+                                    </label>
                                     <button type="submit" className="button is-mode-1">Відправити</button>
                                 </form>
                             </div>

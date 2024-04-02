@@ -30,7 +30,7 @@ export const MainReviews = ({id}) => {
             NativeFancybox.unbind(container);
             NativeFancybox.close();
           };
-        });
+        }, []);
       
         return <div ref={containerRef}>{props.children}</div>;
     }

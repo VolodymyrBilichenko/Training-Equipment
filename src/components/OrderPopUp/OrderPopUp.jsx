@@ -1,21 +1,25 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {PopupContext} from '../../App';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import {getApiLink} from '../../api/getApiLink';
 import {GetApiHeaders} from "../../functions/getApiHeaders";
 import getCookies from "../../functions/getCookies";
 import setCookie from "../../functions/setCookie";
 import {toast} from "react-toastify";
+import { setBasket, setBasketComment } from '../../redux/toolkitSlice';
 
 export const OrderPopUp = ({handleClosePopUp}) => {
     const SetPopContext = useContext(PopupContext);
     const basketItems = useSelector(state => state.toolkit.basket);
+    const basketComment = useSelector(state => state.toolkit.basketComment);
     const user = useSelector(state => state.toolkit.user)
 
     const [email, setEmail] = useState(user?.email ?? "");
     const [phone, setPhone] = useState(user?.phone_number ?? "");
     const [checkedBill, setCheckedBill] = useState(false);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         setEmail(user?.email)
@@ -39,9 +43,9 @@ export const OrderPopUp = ({handleClosePopUp}) => {
 
         const dataToSend = {
             "products": basketItems,
+            "note": basketComment,
             "email_not_auth_user": email,
             "phone_not_auth_user": phone,
-
         }
 
         const apiString = getCookies("cookieToken") ? "/api/orders/createFromAuthUser" : "/api/order/create"
@@ -51,13 +55,16 @@ export const OrderPopUp = ({handleClosePopUp}) => {
             .then(({data}) => {
                 console.log(data);
                 handleNavPopupThx();
-                setCookie("basket", "")
+                setCookie("basket", "");
             })
             .catch(error => {
                 console.error('Error:', error);
 
                 if (error.response.data.error.message.some(mes => mes === "Not enough amount of product in store to add into basket")) return toast.error("У одного из товаров не достаточное количество для заказа")
             });
+
+        dispatch(setBasket([]));
+        dispatch(setBasketComment(''));
     }
 
     return (

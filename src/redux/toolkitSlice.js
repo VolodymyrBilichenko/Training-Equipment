@@ -8,6 +8,7 @@ const toolkitSlice = createSlice({
         user: {},
         favorites: [],
         basket: [],
+        basketComment: '',
         allProducts: [],
         allCategories: []
     },
@@ -77,9 +78,10 @@ const toolkitSlice = createSlice({
                     return item;
                 }
             })
-
-
             setCookie("basket", JSON.stringify(state.basket))
+        },
+        setBasketComment(state, action) {
+            state.basketComment = action.payload
         }
 
     }
@@ -98,6 +100,7 @@ export const {
     setBasket,
     changeBasketItem,
     removeFavorite,
+    setBasketComment,
 
 
 } = toolkitSlice.actions;

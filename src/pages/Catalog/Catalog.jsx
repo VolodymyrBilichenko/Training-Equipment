@@ -30,6 +30,12 @@ export const Catalog = () => {
             return;
         }
 
+        const forbiddenChars = /[^\w]/;
+        if (forbiddenChars.test(searchQuery)) {
+            toast.error('Пошуковий запит містить неприпустимі символи');
+            return;
+        }
+
         navigate(`/search/${searchQuery}`)
     }
 
