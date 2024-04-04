@@ -22,7 +22,7 @@ export const MainHeroSearch = ({searchPlaceholder}) => {
             return;
         }
 
-        const forbiddenChars = /[^\w]/;
+        const forbiddenChars = /[!@#$%^&*(),.?":{}|<>]/;
         if (forbiddenChars.test(searchQuery)) {
             toast.error('Пошуковий запит містить неприпустимі символи');
             return;
