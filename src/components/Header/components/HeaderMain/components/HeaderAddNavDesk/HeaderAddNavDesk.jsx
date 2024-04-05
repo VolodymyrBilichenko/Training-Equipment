@@ -21,9 +21,10 @@ export const HeaderAddNavDesk = () => {
             <ul>
                 <li>
                     <button onClick={handlePopUpClick} className="open-popup" title="Акаунт">
-                        <svg width="26" height="26" viewBox="0 0 48 48">
+                        <svg width="26" height="26" viewBox="0 0 48 48" style={{minWidth: '26px', minHeight: '26px'}}>
                             <use xlinkHref="#user"></use>
                         </svg>
+                        <span>Тарас Шевченко</span>
                     </button>
                 </li>
                 <li>
@@ -34,7 +35,7 @@ export const HeaderAddNavDesk = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/basket'} title="Кошик">
+                    <NavLink to={'/basket'} title="Кошик" data-length="1">
                         <svg width="26" height="26" viewBox="0 0 48 48">
                             <use xlinkHref="#cart"></use>
                         </svg>

@@ -91,7 +91,10 @@ export const MainReviews = ({id}) => {
                             </div>
                             <div className="reviews__slide_person reviews__person">
                                 <div className="reviews__person_avatar">
-                                    <img src="https://picsum.photos/id/275/512/512" alt="" width="59" height="59" loading="lazy"/>
+                                    <svg width="26" height="26" viewBox="0 0 48 48">
+                                        <use xlinkHref="#user"></use>
+                                    </svg>
+                                    {/* <img src="https://picsum.photos/id/275/512/512" alt="" width="59" height="59" loading="lazy"/> */}
                                 </div>
                                 <div className="reviews__person_info">
                                     <h3>{reviewItem.user.name}</h3>

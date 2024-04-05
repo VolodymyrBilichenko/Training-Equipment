@@ -66,6 +66,7 @@ const toolkitSlice = createSlice({
         },
         setBasket(state, action) {
             state.basket = action.payload
+            console.log(action.payload);
         },
         changeBasketItem(state, action) {
             state.basket = state.basket.map(item => {

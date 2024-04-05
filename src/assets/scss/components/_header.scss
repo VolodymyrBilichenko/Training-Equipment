@@ -502,7 +502,7 @@
 			font-family: var(--title-font);
 			font-weight: 700;
 			line-height: 110%;
-			text-transform: uppercase;
+			// text-transform: uppercase;
 
 			font-size: 1rem;
 
@@ -567,13 +567,58 @@
 			align-items: center;
 			justify-content: center;
 
-			width: 36px; height: 36px;
-			border-radius: 50%;
-			color: var(--white);
+			// width: 36px; height: 36px;
+			// border-radius: 50%;
+			// color: var(--white);
 			background: transparent;
 
+			min-width: 46px;
+			min-height: 46px;
+			width: auto;
+			height: auto;
+			border-radius: 50px;
+			color: var(--white);
+			// padding: 10px;
+			gap: 3.5px;
+
 			svg {
-				width: 80%; height: 80%;
+				width: 26px; height: 26px;
+			}
+
+			span {
+				max-width: 150px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				font-size: .75rem;
+			}
+
+			&[data-length] {
+				position: relative;
+
+				&::before {
+					content: attr(data-length);
+					position: absolute;
+					right: 0; top: 0;
+					transform: translate(20%,-10%);
+					width: 20px; height: 20px;
+					background: var(--accent-hover);
+					border-radius: 50%;
+			
+					display: flex;
+					align-items: center;
+					justify-content: center;
+			
+					font-family: var(--title-font);
+					text-align: center;
+					font-size: 0.875rem;
+					line-height: 100%;
+					font-weight: 700;
+			
+					@include _992 {
+						transform: translate(20%,-40%);
+					}
+				}
 			}
 
 			@media (min-width: 1550px) {
@@ -582,7 +627,7 @@
 
 			@include _992 {
 				svg {
-					width: 60%; height: 60%;
+					width: 26px; height: 26px;
 				}
 				background: rgba(67, 50, 95, 0.80);
 			}
