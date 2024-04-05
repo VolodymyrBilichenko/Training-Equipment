@@ -21,6 +21,7 @@ import setCookie from "./functions/setCookie";
 import {GetApiHeaders} from "./functions/getApiHeaders";
 import {toast, ToastContainer} from "react-toastify";
 import {Modals} from "./components/Modals/Modals";
+import { CustomToast } from './components/CustomToast/CustomToast';
 // import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 export const PopupContext = createContext(null);
@@ -30,6 +31,10 @@ export const App = () => {
     const [routesList] = useState(routes())
     const [modal, setModal] = useState('');
     const dispatch = useDispatch()
+
+    // const notifySuccess = () => toast.success(<CustomToast toastMessage="Success Message"  />, {
+    //     toastClassName: 'custom-toast',
+    //   });
 
     useEffect(() => {
         window.scrollTo(0, 0)

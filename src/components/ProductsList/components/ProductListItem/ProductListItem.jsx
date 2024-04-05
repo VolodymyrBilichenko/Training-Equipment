@@ -8,6 +8,7 @@ import {getApiLink} from "../../../../api/getApiLink";
 import {GetApiHeaders} from "../../../../functions/getApiHeaders";
 import getCookies from "../../../../functions/getCookies";
 import {toast} from "react-toastify";
+import { CustomToast } from '../../../CustomToast/CustomToast';
 
 export const ProductListItem = ({data}) => {
 
@@ -34,8 +35,8 @@ export const ProductListItem = ({data}) => {
             product_id: data.id,
             product_amount: 1,
         }))
-
-        toast.success("Товар успешно добавлен в корзину")
+        // "Товар успешно добавлен в корзину"
+        toast.success(<CustomToast/>)
 
         setIsAddedBasket(prev => !prev)
     }
