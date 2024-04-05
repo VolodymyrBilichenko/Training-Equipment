@@ -2024,7 +2024,8 @@ body.is-popup-active {
 .products-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 30px 15px
+    gap: 30px 15px;
+    position: relative;
 }
 
 .product-card__image {

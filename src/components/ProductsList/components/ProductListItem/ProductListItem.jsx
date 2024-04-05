@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {addBasketItem, addFavorite, removeFavorite} from '../../../../redux/toolkitSlice';
 import {NavLink} from 'react-router-dom';
-import photoPlaceholder from './../../../../assets/img/photoNotFound.jpg'
+import photoPlaceholder from './../../../../assets/img/null-card-image.png'
 import axios from "axios";
 import {getApiLink} from "../../../../api/getApiLink";
 import {GetApiHeaders} from "../../../../functions/getApiHeaders";

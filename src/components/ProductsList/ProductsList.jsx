@@ -1,6 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { ProductListItem } from './components/ProductListItem/ProductListItem'
 import {ProductsListStyled} from "./ProductsList.styled";
+
+import NotFoundImg from '../../assets/img/not-founded.svg'
 
 export const ProductsList = ({ ClassNameList, list, isLoading }) => {
 
@@ -12,7 +14,16 @@ export const ProductsList = ({ ClassNameList, list, isLoading }) => {
                     key={product.id}
                     data={product}
                 />
-            )) : <p><br/>Ничего нет</p> : <p><br/>Loading...</p>}
+            )) : (
+
+                <div class="catalog__none">
+                    <div class="catalog__none_block">
+                        <img src={NotFoundImg} width="250" height="204" alt=""/>
+                        <span>Ничего нет</span>
+                    </div>
+                </div>
+            )
+            : <p><br/>Loading...</p>}
 
 		</ProductsListStyled>
     )

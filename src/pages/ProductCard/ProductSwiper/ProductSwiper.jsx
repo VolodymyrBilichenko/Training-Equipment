@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import photoPlaceholder from '../../../assets/img/photoNotFound.jpg'
+import photoPlaceholder from '../../../assets/img/null-card-image.png'
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
