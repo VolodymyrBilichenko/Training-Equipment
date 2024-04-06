@@ -55,16 +55,17 @@ export const OrderPopUp = ({handleClosePopUp}) => {
             .then(({data}) => {
                 console.log(data);
                 handleNavPopupThx();
-                setCookie("basket", "");
             })
             .catch(error => {
                 console.error('Error:', error);
-
+                
                 if (error.response.data.error.message.some(mes => mes === "Not enough amount of product in store to add into basket")) return toast.error("У одного из товаров не достаточное количество для заказа")
-            });
-
-        dispatch(setBasket([]));
-        dispatch(setBasketComment(''));
+            })
+            .finally(() => {
+                setCookie("basket", "");
+                dispatch(setBasket([]));
+                dispatch(setBasketComment(''));
+            })
     }
 
     return (

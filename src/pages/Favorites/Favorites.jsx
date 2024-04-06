@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
@@ -19,7 +19,7 @@ export const Favorites = () => {
 
     const FavModal = useContext(PopupContext);
 
-    const test = () => {
+    const handleFavModal = () => {
         FavModal('favorites')
     }
 
@@ -40,7 +40,7 @@ export const Favorites = () => {
 
                 <SectionTitle title={'Избранное'}/>
 
-                <button onClick={test} className="favorites__receive_email open-popup">
+                <button onClick={handleFavModal} className="favorites__receive_email open-popup">
                     Желаю получить Коммерческое предложение по Email для товаров в Избранное
                 </button>
 
