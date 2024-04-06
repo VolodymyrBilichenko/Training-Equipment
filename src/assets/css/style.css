@@ -4780,8 +4780,9 @@ body.is-popup-active {
 
     .header__add-nav button,
     .header__add-nav a {
-        width: 46px;
-        height: 46px
+        /* width: 46px; */
+        height: 46px;
+        width: auto;
     }
 }
 

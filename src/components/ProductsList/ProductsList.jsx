@@ -3,11 +3,12 @@ import { ProductListItem } from './components/ProductListItem/ProductListItem'
 import {ProductsListStyled} from "./ProductsList.styled";
 
 import NotFoundImg from '../../assets/img/not-founded.svg'
+import { CustomLoading } from '../CustomLoading/CustomLoading';
 
 export const ProductsList = ({ ClassNameList, list, isLoading }) => {
 
     return (
-        <ProductsListStyled className={`${ClassNameList} products-list`}>
+        <ProductsListStyled className={`${list.length === 0 ? 'empty' : ''} ${ClassNameList} products-list `}>
 
             {!isLoading ? list.length ? list?.map(product => (
                 <ProductListItem
@@ -23,7 +24,7 @@ export const ProductsList = ({ ClassNameList, list, isLoading }) => {
                     </div>
                 </div>
             )
-            : <p><br/>Loading...</p>}
+            : <CustomLoading/>}
 
 		</ProductsListStyled>
     )

@@ -71,10 +71,6 @@ export const routes = () => {
             element: <Profile/>
         },
         {
-            path: '/pre',
-            element: <Preloader/>
-        },
-        {
             path: '*',
             element: <Error/>
         },

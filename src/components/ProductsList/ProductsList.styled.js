@@ -7,4 +7,8 @@ export const ProductsListStyled = styled.ul`
       color: #9C50B8
     }
   }
+
+  &.empty{
+    display: flex;
+  }
 `

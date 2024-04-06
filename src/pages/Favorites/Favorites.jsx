@@ -1,12 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
 import { SectionTitle } from '../../components/SectionTitle/SectionTitle'
 import { ProductsList } from '../../components/ProductsList/ProductsList'
 import { PaginationProducts } from '../../components/PaginationProducts/PaginationProducts'
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
+import { PopupContext } from '../../App'
 
 export const Favorites = () => {
+    // TODO сделать отправку формы + переделать избраное, что бы отправляло на бек 
 
     const favorites = useSelector(state => state.toolkit.favorites)
     const allProducts = useSelector(state => state.toolkit.allProducts)
@@ -14,6 +16,12 @@ export const Favorites = () => {
     const favoritesList = allProducts.filter(item => favorites.some(item2 => item2 === item.id))
 
     const [isLoading, setIsLoading] = useState(true)
+
+    const FavModal = useContext(PopupContext);
+
+    const test = () => {
+        FavModal('favorites')
+    }
 
 
     useEffect(() => {
@@ -32,9 +40,9 @@ export const Favorites = () => {
 
                 <SectionTitle title={'Избранное'}/>
 
-                <a href="#favorites-popup" className="favorites__receive_email open-popup">
+                <button onClick={test} className="favorites__receive_email open-popup">
                     Желаю получить Коммерческое предложение по Email для товаров в Избранное
-                </a>
+                </button>
 
                 <ProductsList isLoading={isLoading} list={favoritesList} ClassNameList={'favorites__list'}/>
 

@@ -4,6 +4,7 @@ import {RegisterPopUp} from "../RegisterPopUp/RegisterPopUp";
 import {ResetPassPopUp} from "../ResetPassPopUp/ResetPassPopUp";
 import {OrderPopUp} from "../OrderPopUp/OrderPopUp";
 import {ThanksPopUp} from "../ThanksPopUp/ThanksPopUp";
+import {FavoritesPopUp} from "../FavoritesPopUp/FavoritesPopUp";
 import {PopupContext} from "../../App";
 
 export const Modals = ({modal}) => {
@@ -29,6 +30,7 @@ export const Modals = ({modal}) => {
         "resetPass": <ResetPassPopUp handleClosePopUp={handleClosePopUp}/>,
         "order": <OrderPopUp handleClosePopUp={handleClosePopUp}/>,
         "thx": <ThanksPopUp handleClosePopUp={handleClosePopUp}/>,
+        "favorites": <FavoritesPopUp handleClosePopUp={handleClosePopUp}/>,
     }
 
     return (
