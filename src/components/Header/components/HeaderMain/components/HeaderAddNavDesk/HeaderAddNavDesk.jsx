@@ -8,6 +8,7 @@ export const HeaderAddNavDesk = () => {
     const navigate = useNavigate();
     const usersData = useSelector(state => state.toolkit.user)
     const token = getCookies('cookieToken');
+    const basketList = useSelector(state => state.toolkit.basket);
 
     console.log(usersData);
 
@@ -39,7 +40,7 @@ export const HeaderAddNavDesk = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to={'/basket'} title="Кошик" data-length="1">
+                    <NavLink to={'/basket'} title="Кошик" data-length={basketList.length}>
                         <svg width="26" height="26" viewBox="0 0 48 48">
                             <use xlinkHref="#cart"></use>
                         </svg>

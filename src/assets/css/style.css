@@ -5287,3 +5287,7 @@ body.is-popup-active {
     padding: 10px;
     color: #fff;
  }
+
+ .Toastify__close-button svg{
+    fill: #fff;
+ }

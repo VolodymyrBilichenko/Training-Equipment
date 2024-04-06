@@ -6,7 +6,8 @@ import axios from "axios";
 import getCookies from "../../../functions/getCookies";
 import {getApiLink} from "../../../api/getApiLink";
 import {GetApiHeaders} from "../../../functions/getApiHeaders";
-import photoPlaceholder from '../../../assets/img/photoNotFound.jpg'
+import photoPlaceholder from '../../../assets/img/null-card-image.png'
+
 
 export const CartListItem = ({productInfo, setTotalAmount, products}) => {
 

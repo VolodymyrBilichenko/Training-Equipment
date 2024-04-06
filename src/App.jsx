@@ -16,7 +16,6 @@ import setCookie from "./functions/setCookie";
 import {GetApiHeaders} from "./functions/getApiHeaders";
 import {toast, ToastContainer} from "react-toastify";
 import {Modals} from "./components/Modals/Modals";
-// import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 export const PopupContext = createContext(null);
 
@@ -25,10 +24,6 @@ export const App = () => {
     const [routesList] = useState(routes())
     const [modal, setModal] = useState('');
     const dispatch = useDispatch()
-
-    // const notifySuccess = () => toast.success(<CustomToast toastMessage="Success Message"  />, {
-    //     toastClassName: 'custom-toast',
-    //   });
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -96,25 +91,16 @@ export const App = () => {
         <>
             <Sprite/>
 
-            {/* {loading && ''} */}
-
             <PopupContext.Provider value={setModal}>
 
                 <Header/>
 
-                {/* <TransitionGroup component={null}> */}
-                    {/* <CSSTransition key={location.pathname} classNames='fade' timeout={300} */}
-                                   {/* onEnter={() => toggleLoader(true)} onExited={() => toggleLoader(false)}> */}
-
-                        <div className='main'>
-                            <Routes location={location}>
-                                {routesList.map(route => <Route key={route.path} element={route.element}
-                                                                path={route.path}/>)}
-                            </Routes>
-                        </div>
-
-                    {/* </CSSTransition> */}
-                {/* </TransitionGroup> */}
+                    <div className='main'>
+                        <Routes location={location}>
+                            {routesList.map(route => <Route key={route.path} element={route.element}
+                                                            path={route.path}/>)}
+                        </Routes>
+                    </div>
 
                 <Footer/>
 

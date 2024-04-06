@@ -16,6 +16,7 @@ export const Basket = () => {
 
     const basketList = useSelector(state => state.toolkit.basket);
     const allProducts = useSelector(state => state.toolkit.allProducts)
+    const usersData = useSelector(state => state.toolkit.user)
 
     const handleOpenModal = (type) => {
 		setModal(`${type}`)
@@ -26,6 +27,11 @@ export const Basket = () => {
 
         dispatch(setBasketComment(orderComment))
     }
+
+    const discountPercent = usersData.discount.percent
+    const discountBonuses = usersData.discount.bonuses_sum
+    const discountAmount = ((totalAmount * discountPercent) / 100) + discountBonuses
+    const discountTotalSum = totalAmount - discountAmount - discountBonuses
 
     useEffect(() => {
         !basketList.length && setTotalAmount(0); 
@@ -66,17 +72,17 @@ export const Basket = () => {
                     <div className="cart__footer_col">
                         <table className="cart__total">
                             <tbody>
-                            <tr>
+                            {/* <tr>
                                 <td>Минимальная сумма заказа</td>
                                 <td>0 ₴</td>
-                            </tr>
+                            </tr> */}
                             <tr className="add-hr">
                                 <td>
                                     <b>Всього</b>
                                 </td>
                                 <td>
                                     <strong data-price-sum-result="cart-list" data-price-discount="500" data-price-currency="₴">
-                                        {totalAmount}
+                                        {discountPercent ? discountTotalSum : totalAmount}
                                     </strong>
                                 </td>
                             </tr>
@@ -85,7 +91,7 @@ export const Basket = () => {
                                     Знижка
                                 </td>
                                 <td>
-                                    0 ₴
+                                    {discountAmount} ₴
                                 </td>
                             </tr>
                             </tbody>

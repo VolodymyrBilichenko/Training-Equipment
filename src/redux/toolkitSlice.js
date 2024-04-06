@@ -10,7 +10,7 @@ const toolkitSlice = createSlice({
         basket: [],
         basketComment: '',
         allProducts: [],
-        allCategories: []
+        allCategories: [],
     },
     reducers: {
         setUser(state, action) {

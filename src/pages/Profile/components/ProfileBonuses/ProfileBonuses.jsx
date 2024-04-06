@@ -14,18 +14,18 @@ export const ProfileBonuses = () => {
                 {!!user?.discount?.percent && <li>
                     <strong>{user.discount.percent} %</strong>
                     <b>Активная скидка</b>
-                    <p>
+                    {/* <p>
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
                         ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                    </p>
+                    </p> */}
                 </li>}
                 {!!user?.discount?.bonuses_sum && <li>
                     <strong>{user?.discount?.bonuses_sum} ₴</strong>
                     <b>Банусы на счету</b>
-                    <p>
+                    {/* <p>
                         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
                         ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                    </p>
+                    </p> */}
                 </li>}
             </ul>
         </div>

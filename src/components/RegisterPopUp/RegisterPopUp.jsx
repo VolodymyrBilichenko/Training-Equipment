@@ -1,9 +1,10 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import getCookies from '../../functions/getCookies';
 import {useDispatch, useSelector} from 'react-redux';
 import {handleRegistration} from '../../api/registration';
 import {useNavigate} from 'react-router-dom';
 import {PopupContext} from '../../App';
+import {toast} from "react-toastify";
 
 export const RegisterPopUp = ({handleClosePopUp}) => {
     const navigate = useNavigate();
@@ -19,19 +20,30 @@ export const RegisterPopUp = ({handleClosePopUp}) => {
     const [success, setSuccess] = useState('');
     const [showPass, setShowPass] = useState(false);
 
-    const userInfo = useSelector(state => state.toolkit.user)
-    const isLogin = getCookies('token')
-    if (isLogin && userInfo) {
-        return 'Ви вже в системі!'
-    }
+    const userInfo = useSelector(state => state.toolkit.user);
+    const isLogin = getCookies('token');
+    const showWarningToast = isLogin && userInfo;
 
     const handleShowPass = () => {
         setShowPass(!showPass);
     }
 
+    useEffect(() => {
+        if (error) {
+            toast.error('Одно или несколько полей содержат ошибочные данные. Пожалуйста, проверьте их и попробуйте еще раз.')            
+        }
+    }, [error]);
+
+    useEffect(() => {
+        if (success) {
+            toast.success('Вы зарегистрированы. Подождите перенаправления');
+        }
+    }, [success]);
+
 
     return (
         <div className="popup-wrapper">
+            {showWarningToast && toast.warning("Ви вже в системі!")}
             <div onClick={handleClosePopUp} className="popup-bg popup-close"></div>
             <div className="popup-body">
                 <button onClick={handleClosePopUp} type="button" className="popup-close-btn popup-close"
@@ -102,9 +114,7 @@ export const RegisterPopUp = ({handleClosePopUp}) => {
                                         </svg>
                                     </button>
                                 </span>
-                        </div>
-                        {error && <p style={{color: "red"}}>{error}</p>}
-                        {success && <p style={{color: "green"}}>{success}</p>}                        
+                        </div>                                               
                         <div className="popup-form__text">
                             <p>
                                 Регестрируясь на сайте Вы соглашаетесь на <a href="#">обработку личных данных</a>
