@@ -16,6 +16,7 @@ import getCookies from "../../functions/getCookies";
 import {ProductSwiper} from './ProductSwiper/ProductSwiper'
 import {toast} from "react-toastify";
 import HTMLReactParser from "html-react-parser";
+import { Preloader } from '../../components/Preloader/Preloader'
 
 export const ProductCard = () => {
     const {id} = useParams();
@@ -28,18 +29,27 @@ export const ProductCard = () => {
 
     useEffect(() => {
 
+        setIsLoading(true) 
+
         axios.get(getApiLink(`/api/products/${id}`), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setDataCard(data.data)
-                setIsLoading(false)
             })
             .catch((error) => {
                 toast.error("Возникла неизведанная ошибка")
                 console.log('dataCard undefined', error);
-                setIsLoading(false)
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    setIsLoading(false)                
+                }, 1300);
             })
 
     }, [id])
+
+    if (isLoading) {
+        return <Preloader />;
+    }
 
     const handleAddCart = () => {
         const dataItem = {
