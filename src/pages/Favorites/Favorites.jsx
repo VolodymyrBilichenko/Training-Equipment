@@ -8,14 +8,15 @@ import { useSelector } from "react-redux";
 import { PopupContext } from '../../App'
 
 export const Favorites = () => {
-    // TODO сделать отправку формы + переделать избраное, что бы отправляло на бек 
+    // TODO переделать избраное, что бы отправляло на бек 
 
     const favorites = useSelector(state => state.toolkit.favorites)
-    const allProducts = useSelector(state => state.toolkit.allProducts)
+    // const allProducts = useSelector(state => state.toolkit.allProducts)
 
-    const favoritesList = allProducts.filter(item => favorites.some(item2 => item2 === item.id))
+    // const favoritesList = allProducts.filter(item => favorites.some(item2 => item2 === item.id))
 
-    const [isLoading, setIsLoading] = useState(true)
+    console.log(favorites);
+    const [isLoading, setIsLoading] = useState(false)
 
     const FavModal = useContext(PopupContext);
 
@@ -24,11 +25,11 @@ export const Favorites = () => {
     }
 
 
-    useEffect(() => {
-        if(!favorites.length && !allProducts.length && !favoritesList.length) return;
+    // useEffect(() => {
+    //     if(!favorites.length && !allProducts.length && !favoritesList.length) return;
 
-        setIsLoading(false)
-    }, [favoritesList])
+    //     setIsLoading(false)
+    // }, [favoritesList])
 
     return (
         <>
@@ -44,7 +45,7 @@ export const Favorites = () => {
                     Желаю получить Коммерческое предложение по Email для товаров в Избранное
                 </button>
 
-                <ProductsList isLoading={isLoading} list={favoritesList} ClassNameList={'favorites__list'}/>
+                <ProductsList isLoading={isLoading} list={favorites} ClassNameList={'favorites__list'}/>
 
                 <PaginationProducts ClassName={'favorites__pagination'}/>
             </div>

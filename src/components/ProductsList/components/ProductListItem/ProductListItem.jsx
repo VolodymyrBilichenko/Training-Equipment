@@ -18,10 +18,9 @@ export const ProductListItem = ({data}) => {
     const favorites = useSelector(state => state.toolkit.favorites)
     const basket = useSelector(state => state.toolkit.basket)
 
-    const [isFavorite, setIsFavorite] = useState(favorites.some(item => item === data.id))
+    const [isFavorite, setIsFavorite] = useState(favorites.some(item => item.id === data.id))
     const [isAddedBasket, setIsAddedBasket] = useState(basket.some(item => item.product_id === data.id))
 
-    console.log('isAddedBasket',isAddedBasket);
 
     const handleAddBasket = () => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
@@ -40,15 +39,48 @@ export const ProductListItem = ({data}) => {
     }
 
     const handleFavorite = () => {
+        const halfInfoProduct = {
+            id: data.id,
+            name: data.name,
+            files: [{
+                web_path: data?.files[0]?.web_path
+            }],
+            original_price: data.original_price,
+            price: data.price,
+        }
         if (!isFavorite) {
-            dispatch(addFavorite(data.id));
+
+            console.log(data);
+
+            dispatch(addFavorite(halfInfoProduct));
             setIsFavorite(true);
             toast.success("Товар успішно додано до обраних");
+
+            axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
+            axios.post(getApiLink(`/api/favorites/add/${data.id}`), {headers: GetApiHeaders()})
+                .then(({data}) => {
+                    console.log('мб добавил',data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
+
         } else {
-            dispatch(removeFavorite(data.id))
+            dispatch(removeFavorite(halfInfoProduct))
             // setIsFavorite(prev => !prev)
             setIsFavorite(false);
+
+            axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
+            axios.post(getApiLink(`/api/favorites/remove/${data.id}`), {headers: GetApiHeaders()})
+                .then(({data}) => {
+                    console.log('мб удалил',data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
         }
+
+        
     }
 
     return (

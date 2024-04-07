@@ -1,4 +1,3 @@
-import { Preloader } from "../components/Preloader/Preloader"
 import { AboutUs } from "../pages/AboutUs/AboutUs"
 import { Basket } from "../pages/Basket/Basket"
 import { Catalog } from "../pages/Catalog/Catalog"

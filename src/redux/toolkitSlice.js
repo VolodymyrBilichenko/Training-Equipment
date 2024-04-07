@@ -26,17 +26,18 @@ const toolkitSlice = createSlice({
 
         setFavorites(state, action) {
             state.favorites = action.payload
+            setCookie("favorite", JSON.stringify(state.favorites))
         },
         addFavorite(state, action) {
-            if (state.favorites.some(item => item === action.payload)) {
-                state.favorites = state.favorites.filter(item => item !== action.payload)
+            if (state.favorites.some(item => item.id === action.payload.id)) {
+                state.favorites = state.favorites.filter(item => item.id !== action.payload.id)
             } else {
                 state.favorites = [...state.favorites, action.payload]
             }
             setCookie("favorite", JSON.stringify(state.favorites))
         },
         removeFavorite(state, action) {
-            state.favorites = state.favorites.filter((item) => item !== action.payload);
+            state.favorites = state.favorites.filter((item) => item.id !== action.payload.id);
             setCookie("favorite", JSON.stringify(state.favorites))
         },
 

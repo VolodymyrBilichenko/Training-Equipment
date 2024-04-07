@@ -60,7 +60,7 @@ export const App = () => {
         if (hasCookieToken) {
         // GET USER IF WE HAVE COOKIE
             axios.defaults.headers.get['Authorization'] = `Bearer ${hasCookieToken}`
-            axios.get(getApiLink('/api/user/profile'))
+            axios.get(getApiLink('/api/user/profile'), {headers: GetApiHeaders()})
                 .then(({data}) => {
                     dispatch(setUser(data.data))
                 })
@@ -73,11 +73,48 @@ export const App = () => {
         // GET USER BASKET IF WE HAVE COOKIE
         if (hasCookieToken) {
             axios.defaults.headers.get['Authorization'] = `Bearer ${hasCookieToken}`
-            axios.get(getApiLink('/api/bucket/get'))
+            axios.get(getApiLink('/api/bucket/get'), {headers: GetApiHeaders()})
                 .then(({data}) => {
                     console.log(data)
                     setCookie("basket", JSON.stringify(data.data.products))
                     dispatch(setBasket(data.data.products))
+                })
+                .catch((error) => {
+                    toast.error("Возникла неизведанная ошибка")
+                    console.log('user undefined', error);
+                })
+        }
+
+        // GET USER FAVORITE IF WE HAVE COOKIE
+        if (hasCookieToken) {
+            axios.defaults.headers.get['Authorization'] = `Bearer ${hasCookieToken}`
+            axios.get(getApiLink('/api/favorites/get?page=1'), {headers: GetApiHeaders()})
+                .then(({data}) => {
+                    console.log(data)
+                    // const halfInfoProduct = {
+                    //     id: data.data.id,
+                    //     name: data.data.name,
+                    //     files: [{
+                    //         web_path: data.data?.files[0]?.web_path
+                    //     }],
+                    //     original_price: data.data.original_price,
+                    //     price: data.data.price,
+                    // }
+
+                    const newArrFavorite = data.data.map((item) => {
+                        return {
+                            id: item.id,
+                            name: item.name,
+                            files: [{
+                                web_path: item?.files[0]?.web_path
+                            }],
+                            original_price: item.original_price,
+                            price: item.price,
+                        }
+                    })
+
+                    dispatch(setFavorites(newArrFavorite))
+
                 })
                 .catch((error) => {
                     toast.error("Возникла неизведанная ошибка")
