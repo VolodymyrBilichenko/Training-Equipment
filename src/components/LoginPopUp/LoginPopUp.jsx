@@ -25,7 +25,11 @@ export const LoginPopUp = ({handleClosePopUp}) => {
         e.preventDefault()
         setError('')
 
+        // grecaptcha.enterprise.ready(async () => {
+        //     const token = await grecaptcha.enterprise.execute('6LcyeLYpAAAAAF0jlWD4XwAdezmfK3VtULebQzNw', { action: 'LOGIN' });
+
         axios.post(getApiLink('/api/auth/login'), {
+            // token: token,
             email,
             password
         }).then((res) => {
@@ -101,6 +105,7 @@ export const LoginPopUp = ({handleClosePopUp}) => {
                                 </button>
                             </p>
                         </div>
+                        <div class="g-recaptcha" data-sitekey="your_site_key"></div>
                         <button className="popup-form__submit button is-mode-1" type="submit">
                             Войти
                         </button>
