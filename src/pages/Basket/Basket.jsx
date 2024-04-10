@@ -30,11 +30,14 @@ export const Basket = () => {
 
     const discountPercent = usersData.discount ? usersData.discount.percent : 0
     const discountBonuses = usersData.discount ? usersData.discount.bonuses_sum : 0
-    const discountAmount = ((totalAmount * discountPercent) / 100) + discountBonuses
-    const discountTotalSum = totalAmount - discountAmount - discountBonuses
+    const discountAmount = ((totalAmount * discountPercent) / 100)
+    const discountTotalSum = (totalAmount - discountAmount) - discountBonuses
+
+    console.log(discountBonuses);
+    console.log(discountAmount);
 
     useEffect(() => {
-        !basketList.length && setTotalAmount(0); 
+        !basketList.length && setTotalAmount(0);
         !basketList.length && setOrderComment(''); 
     }, [basketList])
 
@@ -82,7 +85,7 @@ export const Basket = () => {
                                 </td>
                                 <td>
                                     <strong data-price-sum-result="cart-list" data-price-discount="500" data-price-currency="₴">
-                                        {discountPercent ? discountTotalSum : totalAmount}
+                                        {discountPercent && !basketList.length ? totalAmount : discountTotalSum}
                                     </strong>
                                 </td>
                             </tr>
@@ -92,6 +95,14 @@ export const Basket = () => {
                                 </td>
                                 <td>
                                     {discountAmount} ₴
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Бонуси
+                                </td>
+                                <td>
+                                    {discountBonuses} ₴
                                 </td>
                             </tr>
                             </tbody>
