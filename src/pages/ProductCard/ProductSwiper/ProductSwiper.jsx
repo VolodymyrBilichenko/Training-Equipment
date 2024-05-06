@@ -12,7 +12,6 @@ import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 export const ProductSwiper = ({ dataCard }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-    console.log('dataph',dataCard);
 
     return (
         <div className="product__col">

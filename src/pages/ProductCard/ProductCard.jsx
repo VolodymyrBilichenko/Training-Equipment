@@ -37,7 +37,6 @@ export const ProductCard = () => {
             })
             .catch((error) => {
                 toast.error("Возникла неизведанная ошибка")
-                console.log('dataCard undefined', error);
             })
             .finally(() => {
                 setTimeout(() => {
@@ -60,7 +59,8 @@ export const ProductCard = () => {
         if (productCount > dataCard?.amount_in_store) return toast.error("На данный момент такого количества товара на складе нет")
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
-        axios.post(getApiLink("/api/bucket/add"), dataItem, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
+        axios.post(getApiLink("/api/bucket/add"), dataItem, {headers: GetApiHeaders()})
+        // .then(({data}) => console.log(data)).catch(er => console.log(er))
 
         toast.success("Товар успешно добавлен в корзину")
 

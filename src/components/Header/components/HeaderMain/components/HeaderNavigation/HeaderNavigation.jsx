@@ -26,11 +26,9 @@ export const HeaderNavigation = ({ isOpen, handleOpen }) => {
         axios.get(getApiLink('/api/static/data'), {headers: GetApiHeaders()})
             .then(({data}) => {
                 setStaticData(data.data);
-                console.log('contact', data.data);
             })
             .catch((error) => {
                 toast.error("Возникла неизведанная ошибка")
-                console.log('staticData undefined', error);
             })
     }, [])
 

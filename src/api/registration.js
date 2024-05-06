@@ -37,8 +37,6 @@ export const handleRegistration = (
             setPhone('')
             setPass('')
 
-            console.log(res.data)
-
             setTimeout(() => {
                 navigate('/profile')
                 dispatch(setUser(res.data.data))

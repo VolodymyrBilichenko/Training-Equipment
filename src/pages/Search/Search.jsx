@@ -9,6 +9,7 @@ import {useParams} from 'react-router-dom'
 import axios from "axios";
 import {getApiLink} from "../../api/getApiLink";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
+import { toast } from 'react-toastify'
 
 export const Search = () => {
     const {search} = useParams();
@@ -25,7 +26,7 @@ export const Search = () => {
                 setIsLoading(false)
             })
             .catch(error => {
-                console.log('products undefined', error);
+                toast.error('Произошла неизвестная ошибка', error)
                 setIsLoading(false)
             })
 

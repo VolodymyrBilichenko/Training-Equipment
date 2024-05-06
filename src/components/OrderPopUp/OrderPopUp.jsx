@@ -53,7 +53,6 @@ export const OrderPopUp = ({handleClosePopUp}) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies("cookieToken")}`;
         axios.post(getApiLink(apiString), dataToSend, {headers: GetApiHeaders()})
             .then(({data}) => {
-                console.log(data);
                 handleNavPopupThx();
             })
             .catch(error => {

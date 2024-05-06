@@ -15,7 +15,6 @@ export const Footer = () => {
 
     const socDataTxt = socialData.filter(item => item.key === 'footer')
 
-    console.log(socDataTxt);
 
     useEffect(() => {
         axios.get(getApiLink('/api/static/data'), {headers: GetApiHeaders()})
@@ -24,7 +23,6 @@ export const Footer = () => {
             })
             .catch((error) => {
                 toast.error("Возникла неизведанная ошибка")
-                console.log('socialData undefined', error);
             })
     }, [])
 

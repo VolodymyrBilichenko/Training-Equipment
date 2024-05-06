@@ -57,7 +57,6 @@ const ProfileInfoPerson = () => {
             }
         }
 
-        console.log(organizationName, userData?.organization?.name)
 
         organizationName === userData?.organization?.name && delete dataBody?.organization?.name
         documentCode === userData?.organization?.document_code && delete dataBody?.organization?.document_code

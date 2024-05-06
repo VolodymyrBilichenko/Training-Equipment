@@ -53,7 +53,6 @@ export const AboutUs = () => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies("cookieToken")}`;
         axios.post(getApiLink('/api/consultation/create-request'), dataToSend, {headers: GetApiHeaders()})
             .then(({data}) => {
-                console.log(data);
                 handleNavPopupThx(); 
 
                 setName("");

@@ -5,6 +5,7 @@ import axios from "axios";
 import {getApiLink} from "../../../api/getApiLink";
 import {GetApiHeaders} from "../../../functions/getApiHeaders";
 import getCookies from "../../../functions/getCookies";
+import { toast } from 'react-toastify';
 
 export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, productCount}) => {
     const [quantity, setQuantity] = useState(productCount ?? 1);
@@ -22,7 +23,8 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
             "product_amount": 1
         }
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
-        axios.post(getApiLink("/api/bucket/add"), dataItem, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
+        axios.post(getApiLink("/api/bucket/add"), dataItem, {headers: GetApiHeaders()})
+        // .then(({data}) => console.log(data)).catch(er => toast.error(er))
 
         dispatch(changeBasketItem({
             count: 1,
@@ -43,7 +45,8 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
         }
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
-        axios.post(getApiLink("/api/bucket/remove"), dataItem, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
+        axios.post(getApiLink("/api/bucket/remove"), dataItem, {headers: GetApiHeaders()})
+        // .then(({data}) => console.log(data)).catch(er => console.log(er))
 
         dispatch(changeBasketItem({
             count: -1,

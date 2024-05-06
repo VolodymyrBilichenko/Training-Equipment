@@ -10,7 +10,6 @@ export const HeaderAddNavDesk = () => {
     const token = getCookies('cookieToken');
     const basketList = useSelector(state => state.toolkit.basket);
 
-    console.log(usersData);
 
     const handlePopUpClick = () => {        
         if (token) {

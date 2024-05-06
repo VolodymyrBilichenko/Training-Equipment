@@ -9,7 +9,7 @@ import {useNavigate, useParams} from 'react-router-dom'
 import {CatalogCategories} from "./components/CatalogCategories";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
 import {PaginationProducts} from '../../components/PaginationProducts/PaginationProducts'
-import { toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 
 export const Catalog = () => {
     const {category_id, search} = useParams();
@@ -50,7 +50,7 @@ export const Catalog = () => {
                 setIsLoading(false)
             })
             .catch(error => {
-                console.log('products undefined', error);
+                toast.error(error)
                 setIsLoading(false)
             })
     }
@@ -64,7 +64,7 @@ export const Catalog = () => {
                 setMetaProduct(data)
             })
             .catch(error => {
-                console.log('products undefined', error);
+                toast.error(error)
                 setIsLoading(false)
             })
 

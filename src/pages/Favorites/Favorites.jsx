@@ -8,14 +8,9 @@ import { useSelector } from "react-redux";
 import { PopupContext } from '../../App'
 
 export const Favorites = () => {
-    // TODO переделать избраное, что бы отправляло на бек 
 
     const favorites = useSelector(state => state.toolkit.favorites)
-    // const allProducts = useSelector(state => state.toolkit.allProducts)
 
-    // const favoritesList = allProducts.filter(item => favorites.some(item2 => item2 === item.id))
-
-    console.log(favorites);
     const [isLoading, setIsLoading] = useState(false)
 
     const FavModal = useContext(PopupContext);
@@ -23,13 +18,6 @@ export const Favorites = () => {
     const handleFavModal = () => {
         FavModal('favorites')
     }
-
-
-    // useEffect(() => {
-    //     if(!favorites.length && !allProducts.length && !favoritesList.length) return;
-
-    //     setIsLoading(false)
-    // }, [favoritesList])
 
     return (
         <>

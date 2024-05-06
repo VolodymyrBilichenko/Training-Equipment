@@ -9,7 +9,6 @@ export const FavoritesPopUp = ({ handleClosePopUp }) => {
     const [email, setEmail] = useState('');
     const dataFavorites = useSelector(state => state.toolkit.favorites);
 
-    console.log(dataFavorites);
 
     
     const handleFormSubmit = (e) => {
@@ -26,12 +25,10 @@ export const FavoritesPopUp = ({ handleClosePopUp }) => {
             "email": email,
         }
 
-        console.log(dataToSend);
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies("cookieToken")}`;
         axios.post(getApiLink('/api/send-commercial-offer'), dataToSend, {headers: GetApiHeaders()})
             .then(({data}) => {
-                console.log(data);
                 // handleNavPopupThx();
             })
             .catch(error => {

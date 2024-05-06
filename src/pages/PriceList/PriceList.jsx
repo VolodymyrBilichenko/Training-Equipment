@@ -12,12 +12,10 @@ export const PriceList = () => {
 	const fullPriceArray = priceData.filter(item => item.category === null);
 	const fullPrice = fullPriceArray.length > 0 ? fullPriceArray[0] : null;
 
-	console.log(fullPrice);
 
 	useEffect(() => {
 		axios.get(getApiLink('/api/price-list/get'), {headers: GetApiHeaders()})
 			.then(({data}) => {
-				console.log(data.data);
 				setPriceData(data.data);
 			})
 			.catch(error => {

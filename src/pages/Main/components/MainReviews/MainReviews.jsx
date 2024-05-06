@@ -46,7 +46,6 @@ export const MainReviews = ({id}) => {
             })
     }, [])
 
-    console.log(reviewsData);
 
     return (
         <section className="reviews container" id={id}>

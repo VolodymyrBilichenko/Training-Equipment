@@ -11,7 +11,6 @@ import {toast} from "react-toastify";
 
 export const ProductListItem = ({data}) => {
 
-    console.log(data);
 
     const dispatch = useDispatch();
 
@@ -27,7 +26,8 @@ export const ProductListItem = ({data}) => {
         axios.post(getApiLink("/api/bucket/add"), {
             "product_id": data.id,
             "product_amount": 1
-        }, {headers: GetApiHeaders()}).then(({data}) => console.log(data)).catch(er => console.log(er))
+        }, {headers: GetApiHeaders()})
+        // .then(({data}) => console.log(data)).catch(er => console.log(er))
 
         dispatch(addBasketItem({
             product_id: data.id,
@@ -50,7 +50,6 @@ export const ProductListItem = ({data}) => {
         }
         if (!isFavorite) {
 
-            console.log(data);
 
             dispatch(addFavorite(halfInfoProduct));
             setIsFavorite(true);
@@ -59,7 +58,6 @@ export const ProductListItem = ({data}) => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
             axios.post(getApiLink(`/api/favorites/add/${data.id}`), {headers: GetApiHeaders()})
                 .then(({data}) => {
-                    console.log('мб добавил',data);
                 })
                 .catch((error) => {
                     console.error(error);
@@ -73,7 +71,6 @@ export const ProductListItem = ({data}) => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
             axios.post(getApiLink(`/api/favorites/remove/${data.id}`), {headers: GetApiHeaders()})
                 .then(({data}) => {
-                    console.log('мб удалил',data);
                 })
                 .catch((error) => {
                     console.error(error);

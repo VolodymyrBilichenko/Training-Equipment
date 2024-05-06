@@ -2,7 +2,6 @@ import React from 'react'
 
 export const ProfileOrdersTr = ({itemData}) => {
 
-    console.log(itemData)
 
     return (
         <tr>

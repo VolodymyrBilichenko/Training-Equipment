@@ -23,11 +23,9 @@ export const HeaderPanel = () => {
         axios.get(getApiLink('/api/static/data'), configHeader)
             .then(({data}) => {
                 setStaticData(data.data);
-                console.log('contact', data.data);
             })
             .catch((error) => {
                 toast.error("Возникла неизведанная ошибка")
-                console.log('staticData undefined', error);
             })
     }, [])
 

@@ -33,8 +33,6 @@ export const Basket = () => {
     const discountAmount = ((totalAmount * discountPercent) / 100)
     const discountTotalSum = (totalAmount - discountAmount) - discountBonuses
 
-    console.log(discountBonuses);
-    console.log(discountAmount);
 
     useEffect(() => {
         !basketList.length && setTotalAmount(0);
