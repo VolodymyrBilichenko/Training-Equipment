@@ -24,7 +24,6 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
         }
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
         axios.post(getApiLink("/api/bucket/add"), dataItem, {headers: GetApiHeaders()})
-        // .then(({data}) => console.log(data)).catch(er => toast.error(er))
 
         dispatch(changeBasketItem({
             count: 1,
@@ -46,7 +45,6 @@ export const CartItemLength = ({setProductCount, setTotalAmount, productInfo, pr
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
         axios.post(getApiLink("/api/bucket/remove"), dataItem, {headers: GetApiHeaders()})
-        // .then(({data}) => console.log(data)).catch(er => console.log(er))
 
         dispatch(changeBasketItem({
             count: -1,

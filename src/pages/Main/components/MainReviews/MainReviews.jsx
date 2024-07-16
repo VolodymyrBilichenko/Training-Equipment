@@ -111,15 +111,15 @@ export const MainReviews = ({id}) => {
                             
                             <div className="reviews__slide_col">
                                 <div className="reviews__certificate">
-                                <a href={reviewItem.file && reviewItem.file.web_path} className="reviews__certificate_link" data-fancybox="gallery">
+                                {reviewItem?.file && <a href={reviewItem.file && reviewItem.file.web_path} className="reviews__certificate_link" data-fancybox="gallery">
                                     <div>
                                         {reviewItem.file && (
-                                                    <img src={reviewItem.file.web_path} alt="Sertificate" width="100%" loading="lazy" style={{marginBottom: "10px"}}/>
+                                                    <img src={reviewItem.file.web_path} alt="Sertificate" width="100%" loading="lazy" style={{marginBottom: "30px"}}/>
                                             )}
                                     </div>
                                     
                                         ДИвитися подяку
-                                </a>
+                                </a>}
                                 </div>
                             </div>
                         </Fancybox>

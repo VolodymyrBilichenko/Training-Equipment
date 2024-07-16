@@ -1,25 +1,25 @@
-import React, {useEffect, useState} from 'react'
-import {BackGroundDecor} from '../../components/BackGroundDecor/BackGroundDecor'
-import {BreadCrumbs} from '../../components/BreadCrumbs/BreadCrumbs'
-import {ProductsList} from '../../components/ProductsList/ProductsList'
-import {CartItemLength} from '../../components/CartList/components/CartItemLength'
+import React, { useEffect, useState } from 'react'
+import { BackGroundDecor } from '../../components/BackGroundDecor/BackGroundDecor'
+import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
+import { ProductsList } from '../../components/ProductsList/ProductsList'
+import { CartItemLength } from '../../components/CartList/components/CartItemLength'
 import axios from 'axios'
-import {getApiLink} from '../../api/getApiLink'
-import {useParams} from 'react-router-dom'
-import {addBasketItem} from "../../redux/toolkitSlice";
-import {useDispatch} from "react-redux";
-import {GetApiHeaders} from "../../functions/getApiHeaders";
+import { getApiLink } from '../../api/getApiLink'
+import { useParams } from 'react-router-dom'
+import { addBasketItem } from "../../redux/toolkitSlice";
+import { useDispatch } from "react-redux";
+import { GetApiHeaders } from "../../functions/getApiHeaders";
 import CreditCard from '../../assets/img/product/credit_card.svg'
 import AccBalance from '../../assets/img/product/account_balance_wallet.svg'
 import Assigment from '../../assets/img/product/assignment.svg'
 import getCookies from "../../functions/getCookies";
-import {ProductSwiper} from './ProductSwiper/ProductSwiper'
-import {toast} from "react-toastify";
+import { ProductSwiper } from './ProductSwiper/ProductSwiper'
+import { toast } from "react-toastify";
 import HTMLReactParser from "html-react-parser";
 import { Preloader } from '../../components/Preloader/Preloader'
 
 export const ProductCard = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const dispatch = useDispatch()
 
     const [dataCard, setDataCard] = useState({});
@@ -29,10 +29,10 @@ export const ProductCard = () => {
 
     useEffect(() => {
 
-        setIsLoading(true) 
+        setIsLoading(true)
 
-        axios.get(getApiLink(`/api/products/${id}`), {headers: GetApiHeaders()})
-            .then(({data}) => {
+        axios.get(getApiLink(`/api/products/${id}`), { headers: GetApiHeaders() })
+            .then(({ data }) => {
                 setDataCard(data.data)
             })
             .catch((error) => {
@@ -40,7 +40,7 @@ export const ProductCard = () => {
             })
             .finally(() => {
                 setTimeout(() => {
-                    setIsLoading(false)                
+                    setIsLoading(false)
                 }, 1300);
             })
 
@@ -52,14 +52,14 @@ export const ProductCard = () => {
 
     const handleAddCart = () => {
         const dataItem = {
-            "product_id": dataCard.id,
+            "product_id": dataCard?.id,
             "product_amount": productCount
         }
 
         if (productCount > dataCard?.amount_in_store) return toast.error("На данный момент такого количества товара на складе нет")
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies('cookieToken')}`
-        axios.post(getApiLink("/api/bucket/add"), dataItem, {headers: GetApiHeaders()})
+        axios.post(getApiLink("/api/bucket/add"), dataItem, { headers: GetApiHeaders() })
         // .then(({data}) => console.log(data)).catch(er => console.log(er))
 
         toast.success("Товар успешно добавлен в корзину")
@@ -70,23 +70,23 @@ export const ProductCard = () => {
 
     return (
         <>
-            <BackGroundDecor/>
+            <BackGroundDecor />
 
             <BreadCrumbs pages={[{
                 route: '/catalog',
                 page: 'Каталог'
-            }, {page: 'Демонстраційна модель «Мозок. Анатомія людини» Learning resources'}]}/>
+            }, { page: 'Демонстраційна модель «Мозок. Анатомія людини» Learning resources' }]} />
 
             {!!Object.keys(dataCard).length && <section className="product container">
 
-                <ProductSwiper dataCard={dataCard.files}/>
+                <ProductSwiper dataCard={dataCard?.files} />
 
                 <div className="product__col">
                     <h2 className="product__title title">
-                        {dataCard.name}
+                        {dataCard?.name}
                     </h2>
                     <span className="product__article-number">
-                        {dataCard.article}
+                        {dataCard?.article}
                     </span>
                     <span className="product__status in-stock">
                         В наличии
@@ -94,17 +94,17 @@ export const ProductCard = () => {
                     <div className="product__info">
                         <div className="product__info_col">
                             <div className="product__price">
-                                <ins>{dataCard.original_price} ₴</ins>
-                                <del>{`${dataCard.price === null ? '' : dataCard.price + ' ₴'}`}</del>
+                                <ins>{(dataCard?.price ?? dataCard?.original_price) * productCount} ₴</ins>
+                                {dataCard?.price && <del>{dataCard?.original_price * productCount} ₴</del>}
                             </div>
 
-                            <CartItemLength setProductCount={setProductCount} productCount={productCount}/>
+                            <CartItemLength setProductCount={setProductCount} productCount={productCount} />
 
                         </div>
                         <div className="product__info_col">
                             <button onClick={handleAddCart} className="product__add-to-cart button"
-                                    type="button"
-                                    aria-label="Додати до кошика">
+                                type="button"
+                                aria-label="Додати до кошика">
                                 <svg width="20" height="20" viewBox="0 0 48 48">
                                     <use xlinkHref="#cart"></use>
                                 </svg>
@@ -119,18 +119,18 @@ export const ProductCard = () => {
                             <table className="product__characteristics">
                                 <caption>Характеристики</caption>
                                 <tbody>
-                                {dataCard?.condition && <tr>
-                                    <td>Стан</td>
-                                    <td>{dataCard.condition}</td>
-                                </tr>}
-                                {dataCard?.producer && <tr>
-                                    <td>Виробник</td>
-                                    <td>{dataCard.producer}</td>
-                                </tr>}
-                                {dataCard?.weight && <tr>
-                                    <td>Вага</td>
-                                    <td>{dataCard.weight} гр</td>
-                                </tr>}
+                                    {dataCard?.condition && <tr>
+                                        <td>Стан</td>
+                                        <td>{dataCard?.condition}</td>
+                                    </tr>}
+                                    {dataCard?.producer && <tr>
+                                        <td>Виробник</td>
+                                        <td>{dataCard?.producer}</td>
+                                    </tr>}
+                                    {dataCard?.weight && <tr>
+                                        <td>Вага</td>
+                                        <td>{dataCard?.weight} гр</td>
+                                    </tr>}
                                 </tbody>
                             </table>
                         </div>
@@ -138,7 +138,7 @@ export const ProductCard = () => {
                             <ul className="product__paymethods">
                                 <li>
                                     <i>
-                                        <img src={CreditCard} width="40" height="40" loading="lazy" alt=""/>
+                                        <img src={CreditCard} width="40" height="40" loading="lazy" alt="" />
                                     </i>
                                     <span>
                                         Безнал
@@ -146,7 +146,7 @@ export const ProductCard = () => {
                                 </li>
                                 <li>
                                     <i>
-                                        <img src={AccBalance} width="40" height="40" loading="lazy" alt=""/>
+                                        <img src={AccBalance} width="40" height="40" loading="lazy" alt="" />
                                     </i>
                                     <span>
                                         Наложенный платёж
@@ -154,7 +154,7 @@ export const ProductCard = () => {
                                 </li>
                                 <li>
                                     <i>
-                                        <img src={Assigment} width="40" height="40" loading="lazy" alt=""/>
+                                        <img src={Assigment} width="40" height="40" loading="lazy" alt="" />
                                     </i>
                                     <span>
                                         По договору поставки
@@ -163,7 +163,7 @@ export const ProductCard = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className='product__info'>
+                    <div style={{ marginTop: "40px" }}>
                         <div className="product__description">
                             <h3>
                                 Опис
@@ -194,7 +194,7 @@ export const ProductCard = () => {
             {!!dataCard?.recommended_products?.length && <section className="recommended container">
                 <div className="recommended__decor" aria-hidden="true">
                     <picture>
-                        <img src="img/decor-element.png" alt="" width="0" height="0" loading="lazy"/>
+                        <img src="img/decor-element.png" alt="" width="0" height="0" loading="lazy" />
                     </picture>
                 </div>
                 <div className="recommended__container">
@@ -202,7 +202,7 @@ export const ProductCard = () => {
                         Рекомендованные
                     </h2>
 
-                    <ProductsList isLoading={isLoading} list={dataCard?.recommended_products} ClassNameList={'recommended__list'}/>
+                    <ProductsList isLoading={isLoading} list={dataCard?.recommended_products} ClassNameList={'recommended__list'} />
 
                 </div>
             </section>}

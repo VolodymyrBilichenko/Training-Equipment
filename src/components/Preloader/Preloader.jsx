@@ -3,6 +3,7 @@ import React from 'react'
 import bgdDecor from '../../assets/img/index/hero/background-decor.png' 
 import bgdDecorElem from '../../assets/img/decor-element.png' 
 import uaLogo from '../../assets/img/ua-min-logo.svg' 
+import { CustomLoading } from '../CustomLoading/CustomLoading'
 
 export const Preloader = () => {
     return (
@@ -23,11 +24,12 @@ export const Preloader = () => {
 				<img src={uaLogo} alt="" width="177" height="140" loading="lazy"/>
 				<b>Навчальне  Обладнання</b>
 			</div>
-			<div class="preloader__text">
+			<CustomLoading/>
+			{/* <div class="preloader__text">
 				<span>Все,</span>
 				<span>Що</span>
 				<span>Необхідно</span>
-			</div>
+			</div> */}
 		</section>   
     )
 }
