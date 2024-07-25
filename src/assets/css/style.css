@@ -952,7 +952,8 @@ section {
 }
 
 .title {
-    font-size: 1.25rem
+    font-size: 1.25rem;
+    line-height: normal;
 }
 
 .min-title {
@@ -3816,7 +3817,7 @@ body.is-popup-active {
     }
 
     .popup-text {
-        font-size: 12px
+        font-size: 16px
     }
 
     .popup-close-btn {
@@ -4506,7 +4507,7 @@ body.is-popup-active {
     }
 
     .cart__message p::before,.cart__message textarea {
-        border-radius: 50px
+        border-radius: 30px
     }
 
     .orders__list {
@@ -5292,3 +5293,70 @@ body.is-popup-active {
  .Toastify__close-button svg{
     fill: #fff;
  }
+
+
+
+
+/* NEW STYLES */
+
+.popup-form__submit:disabled:hover {
+    background: transparent;
+    cursor: default;
+}
+.popup-form__submit:disabled {
+    opacity: 0.5;
+}
+
+.error-message {
+    color: red;
+    font-size: 13px;
+}
+
+.popup-form-register {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+.form-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: 20px;
+    margin-top: 10px;
+    * {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .form-fields {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.fade-enter-active,
+.fade-enter {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+}
+
+.fade-exit {
+    opacity: 0;
+    transition: all .3s ease;
+}
+
+.fade-enter-done {
+    opacity: 1;
+    transition: all .3s ease;
+}
+
+.catalog-fade-exit {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+}
+

@@ -1,20 +1,18 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {PopupContext} from '../../App';
 import {getApiLink} from '../../api/getApiLink'
 import axios from 'axios';
 import setCookie from '../../functions/setCookie';
-import {useNavigate} from 'react-router-dom';
 import {setUser} from "../../redux/toolkitSlice";
 import {useDispatch} from "react-redux";
-import {toast} from 'react-toastify';
+import { errorTypes } from '../../constants.js';
 
 export const LoginPopUp = ({handleClosePopUp}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
     const [showPass, setShowPass] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const navigate = useNavigate();
     const dispatch = useDispatch()
 
     const handleShowPass = () => {
@@ -23,32 +21,26 @@ export const LoginPopUp = ({handleClosePopUp}) => {
 
     const handleLogin = (e) => {
         e.preventDefault()
-        setError('')
-
-        // grecaptcha.enterprise.ready(async () => {
-        //     const token = await grecaptcha.enterprise.execute('6LcyeLYpAAAAAF0jlWD4XwAdezmfK3VtULebQzNw', { action: 'LOGIN' });
+        setErrorMessage('')
 
         axios.post(getApiLink('/api/auth/login'), {
-            // token: token,
             email,
             password
         }).then((res) => {
             if (res.status === 200) {
                 setEmail('')
                 setPassword('')
-
                 dispatch(setUser(res.data.data))
-
             }
+
             setCookie('cookieToken', res.data.data.token);
-            navigate('/profile');
             handleClosePopUp();
         }).catch(error => {
-            console.error(error);
-            toast.error("Неправильні дані для входу. Будь ласка, перевірте свої дані та спробуйте ще раз.");
+            setErrorMessage(error?.response?.data?.message ?? error?.response?.data?.error ?? "")
+            console.log(error);
+            // toast.error("Неправильні дані для входу. Будь ласка, перевірте свої дані та спробуйте ще раз.");
         })
     }
-
 
 
     const SetPopContext = useContext(PopupContext);
@@ -93,7 +85,7 @@ export const LoginPopUp = ({handleClosePopUp}) => {
                                     </button>
                                 </span>
                         </div>
-                        <p>{error}</p>
+                        <p className='error-message'>{errorMessage && errorTypes[errorMessage]}</p>
                         <div className="popup-form__text">
                             <p>
                                 <button onClick={_ => SetPopContext('resetPass')} type={"button"}
@@ -105,7 +97,7 @@ export const LoginPopUp = ({handleClosePopUp}) => {
                                 </button>
                             </p>
                         </div>
-                        <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+                        <div className="g-recaptcha" data-sitekey="6Lc7nvgpAAAAAAJsyvTKiul7qu9eq3pKQ9RAdNW9"></div>
                         <button className="popup-form__submit button is-mode-1" type="submit">
                             Войти
                         </button>

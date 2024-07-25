@@ -17,8 +17,8 @@ export const ProductsList = ({ ClassNameList, list, isLoading }) => {
                 />
             )) : (
 
-                <div class="catalog__none">
-                    <div class="catalog__none_block">
+                <div className="catalog__none">
+                    <div className="catalog__none_block">
                         <img src={NotFoundImg} width="250" height="204" alt=""/>
                         <span>Ничего нет</span>
                     </div>

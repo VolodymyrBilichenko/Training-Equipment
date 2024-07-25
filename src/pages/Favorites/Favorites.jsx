@@ -21,7 +21,7 @@ export const Favorites = () => {
 
     return (
         <>
-            <BackGroundDecor/>
+            {/* <BackGroundDecor/> */}
 
             <BreadCrumbs pages={[{page: 'Избранное'}]}/>
 

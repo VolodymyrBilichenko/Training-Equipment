@@ -33,7 +33,7 @@ export const Profile = () => {
 
     return (
         <>
-            <BackGroundDecor/>
+            {/* <BackGroundDecor/> */}
 
             <BreadCrumbs pages={[{page: 'Личный кабинет'}]}/>
 

@@ -34,7 +34,7 @@ export const Сertificate = () => {
 
 	return (
 		<>
-			<BackGroundDecor />
+			{/* <BackGroundDecor /> */}
 
 			<section className="certificate_orders">
 

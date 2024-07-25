@@ -21,32 +21,5 @@ export const handleRegistration = (
 ) => {
     e.preventDefault()
 
-    axios.post(getApiLink('/api/auth/registration'), {
-        name: name,
-        email: email,
-        phone_number: phone,
-        password: pass
-    }).then((res) => {
-
-        if (res.status === 201) {
-            setSuccess('You have been registered. Wait for redirecting')
-            setError('')
-
-            setName('')
-            setEmail('')
-            setPhone('')
-            setPass('')
-
-            setTimeout(() => {
-                navigate('/profile')
-                dispatch(setUser(res.data.data))
-                setCookie('cookieToken', res.data.data.token );
-                SetPopContext("")
-            }, 2000)
-
-
-        }
-    }).catch(err => {
-        setError(err.response.data.message)
-    })
+    
 }

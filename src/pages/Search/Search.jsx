@@ -34,7 +34,7 @@ export const Search = () => {
 
     return (
         <>
-            <BackGroundDecor/>
+            {/* <BackGroundDecor/> */}
 
             <BreadCrumbs pages={[{page: `Пошук по: ${search}`}]}/>
 

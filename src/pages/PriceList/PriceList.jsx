@@ -25,7 +25,7 @@ export const PriceList = () => {
 
 	return (
 		<>
-			<BackGroundDecor/>
+			{/* <BackGroundDecor/> */}
 
 			<BreadCrumbs pages={[{page: 'Прайс-лист'}]}/>
 
