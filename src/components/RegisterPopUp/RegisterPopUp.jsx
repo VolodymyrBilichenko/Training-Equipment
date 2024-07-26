@@ -47,8 +47,7 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
     setEmail("");
     setPhone("");
     setPass("");
-    // SetPopContext("");
-    handleClosePopUp();
+    SetPopContext("askConfirm");
   }, [isSuccess]);
 
   return (

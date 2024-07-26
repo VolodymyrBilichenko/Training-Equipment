@@ -26,6 +26,10 @@ export const routes = () => {
             element: <Search/>
         },
         {
+            path: '/confirm',
+            element: <Main/>
+        },
+        {
             path: '/search',
             element: <Search/>
         },

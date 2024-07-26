@@ -26,6 +26,9 @@ export const App = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    if(location.pathname.includes('confirm')) setModal('confirm')
+
   }, [location]);
 
   const _ = useGetBeginerAPIs();
