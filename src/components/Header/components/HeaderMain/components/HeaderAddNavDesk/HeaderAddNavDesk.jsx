@@ -9,6 +9,7 @@ export const HeaderAddNavDesk = () => {
     const usersData = useSelector(state => state.toolkit.user)
     const token = getCookies('cookieToken');
     const basketList = useSelector(state => state.toolkit.basket);
+    const favorites = useSelector(state => state.toolkit.favorites);
 
 
     const handlePopUpClick = () => {        
@@ -32,7 +33,7 @@ export const HeaderAddNavDesk = () => {
                     </button>
                 </li>
                 <li>
-                    <NavLink to={'/favorites'} title="Обране">
+                    <NavLink to={'/favorites'} title="Обране" data-length={favorites.length}>
                         <svg width="26" height="26" viewBox="0 0 48 48">
                             <use xlinkHref="#favorite"></use>
                         </svg>
