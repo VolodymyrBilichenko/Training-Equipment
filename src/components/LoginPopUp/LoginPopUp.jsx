@@ -38,7 +38,6 @@ export const LoginPopUp = ({handleClosePopUp}) => {
         }).catch(error => {
             setErrorMessage(error?.response?.data?.message ?? error?.response?.data?.error ?? "")
             console.log(error);
-            // toast.error("Неправильні дані для входу. Будь ласка, перевірте свої дані та спробуйте ще раз.");
         })
     }
 

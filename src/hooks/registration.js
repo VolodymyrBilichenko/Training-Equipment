@@ -23,8 +23,8 @@ export const useRegistration = ({ body }) => {
         console.log(res);
         if (res.status >= 200 && res.status < 300) {
           setIsSuccess(true);
-          dispatch(setUser(res?.data?.data));
-          setCookie("cookieToken", res?.data?.data?.token);
+          // dispatch(setUser(res?.data?.data));
+          // setCookie("cookieToken", res?.data?.data?.token);
         }
       })
       .catch((err) => {
