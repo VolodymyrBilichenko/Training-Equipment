@@ -1,8 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { PopupContext } from "../App";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
+import { getApiLink } from "../api/getApiLink";
 
 export const ModalConfirm = ({ handleClosePopUp }) => {
   const SetPopContext = useContext(PopupContext);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Используем URLSearchParams для разбора строки запроса
+    const params = new URLSearchParams(location.search);
+
+    // Преобразуем в объект
+    const queryObject = {};
+    for (const [key, value] of params.entries()) {
+      queryObject[key] = value;
+    }
+
+    axios
+      .get(
+        getApiLink(
+          `/verify-email/?email=${queryObject?.email}&code=${queryObject?.code}`
+        )
+      )
+      .then((res) => {})
+      .catch((err) => {});
+  }, []);
 
   return (
     <div className="popup-wrapper">
