@@ -1,23 +1,21 @@
-import React from 'react'
+import React from "react";
 
-export const PaginationProducts = ({ClassName, meta, handlePage}) => {
-
-  // console.log(meta.current_page);
+export const PaginationProducts = ({ ClassName, meta, handlePage }) => {
   const processedLinks = meta?.links?.map((link, index) => {
     if (index === 0) {
       return {
         ...link,
-        label: 'Предыдущая'
+        label: "Предыдущая",
       };
     } else if (index === meta.links.length - 1) {
       return {
         ...link,
-        label: 'Следущая'
+        label: "Следущая",
       };
     } else {
       return {
         ...link,
-        label: link.label.replace('&laquo;', '')
+        label: link.label.replace("&laquo;", ""),
       };
     }
   });
@@ -28,17 +26,23 @@ export const PaginationProducts = ({ClassName, meta, handlePage}) => {
     return null;
   }
 
-  return (
+  console.log(processedLinks);
 
+  return (
     <div className={`${ClassName} pagination`}>
-        <div className="pagination__list">
-          {processedLinks?.map((item, index) => (
-            <button key={index} 
-              className={item.active ? 'is-current' : ''} 
-              onClick={_=> handlePage(item.url)}>{item.label}
+      <div className="pagination__list">
+        {processedLinks?.map((item, index) => (
+          <React.Fragment key={index}>
+            <button
+              disabled={!item?.url}
+              className={item.active ? "is-current" : ""}
+              onClick={(_) => handlePage(item.url + "&active=1")}
+            >
+              {item.label}
             </button>
-          ))}
-        </div>
+          </React.Fragment>
+        ))}
+      </div>
     </div>
-  )
-}
+  );
+};

@@ -3162,8 +3162,11 @@ body.is-popup-active {
     gap: 20px 10px
 }
 
+.certificates__card_image img {
+    object-fit: cover;
+}
 .certificates__card_image {
-    display: block
+    display: block;
 }
 
 .certificates__card_name {
@@ -5363,4 +5366,39 @@ body.is-popup-active {
 .grecaptcha-badge {
     opacity: 0;
     margin-right: -70px;
+}
+
+@media screen and (min-width: 992px) {
+    .circle-1 {
+        width: 81px;
+        height: 81px;
+        background: #1179E6;
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        border-radius: 50%;
+        z-index: 0;
+        filter: blur(30px);
+    }
+    .circle-2 {
+        width: 81px;
+        height: 81px;
+        background: #E6DB02;
+        position: absolute;
+        top: -10px;
+        left: 80px;
+        border-radius: 50%;
+        z-index: 0;
+        filter: blur(30px);
+    }
+}
+
+.header__logo img {
+    position: relative;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: pointer;
+    pointer-events: none;
 }

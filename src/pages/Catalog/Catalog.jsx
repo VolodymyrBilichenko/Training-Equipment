@@ -16,7 +16,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 export const Catalog = () => {
   const { category_id, search } = useParams();
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   const allCategories = useSelector((state) => state.toolkit.allCategories);
 
   const [products, setProducts] = useState([]);
@@ -47,6 +47,7 @@ export const Catalog = () => {
   const handlePage = (pageLink) => {
     setIsLoading(true);
     window.scrollTo(0, 0);
+    console.log(pageLink);
     axios
       .get(pageLink, { headers: GetApiHeaders() })
       .then(({ data }) => {
@@ -75,6 +76,7 @@ export const Catalog = () => {
         setIsLoading(false);
         setProducts(data.data);
         setMetaProduct(data);
+        console.log(data);
       })
       .catch((error) => {
         toast.error(error);
@@ -90,8 +92,6 @@ export const Catalog = () => {
 
   return (
     <>
-      {/* <BackGroundDecor/> */}
-
       <BreadCrumbs pages={[{ page: "каталог" }, categoryName]} />
 
       <section className="catalog container">
@@ -142,11 +142,11 @@ export const Catalog = () => {
             </form>
           </search>
 
-                <ProductsList
-                  list={products}
-                  ClassNameList={"catalog__list"}
-                  isLoading={isLoading}
-                />
+          <ProductsList
+            list={products}
+            ClassNameList={"catalog__list"}
+            isLoading={isLoading}
+          />
 
           <PaginationProducts meta={metaProduct.meta} handlePage={handlePage} />
         </div>

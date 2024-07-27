@@ -19,10 +19,11 @@ export const ModalAskConfirm = ({ handleClosePopUp }) => {
           </svg>
         </button>
         <div className="popup-container">
-          <h2 className="popup-title title">Спасибо за регистрацию!</h2>
+          <h2 className="popup-title title">Спасибо за регистрацию</h2>
           <div className="popup-text">
             <p>
-              Вам на почту было отправлено сообщение со ссылкой о подтверждении!
+              Для входа на сайт нужно активировать учетную запись. Письмо с
+              инструкцией выслали вам на email
             </p>
           </div>
           <br />

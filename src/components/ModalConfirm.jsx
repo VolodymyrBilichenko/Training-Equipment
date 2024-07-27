@@ -25,8 +25,12 @@ export const ModalConfirm = ({ handleClosePopUp }) => {
           `/verify-email/?email=${queryObject?.email}&code=${queryObject?.code}`
         )
       )
-      .then((res) => {})
-      .catch((err) => {});
+      .then((res) => {
+        window.history.pushState(null, "", window.location.origin);
+      })
+      .catch((err) => {
+        window.history.pushState(null, "", window.location.origin);
+      });
   }, []);
 
   return (

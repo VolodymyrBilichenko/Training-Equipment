@@ -33,6 +33,8 @@ export const App = () => {
 
   const _ = useGetBeginerAPIs();
 
+  const nonDecorationPages = ['/confirm']
+
   return (
     <>
       <Sprite />
@@ -41,7 +43,7 @@ export const App = () => {
         <Header />
 
         <div className="main">
-          {location.pathname !== "/" && <BackGroundDecor />}
+          {location.pathname !== "/" && !nonDecorationPages.some(item => location.pathname.includes(item)) && <BackGroundDecor />}
 
           <TransitionGroup>
             <CSSTransition

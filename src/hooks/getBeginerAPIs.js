@@ -45,6 +45,7 @@ export const useGetBeginerAPIs = () => {
         headers: GetApiHeaders(),
       })
       .then(({ data }) => {
+        console.log(data);
         dispatch(setAllCategories(data.data));
       })
       .catch((error) => {
