@@ -16,6 +16,7 @@ import {
 } from "react-transition-group";
 import { ToastContainer } from "react-toastify";
 import { BackGroundDecor } from "./components/BackGroundDecor/BackGroundDecor";
+import ArrowLoader from './assets/img/loader.svg'
 
 export const PopupContext = createContext(null);
 
@@ -23,27 +24,55 @@ export const App = () => {
   const location = useLocation();
   const [routesList] = useState(routes());
   const [modal, setModal] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    if(location.pathname.includes('confirm')) setModal('confirm')
+    if (location.pathname.includes("confirm")) setModal("confirm");
+
+
+    window.onload = () => {
+      setIsLoading(false)
+    }
 
   }, [location]);
 
   const _ = useGetBeginerAPIs();
 
-  const nonDecorationPages = ['/confirm']
+  const nonDecorationPages = ["/confirm"];
 
   return (
     <>
+      
+      <TransitionGroup>
+            <CSSTransition
+              key={isLoading}
+              // classNames={!location.pathname.includes("/catalog/") ? "fade" : "catalog-fade"}
+              classNames={"fade"}
+              timeout={300}
+            >
+              {isLoading ? <div className="catalog__loader loader" >
+            <div className="catalog__loader_block">
+                <img src={ArrowLoader} width="53" height="53" alt=""/>
+                <span>Loading...</span>
+            </div>
+        </div> : <></>}
+            </CSSTransition>
+          </TransitionGroup>
+
+
       <Sprite />
 
       <PopupContext.Provider value={setModal}>
         <Header />
 
         <div className="main">
-          {location.pathname !== "/" && !nonDecorationPages.some(item => location.pathname.includes(item)) && <BackGroundDecor />}
+          {location.pathname !== "/" &&
+            !nonDecorationPages.some((item) =>
+              location.pathname.includes(item)
+            ) && <BackGroundDecor />}
 
           <TransitionGroup>
             <CSSTransition
