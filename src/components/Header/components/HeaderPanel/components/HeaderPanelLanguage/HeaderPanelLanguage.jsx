@@ -62,11 +62,11 @@ export const HeaderPanelLanguage = () => {
                             RU
                         </button>
                     </li>
-                    <li>
+                    {/* <li>
                         <button onClick={_ => changeLanguage("en")}>
                             EN
                         </button>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         </div>

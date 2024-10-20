@@ -5369,6 +5369,7 @@ body.is-popup-active {
 }
 
 @media screen and (min-width: 992px) {
+    
     .circle-1 {
         width: 81px;
         height: 81px;
@@ -5379,6 +5380,8 @@ body.is-popup-active {
         border-radius: 50%;
         z-index: 0;
         filter: blur(30px);
+        opacity: 0;
+        transition: all .3s ease;
     }
     .circle-2 {
         width: 81px;
@@ -5390,7 +5393,14 @@ body.is-popup-active {
         border-radius: 50%;
         z-index: 0;
         filter: blur(30px);
+        opacity: 0;
+        transition: all .3s ease;
     }
+
+    .header__logo--link:hover .circle-2,
+    .header__logo--link:hover .circle-1 {
+        opacity: 1;
+   }
 }
 
 .header__logo img {

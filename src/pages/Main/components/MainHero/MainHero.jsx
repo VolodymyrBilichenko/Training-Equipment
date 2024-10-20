@@ -10,9 +10,9 @@ export const MainHero = () => {
 
         <div className="index-hero__background" aria-hidden="true">
             <div className="index-hero__background--image">
-                <picture>
+                {BgdDecor && <picture>
                     <img src={BgdDecor} alt="bgd decor" width="0" height="0" loading="lazy"/>
-                </picture>
+                </picture>}
             </div>
             <div className="index-hero__background--item"></div>
             <div className="index-hero__background--item"></div>

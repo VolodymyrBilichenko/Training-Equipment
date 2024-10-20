@@ -230,6 +230,12 @@
 
 		h3 {
 			grid-column: 2;
+			a {
+				color: #fff;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
 
 			@include _992 {
 				max-width: 230px;

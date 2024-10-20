@@ -102,9 +102,9 @@ export const ProductCard = () => {
           <div className="product__col">
             <h2 className="product__title title">{dataCard?.name}</h2>
             <span className="product__article-number">{dataCard?.article}</span>
-            <span className="product__article-number">
+            {/* <span className="product__article-number">
               Осталось на складе: {dataCard?.amount_in_store}
-            </span>
+            </span> */}
             <span className="product__status in-stock">В наличии</span>
             <div className="product__info">
               <div className="product__info_col">

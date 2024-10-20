@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { PopupContext } from "../../App";
 import getCookies from "../../functions/getCookies";
 import { setBasketComment } from "../../redux/toolkitSlice";
+import { toast } from "react-toastify";
 
 export const Basket = () => {
   const setModal = useContext(PopupContext);
@@ -144,7 +145,7 @@ export const Basket = () => {
             </label>
 
             <button
-              onClick={(_) => handleOpenModal("order")}
+              onClick={(_) => basketList.label ? handleOpenModal("order") : toast.error('У Вас пустая корзина')}
               className="cart__submit button is-mode-1 open-popup"
               data-href="#order-popup"
               type="button"

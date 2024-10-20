@@ -7,6 +7,7 @@ import getCookies from "../../../functions/getCookies";
 import {getApiLink} from "../../../api/getApiLink";
 import {GetApiHeaders} from "../../../functions/getApiHeaders";
 import photoPlaceholder from '../../../assets/img/null-card-image.png'
+import { NavLink } from 'react-router-dom';
 
 
 export const CartListItem = ({productInfo, setTotalAmount, products}) => {
@@ -39,12 +40,16 @@ export const CartListItem = ({productInfo, setTotalAmount, products}) => {
         <li className="cart__item">
             <div className="cart__item_body">
                 <div className="cart__item_info">
-                    <div className="cart__item_image">
+                    <NavLink to={`/product/${productInfo.id}`} className="cart__item_image">
                         <picture>
                             <img src={productInfo.files[0]?.web_path ?? photoPlaceholder} alt="" width="130" height="130" loading="lazy"/>
                         </picture>
-                    </div>
-                    <h3>{productInfo.name}</h3>
+                    </NavLink>
+                    <h3>
+                        <NavLink to={`/product/${productInfo.id}`}>
+                        {productInfo.name}
+                        </NavLink>
+                    </h3>
                     <span>Артикул {productInfo.article}</span>
                 </div>
                 <div className="cart__item_price">
