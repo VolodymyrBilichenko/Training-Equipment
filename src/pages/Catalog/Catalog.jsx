@@ -86,7 +86,7 @@ export const Catalog = () => {
 
   const categoryName = category_id
     ? {
-        page: allCategories.find((item) => +item.id === +category_id)?.name,
+        page: allCategories?.find((item) => +item.id === +category_id)?.name,
       }
     : null;
 

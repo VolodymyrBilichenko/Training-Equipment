@@ -18,6 +18,20 @@
 	&__col {
 		//max-width: 100%;
 		max-width: calc(100vw - var(--container-padding) * 2);
+
+		.title-fav {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			button {
+				background: transparent;
+				border: none;
+				cursor: pointer;
+				svg {
+					color: #9C50B8;
+				}
+			}
+		}
 	}
 
 	// .product__gallery

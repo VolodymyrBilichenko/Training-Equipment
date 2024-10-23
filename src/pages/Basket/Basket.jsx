@@ -13,14 +13,36 @@ export const Basket = () => {
   const setModal = useContext(PopupContext);
   const [orderComment, setOrderComment] = useState("");
   const [totalAmount, setTotalAmount] = useState(0);
+  const [minOrderAmount, setMinOrderAmount] = useState(0);
   const dispatch = useDispatch();
 
   const basketList = useSelector((state) => state.toolkit.basket);
   const allProducts = useSelector((state) => state.toolkit.allProducts);
   const usersData = useSelector((state) => state.toolkit.user);
+  const minOrder = useSelector((state) => state.toolkit.settings)
 
   const handleOpenModal = (type) => {
     setModal(`${type}`);
+  };
+
+  useEffect(() => {
+    if(!Object.keys(minOrder).length) return
+    
+    setMinOrderAmount(minOrder?.find(
+      (item) => item.key === "min_order_price"
+    ).value)
+  }, [minOrder])
+
+  const handleOrder = () => {
+    if (!basketList.length) {
+      return toast.error("У Вас пустая корзина");
+    } else if (minOrderAmount > totalAmount) {
+      return toast.error(
+        "Минимальная сумма для заказа " + minOrderAmount + " грн"
+      );
+    }
+
+    handleOpenModal("order");
   };
 
   const handleCommentChange = (e) => {
@@ -94,6 +116,10 @@ export const Basket = () => {
             <table className="cart__total">
               <tbody>
                 <tr className="">
+                  <td>Минимальная сумма заказа</td>
+                  <td>{minOrderAmount} ₴</td>
+                </tr>
+                <tr className="">
                   <td>Общая сумма заказа</td>
                   <td>{totalAmount} ₴</td>
                 </tr>
@@ -145,7 +171,7 @@ export const Basket = () => {
             </label>
 
             <button
-              onClick={(_) => basketList.label ? handleOpenModal("order") : toast.error('У Вас пустая корзина')}
+              onClick={handleOrder}
               className="cart__submit button is-mode-1 open-popup"
               data-href="#order-popup"
               type="button"

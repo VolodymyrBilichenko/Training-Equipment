@@ -14,14 +14,20 @@ import {
   Transition,
   TransitionGroup,
 } from "react-transition-group";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { BackGroundDecor } from "./components/BackGroundDecor/BackGroundDecor";
 import ArrowLoader from './assets/img/loader.svg'
+import axios from "axios";
+import { getApiLink } from "./api/getApiLink";
+import { GetApiHeaders } from "./functions/getApiHeaders";
+import { useDispatch } from "react-redux";
+import { setSettings } from "./redux/toolkitSlice";
 
 export const PopupContext = createContext(null);
 
 export const App = () => {
   const location = useLocation();
+  const dispatch = useDispatch()
   const [routesList] = useState(routes());
   const [modal, setModal] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -38,6 +44,16 @@ export const App = () => {
     }
 
   }, [location]);
+
+  useEffect(() => {
+    axios.get(getApiLink('/api/static/data'), {headers: GetApiHeaders()})
+        .then(({data}) => {
+          dispatch(setSettings(data.data))
+        })
+        .catch((error) => {
+            toast.error("Возникла неизведанная ошибка")
+        })
+}, [])
 
   const _ = useGetBeginerAPIs();
 

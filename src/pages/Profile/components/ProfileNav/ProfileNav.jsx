@@ -59,6 +59,17 @@ export const ProfileNav = ({ onProfInfo, onProfOrders, onProfBonus }) => {
 				</button>
 			</li>
 			<li>
+				<button 
+					aria-label="Бонусы и скидки"
+					// className={activeTab === 'Бонусы и скидки' ? 'is-current' : ''}
+				>
+					<span>Електронні освітні ресурси (ЕОР)</span>
+					<svg width="20" height="20" viewBox="0 0 20 20">
+						<use xlinkHref="#arrow-next"></use>
+					</svg>
+				</button>
+			</li>
+			<li>
 				<br/>
 				<button onClick={handleExit} aria-label="Електронні освітні ресурси">
 					<span>Выйти</span>

@@ -11,10 +11,15 @@ const toolkitSlice = createSlice({
         basketComment: '',
         allProducts: [],
         allCategories: [],
+        settings: {},
     },
     reducers: {
         setUser(state, action) {
             state.user = action.payload
+        },
+
+        setSettings(state, action) {
+            state.settings = action.payload
         },
 
         setAllProducts(state, action) {
@@ -102,6 +107,7 @@ export const {
     changeBasketItem,
     removeFavorite,
     setBasketComment,
+    setSettings
 
 
 } = toolkitSlice.actions;

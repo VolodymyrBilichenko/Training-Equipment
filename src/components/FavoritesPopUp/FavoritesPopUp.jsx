@@ -7,6 +7,8 @@ import getCookies from '../../functions/getCookies';
 
 export const FavoritesPopUp = ({ handleClosePopUp }) => {
     const [email, setEmail] = useState('');
+    const [isSuccess, setIsSuccess] = useState(false);
+    
     const dataFavorites = useSelector(state => state.toolkit.favorites);
 
 
@@ -16,7 +18,7 @@ export const FavoritesPopUp = ({ handleClosePopUp }) => {
 
         const newDataArr = dataFavorites.map(item => {
             return {
-                "product_id": item,
+                "product_id": item.id,
             }
         })
 
@@ -29,7 +31,7 @@ export const FavoritesPopUp = ({ handleClosePopUp }) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${getCookies("cookieToken")}`;
         axios.post(getApiLink('/api/send-commercial-offer'), dataToSend, {headers: GetApiHeaders()})
             .then(({data}) => {
-                // handleNavPopupThx();
+                setIsSuccess(true)
             })
             .catch(error => {
                 console.error('Error:', error);                
@@ -49,7 +51,7 @@ export const FavoritesPopUp = ({ handleClosePopUp }) => {
                     <h2 className="popup-title title">
                         Товары из избранного
                     </h2>
-                    <form method="post" className="popup-form" onSubmit={handleFormSubmit}>
+                    {!isSuccess ? <form method="post" className="popup-form" onSubmit={handleFormSubmit}>
                         <label className="popup-form__item">
                             <span className="is-required">E-mail</span>
                             <span className="input-label">
@@ -59,7 +61,7 @@ export const FavoritesPopUp = ({ handleClosePopUp }) => {
                         <button className="popup-form__submit button is-mode-1" type="submit">
                             Отправить
                         </button>
-                    </form>
+                    </form> : <p style={{marginTop: "20px"}}>Ваше Коммерческое предложение будет отправлено менеджером в ближайшее время</p>}
                 </div>
             </div>
         </div>

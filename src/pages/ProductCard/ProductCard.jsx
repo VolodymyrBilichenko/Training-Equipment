@@ -6,8 +6,8 @@ import { CartItemLength } from "../../components/CartList/components/CartItemLen
 import axios from "axios";
 import { getApiLink } from "../../api/getApiLink";
 import { useParams } from "react-router-dom";
-import { addBasketItem } from "../../redux/toolkitSlice";
-import { useDispatch } from "react-redux";
+import { addBasketItem, addFavorite, removeFavorite } from "../../redux/toolkitSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { GetApiHeaders } from "../../functions/getApiHeaders";
 import CreditCard from "../../assets/img/product/credit_card.svg";
 import AccBalance from "../../assets/img/product/account_balance_wallet.svg";
@@ -23,10 +23,13 @@ export const ProductCard = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
+  const favorites = useSelector((state) => state.toolkit.favorites);
+
   const [dataCard, setDataCard] = useState({});
   const [productCount, setProductCount] = useState(1);
   const [isAddedBasket, setIsAddedBasket] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isFavorite, setIsFavorite] = useState();
 
   useEffect(() => {
     setIsLoading(true);
@@ -34,7 +37,7 @@ export const ProductCard = () => {
     axios
       .get(getApiLink(`/api/products/${id}`), { headers: GetApiHeaders() })
       .then(({ data }) => {
-        setDataCard(data.data);
+        setDataCard(data?.data);
       })
       .catch((error) => {
         toast.error("Возникла неизведанная ошибка");
@@ -45,6 +48,10 @@ export const ProductCard = () => {
         }, 1300);
       });
   }, [id]);
+
+  useEffect(() => {
+    setIsFavorite(favorites.some((item) => item.id === dataCard?.id))
+  }, [favorites])
 
   if (isLoading) {
     return <Preloader />;
@@ -75,8 +82,58 @@ export const ProductCard = () => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error(errorTypes[err?.response?.data?.error?.message && err?.response?.data?.error?.message[0]]);
+        toast.error(
+          errorTypes[
+            err?.response?.data?.error?.message &&
+              err?.response?.data?.error?.message[0]
+          ]
+        );
       });
+  };
+
+  const handleFavorite = () => {
+    const halfInfoProduct = {
+      id: dataCard?.id,
+      name: dataCard?.name,
+      files: [
+        {
+          web_path: dataCard?.files[0]?.web_path,
+        },
+      ],
+      original_price: dataCard?.original_price,
+      price: dataCard?.price,
+    };
+    if (!isFavorite) {
+      dispatch(addFavorite(halfInfoProduct));
+      setIsFavorite(true);
+      toast.success("Товар успішно додано до обраних");
+
+      axios.defaults.headers.common["Authorization"] = `Bearer ${getCookies(
+        "cookieToken"
+      )}`;
+      axios
+        .post(getApiLink(`/api/favorites/add/${dataCard?.id}`), {
+          headers: GetApiHeaders(),
+        })
+        .then(({ data }) => {})
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      dispatch(removeFavorite(halfInfoProduct));
+      setIsFavorite(false);
+
+      axios.defaults.headers.common["Authorization"] = `Bearer ${getCookies(
+        "cookieToken"
+      )}`;
+      axios
+        .post(getApiLink(`/api/favorites/remove/${dataCard?.id}`), {
+          headers: GetApiHeaders(),
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   return (
@@ -95,13 +152,20 @@ export const ProductCard = () => {
         ]}
       />
 
-      {!!Object.keys(dataCard).length && (
+      {!!dataCard && !!Object.keys(dataCard)?.length && (
         <section className="product container">
           <ProductSwiper dataCard={dataCard?.files} />
 
           <div className="product__col">
-            <h2 className="product__title title">{dataCard?.name}</h2>
-            <span className="product__article-number">{dataCard?.article}</span>
+            <div className="title-fav">
+              <h2 className="product__title title">{dataCard?.name}</h2>
+              <button onClick={handleFavorite}>
+                <svg width="26" height="26" viewBox="0 0 48 48">
+                <use xlinkHref={isFavorite ? "#favorited" : "#favorite"}></use>
+                </svg>
+              </button>
+            </div>
+            <span className="product__article-number">Артикул: {dataCard?.article}</span>
             {/* <span className="product__article-number">
               Осталось на складе: {dataCard?.amount_in_store}
             </span> */}

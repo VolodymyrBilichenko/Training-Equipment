@@ -33,7 +33,7 @@ export const FooterSocial = ({socialData}) => {
                     </svg>
                 </a>
             </li>}
-            {socViber?.value && <li>
+            {/* {socViber?.value && <li>
                 <a href={socViber?.value} title="Viber" target="_blank">
                     <svg width="26" height="26" viewBox="0 0 26 26">
                         <use xlinkHref="#viber"></use>
@@ -46,7 +46,7 @@ export const FooterSocial = ({socialData}) => {
                         <use xlinkHref="#telegram"></use>
                     </svg>
                 </a>
-            </li>}
+            </li>} */}
         </ul>
     </div>
   )
