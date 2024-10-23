@@ -36,7 +36,7 @@ export const CartItemLength = ({
         .then((res) => {
           setQuantity((prev) => prev + 1);
           if (!setTotalAmount) return;
-          setTotalAmount((prev) => prev + productInfo.original_price);
+          setTotalAmount((prev) => prev + (productInfo?.price ?? productInfo?.original_price));
 
           dispatch(
             changeBasketItem({
@@ -55,7 +55,7 @@ export const CartItemLength = ({
     } else {
       setQuantity((prev) => prev + 1);
       if (!setTotalAmount) return;
-      setTotalAmount((prev) => prev + productInfo.original_price);
+      setTotalAmount((prev) => prev + (productInfo?.price ?? productInfo?.original_price));
 
       dispatch(
         changeBasketItem({
@@ -71,7 +71,7 @@ export const CartItemLength = ({
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
     if (!setTotalAmount) return;
-    setTotalAmount((prev) => prev - productInfo.original_price);
+    setTotalAmount((prev) => prev - (productInfo?.price ?? productInfo?.original_price));
 
     dispatch(
       changeBasketItem({
@@ -102,7 +102,7 @@ export const CartItemLength = ({
   useEffect(() => {
     if (!setTotalAmount) return;
 
-    setTotalAmount((prev) => prev + productInfo.original_price * quantity);
+    setTotalAmount((prev) => prev + (productInfo?.price ?? productInfo?.original_price) * quantity);
   }, [allProducts]);
 
   return (

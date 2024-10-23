@@ -49,6 +49,7 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
       email_not_auth_user: email,
       phone_not_auth_user: phone,
     };
+    
 
     const apiString = getCookies("cookieToken")
       ? "/api/orders/createFromAuthUser"
@@ -70,7 +71,7 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
         console.error("Error:", error);
 
         if (
-          error.response.data.error.message.some(
+          error.response.data?.error?.message?.some(
             (mes) =>
               mes === "Not enough amount of product in store to add into basket"
           )

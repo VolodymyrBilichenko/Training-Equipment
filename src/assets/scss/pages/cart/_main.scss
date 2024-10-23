@@ -281,6 +281,10 @@
 
 	&__item_price {
 
+		strike {
+			margin-left: 15px;
+		}
+
 		justify-self: center;
 		grid-column: 1;
 		@include _992 {
