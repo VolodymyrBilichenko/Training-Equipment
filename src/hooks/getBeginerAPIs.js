@@ -22,9 +22,9 @@ export const useGetBeginerAPIs = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    getCookies("basket") &&
+    !!getCookies("basket") &&
       dispatch(setBasket(JSON.parse(getCookies("basket"))));
-    getCookies("favorite") &&
+    !!getCookies("favorite") &&
       dispatch(setFavorites(JSON.parse(getCookies("favorite"))));
 
     // GET ALL PRODUCTS

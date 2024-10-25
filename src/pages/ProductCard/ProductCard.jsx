@@ -6,7 +6,11 @@ import { CartItemLength } from "../../components/CartList/components/CartItemLen
 import axios from "axios";
 import { getApiLink } from "../../api/getApiLink";
 import { useParams } from "react-router-dom";
-import { addBasketItem, addFavorite, removeFavorite } from "../../redux/toolkitSlice";
+import {
+  addBasketItem,
+  addFavorite,
+  removeFavorite,
+} from "../../redux/toolkitSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { GetApiHeaders } from "../../functions/getApiHeaders";
 import CreditCard from "../../assets/img/product/credit_card.svg";
@@ -50,8 +54,10 @@ export const ProductCard = () => {
   }, [id]);
 
   useEffect(() => {
-    setIsFavorite(favorites.some((item) => item.id === dataCard?.id))
-  }, [favorites])
+    setIsFavorite(favorites.some((item) => item.id === dataCard?.id));
+  }, [favorites, dataCard]);
+
+  
 
   if (isLoading) {
     return <Preloader />;
@@ -63,32 +69,33 @@ export const ProductCard = () => {
       product_amount: productCount,
     };
 
-    setIsAddedBasket((prev) => !prev);
-    dispatch(addBasketItem(dataItem));
-
-    if (!getCookies("cookieToken")) return;
-
-    axios.defaults.headers.common["Authorization"] = `Bearer ${getCookies(
-      "cookieToken"
-    )}`;
-    axios
-      .post(getApiLink("/api/bucket/add"), dataItem, {
-        headers: GetApiHeaders(),
-      })
-      .then((res) => {
-        if (res.status >= 200 && res.status < 300) {
-          toast.success("Товар успешно добавлен в корзину");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error(
-          errorTypes[
-            err?.response?.data?.error?.message &&
-              err?.response?.data?.error?.message[0]
-          ]
-        );
-      });
+    if (getCookies("cookieToken")) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${getCookies(
+        "cookieToken"
+      )}`;
+      axios
+        .post(getApiLink("/api/bucket/add"), dataItem, {
+          headers: GetApiHeaders(),
+        })
+        .then((res) => {
+          if (res.status >= 200 && res.status < 300) {
+            toast.success("Товар успешно добавлен в корзину");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error(
+            errorTypes[
+              err?.response?.data?.error?.message &&
+                err?.response?.data?.error?.message[0]
+            ]
+          );
+        });
+    } else {
+      setIsAddedBasket((prev) => !prev);
+      dispatch(addBasketItem(dataItem));
+      toast.success("Товар успешно добавлен в корзину");
+    }
   };
 
   const handleFavorite = () => {
@@ -103,6 +110,7 @@ export const ProductCard = () => {
       original_price: dataCard?.original_price,
       price: dataCard?.price,
     };
+    
     if (!isFavorite) {
       dispatch(addFavorite(halfInfoProduct));
       setIsFavorite(true);
@@ -161,11 +169,15 @@ export const ProductCard = () => {
               <h2 className="product__title title">{dataCard?.name}</h2>
               <button onClick={handleFavorite}>
                 <svg width="26" height="26" viewBox="0 0 48 48">
-                <use xlinkHref={isFavorite ? "#favorited" : "#favorite"}></use>
+                  <use
+                    xlinkHref={isFavorite ? "#favorited" : "#favorite"}
+                  ></use>
                 </svg>
               </button>
             </div>
-            <span className="product__article-number">Артикул: {dataCard?.article}</span>
+            <span className="product__article-number">
+              Артикул: {dataCard?.article}
+            </span>
             {/* <span className="product__article-number">
               Осталось на складе: {dataCard?.amount_in_store}
             </span> */}
