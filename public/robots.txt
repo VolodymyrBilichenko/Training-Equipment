@@ -1,3 +1,14 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /search/
+Disallow: /private/
+
+# Разрешение для основных страниц сайта
+Allow: /
+
+# Путь к карте сайта
+Sitemap: https://forschool.com.ua/sitemap.xml
