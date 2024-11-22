@@ -17,6 +17,14 @@ export const Main = () => {
         setIsLoading(false)
     }, [allProducts])
 
+    const meta = {
+        title: "Главная страница",
+        description: "Описание главной страницы",
+        meta: {
+          charset: "utf-8",
+        },
+      };
+
     return (
         <main className="main">
 

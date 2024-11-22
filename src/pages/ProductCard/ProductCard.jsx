@@ -22,6 +22,8 @@ import { toast } from "react-toastify";
 import HTMLReactParser from "html-react-parser";
 import { Preloader } from "../../components/Preloader/Preloader";
 import { errorTypes } from "../../constants";
+import i18next from "i18next";
+import DocumentMeta from "react-document-meta";
 
 export const ProductCard = () => {
   const { id } = useParams();
@@ -34,6 +36,9 @@ export const ProductCard = () => {
   const [isAddedBasket, setIsAddedBasket] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState();
+
+  console.log(dataCard);
+  const lang = i18next.language ?? "";
 
   useEffect(() => {
     setIsLoading(true);
@@ -53,11 +58,17 @@ export const ProductCard = () => {
       });
   }, [id]);
 
+  const meta = {
+    title: dataCard?.meta_title ?? dataCard["name_" + lang] ?? dataCard?.name,
+    description: dataCard?.meta_description ?? dataCard["description_" + lang] ?? dataCard?.description,
+    meta: {
+      charset: "utf-8",
+    },
+  };
+
   useEffect(() => {
     setIsFavorite(favorites.some((item) => item.id === dataCard?.id));
   }, [favorites, dataCard]);
-
-  
 
   if (isLoading) {
     return <Preloader />;
@@ -110,7 +121,7 @@ export const ProductCard = () => {
       original_price: dataCard?.original_price,
       price: dataCard?.price,
     };
-    
+
     if (!isFavorite) {
       dispatch(addFavorite(halfInfoProduct));
       setIsFavorite(true);
@@ -145,7 +156,7 @@ export const ProductCard = () => {
   };
 
   return (
-    <>
+    <DocumentMeta {...meta}>
       {/* <BackGroundDecor /> */}
 
       <BreadCrumbs
@@ -162,11 +173,13 @@ export const ProductCard = () => {
 
       {!!dataCard && !!Object.keys(dataCard)?.length && (
         <section className="product container">
-          <ProductSwiper dataCard={dataCard?.files} />
+          <ProductSwiper dataCard={dataCard} />
 
           <div className="product__col">
             <div className="title-fav">
-              <h2 className="product__title title">{dataCard?.name}</h2>
+              <h2 className="product__title title">
+                {dataCard["name_" + lang] ?? dataCard?.name}
+              </h2>
               <button onClick={handleFavorite}>
                 <svg width="26" height="26" viewBox="0 0 48 48">
                   <use
@@ -285,23 +298,15 @@ export const ProductCard = () => {
             <div style={{ marginTop: "40px" }}>
               <div className="product__description">
                 <h3>Опис</h3>
-                {HTMLReactParser(dataCard?.description ?? "")}
+                {HTMLReactParser(
+                  dataCard["name_" + lang] ?? dataCard?.description ?? ""
+                )}
               </div>
             </div>
           </div>
 
           <div className="product__col">
-            {dataCard?.precepts && (
-              <ul className="product__orders">
-                {dataCard?.precepts?.map((precept) => (
-                  <li key={precept.id}>
-                    <h3>Відповідає Наказу </h3>
-                    <strong>{precept.number}</strong>
-                    <p>{precept.description}</p>
-                  </li>
-                ))}
-              </ul>
-            )}
+            
           </div>
         </section>
       )}
@@ -330,6 +335,6 @@ export const ProductCard = () => {
           </div>
         </section>
       )}
-    </>
+    </DocumentMeta>
   );
 };
