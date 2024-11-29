@@ -8,12 +8,15 @@ import getCookies from "../../functions/getCookies";
 import setCookie from "../../functions/setCookie";
 import { toast } from "react-toastify";
 import { setBasket, setBasketComment } from "../../redux/toolkitSlice";
+import { useNavigate } from "react-router-dom";
 
 export const OrderPopUp = ({ handleClosePopUp }) => {
   const SetPopContext = useContext(PopupContext);
   const basketItems = useSelector((state) => state.toolkit.basket);
   const basketComment = useSelector((state) => state.toolkit.basketComment);
   const user = useSelector((state) => state.toolkit.user);
+
+  const navigate = useNavigate()
 
   const [email, setEmail] = useState(user?.email ?? "");
   const [phone, setPhone] = useState(user?.phone_number ?? "");
@@ -66,9 +69,11 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
         setCookie("basket", "");
         dispatch(setBasket([]));
         dispatch(setBasketComment(""));
+
+        navigate('/');
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.log("Error:", error);
 
         if (
           error.response.data?.error?.message?.some(

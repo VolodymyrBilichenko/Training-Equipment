@@ -140,8 +140,8 @@ export const ProductListItem = ({ data }) => {
         </NavLink>
       </h3>
       <div className="product-card__price">
-        <ins>{`${data.original_price} ₴`}</ins>
-        <del>{`${data.price === null ? "" : data.price + " ₴"}`}</del>
+        <ins>{`${data.price ?? data.original_price} ₴`}</ins>
+        <del>{`${data.price === null ? "" : data.original_price + " ₴"}`}</del>
       </div>
       {/*style={{background: isAddedBasket ? "#9C50B8" : ""}}*/}
       <button
