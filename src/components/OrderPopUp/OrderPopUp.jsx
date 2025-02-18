@@ -51,6 +51,7 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
       note: basketComment,
       email_not_auth_user: email,
       phone_not_auth_user: phone,
+      is_get_example: checkedBill
     };
     
 
