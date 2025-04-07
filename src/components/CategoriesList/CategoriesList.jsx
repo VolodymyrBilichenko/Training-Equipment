@@ -1,20 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import photoPlaceholder from "./../../assets/img/null-card-image.png";
 
 export const CategoriesList = ({ ClassNameList }) => {
   const allCategories = useSelector((state) => state.toolkit.allCategories);
 
-  console.log(allCategories);
-
   return (
     <ul className={`categories__list ${ClassNameList}`}>
-      {allCategories?.slice(0, 12)?.map((category) => {
+      {allCategories?.map((category) => {
         return (
           <li key={category.id}>
             <NavLink to={`/catalog/${category.id}`}>
               <img
-                src={category.icon_link}
+                src={category?.icon_link ?? photoPlaceholder}
                 width="52"
                 height="52"
                 loading="lazy"

@@ -2,6 +2,7 @@ import { AboutUs } from "../pages/AboutUs/AboutUs"
 import { Basket } from "../pages/Basket/Basket"
 import { Catalog } from "../pages/Catalog/Catalog"
 import { Categories } from "../pages/Categories/Categories"
+import { Docs } from "../pages/Docs/Docs"
 import { Error } from "../pages/Eroor/Error"
 import { Favorites } from "../pages/Favorites/Favorites"
 import { Main } from "../pages/Main/Main"
@@ -20,6 +21,10 @@ export const routes = () => {
         {
             path: '/',
             element: <Main/>
+        },
+        {
+            path: '/docs/:id',
+            element: <Docs/>
         },
         {
             path: '/search/:search',

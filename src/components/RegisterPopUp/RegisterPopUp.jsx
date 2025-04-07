@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import getCookies from "../../functions/getCookies";
 import { useDispatch, useSelector } from "react-redux";
 import { handleRegistration } from "../../api/registration";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PopupContext } from "../../App";
 import { toast } from "react-toastify";
 import { useRegistration } from "../../hooks/registration";
@@ -157,8 +157,7 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
             </p>
             <div className="popup-form__text">
               <p>
-                Регистрируясь на сайте Вы соглашаетесь на обработку личных
-                данных
+                Регистрируясь на сайте Вы соглашаетесь на <Link to="/docs/personal">обработку личных данных</Link>
               </p>
             </div>
             <button

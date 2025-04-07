@@ -12,7 +12,7 @@ export const HeaderAddNavDesk = () => {
     const favorites = useSelector(state => state.toolkit.favorites);
 
 
-    const handlePopUpClick = () => {        
+    const handlePopUpClick = () => {
         if (token) {
             navigate('/profile');
         } else SetPopContext('login');

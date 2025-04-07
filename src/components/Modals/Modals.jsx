@@ -8,6 +8,7 @@ import {FavoritesPopUp} from "../FavoritesPopUp/FavoritesPopUp";
 import {PopupContext} from "../../App";
 import { ModalConfirm } from '../ModalConfirm';
 import { ModalAskConfirm } from '../ModalAskConfirm';
+import { ModalOffer } from '../ModalOffer';
 
 export const Modals = ({modal}) => {
 
@@ -35,6 +36,7 @@ export const Modals = ({modal}) => {
         "favorites": <FavoritesPopUp handleClosePopUp={handleClosePopUp}/>,
         "confirm": <ModalConfirm handleClosePopUp={handleClosePopUp}/>,
         "askConfirm": <ModalAskConfirm handleClosePopUp={handleClosePopUp}/>,
+        "offer": <ModalOffer handleClosePopUp={handleClosePopUp}/>,
     }
 
     return (

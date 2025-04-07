@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { BackGroundDecor } from "../../components/BackGroundDecor/BackGroundDecor";
 import { BreadCrumbs } from "../../components/BreadCrumbs/BreadCrumbs";
 import { ProductsList } from "../../components/ProductsList/ProductsList";
@@ -12,6 +12,9 @@ import { PaginationProducts } from "../../components/PaginationProducts/Paginati
 import { ToastContainer, toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import getCookies from "../../functions/getCookies";
+import setCookie from "../../functions/setCookie";
+import { PopupContext } from "../../App";
 
 export const Catalog = () => {
   const { category_id, search } = useParams();
@@ -89,6 +92,19 @@ export const Catalog = () => {
         page: allCategories?.find((item) => +item.id === +category_id)?.name,
       }
     : null;
+
+
+  const SetPopContext = useContext(PopupContext);
+  const seconds = 10;
+
+  useEffect(() => {
+    if (getCookies("isShown") == 'true') return;
+
+    setTimeout(() => {
+      SetPopContext("offer");
+      setCookie("isShown", true);
+    }, seconds * 1000);
+  }, []);
 
   return (
     <>
