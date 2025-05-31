@@ -114,7 +114,7 @@ export const HeaderNavigation = ({ isOpen, handleOpen }) => {
                         <svg width="20" height="20" viewBox="0 0 48 48">
                             <use xlinkHref="#verifed"></use>
                         </svg>
-                        <b>Учасник Prozorromarket</b>
+                        <b>{t("member_prozoro")}</b>
                     </div>
                     <div className="header__info">
                         <svg width="20" height="20" viewBox="0 0 48 48">

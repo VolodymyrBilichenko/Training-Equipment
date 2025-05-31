@@ -24,8 +24,11 @@ import { Preloader } from "../../components/Preloader/Preloader";
 import { errorTypes } from "../../constants";
 import i18next from "i18next";
 import DocumentMeta from "react-document-meta";
+import { useTranslation } from "react-i18next";
 
 export const ProductCard = () => {
+  const { t } = useTranslation();
+
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -37,7 +40,6 @@ export const ProductCard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState();
 
-  console.log(dataCard);
   const lang = i18next.language ?? "";
 
   useEffect(() => {
@@ -60,7 +62,10 @@ export const ProductCard = () => {
 
   const meta = {
     title: dataCard?.meta_title ?? dataCard["name_" + lang] ?? dataCard?.name,
-    description: dataCard?.meta_description ?? dataCard["description_" + lang] ?? dataCard?.description,
+    description:
+      dataCard?.meta_description ??
+      dataCard["description_" + lang] ??
+      dataCard?.description,
     meta: {
       charset: "utf-8",
     },
@@ -90,22 +95,24 @@ export const ProductCard = () => {
         })
         .then((res) => {
           if (res.status >= 200 && res.status < 300) {
-            toast.success("Товар успешно добавлен в корзину");
+            toast.success(t("success_added_to_cart"));
           }
         })
         .catch((err) => {
           console.log(err);
           toast.error(
-            errorTypes[
-              err?.response?.data?.error?.message &&
-                err?.response?.data?.error?.message[0]
-            ]
+            t(
+              errorTypes[
+                err?.response?.data?.error?.message &&
+                  err?.response?.data?.error?.message[0]
+              ]
+            )
           );
         });
     } else {
       setIsAddedBasket((prev) => !prev);
       dispatch(addBasketItem(dataItem));
-      toast.success("Товар успешно добавлен в корзину");
+      toast.success(t("success_added_to_cart"));
     }
   };
 
@@ -118,14 +125,14 @@ export const ProductCard = () => {
           web_path: dataCard?.files[0]?.web_path,
         },
       ],
-      original_price: dataCard?.original_price,
-      price: dataCard?.price,
+      original_price: dataCard?.price,
+      price: dataCard?.sale_price,
     };
 
     if (!isFavorite) {
       dispatch(addFavorite(halfInfoProduct));
       setIsFavorite(true);
-      toast.success("Товар успішно додано до обраних");
+      toast.success(t("success_added_to_fav"));
 
       axios.defaults.headers.common["Authorization"] = `Bearer ${getCookies(
         "cookieToken"
@@ -163,10 +170,10 @@ export const ProductCard = () => {
         pages={[
           {
             route: "/catalog",
-            page: "Каталог",
+            page: t("menu_point_2"),
           },
           {
-            page: "Демонстраційна модель «Мозок. Анатомія людини» Learning resources",
+            page: dataCard?.name,
           },
         ]}
       />
@@ -189,22 +196,20 @@ export const ProductCard = () => {
               </button>
             </div>
             <span className="product__article-number">
-              Артикул: {dataCard?.article}
+              {t("articul")}: {dataCard?.article}
             </span>
             {/* <span className="product__article-number">
               Осталось на складе: {dataCard?.amount_in_store}
             </span> */}
-            <span className="product__status in-stock">В наличии</span>
+            <span className="product__status in-stock">{t("in_stock")}</span>
             <div className="product__info">
               <div className="product__info_col">
                 <div className="product__price">
                   <ins>
-                    {(dataCard?.price ?? dataCard?.original_price) *
-                      productCount}{" "}
-                    ₴
+                    {(dataCard?.sale_price ?? dataCard?.price) * productCount} ₴
                   </ins>
-                  {dataCard?.price && (
-                    <del>{dataCard?.original_price * productCount} ₴</del>
+                  {dataCard?.sale_price && (
+                    <del>{dataCard?.price * productCount} ₴</del>
                   )}
                 </div>
 
@@ -219,35 +224,35 @@ export const ProductCard = () => {
                   onClick={handleAddCart}
                   className="product__add-to-cart button"
                   type="button"
-                  aria-label="Додати до кошика"
+                  aria-label={t("add_to_cart")}
                 >
                   <svg width="20" height="20" viewBox="0 0 48 48">
                     <use xlinkHref="#cart"></use>
                   </svg>
-                  <span>Додати до кошика</span>
+                  <span>{t("add_to_cart")}</span>
                 </button>
               </div>
             </div>
             <div className="product__info product__info_border">
               <div className="product__info_col">
                 <table className="product__characteristics">
-                  <caption>Характеристики</caption>
+                  <caption>{t("characteristics")}</caption>
                   <tbody>
                     {dataCard?.condition && (
                       <tr>
-                        <td>Стан</td>
+                        <td>{t("condition")}</td>
                         <td>{dataCard?.condition}</td>
                       </tr>
                     )}
                     {dataCard?.producer && (
                       <tr>
-                        <td>Виробник</td>
+                        <td>{t("manufacturer")}</td>
                         <td>{dataCard?.producer}</td>
                       </tr>
                     )}
                     {dataCard?.weight && (
                       <tr>
-                        <td>Вага</td>
+                        <td>{t("weight")}</td>
                         <td>{dataCard?.weight} гр</td>
                       </tr>
                     )}
@@ -266,7 +271,7 @@ export const ProductCard = () => {
                         alt=""
                       />
                     </i>
-                    <span>Безнал</span>
+                    <span>{t("nocash")}</span>
                   </li>
                   <li>
                     <i>
@@ -278,7 +283,7 @@ export const ProductCard = () => {
                         alt=""
                       />
                     </i>
-                    <span>Наложенный платёж</span>
+                    <span>{t("cash_on_delivery")}</span>
                   </li>
                   <li>
                     <i>
@@ -290,14 +295,14 @@ export const ProductCard = () => {
                         alt=""
                       />
                     </i>
-                    <span>По договору поставки</span>
+                    <span>{t("under_supply_contract")}</span>
                   </li>
                 </ul>
               </div>
             </div>
             <div style={{ marginTop: "40px" }}>
               <div className="product__description">
-                <h3>Опис</h3>
+                <h3>{t("description")}</h3>
                 {HTMLReactParser(
                   dataCard["name_" + lang] ?? dataCard?.description ?? ""
                 )}
@@ -305,9 +310,7 @@ export const ProductCard = () => {
             </div>
           </div>
 
-          <div className="product__col">
-            
-          </div>
+          <div className="product__col"></div>
         </section>
       )}
 
@@ -325,7 +328,7 @@ export const ProductCard = () => {
             </picture>
           </div>
           <div className="recommended__container">
-            <h2 className="recommended__title title">Рекомендованные</h2>
+            <h2 className="recommended__title title">{t("recommendation")}</h2>
 
             <ProductsList
               isLoading={isLoading}

@@ -15,12 +15,14 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import getCookies from "../../functions/getCookies";
 import setCookie from "../../functions/setCookie";
 import { PopupContext } from "../../App";
+import { useTranslation } from "react-i18next";
 
 export const Catalog = () => {
   const { category_id, search } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const allCategories = useSelector((state) => state.toolkit.allCategories);
+  const { t } = useTranslation();
 
   const [products, setProducts] = useState([]);
   const [metaProduct, setMetaProduct] = useState({});
@@ -108,7 +110,7 @@ export const Catalog = () => {
 
   return (
     <>
-      <BreadCrumbs pages={[{ page: "каталог" }, categoryName]} />
+      <BreadCrumbs pages={[{ page: t('menu_point_2') }, categoryName]} />
 
       <section className="catalog container">
         <div className="catalog__decor" aria-hidden="true">
@@ -123,7 +125,7 @@ export const Catalog = () => {
           </picture>
         </div>
 
-        <SectionTitle title={"Каталог"} ClassTitle={"catalog__title"} />
+        <SectionTitle title={t('menu_point_2')} ClassTitle={"catalog__title"} />
 
         <div className="catalog__aside" data-sticky-container>
           <div className="catalog__categories sticky" data-margin-top="30">
@@ -131,7 +133,7 @@ export const Catalog = () => {
               className="catalog__categories_target button visible-on-mob"
               type="button"
             >
-              Категории
+              {t('categories_title')}
             </button>
             <div className="catalog__categories_block">
               <div>
@@ -147,7 +149,7 @@ export const Catalog = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 type="search"
                 name="search"
-                placeholder="Пошук по каталогу"
+                placeholder={t('catalog_search')}
                 required
               />
               <button type="submit" title="Поиск">

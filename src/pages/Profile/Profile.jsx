@@ -1,67 +1,66 @@
-import React, {useState} from 'react'
-import {BackGroundDecor} from '../../components/BackGroundDecor/BackGroundDecor'
-import {BreadCrumbs} from '../../components/BreadCrumbs/BreadCrumbs'
-import {SectionTitle} from '../../components/SectionTitle/SectionTitle'
-import {ProfileNav} from './components/ProfileNav/ProfileNav'
-import {ProfileBonuses} from './components/ProfileBonuses/ProfileBonuses'
-import {ProfileInfo} from './components/ProfileInfo/ProfileInfo'
-import {ProfileOrders} from './components/ProfileOrders/ProfileOrders'
-
+import React, { useState } from "react";
+import { BackGroundDecor } from "../../components/BackGroundDecor/BackGroundDecor";
+import { BreadCrumbs } from "../../components/BreadCrumbs/BreadCrumbs";
+import { SectionTitle } from "../../components/SectionTitle/SectionTitle";
+import { ProfileNav } from "./components/ProfileNav/ProfileNav";
+import { ProfileBonuses } from "./components/ProfileBonuses/ProfileBonuses";
+import { ProfileInfo } from "./components/ProfileInfo/ProfileInfo";
+import { ProfileOrders } from "./components/ProfileOrders/ProfileOrders";
+import { useTranslation } from "react-i18next";
 
 export const Profile = () => {
-    const [profileInfo, setProfileInfo] = useState(true);
-    const [profileOrders, setProfileOrders] = useState(false);
-    const [profileBonus, setProfileBonus] = useState(false);
+  const { t } = useTranslation();
 
-    const handleProfInfoClick = () => {
-        setProfileInfo(true);
-        setProfileOrders(false);
-        setProfileBonus(false);
-    }
+  const [profileInfo, setProfileInfo] = useState(true);
+  const [profileOrders, setProfileOrders] = useState(false);
+  const [profileBonus, setProfileBonus] = useState(false);
 
-    const handleProfOrdersClick = () => {
-        setProfileInfo(false);
-        setProfileOrders(true);
-        setProfileBonus(false);
-    }
+  const handleProfInfoClick = () => {
+    setProfileInfo(true);
+    setProfileOrders(false);
+    setProfileBonus(false);
+  };
 
-    const handleProfBonusClick = () => {
-        setProfileInfo(false);
-        setProfileOrders(false);
-        setProfileBonus(true);
-    }
+  const handleProfOrdersClick = () => {
+    setProfileInfo(false);
+    setProfileOrders(true);
+    setProfileBonus(false);
+  };
 
-    return (
-        <>
-            {/* <BackGroundDecor/> */}
+  const handleProfBonusClick = () => {
+    setProfileInfo(false);
+    setProfileOrders(false);
+    setProfileBonus(true);
+  };
 
-            <BreadCrumbs pages={[{page: 'Личный кабинет'}]}/>
+  return (
+    <>
+      {/* <BackGroundDecor/> */}
 
-            <section className="account container">
+      <BreadCrumbs pages={[{ page: t("personal_cabinet") }]} />
 
-                <SectionTitle title={'Личный кабинет'} ClassTitle={'account__title'}/>
+      <section className="account container">
+        <SectionTitle
+          title={t("personal_cabinet")}
+          ClassTitle={"account__title"}
+        />
 
-                <div className="account__aside" data-sticky-container>
+        <div className="account__aside" data-sticky-container>
+          <ProfileNav
+            onProfInfo={handleProfInfoClick}
+            onProfOrders={handleProfOrdersClick}
+            onProfBonus={handleProfBonusClick}
+          />
+        </div>
 
-                    <ProfileNav
-                        onProfInfo={handleProfInfoClick}
-                        onProfOrders={handleProfOrdersClick}
-                        onProfBonus={handleProfBonusClick}
-                    />
+        <div className="account__main">
+          {profileInfo && <ProfileInfo />}
 
-                </div>
+          {profileOrders && <ProfileOrders />}
 
-                <div className="account__main">
-
-                    {profileInfo && <ProfileInfo/>}
-
-                    {profileOrders && <ProfileOrders/>}
-
-                    {profileBonus && <ProfileBonuses/>}
-
-                </div>
-            </section>
-
-        </>
-    )
-}
+          {profileBonus && <ProfileBonuses />}
+        </div>
+      </section>
+    </>
+  );
+};

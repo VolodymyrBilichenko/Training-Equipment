@@ -6,8 +6,10 @@ import { ProductsList } from '../../components/ProductsList/ProductsList'
 import { PaginationProducts } from '../../components/PaginationProducts/PaginationProducts'
 import { useSelector } from "react-redux";
 import { PopupContext } from '../../App'
+import { useTranslation } from 'react-i18next';
 
 export const Favorites = () => {
+    const { t } = useTranslation();
 
     const favorites = useSelector(state => state.toolkit.favorites)
 
@@ -23,14 +25,14 @@ export const Favorites = () => {
         <>
             {/* <BackGroundDecor/> */}
 
-            <BreadCrumbs pages={[{page: 'Избранное'}]}/>
+            <BreadCrumbs pages={[{page: t('favorites_title')}]}/>
 
             <div className='favorites container'>
 
-                <SectionTitle title={'Избранное'}/>
+                <SectionTitle title={t('favorites_title')}/>
 
                 <button onClick={handleFavModal} className="favorites__receive_email open-popup">
-                    Желаю получить Коммерческое предложение по Email для товаров в Избранное
+                    {t('want_to_get_text')}
                 </button>
 
                 <ProductsList isLoading={isLoading} list={favorites} ClassNameList={'favorites__list'}/>

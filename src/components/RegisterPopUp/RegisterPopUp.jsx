@@ -7,8 +7,11 @@ import { PopupContext } from "../../App";
 import { toast } from "react-toastify";
 import { useRegistration } from "../../hooks/registration";
 import { errorTypes } from "../../constants";
+import { useTranslation } from "react-i18next";
 
 export const RegisterPopUp = ({ handleClosePopUp }) => {
+  const { t } = useTranslation();
+
   const SetPopContext = useContext(PopupContext);
 
   const [name, setName] = useState("");
@@ -153,7 +156,7 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
             </div>
 
             <p className="error-message">
-              {errorMessage && errorTypes[errorMessage]}
+              {errorMessage && t(errorTypes[errorMessage])}
             </p>
             <div className="popup-form__text">
               <p>

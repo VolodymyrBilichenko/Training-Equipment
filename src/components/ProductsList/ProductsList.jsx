@@ -4,8 +4,10 @@ import {ProductsListStyled} from "./ProductsList.styled";
 
 import NotFoundImg from '../../assets/img/not-founded.svg'
 import { CustomLoading } from '../CustomLoading/CustomLoading';
+import { useTranslation } from 'react-i18next';
 
 export const ProductsList = ({ ClassNameList, list, isLoading }) => {
+    const { t } = useTranslation();
 
     return (
         <ProductsListStyled className={`${list.length === 0 ? 'empty' : ''} ${ClassNameList} products-list `}>
@@ -20,7 +22,7 @@ export const ProductsList = ({ ClassNameList, list, isLoading }) => {
                 <div className="catalog__none">
                     <div className="catalog__none_block">
                         <img src={NotFoundImg} width="250" height="204" alt=""/>
-                        <span>Ничего нет</span>
+                        <span>{t('nothing_title')}</span>
                     </div>
                 </div>
             )

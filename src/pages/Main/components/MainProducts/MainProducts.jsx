@@ -1,14 +1,15 @@
-import React from 'react'
-import { SectionTitle } from '../../../../components/SectionTitle/SectionTitle'
-import { MainProductsList } from './components/MainProductsList/MainProductsList'
+import React from "react";
+import { SectionTitle } from "../../../../components/SectionTitle/SectionTitle";
+import { MainProductsList } from "./components/MainProductsList/MainProductsList";
+import { useTranslation } from "react-i18next";
 
 export const MainProducts = () => {
-    return (
-        <section className="products container">
+  const { t } = useTranslation();
+  return (
+    <section className="products container">
+      <SectionTitle title={t("new_education_solution")} />
 
-            <SectionTitle title={'Нові освітні рішення'} />
-
-            <MainProductsList/>
-        </section>
-    )
-}
+      <MainProductsList />
+    </section>
+  );
+};

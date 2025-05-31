@@ -1,16 +1,19 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export const PaginationProducts = ({ ClassName, meta, handlePage }) => {
+  const { t } = useTranslation();
+
   const processedLinks = meta?.links?.map((link, index) => {
     if (index === 0) {
       return {
         ...link,
-        label: "Предыдущая",
+        label: t("pagination_prev"),
       };
     } else if (index === meta.links.length - 1) {
       return {
         ...link,
-        label: "Следущая",
+        label: t("pagination_next"),
       };
     } else {
       return {
@@ -25,8 +28,6 @@ export const PaginationProducts = ({ ClassName, meta, handlePage }) => {
   if (!shouldDisplayPagination) {
     return null;
   }
-
-  console.log(processedLinks);
 
   return (
     <div className={`${ClassName} pagination`}>

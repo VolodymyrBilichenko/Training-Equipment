@@ -9,14 +9,17 @@ import setCookie from "../../functions/setCookie";
 import { toast } from "react-toastify";
 import { setBasket, setBasketComment } from "../../redux/toolkitSlice";
 import { useNavigate } from "react-router-dom";
+import { Trans, useTranslation } from "react-i18next";
 
 export const OrderPopUp = ({ handleClosePopUp }) => {
+  const { t } = useTranslation();
+
   const SetPopContext = useContext(PopupContext);
   const basketItems = useSelector((state) => state.toolkit.basket);
   const basketComment = useSelector((state) => state.toolkit.basketComment);
   const user = useSelector((state) => state.toolkit.user);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState(user?.email ?? "");
   const [phone, setPhone] = useState(user?.phone_number ?? "");
@@ -51,9 +54,8 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
       note: basketComment,
       email_not_auth_user: email,
       phone_not_auth_user: phone,
-      is_get_example: checkedBill
+      is_get_example: checkedBill,
     };
-    
 
     const apiString = getCookies("cookieToken")
       ? "/api/orders/createFromAuthUser"
@@ -71,7 +73,7 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
         dispatch(setBasket([]));
         dispatch(setBasketComment(""));
 
-        navigate('/');
+        navigate("/");
       })
       .catch((error) => {
         console.log("Error:", error);
@@ -85,7 +87,8 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
           return toast.error(
             "У одного из товаров не достаточное количество для заказа"
           );
-      }).finally(() => {
+      })
+      .finally(() => {
         setIsLoading(false);
       });
   };
@@ -106,26 +109,29 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
         </button>
         <div className="popup-container">
           <h2 className="popup-title title">Оформление заказа</h2>
-          {!user?.id && <div className="popup-text">
-            <p>
-              Если Вы хотите получить персональную скидку или стать участником
-              бонусной системы -
-              <button
-                onClick={handleNavPopupRegister}
-                className="open-popup popup-close"
-              >
-                &nbsp;Зарегистрируйтесь
-              </button>{" "}
-              или
-              <button
-                onClick={handleNavPopupLogin}
-                className="open-popup popup-close"
-              >
-                &nbsp;Авторизуйтесь
-              </button>
-              в личном кабинете, прежде чем оформить этот заказ
-            </p>
-          </div>}
+          {!user?.id && (
+            <div className="popup-text">
+              <p>
+                <Trans
+                  i18nKey="want_discount_register"
+                  components={{
+                    register: (
+                      <button
+                        onClick={handleNavPopupRegister}
+                        className="open-popup"
+                      />
+                    ),
+                    login: (
+                      <button
+                        onClick={handleNavPopupLogin}
+                        className="open-popup"
+                      />
+                    ),
+                  }}
+                />
+              </p>
+            </div>
+          )}
           <form
             method="post"
             onSubmit={handleFormSubmit}
@@ -172,17 +178,14 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
                   <use xlinkHref="#check"></use>
                 </svg>
               </span>
-              <span className="checkbox-text">
-                Бажаю отримати на адресу електронної пошти примірник Договору
-                поставки та Рахунок
-              </span>
+              <span className="checkbox-text">{t("want_to_get")}</span>
             </label>
             <button
               disabled={isLoading}
               className="popup-form__submit button is-mode-1"
               type="submit"
             >
-              Оформити замовлення
+              {t("make_order")}
             </button>
           </form>
         </div>

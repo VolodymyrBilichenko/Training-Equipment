@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next';
 
 export const HeaderMessage = () => {
   const [isOpen, setIsopen] = useState(true);
@@ -7,6 +8,8 @@ export const HeaderMessage = () => {
     setIsopen(false);
   }
 
+  const { t } = useTranslation();
+
   return (
     <div className={`header__message ${isOpen === false ? 'is-hidden' : ''} `}>
         <div className="header__message--body">
@@ -14,7 +17,7 @@ export const HeaderMessage = () => {
             <svg width="20" height="20" viewBox="0 0 48 48">
                 <use xlinkHref="#delivery"></use>
             </svg>
-            <b>Безкоштовна доставка для бюджетних організацій</b>
+            <b>{t('free_shipping')}</b>
             </div>
             <button onClick={handleClose} className="header__message--close" type="button">
               <svg width="20" height="20" viewBox="0 0 20 20">

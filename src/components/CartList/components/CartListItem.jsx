@@ -8,8 +8,11 @@ import { getApiLink } from "../../../api/getApiLink";
 import { GetApiHeaders } from "../../../functions/getApiHeaders";
 import photoPlaceholder from "../../../assets/img/null-card-image.png";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const CartListItem = ({ productInfo, setTotalAmount, products }) => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
   const basketList = useSelector((state) => state.toolkit.basket);
   const basketItem = basketList.filter(
@@ -20,7 +23,7 @@ export const CartListItem = ({ productInfo, setTotalAmount, products }) => {
   const [productPrice, setProductPrice] = useState(0);
 
   const handleDeleteItem = () => {
-    setTotalAmount((prev) => prev - productPrice * productCount);
+    // setTotalAmount((prev) => prev - productPrice * productCount);
     dispatch(removeBasketItem(productInfo.id));
 
     if (!getCookies("cookieToken")) return;
@@ -38,8 +41,8 @@ export const CartListItem = ({ productInfo, setTotalAmount, products }) => {
     );
   };
 
-  useEffect(() => {
-    setProductPrice(productInfo?.price ?? productInfo?.original_price)
+  useEffect(() => {  
+    setProductPrice(productInfo?.sale_price ?? productInfo?.price)
     setProductCount(basketItem.product_amount);
   }, [basketItem]);
 
@@ -66,15 +69,19 @@ export const CartListItem = ({ productInfo, setTotalAmount, products }) => {
               {productInfo.name}
             </NavLink>
           </h3>
-          <span>Артикул {productInfo.article}</span>
+          <span>{t('articul')} {productInfo.article}</span>
         </div>
         <div className="cart__item_price">
-          <span>Ціна</span>
-          <b>{productInfo?.original_price} ₴</b>
-          {productInfo?.price && <strike>{productInfo?.price} ₴</strike>}
+          <span>
+            {t('price')}
+          </span>
+          {<b>{productInfo?.sale_price ?? productInfo?.price} ₴</b>}
+          {productInfo?.sale_price ? <strike>{productInfo?.price} ₴</strike> : productInfo?.sale_price}
         </div>
         <div className="cart__item_length">
-          <span>Кількість</span>
+          <span>
+            {t('amount')}
+          </span>
 
           <CartItemLength
             products={products}
@@ -85,7 +92,9 @@ export const CartListItem = ({ productInfo, setTotalAmount, products }) => {
           />
         </div>
         <div className="cart__item_total">
-          <span>Сума</span>
+          <span>
+            {t('summa')}
+          </span>
           <b data-price-currency="₴">
             {productPrice * productCount}
           </b>

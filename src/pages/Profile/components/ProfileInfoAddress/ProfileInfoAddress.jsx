@@ -5,8 +5,11 @@ import { getApiLink } from "../../../../api/getApiLink";
 import { GetApiHeaders } from "../../../../functions/getApiHeaders";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const ProfileInfoAddress = () => {
+  const { t } = useTranslation();
+
   const userData = useSelector((state) => state.toolkit.user);
 
   const [isAnimate, setIsAnimate] = useState(false);
@@ -62,20 +65,20 @@ const ProfileInfoAddress = () => {
       .then(({ data }) => {
         handleEdit();
       })
-      .catch((er) => toast.error("Возникла неизведанная ошибка"));
+      .catch((er) => toast.error(t("something_was_happen")));
   };
-
-  console.log(deliveryBox);
 
   return (
     <div className={`account__block ${isEdit && "is-editing"}`}>
       <div className="account__block_header">
-        <h3 className="account__block_title min-title">Адрес доставки</h3>
+        <h3 className="account__block_title min-title">
+          {t("delivery_address")}
+        </h3>
         <button
           onClick={handleEdit}
           type="button"
           className="account__block_edit"
-          title="Редактировать"
+          title={t("edit")}
         >
           <svg width="24" height="24" viewBox="0 0 24 24">
             <use xlinkHref="#edit"></use>
@@ -89,19 +92,19 @@ const ProfileInfoAddress = () => {
             style={{ opacity: isAnimate ? 0 : 1 }}
           >
             <label className="account__block_item">
-              <span>Адрес</span>
+              <span>{t("address")}</span>
               <span className="value">{deliveryAddress ?? "–"}</span>
             </label>
             <label className="account__block_item">
-              <span>ФИО Получателя</span>
+              <span>{t("reciever_fio")}</span>
               <span className="value">{deliveryName ?? "–"}</span>
             </label>
             <label className="account__block_item">
-              <span>Отделение Новой Почты</span>
+              <span>{t("nova_post_number")}</span>
               <span className="value">{deliveryBox ?? "–"}</span>
             </label>
             <label className="account__block_item">
-              <span>Телефон получателя</span>
+              <span>{t("receiver_phone")}</span>
               <span className="value">{deliveryPhone ?? "–"}</span>
             </label>
           </div>
@@ -112,12 +115,12 @@ const ProfileInfoAddress = () => {
             style={{ opacity: isAnimate ? 0 : 1 }}
           >
             <label className="account__block_item">
-              <span>Адрес</span>
+              <span>{t("address")}</span>
               <span className="input-label">
                 <input
                   type="text"
                   name="address"
-                  placeholder="Введите адрес"
+                  placeholder={t('enter_address')}
                   value={deliveryAddress}
                   onChange={(e) => setDeliveryAddress(e.target.value)}
                   required
@@ -126,12 +129,12 @@ const ProfileInfoAddress = () => {
               </span>
             </label>
             <label className="account__block_item">
-              <span>ФИО Получателя</span>
+              <span>{t("reciever_fio")}</span>
               <span className="input-label">
                 <input
                   type="text"
                   name="receiver-name"
-                  placeholder="Введите имя получателя"
+                  placeholder={t('enter_receiver_fio')}
                   value={deliveryName}
                   onChange={(e) => setDeliveryName(e.target.value)}
                   required
@@ -140,12 +143,12 @@ const ProfileInfoAddress = () => {
               </span>
             </label>
             <label className="account__block_item">
-              <span>Отделение Новой Почты</span>
+              <span>{t("nova_post_number")}</span>
               <span className="input-label">
                 <input
                   type="text"
                   name="new-post-address"
-                  placeholder="Введите отделение Новой Почты"
+                  placeholder={t('enter_nove_post_number')}
                   value={deliveryBox}
                   onChange={(e) => setDeliveryBox(e.target.value)}
                   className="input"
@@ -153,12 +156,12 @@ const ProfileInfoAddress = () => {
               </span>
             </label>
             <label className="account__block_item">
-              <span>Телефон получателя</span>
+              <span>{t("receiver_phone")}</span>
               <span className="input-label">
                 <input
                   type="tel"
                   name="receiver-phone"
-                  placeholder="Введите номер телефона"
+                  placeholder={t('enter_phone')}
                   value={deliveryPhone}
                   onChange={(e) => setDeliveryPhone(e.target.value)}
                   className="input"
@@ -170,7 +173,7 @@ const ProfileInfoAddress = () => {
                 <svg width="24" height="24" viewBox="0 0 24 24">
                   <use xlinkHref="#save"></use>
                 </svg>
-                <span>Сохранить</span>
+                <span>{t("save")}</span>
               </button>
               <button
                 onClick={handleEdit}
@@ -180,7 +183,7 @@ const ProfileInfoAddress = () => {
                 <svg width="24" height="24" viewBox="0 0 24 24">
                   <use xlinkHref="#cancel"></use>
                 </svg>
-                <span>Отменить</span>
+                <span>{t("cancel")}</span>
               </button>
             </div>
           </form>

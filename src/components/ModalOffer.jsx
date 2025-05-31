@@ -3,6 +3,7 @@ import { PopupContext } from "../App";
 import axios from "axios";
 import { NavLink, useLocation } from "react-router-dom";
 import { getApiLink } from "../api/getApiLink";
+import { useTranslation } from "react-i18next";
 
 export const ModalOffer = ({ handleClosePopUp }) => {
   const SetPopContext = useContext(PopupContext);
@@ -32,6 +33,8 @@ export const ModalOffer = ({ handleClosePopUp }) => {
         window.history.pushState(null, "", window.location.origin);
       });
   }, []);
+
+  const { t } = useTranslation();
 
   return (
     <div className="popup-wrapper">
@@ -65,7 +68,7 @@ export const ModalOffer = ({ handleClosePopUp }) => {
             style={{ display: "block", margin: "0 auto" }}
             className="popup-form__submit button is-mode-1"
           >
-            Консультация по подготовке к тендеру
+            {t('menu_point_4')}
           </NavLink>
         </div>
       </div>

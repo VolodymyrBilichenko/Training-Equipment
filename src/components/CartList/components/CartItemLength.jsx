@@ -7,6 +7,7 @@ import { GetApiHeaders } from "../../../functions/getApiHeaders";
 import getCookies from "../../../functions/getCookies";
 import { toast } from "react-toastify";
 import { errorTypes } from "../../../constants";
+import { useTranslation } from "react-i18next";
 
 export const CartItemLength = ({
   setProductCount,
@@ -14,6 +15,8 @@ export const CartItemLength = ({
   productInfo,
   productCount,
 }) => {
+  const { t } = useTranslation();
+
   const [quantity, setQuantity] = useState(productCount ?? 1);
   const dispatch = useDispatch();
 
@@ -36,7 +39,9 @@ export const CartItemLength = ({
         .then((res) => {
           setQuantity((prev) => prev + 1);
           if (!setTotalAmount) return;
-          setTotalAmount((prev) => prev + (productInfo?.price ?? productInfo?.original_price));
+          setTotalAmount(
+            (prev) => prev + (productInfo?.sale_price ?? productInfo?.price)
+          );
 
           dispatch(
             changeBasketItem({
@@ -48,14 +53,16 @@ export const CartItemLength = ({
         .catch((err) => {
           toast.error(
             err?.response?.data?.error?.message
-              ? errorTypes[err?.response?.data?.error?.message[0]]
+              ? t(errorTypes[err?.response?.data?.error?.message[0]])
               : "Неизвестная ошибка"
           );
         });
     } else {
       setQuantity((prev) => prev + 1);
       if (!setTotalAmount) return;
-      setTotalAmount((prev) => prev + (productInfo?.price ?? productInfo?.original_price));
+      setTotalAmount(
+        (prev) => prev + (productInfo?.sale_price ?? productInfo?.price)
+      );
 
       dispatch(
         changeBasketItem({
@@ -71,7 +78,9 @@ export const CartItemLength = ({
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
     if (!setTotalAmount) return;
-    setTotalAmount((prev) => prev - (productInfo?.price ?? productInfo?.original_price));
+    setTotalAmount(
+      (prev) => prev - (productInfo?.sale_price ?? productInfo?.price)
+    );
 
     dispatch(
       changeBasketItem({
@@ -102,7 +111,10 @@ export const CartItemLength = ({
   useEffect(() => {
     if (!setTotalAmount) return;
 
-    setTotalAmount((prev) => prev + (productInfo?.price ?? productInfo?.original_price) * quantity);
+    setTotalAmount(
+      (prev) =>
+        prev + (productInfo?.sale_price ?? productInfo?.price) * quantity
+    );
   }, [allProducts]);
 
   return (

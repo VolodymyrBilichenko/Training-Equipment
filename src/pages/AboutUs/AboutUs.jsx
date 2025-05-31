@@ -12,12 +12,15 @@ import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import { PopupContext } from "../../App";
 import getCookies from "../../functions/getCookies";
+import { useTranslation } from "react-i18next";
 
 export const AboutUs = () => {
   const SetPopContext = useContext(PopupContext);
   const [staticData, setStaticData] = useState([]);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+
+  const { t } = useTranslation();
 
   const dataAboutUs = staticData.filter((item) => item.key === "about_us");
   const dataDelivery = staticData.filter((item) => item.key === "delivery");
@@ -89,7 +92,7 @@ export const AboutUs = () => {
     <>
       {/* <BackGroundDecor/> */}
 
-      <BreadCrumbs pages={[{ page: "О компании" }]} />
+      <BreadCrumbs pages={[{ page: t("menu_point_1") }]} />
 
       <section className="about-us container">
         <div className="about-us__decor" aria-hidden="true">
@@ -103,30 +106,33 @@ export const AboutUs = () => {
             />
           </picture>
         </div>
-        <SectionTitle title={"О компании"} ClassTitle={"about-us__title"} />
+        <SectionTitle
+          title={t("menu_point_1")}
+          ClassTitle={"about-us__title"}
+        />
         <div className="about-us__wrapper">
           <div className="about-us__aside" data-sticky-container>
             <nav className="about-us__aside_nav sticky" data-margin-top="30">
               <ul>
                 <li>
                   {/*onClick={handleSmoothScroll}*/}
-                  <a href="#about-us">Про нас</a>
+                  <a href="#about-us">{t("about_us_title")}</a>
                 </li>
                 <li>
                   {/*onClick={handleSmoothScroll}*/}
-                  <a href="#deliv">Доставка</a>
+                  <a href="#deliv">{t("shiping_title")}</a>
                 </li>
                 <li>
                   {/*onClick={handleSmoothScroll}*/}
-                  <a href="#payment">Оплата</a>
+                  <a href="#payment">{t("payment_title")}</a>
                 </li>
                 <li>
                   {/*onClick={handleSmoothScroll}*/}
-                  <a href="#consultation">Консультация</a>
+                  <a href="#consultation">{t("consultation_title")}</a>
                 </li>
                 <li>
                   {/*onClick={handleSmoothScroll}*/}
-                  <a href="#reviews">Відгуки</a>
+                  <a href="#reviews">{t("reviews")}</a>
                 </li>
               </ul>
             </nav>
@@ -134,7 +140,7 @@ export const AboutUs = () => {
           <div className="about-us__main">
             <div className="about-us__content">
               <article id="about-us">
-                <h3>Про нас</h3>
+                <h3>{t("about_us_title")}</h3>
                 <div className="about-us__content_row">
                   <div className="about-us__content_col">
                     <p>{dataAboutUs.length > 0 ? dataAboutUs[0].value : ""}</p>
@@ -154,12 +160,12 @@ export const AboutUs = () => {
               </article>
 
               <article id="deliv">
-                <h3>Доставка</h3>
+                <h3>{t("shiping_title")}</h3>
                 <p>{dataDelivery.length > 0 ? dataDelivery[0].value : ""}</p>
               </article>
 
               <article id="payment">
-                <h3>Оплата</h3>
+                <h3>{t("payment_title")}</h3>
                 <p>{dataPayment.length > 0 ? dataPayment[0].value : ""}</p>
               </article>
             </div>
@@ -169,12 +175,11 @@ export const AboutUs = () => {
             >
               <div className="consultation__body">
                 <h3 className="consultation__title title">
-                  Консультация по подготовке к тендеру
+                  {t('menu_point_4')}
                 </h3>
                 <div className="consultation__text">
                   <p>
-                    Введите свои контактные данные и наш менеджер свяжется с
-                    вами
+                    {t('enter_data_to_phone')}
                   </p>
                 </div>
                 <form
@@ -188,7 +193,7 @@ export const AboutUs = () => {
                       onChange={(e) => setName(e.target.value)}
                       type="text"
                       name="name"
-                      placeholder="Ім’я"
+                      placeholder={t('name_title')}
                       required
                     />
                   </label>
@@ -199,12 +204,12 @@ export const AboutUs = () => {
                       onChange={(e) => setPhone(e.target.value)}
                       type="tel"
                       name="phone"
-                      placeholder="Телефон"
+                      placeholder={t('phone_title')}
                       required
                     />
                   </label>
                   <button type="submit" className="button is-mode-1">
-                    Відправити
+                    {t('send_title')}
                   </button>
                 </form>
               </div>

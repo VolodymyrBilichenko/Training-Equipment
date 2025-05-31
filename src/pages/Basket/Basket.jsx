@@ -8,8 +8,11 @@ import { PopupContext } from "../../App";
 import getCookies from "../../functions/getCookies";
 import { setBasketComment } from "../../redux/toolkitSlice";
 import { toast } from "react-toastify";
+import { Trans, useTranslation } from "react-i18next";
 
 export const Basket = () => {
+  const { t } = useTranslation();
+
   const setModal = useContext(PopupContext);
   const [orderComment, setOrderComment] = useState("");
   const [totalAmount, setTotalAmount] = useState(0);
@@ -19,26 +22,26 @@ export const Basket = () => {
   const basketList = useSelector((state) => state.toolkit.basket);
   const allProducts = useSelector((state) => state.toolkit.allProducts);
   const usersData = useSelector((state) => state.toolkit.user);
-  const minOrder = useSelector((state) => state.toolkit.settings)
+  const minOrder = useSelector((state) => state.toolkit.settings);
 
   const handleOpenModal = (type) => {
     setModal(`${type}`);
   };
 
   useEffect(() => {
-    if(!Object.keys(minOrder).length) return
-    
-    setMinOrderAmount(minOrder?.find(
-      (item) => item.key === "min_order_price"
-    ).value)
-  }, [minOrder])
+    if (!Object.keys(minOrder).length) return;
+
+    setMinOrderAmount(
+      minOrder?.find((item) => item.key === "min_order_price").value
+    );
+  }, [minOrder]);
 
   const handleOrder = () => {
     if (!basketList.length) {
-      return toast.error("У Вас пустая корзина");
+      return toast.error(t("you_have_empty_cart"));
     } else if (minOrderAmount > totalAmount) {
       return toast.error(
-        "Минимальная сумма для заказа " + minOrderAmount + " грн"
+        t("minimum_order_price") + " " + minOrderAmount + " грн"
       );
     }
 
@@ -67,30 +70,31 @@ export const Basket = () => {
     <>
       {/* <BackGroundDecor /> */}
 
-      <BreadCrumbs pages={[{ page: "корзина" }]} />
+      <BreadCrumbs pages={[{ page: t("cart") }]} />
 
       <section className="cart container">
-        <SectionTitle title={"Корзина"} />
+        <SectionTitle title={t("cart")} />
 
         {!getCookies("cookieToken") && (
           <div className="cart__note">
             <p>
-              Если Вы хотите получить персональную скидку или стать участником
-              бонусной системы -
-              <button
-                onClick={(_) => handleOpenModal("register")}
-                className="open-popup"
-              >
-                &nbsp;Зарегистрируйтесь
-              </button>{" "}
-              или
-              <button
-                onClick={(_) => handleOpenModal("login")}
-                className="open-popup"
-              >
-                &nbsp;Авторизуйтесь
-              </button>{" "}
-              в личном кабинете, прежде чем оформить этот заказ
+              <Trans
+                i18nKey="want_discount_register"
+                components={{
+                  register: (
+                    <button
+                      onClick={() => handleOpenModal("register")}
+                      className="open-popup"
+                    />
+                  ),
+                  login: (
+                    <button
+                      onClick={() => handleOpenModal("login")}
+                      className="open-popup"
+                    />
+                  ),
+                }}
+              />
             </p>
           </div>
         )}
@@ -100,13 +104,13 @@ export const Basket = () => {
         <div className="cart__footer">
           <div className="cart__footer_col">
             <div className="cart__message">
-              <label htmlFor="order-message">Комментарий к заказу</label>
+              <label htmlFor="order-message">{t("comment_to_order")}</label>
               <p>
                 <textarea
                   name="order-message"
                   value={orderComment}
                   onChange={handleCommentChange}
-                  placeholder="Введите текст"
+                  placeholder={t("enter_text")}
                   id="order-message"
                 ></textarea>
               </p>
@@ -116,24 +120,24 @@ export const Basket = () => {
             <table className="cart__total">
               <tbody>
                 <tr className="">
-                  <td>Минимальная сумма заказа</td>
+                  <td>{t("minimum_order_price")}</td>
                   <td>{minOrderAmount} ₴</td>
                 </tr>
                 <tr className="">
-                  <td>Общая сумма заказа</td>
+                  <td>{t("common_total")}</td>
                   <td>{totalAmount} ₴</td>
                 </tr>
                 <tr>
-                  <td>Скидка</td>
+                  <td>{t("discount")}</td>
                   <td>{discountAmount} ₴</td>
                 </tr>
                 <tr>
-                  <td>Бонусов</td>
+                  <td>{t("bonuses")}</td>
                   <td>{discountBonuses} ₴</td>
                 </tr>
                 <tr className="add-hr">
                   <td>
-                    <b>Всього</b>
+                    <b>{t("total")}</b>
                   </td>
                   <td>
                     <strong
@@ -164,10 +168,7 @@ export const Basket = () => {
                   <use xlinkHref="#check"></use>
                 </svg>
               </span>
-              <span className="checkbox-text">
-                Бажаю отримати на адресу електронної пошти примірник Договору
-                поставки та Рахунок
-              </span>
+              <span className="checkbox-text">{t("want_to_get")}</span>
             </label>
 
             <button
@@ -175,12 +176,12 @@ export const Basket = () => {
               className="cart__submit button is-mode-1 open-popup"
               data-href="#order-popup"
               type="button"
-              aria-label="Оформити замовлення"
+              aria-label={t("make_order")}
             >
               <svg width="24" height="24" viewBox="0 0 48 48">
                 <use xlinkHref="#cart"></use>
               </svg>
-              <span>Оформити замовлення</span>
+              <span>{t("make_order")}</span>
             </button>
           </div>
         </div>

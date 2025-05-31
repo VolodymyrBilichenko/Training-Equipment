@@ -4,6 +4,7 @@ import { HeaderPanelLanguage } from './components/HeaderPanelLanguage/HeaderPane
 import axios from 'axios';
 import { getApiLink } from '../../../../api/getApiLink';
 import {toast} from "react-toastify";
+import { useTranslation } from 'react-i18next';
 
 export const HeaderPanel = () => {
     const [staticData, setStaticData] = useState([]);
@@ -29,6 +30,8 @@ export const HeaderPanel = () => {
             })
     }, [])
 
+    const { t } = useTranslation();
+
   return (
     <div className="header__panel visible-on-desktop container is-large">
 
@@ -38,7 +41,7 @@ export const HeaderPanel = () => {
             <svg width="20" height="20" viewBox="0 0 48 48">
                 <use xlinkHref="#verifed"></use>
             </svg>
-            <b>Учасник Prozorromarket</b>
+            <b>{t("member_prozoro")}</b>
         </div>
 
         <HeaderPanelLanguage/>

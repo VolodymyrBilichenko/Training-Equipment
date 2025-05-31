@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { PopupContext } from "../../App";
 import setCookie from "../../functions/setCookie";
 import getCookies from "../../functions/getCookies";
+import { useTranslation } from "react-i18next";
 
 export const Main = () => {
   const allProducts = useSelector((state) => state.toolkit.allProducts);
@@ -27,6 +28,7 @@ export const Main = () => {
     },
   };
 
+  const { t } = useTranslation();
 
   return (
     <main className="main">
@@ -35,7 +37,7 @@ export const Main = () => {
       <MainCategories />
 
       <section className="products container">
-        <SectionTitle title={"Нові освітні рішення"} />
+        <SectionTitle title={t("new_education_solution")} />
 
         <ProductsList
           list={allProducts.slice(0, 8)}

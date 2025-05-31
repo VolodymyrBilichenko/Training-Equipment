@@ -12,9 +12,12 @@ import { getApiLink } from "../../../../api/getApiLink";
 import { GetApiHeaders } from "../../../../functions/getApiHeaders";
 import getCookies from "../../../../functions/getCookies";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 export const ProductListItem = ({ data }) => {
   const dispatch = useDispatch();
+
+  const { t } = useTranslation();
 
   const favorites = useSelector((state) => state.toolkit.favorites);
   const basket = useSelector((state) => state.toolkit.basket);
@@ -140,8 +143,8 @@ export const ProductListItem = ({ data }) => {
         </NavLink>
       </h3>
       <div className="product-card__price">
-        <ins>{`${data.price ?? data.original_price} ₴`}</ins>
-        <del>{`${data.price === null ? "" : data.original_price + " ₴"}`}</del>
+        <ins>{`${data.sale_price ?? data.price} ₴`}</ins>
+        {data.sale_price && <del>{data.price + " ₴"}</del>}
       </div>
       {/*style={{background: isAddedBasket ? "#9C50B8" : ""}}*/}
       <button
@@ -152,7 +155,7 @@ export const ProductListItem = ({ data }) => {
         <svg width="20" height="20" viewBox="0 0 48 48">
           <use xlinkHref="#cart"></use>
         </svg>
-        <span>Додати до кошика</span>
+        <span>{t("add_to_cart")}</span>
       </button>
     </li>
   );

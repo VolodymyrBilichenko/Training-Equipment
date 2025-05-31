@@ -110,6 +110,7 @@
 			text-transform: uppercase;
 
 			font-size: 1.5rem;
+			max-width: 100px;
 
 			@include _550 {
 				font-size: 2rem;
