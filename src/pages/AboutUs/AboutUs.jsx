@@ -8,23 +8,19 @@ import { GetApiHeaders } from "../../functions/getApiHeaders";
 
 import AboutPh from "../../assets/img/about-us/about-us-image.png";
 import { MainReviews } from "../Main/components/MainReviews/MainReviews";
-import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import { PopupContext } from "../../App";
 import getCookies from "../../functions/getCookies";
 import { useTranslation } from "react-i18next";
+import { getLocalizedText } from "../../utils/getLocalizedText";
+import { useSelector } from "react-redux";
 
 export const AboutUs = () => {
   const SetPopContext = useContext(PopupContext);
-  const [staticData, setStaticData] = useState([]);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
-  const { t } = useTranslation();
-
-  const dataAboutUs = staticData.filter((item) => item.key === "about_us");
-  const dataDelivery = staticData.filter((item) => item.key === "delivery");
-  const dataPayment = staticData.filter((item) => item.key === "payment");
+  const { t, i18n } = useTranslation();
 
   const location = useLocation();
 
@@ -75,18 +71,18 @@ export const AboutUs = () => {
     setTimeout(scrollToSection, 1);
   }, [location]);
 
+  const [textAbout, setTextAbout] = useState("");
+  const [textDelivery, setTextDelivery] = useState("");
+  const [textPayment, setTextPayment] = useState("");
+
+  const staticData = useSelector((state) => state.toolkit.staticData);
   useEffect(() => {
-    axios
-      .get(getApiLink("/api/static/data"), { headers: GetApiHeaders() })
-      .then(({ data }) => {
-        setTimeout(scrollToSection, 100);
-        setStaticData(data.data);
-      })
-      .catch((error) => {
-        toast.error("Возникла неизведанная ошибка");
-        console.error("static data error", error);
-      });
-  }, []);
+    if (!staticData) return;
+
+    setTextAbout(getLocalizedText(staticData, i18n.language, "about_us"));
+    setTextDelivery(getLocalizedText(staticData, i18n.language, "delivery"));
+    setTextPayment(getLocalizedText(staticData, i18n.language, "payment"));
+  }, [i18n.language, staticData]);
 
   return (
     <>
@@ -143,7 +139,7 @@ export const AboutUs = () => {
                 <h3>{t("about_us_title")}</h3>
                 <div className="about-us__content_row">
                   <div className="about-us__content_col">
-                    <p>{dataAboutUs.length > 0 ? dataAboutUs[0].value : ""}</p>
+                    <p>{textAbout ?? ""}</p>
                   </div>
                   <div className="about-us__content_col">
                     <picture className="image-aspect-ratio">
@@ -161,12 +157,12 @@ export const AboutUs = () => {
 
               <article id="deliv">
                 <h3>{t("shiping_title")}</h3>
-                <p>{dataDelivery.length > 0 ? dataDelivery[0].value : ""}</p>
+                <p>{textDelivery ?? ""}</p>
               </article>
 
               <article id="payment">
                 <h3>{t("payment_title")}</h3>
-                <p>{dataPayment.length > 0 ? dataPayment[0].value : ""}</p>
+                <p>{textPayment ?? ""}</p>
               </article>
             </div>
             <div
@@ -175,12 +171,10 @@ export const AboutUs = () => {
             >
               <div className="consultation__body">
                 <h3 className="consultation__title title">
-                  {t('menu_point_4')}
+                  {t("menu_point_4")}
                 </h3>
                 <div className="consultation__text">
-                  <p>
-                    {t('enter_data_to_phone')}
-                  </p>
+                  <p>{t("enter_data_to_phone")}</p>
                 </div>
                 <form
                   className="consultation__form"
@@ -193,7 +187,7 @@ export const AboutUs = () => {
                       onChange={(e) => setName(e.target.value)}
                       type="text"
                       name="name"
-                      placeholder={t('name_title')}
+                      placeholder={t("name_title")}
                       required
                     />
                   </label>
@@ -204,12 +198,12 @@ export const AboutUs = () => {
                       onChange={(e) => setPhone(e.target.value)}
                       type="tel"
                       name="phone"
-                      placeholder={t('phone_title')}
+                      placeholder={t("phone_title")}
                       required
                     />
                   </label>
                   <button type="submit" className="button is-mode-1">
-                    {t('send_title')}
+                    {t("send_title")}
                   </button>
                 </form>
               </div>

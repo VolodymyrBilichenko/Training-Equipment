@@ -1,53 +1,32 @@
-import React from 'react'
+import React from "react";
 
-export const FooterSocial = ({socialData}) => {
+const socialIcons = [
+  { key: "facebook", title: "Facebook", iconId: "#facebook" },
+  { key: "instagram", title: "Instagram", iconId: "#instagram" },
+  { key: "youtube", title: "YouTube", iconId: "#youtube" },
+  { key: "viber", title: "Viber", iconId: "#viber" },
+  { key: "telegram", title: "Telegram", iconId: "#telegram" },
+];
 
-    const socFacebook = socialData?.find(item => item.key === 'facebook')
-    const socViber = socialData?.find(item => item.key === 'viber')
-    const socTelegram = socialData?.find(item => item.key === 'telegram')
-    const socYoutube = socialData?.find(item => item.key === 'youtube')
-    const socInstagram = socialData?.find(item => item.key === 'instagram')
-
-
+export const FooterSocial = ({ socialData }) => {
   return (
     <div className="footer__social">
-        <ul>
-            {socFacebook?.value && <li>
-                <a href={socFacebook?.value} title="Facebook" target="_blank">
-                    <svg width="26" height="26" viewBox="0 0 48 48">
-                        <use xlinkHref="#facebook"></use>
-                    </svg>
-                </a>
-            </li>}
-            {socInstagram?.value && <li>
-                <a href={socInstagram?.value} title="Instagram" target="_blank">
-                    <svg width="26" height="26" viewBox="0 0 48 48">
-                        <use xlinkHref="#instagram"></use>
-                    </svg>
-                </a>
-            </li>}
-            {socYoutube?.value && <li>
-                <a href={socYoutube?.value} title="YouTube" target="_blank">
-                    <svg width="26" height="26" viewBox="0 0 48 48">
-                        <use xlinkHref="#youtube"></use>
-                    </svg>
-                </a>
-            </li>}
-            {/* {socViber?.value && <li>
-                <a href={socViber?.value} title="Viber" target="_blank">
-                    <svg width="26" height="26" viewBox="0 0 26 26">
-                        <use xlinkHref="#viber"></use>
-                    </svg>
-                </a>
-            </li>}
-            {socTelegram?.value && <li>
-                <a href={socTelegram?.value} title="Telegram" target="_blank">
-                    <svg width="26" height="26" viewBox="0 0 26 26">
-                        <use xlinkHref="#telegram"></use>
-                    </svg>
-                </a>
-            </li>} */}
-        </ul>
+      <ul>
+        {socialIcons.map(({ key, title, iconId }) => {
+          const item = socialData?.find((el) => el.key === key);
+          if (!item?.value) return null;
+
+          return (
+            <li key={key}>
+              <a href={item.value} title={title} target="_blank" rel="noopener noreferrer">
+                <svg width="26" height="26" viewBox="0 0 48 48">
+                  <use xlinkHref={iconId} />
+                </svg>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
     </div>
-  )
-}
+  );
+};
