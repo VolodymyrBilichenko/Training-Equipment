@@ -117,7 +117,7 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
                   <input
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    type="tel"
+                    type="number"
                     name="phone"
                     required
                     placeholder="Введите номер телефона"

@@ -63,7 +63,7 @@ export const ModalOffer = ({ handleClosePopUp }) => {
           </div>
           <br />
           <NavLink
-            to={'/about#consultation'}
+            to={'/about/#consultation'}
             onClick={handleClosePopUp}
             style={{ display: "block", margin: "0 auto" }}
             className="popup-form__submit button is-mode-1"

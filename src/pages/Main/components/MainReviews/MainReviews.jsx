@@ -41,6 +41,10 @@ export const MainReviews = ({ id }) => {
       .get(getApiLink("/api/reviews/get"), { headers: GetApiHeaders() })
       .then(({ data }) => {
         setReviewsData(data.data);
+
+        console.log(data);
+
+        // first_name, last_name, organization
       })
       .catch((error) => {
         toast.error("Возникла неизведанная ошибка");
@@ -102,8 +106,14 @@ export const MainReviews = ({ id }) => {
                   {/* <img src="https://picsum.photos/id/275/512/512" alt="" width="59" height="59" loading="lazy"/> */}
                 </div>
                 <div className="reviews__person_info">
-                  <h3>{reviewItem.user.name}</h3>
-                  <span>{reviewItem.user.organization.name}</span>
+                  {reviewItem?.first_name && reviewItem?.last_name ? (
+                    <h3>
+                      {reviewItem.first_name + " " + reviewItem.last_name}
+                    </h3>
+                  ) : (
+                    <h3>{reviewItem.user.name}</h3>
+                  )}
+                  <span>{reviewItem?.organization ?? reviewItem?.user?.organization?.name}</span>
                 </div>
               </div>
             </div>
@@ -133,7 +143,7 @@ export const MainReviews = ({ id }) => {
                           />
                         )}
                       </div>
-                      {t('see_document')}
+                      {t("see_document")}
                     </a>
                   )}
                 </div>

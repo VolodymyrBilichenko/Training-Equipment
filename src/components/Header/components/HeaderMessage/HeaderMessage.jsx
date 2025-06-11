@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
 
 export const HeaderMessage = () => {
   const [isOpen, setIsopen] = useState(true);
@@ -11,7 +12,7 @@ export const HeaderMessage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className={`header__message ${isOpen === false ? 'is-hidden' : ''} `}>
+    <NavLink to={'/about'} className={`header__message ${isOpen === false ? 'is-hidden' : ''} `}>
         <div className="header__message--body">
             <div className="header__message--text">
             <svg width="20" height="20" viewBox="0 0 48 48">
@@ -25,7 +26,7 @@ export const HeaderMessage = () => {
               </svg>
             </button>
         </div>
-    </div>
+    </NavLink>
     
   )
 }

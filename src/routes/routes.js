@@ -55,6 +55,10 @@ export const routes = () => {
             element: <Catalog/>
         },
         {
+            path: '/catalog/:category_id/:subcategory_id',
+            element: <Catalog/>
+        },
+        {
             path: '/product/:id',
             element: <ProductCard/>
         },

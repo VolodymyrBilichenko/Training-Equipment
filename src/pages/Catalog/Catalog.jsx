@@ -18,7 +18,7 @@ import { PopupContext } from "../../App";
 import { useTranslation } from "react-i18next";
 
 export const Catalog = () => {
-  const { category_id, search } = useParams();
+  const { category_id, subcategory_id, search } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const allCategories = useSelector((state) => state.toolkit.allCategories);
@@ -68,20 +68,24 @@ export const Catalog = () => {
   useEffect(() => {
     setIsLoading(true);
 
+    let category = "";
+
+    if (!!subcategory_id) {
+      category = `&subcategory_id=${subcategory_id}`;
+    } else if (!!category_id) {
+      category = `&category_id=${category_id}`;
+    } else {
+      category = "";
+    }
+
     axios
-      .get(
-        getApiLink(
-          `/api/products/get?active=1${
-            category_id ? `&category_id=${category_id}&page=1` : "&page=1"
-          }`
-        ),
-        { headers: GetApiHeaders() }
-      )
+      .get(getApiLink(`/api/products/get?active=1&page=1` + (category)), {
+        headers: GetApiHeaders(),
+      })
       .then(({ data }) => {
         setIsLoading(false);
         setProducts(data.data);
         setMetaProduct(data);
-        console.log(data);
       })
       .catch((error) => {
         toast.error(error);
@@ -95,12 +99,11 @@ export const Catalog = () => {
       }
     : null;
 
-
   const SetPopContext = useContext(PopupContext);
   const seconds = 10;
 
   useEffect(() => {
-    if (getCookies("isShown") == 'true') return;
+    if (getCookies("isShown") == "true") return;
 
     setTimeout(() => {
       SetPopContext("offer");
@@ -110,7 +113,7 @@ export const Catalog = () => {
 
   return (
     <>
-      <BreadCrumbs pages={[{ page: t('menu_point_2') }, categoryName]} />
+      <BreadCrumbs pages={[{ page: t("menu_point_2") }, categoryName]} />
 
       <section className="catalog container">
         <div className="catalog__decor" aria-hidden="true">
@@ -125,7 +128,7 @@ export const Catalog = () => {
           </picture>
         </div>
 
-        <SectionTitle title={t('menu_point_2')} ClassTitle={"catalog__title"} />
+        <SectionTitle title={t("menu_point_2")} ClassTitle={"catalog__title"} />
 
         <div className="catalog__aside" data-sticky-container>
           <div className="catalog__categories sticky" data-margin-top="30">
@@ -133,7 +136,7 @@ export const Catalog = () => {
               className="catalog__categories_target button visible-on-mob"
               type="button"
             >
-              {t('categories_title')}
+              {t("categories_title")}
             </button>
             <div className="catalog__categories_block">
               <div>
@@ -149,7 +152,7 @@ export const Catalog = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 type="search"
                 name="search"
-                placeholder={t('catalog_search')}
+                placeholder={t("catalog_search")}
                 required
               />
               <button type="submit" title="Поиск">

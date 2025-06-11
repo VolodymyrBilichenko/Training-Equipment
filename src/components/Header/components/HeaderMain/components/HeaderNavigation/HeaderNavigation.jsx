@@ -54,7 +54,7 @@ export const HeaderNavigation = ({ isOpen, handleOpen }) => {
             <NavLink to={"/pricelist"}>{t("menu_point_3")}</NavLink>
           </li>
           <li>
-            <NavLink to={"/about#consultation"}>{t("menu_point_4")}</NavLink>
+            <NavLink to={"/about/#consultation"}>{t("menu_point_4")}</NavLink>
           </li>
           <li>
             <NavLink to={"/certificate"}>{t("menu_point_5")}</NavLink>

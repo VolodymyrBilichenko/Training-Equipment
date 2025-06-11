@@ -27,10 +27,33 @@ import DocumentMeta from "react-document-meta";
 import { useTranslation } from "react-i18next";
 
 export const ProductCard = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { id } = useParams();
   const dispatch = useDispatch();
+
+  const statuses = [
+    {
+      ua: "Немає у наявності",
+      ru: "Нет в наличии",
+      en: "None of stock",
+    },
+    {
+      ua: "У наявності",
+      ru: "В наличии",
+      en: "In stock",
+    },
+    {
+      ua: "Очікується протягом кількох днів",
+      ru: "Ожидается",
+      en: "Wating",
+    },
+    {
+      ua: "Видален з прайса",
+      ru: "Удален из прайса",
+      en: "Deleted from list",
+    },
+  ];
 
   const favorites = useSelector((state) => state.toolkit.favorites);
 
@@ -201,7 +224,13 @@ export const ProductCard = () => {
             {/* <span className="product__article-number">
               Осталось на складе: {dataCard?.amount_in_store}
             </span> */}
-            <span className="product__status in-stock">{t("in_stock")}</span>
+            <span
+              className={
+                "product__status" + (dataCard.status.id === 2 ? " in-stock" : "")
+              }
+            >
+              {statuses[dataCard.status.id - 1][i18n.language]}
+            </span>
             <div className="product__info">
               <div className="product__info_col">
                 <div className="product__price">
@@ -221,6 +250,7 @@ export const ProductCard = () => {
               </div>
               <div className="product__info_col">
                 <button
+                  disabled={dataCard.status.id !== 2}
                   onClick={handleAddCart}
                   className="product__add-to-cart button"
                   type="button"

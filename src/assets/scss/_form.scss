@@ -59,6 +59,12 @@ input[type="password"] {
 
 	transition: color .2s ease;
 
+	width: fit-content !important;
+
+	svg {
+		width: fit-content;
+	}
+
 	@media (any-hover: hover) {
 		transition: color .2s ease;
 		&:hover {

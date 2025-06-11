@@ -84,6 +84,18 @@ export const AboutUs = () => {
     setTextPayment(getLocalizedText(staticData, i18n.language, "payment"));
   }, [i18n.language, staticData]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const hash = location.hash.replace('#', '');
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 500); // Задержка в мс
+
+    return () => clearTimeout(timer);
+  }, [location]);
+
   return (
     <>
       {/* <BackGroundDecor/> */}
