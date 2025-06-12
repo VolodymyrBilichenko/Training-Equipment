@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 export const CatalogCategories = () => {
   const allCategories = useSelector((state) => state.toolkit.allCategories);
   const location = useLocation();
+  const { subcategory_id } = useParams();
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(!!subcategory_id)
 
   const {t, i18n} = useTranslation()
 
+  
   return (
     <ul className="catalog__categories_list">
       <li>

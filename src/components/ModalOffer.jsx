@@ -20,18 +20,18 @@ export const ModalOffer = ({ handleClosePopUp }) => {
       queryObject[key] = value;
     }
 
-    axios
-      .get(
-        getApiLink(
-          `/verify-email/?email=${queryObject?.email}&code=${queryObject?.code}`
-        )
-      )
-      .then((res) => {
-        window.history.pushState(null, "", window.location.origin);
-      })
-      .catch((err) => {
-        window.history.pushState(null, "", window.location.origin);
-      });
+    // axios
+    //   .get(
+    //     getApiLink(
+    //       `/verify-email/?email=${queryObject?.email}&code=${queryObject?.code}`
+    //     )
+    //   )
+    //   .then((res) => {
+    //     window.history.pushState(null, "", window.location.origin);
+    //   })
+    //   .catch((err) => {
+    //     window.history.pushState(null, "", window.location.origin);
+    //   });
   }, []);
 
   const { t } = useTranslation();
@@ -51,24 +51,17 @@ export const ModalOffer = ({ handleClosePopUp }) => {
           </svg>
         </button>
         <div className="popup-container">
-          {/* <h2 className="popup-title title">
-            Хотите получить техническое задание по данной позиции либо
-            консультацию по подготовке к тендеру?
-          </h2> */}
           <div className="popup-text">
-            <p>
-            Хотите получить техническое задание по данной позиции либо
-            консультацию по подготовке к тендеру?
-            </p>
+            <p>{t("want_to_get_tz")}</p>
           </div>
           <br />
           <NavLink
-            to={'/about/#consultation'}
+            to={"/about/#consultation"}
             onClick={handleClosePopUp}
             style={{ display: "block", margin: "0 auto" }}
             className="popup-form__submit button is-mode-1"
           >
-            {t('menu_point_4')}
+            {t("menu_point_4")}
           </NavLink>
         </div>
       </div>

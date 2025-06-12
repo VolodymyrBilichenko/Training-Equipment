@@ -79,7 +79,7 @@ export const Catalog = () => {
     }
 
     axios
-      .get(getApiLink(`/api/products/get?active=1&page=1` + (category)), {
+      .get(getApiLink(`/api/products/get?active=1&page=1` + category), {
         headers: GetApiHeaders(),
       })
       .then(({ data }) => {
@@ -100,15 +100,20 @@ export const Catalog = () => {
     : null;
 
   const SetPopContext = useContext(PopupContext);
+
   const seconds = 10;
 
   useEffect(() => {
-    if (getCookies("isShown") == "true") return;
+    // if (getCookie("isShown") === "true") return;
 
-    setTimeout(() => {
-      SetPopContext("offer");
+    const timer = setTimeout(() => {
       setCookie("isShown", true);
+      SetPopContext("offer"); // показать модалку
     }, seconds * 1000);
+
+    return () => {
+      clearTimeout(timer); // отменяем, если пользователь ушёл со страницы
+    };
   }, []);
 
   return (
