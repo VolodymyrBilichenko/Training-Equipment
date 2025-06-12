@@ -40,6 +40,9 @@
 		// .footer__logo--img
 
 		&--img {
+
+			object-fit: contain;
+			object-position: left;
 		}
 	}
 

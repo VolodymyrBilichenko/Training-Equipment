@@ -86,9 +86,9 @@ export const ProductCard = () => {
   const meta = {
     title: dataCard?.meta_title ?? dataCard["name_" + lang] ?? dataCard?.name,
     description:
-      dataCard?.meta_description ??
+      (dataCard?.meta_description ??
       dataCard["description_" + lang] ??
-      dataCard?.description,
+      dataCard?.description) + " | Ukraine Facility",
     meta: {
       charset: "utf-8",
     },
