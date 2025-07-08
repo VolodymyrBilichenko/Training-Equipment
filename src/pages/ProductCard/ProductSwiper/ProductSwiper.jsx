@@ -8,13 +8,18 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { useTranslation } from "react-i18next";
 
 export const ProductSwiper = ({ dataCard }) => {
+  const { t } = useTranslation();
+  
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
     <div className="product__col">
-      {dataCard?.files && Array.isArray(dataCard?.files) && dataCard?.files.length > 0 ? (
+      {dataCard?.files &&
+      Array.isArray(dataCard?.files) &&
+      dataCard?.files.length > 0 ? (
         <>
           <Swiper
             style={{
@@ -62,7 +67,7 @@ export const ProductSwiper = ({ dataCard }) => {
         <ul className="product__orders">
           {dataCard?.precepts?.map((precept) => (
             <li key={precept.id}>
-              <h3>Відповідає Наказу </h3>
+              <h3>{t("order_have")}</h3>
               <strong>{precept.number}</strong>
               <p>{precept.description}</p>
             </li>

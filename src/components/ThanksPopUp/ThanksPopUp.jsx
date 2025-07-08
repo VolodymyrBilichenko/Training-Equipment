@@ -1,7 +1,9 @@
 import React, {useContext} from 'react'
 import {PopupContext} from '../../App';
+import { useTranslation } from 'react-i18next';
 
 export const ThanksPopUp = ({handleClosePopUp}) => {
+    const { t } = useTranslation();
 
     return (
         <div className="popup-wrapper">
@@ -15,11 +17,11 @@ export const ThanksPopUp = ({handleClosePopUp}) => {
                 </button>
                 <div className="popup-container">
                     <h2 className="popup-title title">
-                        Спасибо
+                        {t('thanks')}
                     </h2>
                     <div className="popup-text">
                         <p>
-                            Ваше Коммерческое предложение будет отправлено менеджером в ближайшее время
+                            {t('com_suggest')}
                         </p>
                     </div>
                 </div>

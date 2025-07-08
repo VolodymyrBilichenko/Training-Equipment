@@ -7,7 +7,7 @@ import { PopupContext } from "../../App";
 import { toast } from "react-toastify";
 import { useRegistration } from "../../hooks/registration";
 import { errorTypes } from "../../constants";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 export const RegisterPopUp = ({ handleClosePopUp }) => {
   const { t } = useTranslation();
@@ -69,12 +69,9 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
           </svg>
         </button>
         <div className="popup-container">
-          <h2 className="popup-title title">Регистрация</h2>
+          <h2 className="popup-title title">{t("registration")}</h2>
           <div className="popup-text">
-            <p>
-              Регистрация позволит Вам получить накопительную скидку и купить
-              следующий заказ по более выгодной цене
-            </p>
+            <p>{t("registration_description")}</p>
           </div>
           <form
             onSubmit={handleSubmit}
@@ -83,7 +80,7 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
           >
             <div className="form-fields">
               <label className="popup-form__item">
-                <span className="is-required">ФИО Контактного лица</span>
+                <span className="is-required">{t("personal_fio")}</span>
                 <span className="input-label">
                   <input
                     value={name}
@@ -106,13 +103,13 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
                     type="email"
                     name="email"
                     required
-                    placeholder="Введите свой email"
+                    placeholder={t("enter_your_email")}
                     className="input"
                   />
                 </span>
               </label>
               <label className="popup-form__item">
-                <span className="is-required">Телефон</span>
+                <span className="is-required">{t("phone_title")}</span>
                 <span className="input-label">
                   <input
                     value={phone}
@@ -120,13 +117,13 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
                     type="number"
                     name="phone"
                     required
-                    placeholder="Введите номер телефона"
+                    placeholder={t("enter_phone")}
                     className="input"
                   />
                 </span>
               </label>
               <label className="popup-form__item">
-                <span className="is-required">Пароль</span>
+                <span className="is-required">{t("password")}</span>
                 <span className="input-label">
                   <input
                     value={pass}
@@ -134,7 +131,7 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
                     type={showPass ? "text" : "password"}
                     name="password"
                     required
-                    placeholder="Введите пароль"
+                    placeholder={t("enter_password")}
                     className="input"
                   />
                   <button
@@ -145,7 +142,7 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
                     }
                     onClick={handleShowPass}
                     type="button"
-                    title="Показать/скрыть пароль"
+                    title={t("show_hide_password")}
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24">
                       <use xlinkHref="#visibility"></use>
@@ -160,7 +157,12 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
             </p>
             <div className="popup-form__text">
               <p>
-                Регистрируясь на сайте Вы соглашаетесь на <Link to="/docs/personal">обработку личных данных</Link>
+                <Trans
+                  i18nKey="registration_privacy"
+                  components={{
+                    privacy: <Link to="/docs/personal" />,
+                  }}
+                />
               </p>
             </div>
             <button
@@ -168,7 +170,7 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
               className="popup-form__submit button is-mode-1"
               type="submit"
             >
-              Зарегистрироваться
+              {t("register")}
             </button>
             <div className="popup-form__text">
               <p>
@@ -177,7 +179,7 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
                   type={"button"}
                   className="open-popup popup-close"
                 >
-                  Войти
+                  {t("enter")}
                 </button>
               </p>
             </div>

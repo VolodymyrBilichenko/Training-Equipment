@@ -6,9 +6,9 @@ export const getLocalizedText = (data, language, type) => {
   if (!text) return "";
 
   const localizedText = {
-    ru: text.value_ru,
-    ua: text.value_ua,
-    en: text.value_en,
+    ru: text.value_ru ?? text.name_ru,
+    ua: text.value_ua ?? text.name_ua,
+    en: text.value_en ?? text.name_en,
   };
 
   return localizedText[language] || text.value || "";

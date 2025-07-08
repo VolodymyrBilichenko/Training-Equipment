@@ -2,9 +2,15 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import photoPlaceholder from "./../../assets/img/null-card-image.png";
+import { getLocalizedText } from "../../utils/getLocalizedText";
+import { useTranslation } from "react-i18next";
 
 export const CategoriesList = ({ ClassNameList }) => {
+  const { t, i18n } = useTranslation();
+
   const allCategories = useSelector((state) => state.toolkit.allCategories);
+
+  console.log(allCategories);
 
   return (
     <ul className={`categories__list ${ClassNameList}`}>
@@ -17,9 +23,9 @@ export const CategoriesList = ({ ClassNameList }) => {
                 width="52"
                 height="52"
                 loading="lazy"
-                alt="categories ic"
+                alt={category["name_" + i18n.language] ?? category.name}
               />
-              <h3>{category.name}</h3>
+              <h3>{category["name_" + i18n.language] ?? category.name}</h3>
             </NavLink>
           </li>
         );

@@ -54,7 +54,7 @@ export const CartItemLength = ({
           toast.error(
             err?.response?.data?.error?.message
               ? t(errorTypes[err?.response?.data?.error?.message[0]])
-              : "Неизвестная ошибка"
+              : t("something_was_happen")
           );
         });
     } else {

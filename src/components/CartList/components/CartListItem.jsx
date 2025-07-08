@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CartItemLength } from "./CartItemLength";
 import { useDispatch, useSelector } from "react-redux";
-import { removeBasketItem } from "../../../redux/toolkitSlice";
+import { removeBasketItem, updateBasketItem } from "../../../redux/toolkitSlice";
 import axios from "axios";
 import getCookies from "../../../functions/getCookies";
 import { getApiLink } from "../../../api/getApiLink";
@@ -9,44 +9,32 @@ import { GetApiHeaders } from "../../../functions/getApiHeaders";
 import photoPlaceholder from "../../../assets/img/null-card-image.png";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { removeProduct, updateProduct } from "../../../utils/db";
 
-export const CartListItem = ({ productInfo, setTotalAmount, products }) => {
+export const CartListItem = ({ productInfo }) => {
   const { t } = useTranslation();
-
   const dispatch = useDispatch();
-  const basketList = useSelector((state) => state.toolkit.basket);
-  const basketItem = basketList.filter(
-    (item) => item.product_id === productInfo.id
-  )[0];
 
-  const [productCount, setProductCount] = useState(basketItem.product_amount);
-  const [productPrice, setProductPrice] = useState(0);
+  const [productCount, setProductCount] = useState(productInfo?.amount ?? 1);
 
   const handleDeleteItem = () => {
-    // setTotalAmount((prev) => prev - productPrice * productCount);
-    dispatch(removeBasketItem(productInfo.id));
-
-    if (!getCookies("cookieToken")) return;
-
-    axios.defaults.headers.common["Authorization"] = `Bearer ${getCookies(
-      "cookieToken"
-    )}`;
-    axios.post(
-      getApiLink("/api/bucket/remove"),
-      {
-        product_id: productInfo.id,
-        product_amount: productCount,
-      },
-      { headers: GetApiHeaders() }
-    );
+    removeProduct(productInfo?.id);
+    dispatch(removeBasketItem(productInfo?.id));
   };
 
-  useEffect(() => {  
-    setProductPrice(productInfo?.sale_price ?? productInfo?.price)
-    setProductCount(basketItem.product_amount);
-  }, [basketItem]);
+  const handleIncrement = async () => {
+    setProductCount((prev) => prev + 1);
+  };
 
+  const handleDecrement = async () => {
+    if (productCount > 1) setProductCount((prev) => prev - 1);
+  };
   
+  useEffect(() => {
+    if (productCount !== productInfo?.amount) {
+      dispatch(updateBasketItem({ ...productInfo, amount: productCount }));
+    }
+  }, [productCount]);
 
   return (
     <li className="cart__item">
@@ -57,7 +45,7 @@ export const CartListItem = ({ productInfo, setTotalAmount, products }) => {
             className="cart__item_image"
           >
             <img
-              src={productInfo.files[0]?.web_path ?? photoPlaceholder}
+              src={productInfo?.photo ?? photoPlaceholder}
               alt=""
               width="130"
               height="130"
@@ -66,38 +54,57 @@ export const CartListItem = ({ productInfo, setTotalAmount, products }) => {
           </NavLink>
           <h3>
             <NavLink to={`/product/${productInfo.id}`}>
-              {productInfo.name}
+              {productInfo?.name}
             </NavLink>
           </h3>
-          <span>{t('articul')} {productInfo.article}</span>
+          <span>
+            {t("articul")} {productInfo?.articul}
+          </span>
         </div>
         <div className="cart__item_price">
-          <span>
-            {t('price')}
-          </span>
+          <span>{t("price")}</span>
           {<b>{productInfo?.sale_price ?? productInfo?.price} ₴</b>}
-          {productInfo?.sale_price ? <strike>{productInfo?.price} ₴</strike> : productInfo?.sale_price}
+          {productInfo?.sale_price ? (
+            <strike>{productInfo?.price} ₴</strike>
+          ) : (
+            productInfo?.sale_price
+          )}
         </div>
         <div className="cart__item_length">
-          <span>
-            {t('amount')}
-          </span>
+          <span>{t("amount")}</span>
 
-          <CartItemLength
-            products={products}
-            setTotalAmount={setTotalAmount}
-            productInfo={productInfo}
-            setProductCount={setProductCount}
-            productCount={productCount}
-          />
+          <div className="product__length">
+            <button
+              className="product__length_minus"
+              type="button"
+              onClick={handleDecrement}
+            >
+              -
+            </button>
+            <input
+              type="number"
+              name="product-length"
+              placeholder=""
+              value={productCount}
+              max="100"
+              min="1"
+              data-price-value="200"
+              required
+              className="product__length_value"
+              readOnly
+            />
+            <button
+              className="product__length_plus"
+              type="button"
+              onClick={handleIncrement}
+            >
+              +
+            </button>
+          </div>
         </div>
         <div className="cart__item_total">
-          <span>
-            {t('summa')}
-          </span>
-          <b data-price-currency="₴">
-            {productPrice * productCount}
-          </b>
+          <span>{t("summa")}</span>
+          <b data-price-currency="₴">{(productInfo?.sale_price ?? productInfo?.price) * productCount}</b>
         </div>
         <button
           onClick={handleDeleteItem}

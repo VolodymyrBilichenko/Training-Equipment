@@ -71,7 +71,18 @@ export const ProductCard = () => {
     axios
       .get(getApiLink(`/api/products/${id}`), { headers: GetApiHeaders() })
       .then(({ data }) => {
-        setDataCard(data?.data);
+        let item = data.data;
+
+        if (item.amount_in_store === 0) {
+          item = {
+            ...item,
+            status: {
+              id: 1,
+            },
+          };
+        }
+
+        setDataCard(item);
       })
       .catch((error) => {
         toast.error("Возникла неизведанная ошибка");
@@ -87,8 +98,8 @@ export const ProductCard = () => {
     title: dataCard?.meta_title ?? dataCard["name_" + lang] ?? dataCard?.name,
     description:
       (dataCard?.meta_description ??
-      dataCard["description_" + lang] ??
-      dataCard?.description) + " | Ukraine Facility",
+        dataCard["description_" + lang] ??
+        dataCard?.description) + " | Ukraine Facility",
     meta: {
       charset: "utf-8",
     },
@@ -102,10 +113,16 @@ export const ProductCard = () => {
     return <Preloader />;
   }
 
-  const handleAddCart = () => {
+  const handleAddCart = async () => {
+    
     const dataItem = {
-      product_id: dataCard?.id,
-      product_amount: productCount,
+      id: dataCard?.id,
+      photo: dataCard?.files[0]?.web_path,
+      articul: dataCard?.article,
+      price: dataCard?.price,
+      sale_price: dataCard?.sale_price,
+      amount: productCount,
+      name: dataCard?.name,
     };
 
     if (getCookies("cookieToken")) {
@@ -133,7 +150,6 @@ export const ProductCard = () => {
           );
         });
     } else {
-      setIsAddedBasket((prev) => !prev);
       dispatch(addBasketItem(dataItem));
       toast.success(t("success_added_to_cart"));
     }
@@ -164,7 +180,6 @@ export const ProductCard = () => {
         .post(getApiLink(`/api/favorites/add/${dataCard?.id}`), {
           headers: GetApiHeaders(),
         })
-        .then(({ data }) => {})
         .catch((error) => {
           console.error(error);
         });
@@ -224,9 +239,11 @@ export const ProductCard = () => {
             {/* <span className="product__article-number">
               Осталось на складе: {dataCard?.amount_in_store}
             </span> */}
+
             <span
               className={
-                "product__status" + (dataCard.status.id === 2 ? " in-stock" : "")
+                "product__status" +
+                (dataCard.status.id === 2 ? " in-stock" : "")
               }
             >
               {statuses[dataCard.status.id - 1][i18n.language]}
@@ -250,7 +267,9 @@ export const ProductCard = () => {
               </div>
               <div className="product__info_col">
                 <button
-                  disabled={dataCard.status.id !== 2}
+                  disabled={
+                    dataCard.status.id !== 2 || !dataCard.amount_in_store
+                  }
                   onClick={handleAddCart}
                   className="product__add-to-cart button"
                   type="button"

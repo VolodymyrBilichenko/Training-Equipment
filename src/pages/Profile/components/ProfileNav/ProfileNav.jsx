@@ -3,8 +3,11 @@ import {useNavigate} from "react-router-dom";
 import setCookie from "../../../../functions/setCookie";
 import {useDispatch} from "react-redux";
 import {setUser} from "../../../../redux/toolkitSlice";
+import { useTranslation } from 'react-i18next';
 
 export const ProfileNav = ({ onProfInfo, onProfOrders, onProfBonus }) => {
+	const { t } = useTranslation();
+
 	const [activeTab, setActiveTab] = useState('Личные данные');
 
 	const handleClickTab = (tabName) => {
@@ -28,7 +31,9 @@ export const ProfileNav = ({ onProfInfo, onProfOrders, onProfBonus }) => {
 				 	aria-label="Личные данные"
 					className={activeTab === 'Личные данные' ? 'is-current' : ''}
 				>
-					<span>Личные данные</span>
+					<span>
+						{t('personal_info')}
+					</span>
 					<svg width="20" height="20" viewBox="0 0 20 20">
 						<use xlinkHref="#arrow-next"></use>
 					</svg>
@@ -40,7 +45,9 @@ export const ProfileNav = ({ onProfInfo, onProfOrders, onProfBonus }) => {
 					aria-label="Мои заказы"
 					className={activeTab === 'Мои заказы' ? 'is-current' : ''}
 				>
-					<span>Мои заказы</span>
+					<span>
+						{t('my_orders')}
+					</span>
 					<svg width="20" height="20" viewBox="0 0 20 20">
 						<use xlinkHref="#arrow-next"></use>
 					</svg>
@@ -52,13 +59,15 @@ export const ProfileNav = ({ onProfInfo, onProfOrders, onProfBonus }) => {
 					aria-label="Бонусы и скидки"
 					className={activeTab === 'Бонусы и скидки' ? 'is-current' : ''}
 				>
-					<span>Бонусы и скидки</span>
+					<span>
+						{t('bonuses_and_sales')}
+					</span>
 					<svg width="20" height="20" viewBox="0 0 20 20">
 						<use xlinkHref="#arrow-next"></use>
 					</svg>
 				</button>
 			</li>
-			<li>
+			{/* <li>
 				<button 
 					aria-label="Бонусы и скидки"
 					// className={activeTab === 'Бонусы и скидки' ? 'is-current' : ''}
@@ -68,11 +77,13 @@ export const ProfileNav = ({ onProfInfo, onProfOrders, onProfBonus }) => {
 						<use xlinkHref="#arrow-next"></use>
 					</svg>
 				</button>
-			</li>
+			</li> */}
 			<li>
 				<br/>
 				<button onClick={handleExit} aria-label="Електронні освітні ресурси">
-					<span>Выйти</span>
+					<span>
+						{t('exit')}
+					</span>
 					{/*<svg width="20" height="20" viewBox="0 0 20 20">*/}
 					{/*	<use xlinkHref="#arrow-next"></use>*/}
 					{/*</svg>*/}

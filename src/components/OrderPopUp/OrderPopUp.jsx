@@ -10,12 +10,13 @@ import { toast } from "react-toastify";
 import { setBasket, setBasketComment } from "../../redux/toolkitSlice";
 import { useNavigate } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
+import { clearProducts } from "../../utils/db";
 
 export const OrderPopUp = ({ handleClosePopUp }) => {
   const { t } = useTranslation();
 
   const SetPopContext = useContext(PopupContext);
-  const basketItems = useSelector((state) => state.toolkit.basket);
+  const basketList = useSelector((state) => state.toolkit.basket);
   const basketComment = useSelector((state) => state.toolkit.basketComment);
   const user = useSelector((state) => state.toolkit.user);
 
@@ -49,8 +50,13 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
     e.preventDefault();
     setIsLoading(true);
 
+    const products = basketList.map(item => ({
+      product_id: item.id,
+      product_amount: item.amount,
+    }));
+
     const dataToSend = {
-      products: basketItems,
+      products,
       note: basketComment,
       email_not_auth_user: email,
       phone_not_auth_user: phone,
@@ -72,6 +78,10 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
         setCookie("basket", "");
         dispatch(setBasket([]));
         dispatch(setBasketComment(""));
+        dispatch(setBasket([]));
+
+        // clear basket from db
+        clearProducts();
 
         navigate("/");
       })
@@ -84,9 +94,9 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
               mes === "Not enough amount of product in store to add into basket"
           )
         )
-          return toast.error(
-            "У одного из товаров не достаточное количество для заказа"
-          );
+          return toast.error(t("product_dont_enough"));
+
+        return toast.error(t("something_was_happen"));
       })
       .finally(() => {
         setIsLoading(false);
@@ -108,7 +118,7 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
           </svg>
         </button>
         <div className="popup-container">
-          <h2 className="popup-title title">Оформление заказа</h2>
+          <h2 className="popup-title title">{t("checkout_order")}</h2>
           {!user?.id && (
             <div className="popup-text">
               <p>
@@ -146,13 +156,13 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
                   value={email}
                   name="email"
                   required
-                  placeholder="Введите свой email"
+                  placeholder={t("enter_your_email")}
                   className="input"
                 />
               </span>
             </label>
             <label className="popup-form__item">
-              <span className="is-required">Телефон</span>
+              <span className="is-required">{t("phone_title")}</span>
               <span className="input-label">
                 <input
                   type="tel"
@@ -160,7 +170,7 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
                   value={phone}
                   name="phone"
                   required
-                  placeholder="Введите номер телефона"
+                  placeholder={t("enter_phone")}
                   className="input"
                 />
               </span>

@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
 import { PopupContext } from "../App";
+import { useTranslation } from "react-i18next";
 
 export const ModalAskConfirm = ({ handleClosePopUp }) => {
+  const { t } = useTranslation();
+  
   const SetPopContext = useContext(PopupContext);
 
   return (
@@ -12,19 +15,16 @@ export const ModalAskConfirm = ({ handleClosePopUp }) => {
           type="button"
           onClick={handleClosePopUp}
           className="popup-close-btn popup-close"
-          title="Закрити"
+          title={t("close")}
         >
           <svg width="24" height="24" viewBox="0 0 24 24">
             <use xlinkHref="#close-3"></use>
           </svg>
         </button>
         <div className="popup-container">
-          <h2 className="popup-title title">Спасибо за регистрацию</h2>
+          <h2 className="popup-title title">{t("registration_thanks")}</h2>
           <div className="popup-text">
-            <p>
-              Для входа на сайт нужно активировать учетную запись. Письмо с
-              инструкцией выслали вам на email
-            </p>
+            <p>{t("registration_email")}</p>
           </div>
           <br />
           <button
@@ -32,7 +32,7 @@ export const ModalAskConfirm = ({ handleClosePopUp }) => {
             style={{ display: "block", margin: "0 auto" }}
             className="popup-form__submit button is-mode-1"
           >
-            Закрыть
+            {t("close")}
           </button>
         </div>
       </div>

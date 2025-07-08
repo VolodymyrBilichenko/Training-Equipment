@@ -16,7 +16,7 @@ import {
 } from "react-transition-group";
 import { toast, ToastContainer } from "react-toastify";
 import { BackGroundDecor } from "./components/BackGroundDecor/BackGroundDecor";
-import ArrowLoader from './assets/img/loader.svg'
+import ArrowLoader from "./assets/img/loader.svg";
 import axios from "axios";
 import { getApiLink } from "./api/getApiLink";
 import { GetApiHeaders } from "./functions/getApiHeaders";
@@ -27,33 +27,31 @@ export const PopupContext = createContext(null);
 
 export const App = () => {
   const location = useLocation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [routesList] = useState(routes());
   const [modal, setModal] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  
 
   useEffect(() => {
     window.scrollTo(0, 0);
 
     if (location.pathname.includes("confirm")) setModal("confirm");
 
-
     window.onload = () => {
-      setIsLoading(false)
-    }
-
+      setIsLoading(false);
+    };
   }, [location]);
 
   useEffect(() => {
-    axios.get(getApiLink('/api/static/data'), {headers: GetApiHeaders()})
-        .then(({data}) => {
-          dispatch(setSettings(data.data))
-        })
-        .catch((error) => {
-            toast.error("Возникла неизведанная ошибка")
-        })
-}, [])
+    axios
+      .get(getApiLink("/api/static/data"), { headers: GetApiHeaders() })
+      .then(({ data }) => {
+        dispatch(setSettings(data.data));
+      })
+      .catch((error) => {
+        toast.error("Возникла неизведанная ошибка");
+      });
+  }, []);
 
   const _ = useGetBeginerAPIs();
 
@@ -61,23 +59,24 @@ export const App = () => {
 
   return (
     <>
-      
       <TransitionGroup>
-            <CSSTransition
-              key={isLoading}
-              // classNames={!location.pathname.includes("/catalog/") ? "fade" : "catalog-fade"}
-              classNames={"fade"}
-              timeout={300}
-            >
-              {isLoading ? <div className="catalog__loader loader" >
-            <div className="catalog__loader_block">
-                <img src={ArrowLoader} width="53" height="53" alt=""/>
+        <CSSTransition
+          key={isLoading}
+          classNames={"fade"}
+          timeout={300}
+        >
+          {isLoading ? (
+            <div className="catalog__loader loader">
+              <div className="catalog__loader_block">
+                <img src={ArrowLoader} width="53" height="53" alt="" />
                 <span>Loading...</span>
+              </div>
             </div>
-        </div> : <></>}
-            </CSSTransition>
-          </TransitionGroup>
-
+          ) : (
+            <></>
+          )}
+        </CSSTransition>
+      </TransitionGroup>
 
       <Sprite />
 

@@ -10,8 +10,11 @@ import { PopupContext } from "../../App";
 import setCookie from "../../functions/setCookie";
 import getCookies from "../../functions/getCookies";
 import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
 
 export const Main = () => {
+  const { t } = useTranslation();
+
   const allProducts = useSelector((state) => state.toolkit.allProducts);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -20,18 +23,16 @@ export const Main = () => {
     setIsLoading(false);
   }, [allProducts]);
 
-  const meta = {
-    title: "Главная страница",
-    description: "Описание главной страницы",
-    meta: {
-      charset: "utf-8",
-    },
-  };
-
-  const { t } = useTranslation();
-
   return (
     <main className="main">
+      <Helmet>
+        <title>
+          {t("main_page")}
+        </title>
+        <meta name="description" content="Описание главной страницы" />
+        <meta charSet="utf-8" />
+      </Helmet>
+
       <MainHero />
 
       <MainCategories />

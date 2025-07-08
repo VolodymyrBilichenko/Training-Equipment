@@ -1,10 +1,10 @@
 import React from 'react'
-import { ProductListItem } from './components/ProductListItem/ProductListItem'
 import {ProductsListStyled} from "./ProductsList.styled";
 
 import NotFoundImg from '../../assets/img/not-founded.svg'
 import { CustomLoading } from '../CustomLoading/CustomLoading';
 import { useTranslation } from 'react-i18next';
+import { ProductItem } from '../ProductItem';
 
 export const ProductsList = ({ ClassNameList, list, isLoading }) => {
     const { t } = useTranslation();
@@ -13,7 +13,7 @@ export const ProductsList = ({ ClassNameList, list, isLoading }) => {
         <ProductsListStyled className={`${list.length === 0 ? 'empty' : ''} ${ClassNameList} products-list `}>
 
             {!isLoading ? list.length ? list?.map(product => (
-                <ProductListItem
+                <ProductItem
                     key={product.id}
                     data={product}
                 />

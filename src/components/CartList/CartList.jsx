@@ -1,39 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CartListItem } from "./components/CartListItem";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { getAllCartProducts } from "../../utils/db";
 
-export const CartList = ({ products, setTotalAmount }) => {
+export const CartList = () => {
   const { t } = useTranslation();
 
-  const basketList = useSelector((state) => state.toolkit.basket);
-  const allProducts = useSelector((state) => state.toolkit.allProducts);
+  const basketRedux = useSelector((state) => state.toolkit.basket);
 
-  const productsList = allProducts ?? products;
+  const [basketList, setBasketList] = useState(basketRedux ?? []);
+
+  useEffect(() => {
+    setBasketList(basketRedux);
+  }, [basketRedux]);
 
   return (
-    <ul className="cart__list" data-price-sum-container-id="cart-list">
-      {basketList.length ? (
-        productsList
-          ?.filter((item) =>
-            basketList.some((item2) => item.id === item2.product_id)
-          )
-          ?.map((productItem) => (
-            <CartListItem
-              key={productItem.id}
-              products={products}
-              setTotalAmount={setTotalAmount}
-              productInfo={productItem}
-            />
-          ))
+    <>
+      {!!basketList.length ? (
+        <ul className="cart__list" data-price-sum-container-id="cart-list">
+          {basketList?.map((item) => (
+            <CartListItem key={item.id} productInfo={item} />
+          ))}
+        </ul>
       ) : (
-        <>
-          <br />
-          <br />
-          <p>{t("empty_cart")}</p>
-          <br />
-        </>
+        <p className="empty_cart">{t("empty_cart")}</p>
       )}
-    </ul>
+    </>
   );
 };

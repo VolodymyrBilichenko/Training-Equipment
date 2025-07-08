@@ -619,8 +619,7 @@ body.is-mobile-menu-active {
     top: 0;
     width: 100%;
     height: 100%;
-    -o-object-fit: cover;
-    object-fit: cover
+    object-fit: contain
 }
 
 .main,section {
@@ -3757,7 +3756,8 @@ body.is-popup-active {
     }
 
     .product-card__price ins,.product-card__price strong {
-        min-width: 100px
+        /* min-width: 100px */
+        min-width: 0
     }
 
     .product__info_col {

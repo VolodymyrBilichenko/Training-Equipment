@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import setCookie from "../functions/setCookie";
+import { getProduct, removeFavoriteProduct, removeProduct, saveFavoriteProduct, saveProducts, updateProduct } from "../utils/db";
 
 
 const toolkitSlice = createSlice({
@@ -32,45 +33,83 @@ const toolkitSlice = createSlice({
 
         setFavorites(state, action) {
             state.favorites = action.payload
-            setCookie("favorite", JSON.stringify(state.favorites))
         },
         addFavorite(state, action) {
-            if (state.favorites.some(item => item.id === action.payload.id)) {
-                state.favorites = state.favorites.filter(item => item.id !== action.payload.id)
-            } else {
-                state.favorites = [...state.favorites, action.payload]
+            
+            for (let i = 0; i < state.favorites.length; i++) {
+                if (state.favorites[i].id === action.payload.id) {
+                    state.favorites[i] = action.payload
+                    return
+                }
             }
-            setCookie("favorite", JSON.stringify(state.favorites))
+            state.favorites = [...state.favorites, action.payload]
+            saveFavoriteProduct(action.payload)
+
         },
         removeFavorite(state, action) {
-            state.favorites = state.favorites.filter((item) => item.id !== action.payload.id);
-            setCookie("favorite", JSON.stringify(state.favorites))
+
+            for (let i = 0; i < state.favorites.length; i++) {
+                if (state.favorites[i].id === action.payload.id) {
+                    state.favorites.splice(i, 1)
+                    removeFavoriteProduct(action.payload.id)
+                    return
+                }
+            }
+
         },
 
         addBasketItem(state, action) {
+    
+            const product = action.payload
 
-            if (state.basket?.some(item => item.product_id === action.payload.product_id)) {
-                state.basket = state.basket.map(item => {
-                    if (item.product_id === action.payload.product_id) {
-                        return {
-                            ...item,
-                            product_amount: item.product_amount + action.payload.product_amount
-                        }
-                    } else {
-                        return item
-                    }
-                })
-            } else {
-                state.basket = [...state.basket, action.payload]
+            for (let i = 0; i < state.basket.length; i++) {
+                if (state.basket[i].id === product.id) {
+                    updateProductAmount(product, i)
+                    return 
+                }
             }
 
-            setCookie("basket", JSON.stringify(state.basket))
+            addProduct(product)
+
+            async function addProduct(product) {
+                state.basket = [...state.basket, product]
+
+                // save product to db
+                await saveProducts([product])
+            }
+
+            async function updateProductAmount(product, i) {
+                state.basket[i].amount += product.amount
+
+                // get product from db
+                const productFromDb = await getProduct(product.id)
+                
+                // update product amount in db
+                await updateProduct({ ...productFromDb, amount: product.amount + productFromDb.amount });
+            }
 
         },
-        removeBasketItem(state, action) {
-            state.basket = state.basket.filter(item => item.product_id !== action.payload)
-            setCookie("basket", JSON.stringify(state.basket))
+        updateBasketItem(state, action) {
+            const product = action.payload
+
+            for (let i = 0; i < state.basket.length; i++) {
+                if (state.basket[i].id === product.id) {
+                    state.basket[i].amount = product.amount
+
+                    // update product amount in db
+                    updateProduct({ ...state.basket[i], amount: product.amount });
+                } else {
+                    state.basket = [...state.basket]
+                }
+            }
         },
+        removeBasketItem(state, action) {
+            state.basket = state.basket.filter(item => item.id !== action.payload)
+
+            // remove product from db
+            removeProduct(action.payload)
+        },
+
         setBasket(state, action) {
             state.basket = action.payload
         },
@@ -107,6 +146,7 @@ export const {
     setFavorites,
     addFavorite,
     addBasketItem,
+    updateBasketItem,
     removeBasketItem,
     setBasket,
     changeBasketItem,

@@ -5,8 +5,11 @@ import { toast } from "react-toastify";
 import { GetApiHeaders } from "../../../../../functions/getApiHeaders";
 import { getApiLink } from "../../../../../api/getApiLink";
 import photoPlaceholder from "../../../../../assets/img/null-card-image.png";
+import { useTranslation } from "react-i18next";
 
 export const MainHeroSearch = ({ searchPlaceholder }) => {
+  const { t } = useTranslation();
+  
   const { search } = useParams();
 
   const [searchQuery, setSearchQuery] = useState(search);
@@ -93,7 +96,7 @@ export const MainHeroSearch = ({ searchPlaceholder }) => {
                         </span>
                     </NavLink>
                 </li>
-            )) : "Товаров не найдено"
+            )) : t('no_products')
         }
       </ul>}
     </search>

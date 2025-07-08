@@ -43,6 +43,7 @@
 
 	&__image {
 		display: block;
+		// background: #fff;
 
 		picture {
 			display: block;
@@ -68,6 +69,12 @@
 				opacity: 1; visibility: visible;
 			}
 		}
+	}
+
+	.not_in_stock {
+		font-size: 14px;
+		margin-top: 5px;
+		color: red;
 	}
 
 	// .product-card__title

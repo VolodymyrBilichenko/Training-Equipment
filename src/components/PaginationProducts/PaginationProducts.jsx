@@ -37,7 +37,7 @@ export const PaginationProducts = ({ ClassName, meta, handlePage }) => {
             <button
               disabled={!item?.url}
               className={item.active ? "is-current" : ""}
-              onClick={(_) => handlePage(item.url + "&active=1")}
+              onClick={(_) => handlePage(item)}
             >
               {item.label}
             </button>

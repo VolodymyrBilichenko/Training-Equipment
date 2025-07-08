@@ -49,37 +49,36 @@ export const Catalog = () => {
   };
 
   const [isLoading, setIsLoading] = useState(true);
-  const handlePage = (pageLink) => {
+  const handlePage = (paginationItem) => {
+    const params = new URLSearchParams(location.search);
+    params.set("page", paginationItem.label);
+    navigate(`${location.pathname}?${params.toString()}`);
+
     setIsLoading(true);
     window.scrollTo(0, 0);
-    console.log(pageLink);
-    axios
-      .get(pageLink, { headers: GetApiHeaders() })
-      .then(({ data }) => {
-        setMetaProduct(data);
-        setProducts(data.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        toast.error(error);
-        setIsLoading(false);
-      });
   };
+
   useEffect(() => {
     setIsLoading(true);
 
     let category = "";
 
+    console.log('category_id', category_id);
+    console.log('subcategory_id', subcategory_id);
+
     if (!!subcategory_id) {
-      category = `&subcategory_id=${subcategory_id}`;
+      category = `&category_id=${subcategory_id}`;
     } else if (!!category_id) {
       category = `&category_id=${category_id}`;
     } else {
       category = "";
     }
 
+    const params = new URLSearchParams(location.search);
+    const page = params.get("page");
+
     axios
-      .get(getApiLink(`/api/products/get?active=1&page=1` + category), {
+      .get(getApiLink(`/api/products/get?active=1&page=${page ?? 1}` + category), {
         headers: GetApiHeaders(),
       })
       .then(({ data }) => {
@@ -91,7 +90,7 @@ export const Catalog = () => {
         toast.error(error);
         setIsLoading(false);
       });
-  }, [category_id]);
+  }, [category_id, subcategory_id, location.search]);
 
   const categoryName = category_id
     ? {
@@ -104,10 +103,10 @@ export const Catalog = () => {
   const seconds = 10;
 
   useEffect(() => {
-    // if (getCookie("isShown") === "true") return;
+    if (getCookies("isShown") === "true") return;
 
     const timer = setTimeout(() => {
-      setCookie("isShown", true);
+      setCookie("isShown", true, 3600);
       SetPopContext("offer"); // показать модалку
     }, seconds * 1000);
 

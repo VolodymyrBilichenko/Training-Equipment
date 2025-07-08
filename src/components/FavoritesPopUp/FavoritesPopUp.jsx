@@ -88,8 +88,7 @@ export const FavoritesPopUp = ({ handleClosePopUp }) => {
             </form>
           ) : (
             <p style={{ marginTop: "20px" }}>
-              Ваше Коммерческое предложение будет отправлено менеджером в
-              ближайшее время
+              {t('com_suggest')}
             </p>
           )}
         </div>

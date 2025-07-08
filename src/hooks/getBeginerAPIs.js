@@ -13,6 +13,7 @@ import setCookie from "./../functions/setCookie";
 import { GetApiHeaders } from "./../functions/getApiHeaders";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
+import { getAllCartProducts, getFavoriteProducts } from "../utils/db";
 
 export const useGetBeginerAPIs = () => {
   const hasCookieToken = getCookies("cookieToken");
@@ -22,10 +23,13 @@ export const useGetBeginerAPIs = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    !!getCookies("basket") &&
-      dispatch(setBasket(JSON.parse(getCookies("basket") ?? "")));
-    !!getCookies("favorite") &&
-      dispatch(setFavorites(JSON.parse(getCookies("favorite") ?? "")));
+    getAllCartProducts().then((products) => {
+      dispatch(setBasket(products));
+    });
+      
+    getFavoriteProducts().then((products) => {
+      dispatch(setFavorites(products));
+    });
 
     // GET ALL PRODUCTS
     axios
@@ -71,8 +75,8 @@ export const useGetBeginerAPIs = () => {
       axios
         .get(getApiLink("/api/bucket/get"), { headers: GetApiHeaders() })
         .then(({ data }) => {
-          setCookie("basket", JSON.stringify(data.data.products));
-          dispatch(setBasket(data.data.products));
+          // setCookie("basket", JSON.stringify(data.data.products));
+          // dispatch(setBasket(data.data.products));
         })
         .catch((error) => {
           toast.error("Возникла неизведанная ошибка");

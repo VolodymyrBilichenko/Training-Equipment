@@ -10,8 +10,11 @@ import axios from "axios";
 import {getApiLink} from "../../api/getApiLink";
 import {GetApiHeaders} from "../../functions/getApiHeaders";
 import { toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 
 export const Search = () => {
+    const { t } = useTranslation();
+
     const {search} = useParams();
 
     const [products, setProducts] = useState([])
@@ -36,11 +39,11 @@ export const Search = () => {
         <>
             {/* <BackGroundDecor/> */}
 
-            <BreadCrumbs pages={[{page: `Пошук по: ${search}`}]}/>
+            <BreadCrumbs pages={[{page: `${t('search_by')} ${search}`}]}/>
 
             <div className='favorites container'>
 
-                <SectionTitle title={`Пошук по: ${search}`}/>
+                <SectionTitle title={`${t('search_by')} ${search}`}/>
 
                 <MainHeroSearch searchPlaceholder={'Пошук'}/>
 

@@ -3,8 +3,10 @@ import { PopupContext } from "../App";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { getApiLink } from "../api/getApiLink";
+import { useTranslation } from "react-i18next";
 
 export const ModalConfirm = ({ handleClosePopUp }) => {
+  const { t } = useTranslation();
   const SetPopContext = useContext(PopupContext);
 
   const location = useLocation();
@@ -48,9 +50,13 @@ export const ModalConfirm = ({ handleClosePopUp }) => {
           </svg>
         </button>
         <div className="popup-container">
-          <h2 className="popup-title title">Спасибо</h2>
+          <h2 className="popup-title title">
+            {t('thanks')}
+          </h2>
           <div className="popup-text">
-            <p>Ваша почта подтверждена</p>
+            <p>
+              {t("email_completed")}
+            </p>
           </div>
           <br />
           <button
@@ -58,7 +64,7 @@ export const ModalConfirm = ({ handleClosePopUp }) => {
             style={{ display: "block", margin: "0 auto" }}
             className="popup-form__submit button is-mode-1"
           >
-            Закрыть
+            {t('close')}
           </button>
         </div>
       </div>

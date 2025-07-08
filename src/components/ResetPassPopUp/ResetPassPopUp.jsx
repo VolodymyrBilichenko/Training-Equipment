@@ -4,8 +4,11 @@ import { getApiLink } from "../../api/getApiLink";
 import { GetApiHeaders } from "../../functions/getApiHeaders";
 import getCookies from "../../functions/getCookies";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 export const ResetPassPopUp = ({ handleClosePopUp }) => {
+  const { t } = useTranslation();
+
   const [email, setEmail] = useState("");
   const [isSuccessSent, setIsSuccessSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,10 +50,12 @@ export const ResetPassPopUp = ({ handleClosePopUp }) => {
           </svg>
         </button>
         <div className="popup-container">
-          <h2 className="popup-title title">Восстановление пароля</h2>
+          <h2 className="popup-title title">
+            {t('recovery_password')}
+          </h2>
           {!isSuccessSent && <div className="popup-text">
             <p>
-              Введите свою почту и мы отправим вам письмо с временным паролем
+              {t('recovery_description')}
             </p>
           </div>}
           {!isSuccessSent ? (
@@ -68,7 +73,7 @@ export const ResetPassPopUp = ({ handleClosePopUp }) => {
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                     required
-                    placeholder="Введите свой email"
+                    placeholder={t('enter_your_email')}
                     className="input"
                   />
                 </span>
@@ -78,12 +83,14 @@ export const ResetPassPopUp = ({ handleClosePopUp }) => {
                 className="popup-form__submit button is-mode-1"
                 type="submit"
               >
-                Продолжить
+                {t('continue')}
               </button>
             </form>
           ) : (
             <div className="popup-text">
-              <p>Вам на почту была отправлена инструкция по замене пароля</p>
+              <p>
+                {t('recovery_success')}
+              </p>
             </div>
           )}
         </div>

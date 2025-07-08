@@ -33,7 +33,7 @@ export const Footer = () => {
         dispatch(setStaticData(data.data));
       })
       .catch(() => {
-        toast.error("Возникла неизведанная ошибка");
+        toast.error(t('something_was_happen'));
       });
   }, []);
 
