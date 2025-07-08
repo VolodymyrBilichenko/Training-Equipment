@@ -9,8 +9,8 @@ export const FooterContacts = ({ emailsText, addressText }) => {
       <h2>{t("contacts_title")}</h2>
 
       <ul>
-        {emailsText?.length && emailsText?.map((item) => (
-          <li key={item}>
+        {emailsText?.length && emailsText?.map((item, index) => (
+          <li key={index}>
             <a href={`mailto:${item}`}>{item}</a>
           </li>
         ))}

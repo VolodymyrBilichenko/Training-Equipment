@@ -29,8 +29,8 @@ export const HeaderPanelPhone = () => {
 
   return (
     <ul className="header__tel">
-      {textPhones.map((item) => (
-        <li key={item}>
+      {textPhones.map((item, index) => (
+        <li key={index}>
           <a href={`tel:${item?.replace(/[^+\d]/g, "")}`}>
             <svg width="20" height="20" viewBox="0 0 48 48">
               <use xlinkHref="#tel"></use>

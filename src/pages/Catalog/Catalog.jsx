@@ -63,9 +63,6 @@ export const Catalog = () => {
 
     let category = "";
 
-    console.log('category_id', category_id);
-    console.log('subcategory_id', subcategory_id);
-
     if (!!subcategory_id) {
       category = `&category_id=${subcategory_id}`;
     } else if (!!category_id) {

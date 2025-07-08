@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import "./assets/js/main";
 import "./assets/scss/style.scss";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +11,7 @@ import { Modals } from "./components/Modals/Modals";
 import { useGetBeginerAPIs } from "./hooks/getBeginerAPIs";
 import {
   CSSTransition,
+  SwitchTransition,
   Transition,
   TransitionGroup,
 } from "react-transition-group";
@@ -38,7 +39,9 @@ export const App = () => {
     if (location.pathname.includes("confirm")) setModal("confirm");
 
     window.onload = () => {
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 150);
     };
   }, [location]);
 
@@ -57,27 +60,20 @@ export const App = () => {
 
   const nonDecorationPages = ["/confirm"];
 
+  const nodeRef = useRef(null);
+
   return (
     <>
-      <TransitionGroup>
-        <CSSTransition
-          key={isLoading}
-          classNames={"fade"}
-          timeout={300}
-        >
-          {isLoading ? (
-            <div className="catalog__loader loader">
-              <div className="catalog__loader_block">
-                <img src={ArrowLoader} width="53" height="53" alt="" />
-                <span>Loading...</span>
-              </div>
-            </div>
-          ) : (
-            <></>
-          )}
-        </CSSTransition>
-      </TransitionGroup>
-
+      {isLoading ? (
+        <div className="catalog__loader loader">
+          <div className="catalog__loader_block">
+            <img src={ArrowLoader} width="53" height="53" alt="" />
+            <span>Loading...</span>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <Sprite />
 
       <PopupContext.Provider value={setModal}>
@@ -89,26 +85,27 @@ export const App = () => {
               location.pathname.includes(item)
             ) && <BackGroundDecor />}
 
-          <TransitionGroup>
+          <SwitchTransition mode="out-in">
             <CSSTransition
               key={location.pathname}
-              // classNames={!location.pathname.includes("/catalog/") ? "fade" : "catalog-fade"}
-              classNames={"fade"}
-              timeout={300}
+              nodeRef={nodeRef}
+              timeout={150}
+              classNames="fade"
+              unmountOnExit
             >
-              <main>
+              <main ref={nodeRef}>
                 <Routes location={location}>
                   {routesList.map((route) => (
                     <Route
                       key={route.path}
-                      element={route.element}
                       path={route.path}
+                      element={route.element}
                     />
                   ))}
                 </Routes>
               </main>
             </CSSTransition>
-          </TransitionGroup>
+          </SwitchTransition>
         </div>
 
         <Footer />

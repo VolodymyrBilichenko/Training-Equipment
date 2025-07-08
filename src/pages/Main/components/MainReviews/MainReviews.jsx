@@ -41,10 +41,6 @@ export const MainReviews = ({ id }) => {
       .get(getApiLink("/api/reviews/get"), { headers: GetApiHeaders() })
       .then(({ data }) => {
         setReviewsData(data.data);
-
-        console.log(data);
-
-        // first_name, last_name, organization
       })
       .catch((error) => {
         toast.error("Возникла неизведанная ошибка");

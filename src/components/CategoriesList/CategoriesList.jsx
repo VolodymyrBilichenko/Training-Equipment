@@ -10,8 +10,6 @@ export const CategoriesList = ({ ClassNameList }) => {
 
   const allCategories = useSelector((state) => state.toolkit.allCategories);
 
-  console.log(allCategories);
-
   return (
     <ul className={`categories__list ${ClassNameList}`}>
       {allCategories?.map((category) => {

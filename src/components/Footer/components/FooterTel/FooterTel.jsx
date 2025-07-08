@@ -32,8 +32,8 @@ export const FooterTel = ({ socialData }) => {
       <h2>{t("phones_title")}</h2>
 
       <ul>
-        {textPhones.map((item) => (
-          <li key={item}>
+        {textPhones.map((item, index) => (
+          <li key={index}>
             <a href={`tel:${item?.replace(/[^+\d]/g, "")}`}>
               {item}
             </a>

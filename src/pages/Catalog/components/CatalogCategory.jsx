@@ -6,13 +6,6 @@ export const CatalogCategory = ({ category }) => {
   const { i18n } = useTranslation();
   const { subcategory_id, category_id } = useParams();
   const [isOpen, setIsOpen] = useState(!!subcategory_id && category_id == category.id);
-
-  console.log('category', category);
-
-  console.log('category_id', category_id);
-  console.log('category.id', category.id);
-  console.log('subcategory_id', subcategory_id);
-  console.log('isOpen', isOpen);
   
   return (
     <li key={category.id}>
@@ -39,7 +32,7 @@ export const CatalogCategory = ({ category }) => {
 
       <ul className={isOpen ? "is-open" : ""}>
         {category?.subcategories?.map((item) => (
-          <li>
+          <li key={item.id}>
             <NavLink
               to={`/catalog/${category.id}/${item.id}`}
               className={({ isActive }) => (isActive ? "is-current" : "")}

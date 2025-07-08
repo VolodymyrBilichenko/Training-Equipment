@@ -49,7 +49,6 @@ export const useGetBeginerAPIs = () => {
         headers: GetApiHeaders(),
       })
       .then(({ data }) => {
-        console.log(data);
         dispatch(setAllCategories(data.data));
       })
       .catch((error) => {
@@ -75,6 +74,7 @@ export const useGetBeginerAPIs = () => {
       axios
         .get(getApiLink("/api/bucket/get"), { headers: GetApiHeaders() })
         .then(({ data }) => {
+          console.log('data', data);
           // setCookie("basket", JSON.stringify(data.data.products));
           // dispatch(setBasket(data.data.products));
         })

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PopupContext } from "../../App";
 import { getApiLink } from "../../api/getApiLink";
 import axios from "axios";

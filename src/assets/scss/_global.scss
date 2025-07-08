@@ -462,3 +462,45 @@ section {
 	align-items: center;
 	z-index: 1000;
 }
+
+.product__swiper_image {
+	height: 100%;
+}
+
+main {
+	min-height: 80vh;
+	flex-direction: column;
+  }
+
+  .main {
+	position: relative;
+	min-height: 100vh;
+  }
+  
+  .fade-enter, .fade-exit {
+	// position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+  }
+  
+  
+.fade-enter {
+	opacity: 0;
+	transform: translateY(20px) scale(0.98);
+  }
+  .fade-enter-active {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+	transition: opacity 300ms ease, transform 300ms ease;
+  }
+  .fade-exit {
+	opacity: 1;
+	transform: translateY(0) scale(1);
+  }
+  .fade-exit-active {
+	opacity: 0;
+	transform: translateY(20px) scale(0.98);
+	transition: opacity 300ms ease, transform 300ms ease;
+  }
+  
