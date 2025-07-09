@@ -12,21 +12,21 @@ export const HeaderMessage = () => {
   const { t } = useTranslation();
 
   return (
-    <NavLink to={'/about'} className={`header__message ${isOpen === false ? 'is-hidden' : ''} `}>
+    <div className={`header__message ${isOpen === false ? 'is-hidden' : ''} `}>
         <div className="header__message--body">
-            <div className="header__message--text">
+            <NavLink to={'/about'} className="header__message--text">
             <svg width="20" height="20" viewBox="0 0 48 48">
                 <use xlinkHref="#delivery"></use>
             </svg>
             <b>{t('free_shipping')}</b>
-            </div>
+            </NavLink>
             <button onClick={handleClose} className="header__message--close" type="button">
               <svg width="20" height="20" viewBox="0 0 20 20">
                   <use xlinkHref="#close-2"></use>
               </svg>
             </button>
         </div>
-    </NavLink>
+    </div>
     
   )
 }

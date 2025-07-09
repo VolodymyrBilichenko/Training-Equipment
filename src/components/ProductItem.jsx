@@ -17,7 +17,7 @@ import {
 
 export const ProductItem = ({ data }) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const favorites = useSelector((state) => state.toolkit.favorites);
 
@@ -32,6 +32,10 @@ export const ProductItem = ({ data }) => {
       sale_price: data?.sale_price,
       amount: 1,
       name: data?.name,
+      name_ua: data?.name_ua,
+      name_ru: data?.name_ru,
+      name_en: data?.name_en,
+      amount_in_store: data?.amount_in_store,
     };
 
     dispatch(addBasketItem(dataItem));
@@ -58,6 +62,9 @@ export const ProductItem = ({ data }) => {
     const favoriteProduct = {
       id: data.id,
       name: data.name,
+      name_ua: data?.name_ua,
+      name_ru: data?.name_ru,
+      name_en: data?.name_en,
       price: data.price,
       sale_price: data.sale_price,
       amount_in_store: data.amount_in_store,
@@ -141,7 +148,7 @@ export const ProductItem = ({ data }) => {
       </NavLink>
       <h3 className="product-card__title">
         <NavLink target="_blank" to={`/product/${data.id}`}>
-          {data.name}
+          {data?.[`name_${i18n.language}`] ?? data?.name}
         </NavLink>
       </h3>
 
@@ -149,22 +156,24 @@ export const ProductItem = ({ data }) => {
         <p className="not_in_stock">{t("not_in_stock")}</p>
       )}
 
-      <div className="product-card__price">
-        <ins>{`${data.sale_price ?? data.price} ₴`}</ins>
-        {data.sale_price && <del>{data.price + " ₴"}</del>}
-      </div>
+      <div className="button-row">
+        <div className="product-card__price">
+          <ins>{`${data.sale_price ?? data.price} ₴`}</ins>
+          {data.sale_price && <del>{data.price + " ₴"}</del>}
+        </div>
 
-      <button
-        disabled={!data.amount_in_store}
-        onClick={handleAddBasket}
-        className="product-card__add-cart button is-min-on-mob"
-        type="button"
-      >
-        <svg width="20" height="20" viewBox="0 0 48 48">
-          <use xlinkHref="#cart"></use>
-        </svg>
-        <span>{t("add_to_cart")}</span>
-      </button>
+        <button
+          disabled={!data.amount_in_store}
+          onClick={handleAddBasket}
+          className="product-card__add-cart button is-min-on-mob"
+          type="button"
+        >
+          <svg width="20" height="20" viewBox="0 0 48 48">
+            <use xlinkHref="#cart"></use>
+          </svg>
+          <span>{t("add_to_cart")}</span>
+        </button>
+      </div>
     </li>
   );
 };

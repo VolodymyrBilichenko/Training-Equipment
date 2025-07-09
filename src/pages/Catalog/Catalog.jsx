@@ -27,7 +27,7 @@ export const Catalog = () => {
   const [products, setProducts] = useState([]);
   const [metaProduct, setMetaProduct] = useState({});
   const [searchQuery, setSearchQuery] = useState(search);
-
+  const [isOpenCategories, setIsOpenCategories] = useState(false);
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -50,9 +50,18 @@ export const Catalog = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const handlePage = (paginationItem) => {
-    const params = new URLSearchParams(location.search);
-    params.set("page", paginationItem.label);
-    navigate(`${location.pathname}?${params.toString()}`);
+
+    const utmParams = {};
+    if (paginationItem.url) {
+      const urlObj = new URL(paginationItem.url);
+      const params = new URLSearchParams(urlObj.search);
+      // Получить все utm-метки
+      for (const [key, value] of params.entries()) {
+        utmParams[key] = value;
+      }
+    }
+    
+    navigate(`${location.pathname}?${new URLSearchParams(utmParams).toString()}`);
 
     setIsLoading(true);
     window.scrollTo(0, 0);
@@ -136,13 +145,12 @@ export const Catalog = () => {
             <button
               className="catalog__categories_target button visible-on-mob"
               type="button"
+              onClick={() => setIsOpenCategories(!isOpenCategories)}
             >
               {t("categories_title")}
             </button>
-            <div className="catalog__categories_block">
-              <div>
+            <div className={"catalog__categories_block " + (isOpenCategories ? "is-active" : "")}>
                 <CatalogCategories />
-              </div>
             </div>
           </div>
         </div>

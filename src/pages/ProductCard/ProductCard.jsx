@@ -63,8 +63,6 @@ export const ProductCard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState();
 
-  const lang = i18next.language ?? "";
-
   useEffect(() => {
     setIsLoading(true);
 
@@ -95,10 +93,10 @@ export const ProductCard = () => {
   }, [id]);
 
   const meta = {
-    title: dataCard?.meta_title ?? dataCard["name_" + lang] ?? dataCard?.name,
+    title: dataCard?.meta_title ?? dataCard["name_" + i18n.language] ?? dataCard?.name,
     description:
       (dataCard?.meta_description ??
-        dataCard["description_" + lang] ??
+        dataCard["description_" + i18n.language] ??
         dataCard?.description) + " | Ukraine Facility",
     meta: {
       charset: "utf-8",
@@ -114,7 +112,13 @@ export const ProductCard = () => {
   }
 
   const handleAddCart = async () => {
-    
+    if (dataCard?.amount_in_store <= productCount) {
+      toast.error(
+        t("not_enough_amount_of_product_in_store_to_add_into_basket")
+      );
+      return;
+    }
+
     const dataItem = {
       id: dataCard?.id,
       photo: dataCard?.files[0]?.web_path,
@@ -123,6 +127,10 @@ export const ProductCard = () => {
       sale_price: dataCard?.sale_price,
       amount: productCount,
       name: dataCard?.name,
+      name_ua: dataCard?.name_ua,
+      name_ru: dataCard?.name_ru,
+      name_en: dataCard?.name_en,
+      amount_in_store: dataCard?.amount_in_store,
     };
 
     if (getCookies("cookieToken")) {
@@ -223,7 +231,7 @@ export const ProductCard = () => {
           <div className="product__col">
             <div className="title-fav">
               <h2 className="product__title title">
-                {dataCard["name_" + lang] ?? dataCard?.name}
+                {dataCard["name_" + i18n.language] ?? dataCard?.name}
               </h2>
               <button onClick={handleFavorite}>
                 <svg width="26" height="26" viewBox="0 0 48 48">
@@ -353,7 +361,7 @@ export const ProductCard = () => {
               <div className="product__description">
                 <h3>{t("description")}</h3>
                 {HTMLReactParser(
-                  dataCard["name_" + lang] ?? dataCard?.description ?? ""
+                  dataCard["name_" + i18n.language] ?? dataCard?.description ?? ""
                 )}
               </div>
             </div>

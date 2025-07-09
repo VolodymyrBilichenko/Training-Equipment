@@ -182,7 +182,7 @@
 		width: 100%;
 
 		svg {
-			display: none;
+			// display: none;
 			@include _550 {
 				display: inline-block;
 			}

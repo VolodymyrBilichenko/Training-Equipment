@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useContext, useEffect, useState } from "react";
 import { PopupContext } from "../../../App";
-import { setBasketComment } from "../../../redux/toolkitSlice";
+import { setBasketComment, setIsUseBonuses } from "../../../redux/toolkitSlice";
 
 export const BasketFooter = () => {
   const { t } = useTranslation();
@@ -11,13 +11,18 @@ export const BasketFooter = () => {
 
   const settings = useSelector((state) => state.toolkit.settings);
   const basketList = useSelector((state) => state.toolkit.basket);
+  const user = useSelector((state) => state.toolkit.user);
 
   const [minOrderPrice, setMinOrderPrice] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
   const [comment, setComment] = useState("");
+  const [discountAmount, setDiscountAmount] = useState(0);
+  const [bonus, setBonus] = useState(0);
+  const [_isUseBonuses, _setIsUseBonuses] = useState(false);
 
   const handleOrder = () => {
     dispatch(setBasketComment(comment));
+    dispatch(setIsUseBonuses(_isUseBonuses));
     setModal("order");
   };
 
@@ -32,6 +37,16 @@ export const BasketFooter = () => {
         0
       )
     );
+
+    // discount amount
+    setDiscountAmount(
+      basketList.reduce((acc, item) => {
+        if (item.sale_price) {
+          return acc + item.amount * (item.price - item.sale_price);
+        }
+        return acc;
+      }, 0)
+    );
   }, [basketList]);
 
   useEffect(() => {
@@ -41,6 +56,12 @@ export const BasketFooter = () => {
       );
     }
   }, [settings]);
+
+  useEffect(() => {
+    if (user?.discount?.bonuses_sum) {
+      setBonus(user?.discount?.bonuses_sum);
+    }
+  }, [user]);
 
   return (
     <div className="cart__footer">
@@ -71,32 +92,46 @@ export const BasketFooter = () => {
             </tr>
             <tr>
               <td>{t("discount")}</td>
-              {/* <td>{discountAmount} ₴</td> */}
+              <td>{discountAmount.toFixed(2)} ₴</td>
             </tr>
-            <tr>
-              <td>{t("bonuses")}</td>
-              {/* <td>{discountBonuses} ₴</td> */}
-            </tr>
+            {bonus > 0 && (
+              <tr>
+                <td>{t("bonuses")}</td>
+                <td className="bonuses-row">
+                  <span>{bonus} ₴</span>
+                  <input
+                    type="checkbox"
+                    className="checkbox-input"
+                    id="bonuses-input"
+                    disabled={totalAmount < minOrderPrice}
+                    checked={_isUseBonuses}
+                    onChange={() => _setIsUseBonuses(!_isUseBonuses)}
+                  />
+                  <label htmlFor="bonuses-input" className="checkbox-element">
+                    <svg width="17" height="17" viewBox="0 0 17 17">
+                      <use xlinkHref="#check"></use>
+                    </svg>
+                    <span>{t("use_bonuses")}</span>
+                  </label>
+                </td>
+              </tr>
+            )}
             <tr className="add-hr">
               <td>
                 <b>{t("total")}</b>
               </td>
               <td>
                 <strong>
-                  {/* {discountPercent && !basketList.length
-                ? totalAmount < 0
-                  ? 0
-                  : totalAmount.toFixed(2)
-                : discountTotalSum < 0
-                ? 0
-                : discountTotalSum.toFixed(2)} */}
-                {totalAmount.toFixed(2)} ₴
+                  {_isUseBonuses
+                    ? (totalAmount - bonus).toFixed(2)
+                    : totalAmount.toFixed(2)}{" "}
+                  ₴
                 </strong>
               </td>
             </tr>
           </tbody>
         </table>
-        <label className="cart__checkbox checkbox">
+        {/* <label className="cart__checkbox checkbox">
           <input
             type="checkbox"
             name="receive-docs"
@@ -108,7 +143,7 @@ export const BasketFooter = () => {
             </svg>
           </span>
           <span className="checkbox-text">{t("want_to_get")}</span>
-        </label>
+        </label> */}
 
         <button
           onClick={handleOrder}

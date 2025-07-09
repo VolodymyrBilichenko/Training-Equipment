@@ -153,5 +153,7 @@
   "product_dont_enough": "У одного з товарів не достатньо для замовлення",
   "not_in_stock": "Немає у наявності",
   "success_added_to_favorites": "Товар успішно додано до обраного",
-  "success_removed_from_favorites": "Товар успішно видалено з обраного"
+  "success_removed_from_favorites": "Товар успішно видалено з обраного",
+  "not_enough_amount_of_product_in_store_to_add_into_basket": "Недостатньо товару на складі",
+  "use_bonuses": "Використати бонуси"
 }

@@ -23,7 +23,7 @@ export const HeaderAddNavDesk = () => {
   const SetPopContext = useContext(PopupContext);
 
   useEffect(() => {
-    setBasketCount(basket.reduce((acc, item) => acc + item.amount, 0));
+    setBasketCount(basket.reduce((acc, item) => acc + +item.amount, 0));
   }, [basket]);
 
   return (

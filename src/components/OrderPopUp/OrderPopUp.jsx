@@ -11,6 +11,7 @@ import { setBasket, setBasketComment } from "../../redux/toolkitSlice";
 import { useNavigate } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
 import { clearProducts } from "../../utils/db";
+import InputMask from "react-input-mask";
 
 export const OrderPopUp = ({ handleClosePopUp }) => {
   const { t } = useTranslation();
@@ -19,7 +20,8 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
   const basketList = useSelector((state) => state.toolkit.basket);
   const basketComment = useSelector((state) => state.toolkit.basketComment);
   const user = useSelector((state) => state.toolkit.user);
-
+  const isUseBonuses = useSelector((state) => state.toolkit.isUseBonuses);
+  
   const navigate = useNavigate();
 
   const [email, setEmail] = useState(user?.email ?? "");
@@ -50,7 +52,7 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const products = basketList.map(item => ({
+    const products = basketList.map((item) => ({
       product_id: item.id,
       product_amount: item.amount,
     }));
@@ -61,6 +63,7 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
       email_not_auth_user: email,
       phone_not_auth_user: phone,
       is_get_example: checkedBill,
+      is_use_bonuses: isUseBonuses
     };
 
     const apiString = getCookies("cookieToken")
@@ -164,15 +167,22 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
             <label className="popup-form__item">
               <span className="is-required">{t("phone_title")}</span>
               <span className="input-label">
-                <input
-                  type="tel"
-                  onChange={(e) => setPhone(e.target.value)}
+                <InputMask
+                  mask="+380 (99) 999 99 99"
                   value={phone}
-                  name="phone"
-                  required
+                  onChange={(e) => setPhone(e.target.value)}
                   placeholder={t("enter_phone")}
-                  className="input"
-                />
+                >
+                  {(inputProps) => (
+                    <input
+                      {...inputProps}
+                      type="tel"
+                      name="phone"
+                      required
+                      className="input"
+                    />
+                  )}
+                </InputMask>
               </span>
             </label>
             <label className="popup-form__checkbox checkbox">

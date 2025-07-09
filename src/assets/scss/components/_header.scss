@@ -407,8 +407,18 @@
 		// .header__logo--link
 
 		&--link {
-			display: block;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			//max-width: 150px;
+			
+			@media screen and (max-width: 992px) {
+				.blue_mark {
+					// margin-left: 10px;
+					width: 40px;
+					height: 40px;
+				}
+			}
 		}
 
 		// .header__logo--img

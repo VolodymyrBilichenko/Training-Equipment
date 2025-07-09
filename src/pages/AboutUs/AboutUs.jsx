@@ -14,6 +14,7 @@ import getCookies from "../../functions/getCookies";
 import { useTranslation } from "react-i18next";
 import { getLocalizedText } from "../../utils/getLocalizedText";
 import { useSelector } from "react-redux";
+import InputMask from "react-input-mask";
 
 export const AboutUs = () => {
   const SetPopContext = useContext(PopupContext);
@@ -86,10 +87,10 @@ export const AboutUs = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const hash = location.hash.replace('#', '');
+      const hash = location.hash.replace("#", "");
       const element = document.getElementById(hash);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     }, 500); // Задержка в мс
 
@@ -204,7 +205,7 @@ export const AboutUs = () => {
                     />
                   </label>
                   <label className="input-label">
-                    <input
+                    {/* <input
                       className="input"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
@@ -212,7 +213,24 @@ export const AboutUs = () => {
                       name="phone"
                       placeholder={t("phone_title")}
                       required
-                    />
+                    /> */}
+
+                    <InputMask
+                      mask="+380 (99) 999 99 99"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder={t("enter_phone")}
+                    >
+                      {(inputProps) => (
+                        <input
+                          {...inputProps}
+                          type="tel"
+                          name="phone"
+                          required
+                          className="input"
+                        />
+                      )}
+                    </InputMask>
                   </label>
                   <button type="submit" className="button is-mode-1">
                     {t("send_title")}

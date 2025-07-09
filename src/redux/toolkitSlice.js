@@ -13,7 +13,8 @@ const toolkitSlice = createSlice({
         allProducts: [],
         allCategories: [],
         settings: {},
-        staticData: {}
+        staticData: {},
+        isUseBonuses: false
     },
     reducers: {
         setUser(state, action) {
@@ -132,6 +133,10 @@ const toolkitSlice = createSlice({
 
         setStaticData(state, action) {
             state.staticData = action.payload
+        },
+
+        setIsUseBonuses(state, action) {
+            state.isUseBonuses = action.payload
         }
 
     }
@@ -153,7 +158,8 @@ export const {
     removeFavorite,
     setBasketComment,
     setSettings,
-    setStaticData
+    setStaticData,
+    setIsUseBonuses
 
 
 } = toolkitSlice.actions;

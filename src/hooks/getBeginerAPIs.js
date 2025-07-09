@@ -74,9 +74,20 @@ export const useGetBeginerAPIs = () => {
       axios
         .get(getApiLink("/api/bucket/get"), { headers: GetApiHeaders() })
         .then(({ data }) => {
-          console.log('data', data);
-          // setCookie("basket", JSON.stringify(data.data.products));
-          // dispatch(setBasket(data.data.products));
+
+          const products = data.data.products.map((item) => {
+            return {
+              id: item.id,
+              photo: item?.files[0]?.web_path,
+              articul: item?.article,
+              price: item?.price,
+              sale_price: item?.sale_price,
+              amount: item.product_amount ?? 1,
+              name: item?.name,
+            };
+          });
+
+          dispatch(setBasket(products));
         })
         .catch((error) => {
           toast.error("Возникла неизведанная ошибка");

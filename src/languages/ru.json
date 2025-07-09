@@ -153,5 +153,7 @@
   "product_dont_enough": "У одного из товаров не достаточное количество для заказа",
   "not_in_stock": "Нет в наличии",
   "success_added_to_favorites": "Товар успешно добавлен в избранное",
-  "success_removed_from_favorites": "Товар успешно удален из избранного"
+  "success_removed_from_favorites": "Товар успешно удален из избранного",
+  "not_enough_amount_of_product_in_store_to_add_into_basket": "Недостаточное количество товара на складе",
+  "use_bonuses": "Использовать бонусы"
 }

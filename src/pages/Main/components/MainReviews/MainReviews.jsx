@@ -58,8 +58,13 @@ export const MainReviews = ({ id }) => {
         slidesPerView={1}
         slidesPerGroup={1}
         spaceBetween={0}
+        autoHeight={true} // 👈 ВАЖНО
         pagination={{
+          el: ".swiper-pagination-custom",
           clickable: true,
+          renderBullet: function (index, className) {
+            return `<span class="${className} custom-dot">${index + 1}</span>`;
+          },
         }}
         modules={[Pagination]}
         className="mySwiper"
@@ -81,11 +86,6 @@ export const MainReviews = ({ id }) => {
           <SwiperSlide
             className="reviews__slide"
             key={reviewItem.id}
-            style={{
-              border: "1px solid #7f469b",
-              marginRight: "0",
-              height: "auto",
-            }}
           >
             <div className="reviews__slide_col">
               <svg width="36" height="39" viewBox="0 0 39 36">
@@ -148,6 +148,9 @@ export const MainReviews = ({ id }) => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <div className="swiper-pagination-custom"></div>
+
     </section>
   );
 };

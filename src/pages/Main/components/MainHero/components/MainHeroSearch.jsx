@@ -12,7 +12,7 @@ export const MainHeroSearch = ({ searchPlaceholder }) => {
   
   const { search } = useParams();
 
-  const [searchQuery, setSearchQuery] = useState(search);
+  const [searchQuery, setSearchQuery] = useState(search ?? "");
   const navigate = useNavigate();
 
   const handleInputQuery = (evt) => {
@@ -42,6 +42,8 @@ export const MainHeroSearch = ({ searchPlaceholder }) => {
   const [isShowList, setIsShowList] = useState(true);
 
   useEffect(() => {
+    if(searchQuery.length < 2) return setIsShowList(false);
+    
     if (!searchQuery) return setIsShowList(false);
 
     axios
@@ -88,7 +90,7 @@ export const MainHeroSearch = ({ searchPlaceholder }) => {
 
         {
             products.length ? products.map(item => (
-                <li>
+                <li key={item.id}>
                     <NavLink to={`/product/${item.id}`}>
                         <img src={item.files[0]?.web_path ?? photoPlaceholder} alt="" />
                         <span>

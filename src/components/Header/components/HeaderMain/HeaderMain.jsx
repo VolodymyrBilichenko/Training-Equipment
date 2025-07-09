@@ -26,14 +26,6 @@ export const HeaderMain = () => {
         <NavLink to={"/"} className="header__logo--link">
           <div className="circle-1"></div>
           <div className="circle-2"></div>
-          <img
-            src={LogotypeSvg}
-            alt="Логотип"
-            width="40"
-            height="40"
-            loading="lazy"
-            className="header__logo--img visible-on-mob"
-          />
           <div className="header__logo_inner">
             <picture className="visible-on-desktop">
               <img
@@ -41,11 +33,18 @@ export const HeaderMain = () => {
                 alt="Логотип"
                 width="150"
                 height="40"
-                style={{ width: "269px" }}
                 loading="lazy"
                 className="header__logo--img"
               />
             </picture>
+            <img
+              src={LogotypeSvg}
+              alt="Логотип"
+              width="40"
+              height="40"
+              loading="lazy"
+              className="header__logo--img visible-on-mob"
+            />
             <picture className="blue_mark">
               <img src={BlueMark} alt="mark" />
             </picture>
@@ -55,7 +54,7 @@ export const HeaderMain = () => {
 
       <HeaderAddNavMob />
 
-      <HeaderNavigation isOpen={isOpen} handleOpen={handleOpen} />
+      <HeaderNavigation isOpen={isOpen} />
 
       <HeaderAddNavDesk />
 
