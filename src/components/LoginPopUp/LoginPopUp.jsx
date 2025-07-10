@@ -32,6 +32,7 @@ export const LoginPopUp = ({ handleClosePopUp }) => {
         password,
       })
       .then((res) => {
+
         if (res.status === 200) {
           setEmail("");
           setPassword("");
@@ -53,6 +54,7 @@ export const LoginPopUp = ({ handleClosePopUp }) => {
 
   return (
     <div className="popup-wrapper">
+
       <div className="popup-bg popup-close" onClick={handleClosePopUp}></div>
       <div className="popup-body">
         <button

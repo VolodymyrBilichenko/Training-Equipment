@@ -38,7 +38,7 @@ export const CertificateList = ({ sertificatData }) => {
         {sertificatData.map((sertificate) => (
           <div className='certificates__card'>
             <a href={sertificate.files[0].web_path} className="certificates__card_image" data-fancybox="gallery">
-              <img src={sertificate.files[0].web_path} alt="certificate ph" width="299" height="423" loading="lazy"/>
+              <img src={sertificate.files[0].web_path} alt="certificate ph" loading="lazy"/>
             </a>
             <span className="certificates__card_name">
                 {sertificate.description}

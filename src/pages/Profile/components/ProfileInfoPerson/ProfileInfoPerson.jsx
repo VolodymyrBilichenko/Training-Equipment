@@ -3,12 +3,15 @@ import axios from "axios";
 import { getApiLink } from "../../../../api/getApiLink";
 import { GetApiHeaders } from "../../../../functions/getApiHeaders";
 import getCookies from "../../../../functions/getCookies";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import InputMask from "react-input-mask";
+import { updateUser } from "../../../../redux/toolkitSlice";
 
 const ProfileInfoPerson = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.toolkit.user);
 
@@ -47,37 +50,28 @@ const ProfileInfoPerson = () => {
     e.preventDefault();
 
     const dataBody = {
-      email: email,
       name: name,
+      email: email,
       phone_number: phone,
       organization: {
-        name: organizationName,
-        document_code: +documentCode,
-        contact_person: headMasterName,
+        name: !organizationName ? null : organizationName,
+        document_code: !documentCode ? null : documentCode,
+        contact_person: !headMasterName ? null : headMasterName,
       },
     };
 
-    organizationName === userData?.organization?.name &&
-      delete dataBody?.organization?.name;
-    documentCode === userData?.organization?.document_code &&
-      delete dataBody?.organization?.document_code;
-    headMasterName === userData?.organization?.contact_person &&
-      delete dataBody?.organization?.contact_person;
-
-    if (
-      organizationName === userData?.organization?.name &&
-      documentCode === userData?.organization?.document_code &&
-      headMasterName === userData?.organization?.contact_person
-    ) {
-      delete dataBody.organization;
+    for (const key in dataBody) {
+      if (dataBody[key] === userData[key]) {
+        delete dataBody[key];
+      }
     }
 
-    phone === userData.phone_number && delete dataBody.phone_number;
-    name === userData.name && delete dataBody.name;
-    email === userData.email && delete dataBody.email;
-    delete dataBody.updated_at;
-    delete dataBody.created_at;
-    delete dataBody.id;
+    dispatch(
+      updateUser({
+        ...userData,
+        ...dataBody,
+      })
+    );
 
     axios.defaults.headers.common["Authorization"] = `Bearer ${getCookies(
       "cookieToken"
@@ -151,7 +145,7 @@ const ProfileInfoPerson = () => {
                   type="text"
                   name="name-director"
                   placeholder={t("enter_FIO_director")}
-                  value={headMasterName}
+                  value={headMasterName ?? ""}
                   onChange={(e) => setHeadMasterName(e.target.value)}
                   className="input"
                 />
@@ -164,7 +158,7 @@ const ProfileInfoPerson = () => {
                   type="text"
                   name="company-name"
                   placeholder={t("enter_organization_name")}
-                  value={organizationName}
+                  value={organizationName ?? ""}
                   onChange={(e) => setOrganizationName(e.target.value)}
                   className="input"
                 />
@@ -177,7 +171,7 @@ const ProfileInfoPerson = () => {
                   type="email"
                   name="email"
                   placeholder={t("enter_email")}
-                  value={email}
+                  value={email ?? ""}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="input"
@@ -188,10 +182,10 @@ const ProfileInfoPerson = () => {
               <span>{t("code_edrpu")}</span>
               <span className="input-label">
                 <input
-                  type="text"
+                  type="number"
                   name="code"
                   placeholder={t("enter_code_edrpu")}
-                  value={documentCode}
+                  value={documentCode ?? ""}
                   onChange={(e) => setDocumentCode(e.target.value)}
                   className="input"
                 />
@@ -200,15 +194,22 @@ const ProfileInfoPerson = () => {
             <label className="account__block_item">
               <span className="is-required">{t("phone_title")}</span>
               <span className="input-label">
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder={t("enter_phone")}
+                <InputMask
+                  mask="+380 (99) 999 99 99"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  required
-                  className="input"
-                />
+                >
+                  {(inputProps) => (
+                    <input
+                      {...inputProps}
+                      type="tel"
+                      placeholder={t("enter_phone")}
+                      className="input"
+                      name="phone"
+                      required
+                    />
+                  )}
+                </InputMask>
               </span>
             </label>
             <label className="account__block_item">

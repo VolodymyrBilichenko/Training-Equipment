@@ -138,7 +138,10 @@ export const ProductCard = () => {
         "cookieToken"
       )}`;
       axios
-        .post(getApiLink("/api/bucket/add"), dataItem, {
+        .post(getApiLink("/api/bucket/add"), {
+          product_id: dataCard?.id,
+          product_amount: productCount,
+        }, {
           headers: GetApiHeaders(),
         })
         .then((res) => {

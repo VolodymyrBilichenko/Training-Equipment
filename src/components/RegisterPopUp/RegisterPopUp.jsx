@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useRegistration } from "../../hooks/registration";
 import { errorTypes } from "../../constants";
 import { Trans, useTranslation } from "react-i18next";
+import InputMask from "react-input-mask";
 
 export const RegisterPopUp = ({ handleClosePopUp }) => {
   const { t } = useTranslation();
@@ -111,15 +112,13 @@ export const RegisterPopUp = ({ handleClosePopUp }) => {
               <label className="popup-form__item">
                 <span className="is-required">{t("phone_title")}</span>
                 <span className="input-label">
-                  <input
+                  <InputMask
+                    mask="+380 (99) 999 99 99"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    type="number"
-                    name="phone"
-                    required
                     placeholder={t("enter_phone")}
                     className="input"
-                  />
+                  ></InputMask>
                 </span>
               </label>
               <label className="popup-form__item">

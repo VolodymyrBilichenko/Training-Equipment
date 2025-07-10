@@ -524,7 +524,7 @@
 		&--list > li > a {
 			width: 100%;
 
-			padding: 15px 10px;
+			padding: 15px 6px;
 			display: block;
 
 			color: var(--white);
@@ -537,7 +537,7 @@
 
 			@include _992 {
 				font-size: 0.75rem;
-				padding: 10px;
+				padding: 6px;
 			}
 
 			@media (min-width: 1300px) {
@@ -545,7 +545,7 @@
 			}
 
 			@media (min-width: 1550px) {
-				padding: 15px;
+				padding: 7px;
 				font-size: 1rem;
 			}
 
@@ -586,7 +586,7 @@
 			gap: 15px;
 
 			@media (min-width: 1550px) {
-				gap: 30px;
+				gap: 20px;
 			}
 		}
 
@@ -619,6 +619,12 @@
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				font-size: .75rem;
+			}
+
+			@include _992 {
+				span {
+					max-width: 70px;
+				}
 			}
 
 			&[data-length] {

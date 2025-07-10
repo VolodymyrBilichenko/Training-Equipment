@@ -10,7 +10,7 @@ export const ProfileInfo = () => {
     const setModal = useContext(PopupContext)
 
     const handleOpenModal = () => {
-        setModal("resetPass")
+        setModal("changePass")
     }
 
     return (

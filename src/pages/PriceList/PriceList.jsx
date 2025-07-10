@@ -60,7 +60,7 @@ export const PriceList = () => {
                 .filter((item) => item.category !== null)
                 ?.map((item) => (
                   <li key={item.id}>
-                    <a href={item.file.web_path} className="pricelist__item">
+                    <a href={item.file.web_path} target="_blank" download className="pricelist__item">
                       <span>{item.category ? item.category.name : ""}</span>
                       <i>
                         <svg width="26" height="26" viewBox="0 0 26 26">

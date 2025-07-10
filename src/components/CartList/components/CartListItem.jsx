@@ -36,7 +36,7 @@ export const CartListItem = ({ productInfo }) => {
       return;
     }
 
-    setProductCount((prev) => prev + 1);
+    setProductCount((prev) => +prev + 1);
     handleServerUpdateBasket(1, "add");
     handleUpdateBasketCount(+productCount + 1);
   };
@@ -44,7 +44,7 @@ export const CartListItem = ({ productInfo }) => {
   const handleDecrement = async () => {
     if (productCount <= 1) return;
 
-    setProductCount((prev) => prev - 1);
+    setProductCount((prev) => +prev - 1);
     handleServerUpdateBasket(1, "remove");
     handleUpdateBasketCount(+productCount - 1);
   };

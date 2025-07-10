@@ -3,12 +3,15 @@ import axios from "axios";
 import getCookies from "../../../../functions/getCookies";
 import { getApiLink } from "../../../../api/getApiLink";
 import { GetApiHeaders } from "../../../../functions/getApiHeaders";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import InputMask from "react-input-mask";
+import { updateUser } from "../../../../redux/toolkitSlice";
 
 const ProfileInfoAddress = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const userData = useSelector((state) => state.toolkit.user);
 
@@ -44,12 +47,18 @@ const ProfileInfoAddress = () => {
 
     const dataBody = {
       address_delivery: {
-        address_line: deliveryAddress,
-        po_box: deliveryBox,
-        full_name: deliveryName,
-        phone_number: deliveryPhone,
+        address_line: !deliveryAddress ? null : deliveryAddress,
+        po_box: !deliveryBox ? null : deliveryBox,
+        full_name: !deliveryName ? null : deliveryName,
+        phone_number: !deliveryPhone ? null : deliveryPhone,
       },
     };
+
+    const newUserData = {
+      ...userData,
+      address_delivery: dataBody.address_delivery,
+    };
+    dispatch(updateUser(newUserData));
 
     delete dataBody.updated_at;
     delete dataBody.created_at;
@@ -158,14 +167,22 @@ const ProfileInfoAddress = () => {
             <label className="account__block_item">
               <span>{t("receiver_phone")}</span>
               <span className="input-label">
-                <input
+                {/* <input
                   type="tel"
                   name="receiver-phone"
                   placeholder={t('enter_phone')}
                   value={deliveryPhone}
                   onChange={(e) => setDeliveryPhone(e.target.value)}
                   className="input"
-                />
+                /> */}
+                <InputMask
+                  mask="+380 (99) 999 99 99"
+                  value={deliveryPhone}
+                  onChange={(e) => setDeliveryPhone(e.target.value)}
+                  placeholder={t("enter_phone")}
+                  className="input"
+                >
+                </InputMask>
               </span>
             </label>
             <div className="account__block_footer">

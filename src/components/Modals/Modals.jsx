@@ -9,6 +9,7 @@ import {PopupContext} from "../../App";
 import { ModalConfirm } from '../ModalConfirm';
 import { ModalAskConfirm } from '../ModalAskConfirm';
 import { ModalOffer } from '../ModalOffer';
+import { ChangePassPopUp } from '../ChangePassPopUp/ChangePassPopUp';
 
 export const Modals = ({modal}) => {
 
@@ -31,6 +32,7 @@ export const Modals = ({modal}) => {
         "login": <LoginPopUp handleClosePopUp={handleClosePopUp}/>,
         "register": <RegisterPopUp handleClosePopUp={handleClosePopUp}/>,
         "resetPass": <ResetPassPopUp handleClosePopUp={handleClosePopUp}/>,
+        "changePass": <ChangePassPopUp handleClosePopUp={handleClosePopUp}/>,
         "order": <OrderPopUp handleClosePopUp={handleClosePopUp}/>,
         "thx": <ThanksPopUp handleClosePopUp={handleClosePopUp}/>,
         "favorites": <FavoritesPopUp handleClosePopUp={handleClosePopUp}/>,

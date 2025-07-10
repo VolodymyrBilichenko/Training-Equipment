@@ -1,30 +1,32 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { BreadCrumbs } from '../../components/BreadCrumbs/BreadCrumbs'
+import { useTranslation } from 'react-i18next';
 
 import Decor from '../../assets/img/decor-hero-background.png'
 
 export const Error = () => {
+    const { t } = useTranslation();
     return (
         <div className='main'>
             <div className="main__background" style={{backgroundImage: `url(${Decor})`, paddingTop: '24%'}} aria-hidden="true"></div>
 
-            <BreadCrumbs pages={[{page: 'Помилка 404'}]}/>
+            <BreadCrumbs pages={[{page: t('error_404_title')}]}/>
 
             <section className="not-found container">
                 <div className="not-found__col">
                     <h2 className="not-found__title section-title">
-                        Помилка 404
+                        {t('error_404_title')}
                     </h2>
                     <h3 className="not-found__sub-title title">
-                        Сторінку, на яку ви перейшли, не знайдено.
+                        {t('error_404_subtitle')}
                     </h3>
                     <div className="not-found__text">
-                        <p>Якщо Ви перейшли на цю сторінку за посиланням з листа, переконайтеся, що посилання не було перекручено вашим поштовим клієнтом. </p>
-                        <p>У разі, якщо посилання в листі розділено на частини переносами рядка, ви можете заново відтворити його, скопіювавши частини по черзі в адресний рядок браузера.</p>
+                        <p>{t('error_404_text1')}</p>
+                        <p>{t('error_404_text2')}</p>
                     </div>
                     <NavLink to={'/'} className="not-found__button button">
-                        На головну сторінку
+                        {t('to_main_page')}
                     </NavLink>
                 </div>
                 <div className="not-found__col visible-on-desktop">

@@ -3,5 +3,10 @@
   "menu_point_2": "Catalog",
   "menu_point_3": "Price",
   "menu_point_4": "Tender Preparation Consultation",
-  "menu_point_5": "Certificates and Orders"
+  "menu_point_5": "Certificates and Orders",
+  "error_404_title": "Error 404",
+  "error_404_subtitle": "The page you visited was not found.",
+  "error_404_text1": "If you followed a link from an email, please make sure the link was not distorted by your email client.",
+  "error_404_text2": "If the link in the email is split by line breaks, you can reconstruct it by copying the parts one by one into your browser's address bar.",
+  "to_main_page": "To main page"
 }

@@ -98,7 +98,7 @@ export const useGetBeginerAPIs = () => {
     if (hasCookieToken) {
       axios.defaults.headers.get["Authorization"] = `Bearer ${hasCookieToken}`;
       axios
-        .get(getApiLink("/api/favorites/get?page=1"), {
+        .get(getApiLink("/api/favorites/get"), {
           headers: GetApiHeaders(),
         })
         .then(({ data }) => {

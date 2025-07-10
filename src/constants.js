@@ -4,5 +4,12 @@ export const errorTypes = {
   "Not enough amount of product in store to add into basket": "no_stock",
   "The email has already been taken.": "email_taken",
   "The email must be a valid email address.": "invalid_email",
-  "Будь ласка підтвердіть свій акаунт за посиланням на email": "confirm_email"
+  "Будь ласка підтвердіть свій акаунт за посиланням на email": "confirm_email",
+  "wrong_data": "invalid_data",
+  "invalid_name": "invalid_name",
+  "invalid_phone": "invalid_phone",
+  "invalid_password": "invalid_password",
+  "invalid_email": "invalid_email",
+  "passwords_do_not_match": "passwords_do_not_match",
+  "change_password_Wrong credentials": "wrong_credentials_change_password",
 };

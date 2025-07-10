@@ -20,6 +20,9 @@ const toolkitSlice = createSlice({
         setUser(state, action) {
             state.user = action.payload
         },
+        updateUser(state, action) {
+            state.user = action.payload
+        },
 
         setSettings(state, action) {
             state.settings = action.payload
@@ -146,6 +149,7 @@ export default toolkitSlice.reducer;
 export const {
 
     setUser,
+    updateUser,
     setAllProducts,
     setAllCategories,
     setFavorites,
