@@ -6,7 +6,7 @@ import { CustomLoading } from "../CustomLoading/CustomLoading";
 import { useTranslation } from "react-i18next";
 import { ProductItem } from "../ProductItem";
 
-export const ProductsList = ({ ClassNameList, list, isLoading }) => {
+export const ProductsList = ({ ClassNameList, list, isLoading, isShowMore = false }) => {
   const { t } = useTranslation();
   
   const [showCount, setShowCount] = useState(8);
@@ -24,7 +24,7 @@ export const ProductsList = ({ ClassNameList, list, isLoading }) => {
       >
         {!isLoading ? (
           list.length ? (
-            list?.slice(0, showCount).map((product) => (
+            list?.slice(0, isShowMore ? showCount : list.length).map((product) => (
               <ProductItem key={product.id} data={product} />
             ))
           ) : (
@@ -40,9 +40,11 @@ export const ProductsList = ({ ClassNameList, list, isLoading }) => {
         )}
       </ProductsListStyled>
 
-      <button className="products-list__show-more" onClick={handleShowMore} disabled={showCount >= list.length}>
-        {t("show_more")}
-      </button>
+      {isShowMore && (
+        <button className="products-list__show-more" onClick={handleShowMore} disabled={showCount >= list.length}>
+          {t("show_more")}
+        </button>
+      )}
     </>
   );
 };

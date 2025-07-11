@@ -35,7 +35,7 @@ export const Favorites = () => {
                     {t('want_to_get_text')}
                 </button>
 
-                <ProductsList isLoading={isLoading} list={favorites} ClassNameList={'favorites__list'}/>
+                <ProductsList isLoading={isLoading} isShowMore={true} list={favorites} ClassNameList={'favorites__list'}/>
 
                 <PaginationProducts ClassName={'favorites__pagination'}/>
             </div>
