@@ -47,7 +47,6 @@ export const useRegistration = ({ body }) => {
     axios
       .post(getApiLink("/api/auth/registration"), body)
       .then((res) => {
-        console.log(res);
         if (res.status >= 200 && res.status < 300) {
           setIsSuccess(true);
         }

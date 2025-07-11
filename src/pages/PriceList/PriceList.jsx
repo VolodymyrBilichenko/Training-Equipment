@@ -8,18 +8,24 @@ import { GetApiHeaders } from "../../functions/getApiHeaders";
 import { useTranslation } from "react-i18next";
 
 export const PriceList = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [priceData, setPriceData] = useState([]);
-
-  const fullPriceArray = priceData.filter((item) => item.category === null);
-  const fullPrice = fullPriceArray.length > 0 ? fullPriceArray[0] : null;
+  const [fullPrice, setFullPrice] = useState({});
 
   useEffect(() => {
     axios
       .get(getApiLink("/api/price-list/get"), { headers: GetApiHeaders() })
       .then(({ data }) => {
         setPriceData(data.data);
+        
+        for(let i = 0; i < data.data.length; i++) {
+          if(data.data[i].id === 6) {
+            setFullPrice(data.data[i]);
+            break;
+          }
+        }
+        
       })
       .catch((error) => {
         console.error(error);
@@ -38,8 +44,8 @@ export const PriceList = () => {
           ClassTitle={"pricelist__title"}
         />
 
-        <a
-          href={fullPrice && fullPrice.file && fullPrice.file.web_path}
+        {fullPrice?.file?.web_path && <a
+          href={fullPrice?.file?.web_path}
           className="pricelist__item"
         >
           <span>{t('download_full_title')}</span>
@@ -48,7 +54,7 @@ export const PriceList = () => {
               <use xlinkHref="#download"></use>
             </svg>
           </i>
-        </a>
+        </a>}
         {!!priceData.length && (
           <div className="pricelist__block">
             <h3 className="pricelist__block_title title">
@@ -61,7 +67,7 @@ export const PriceList = () => {
                 ?.map((item) => (
                   <li key={item.id}>
                     <a href={item.file.web_path} target="_blank" download className="pricelist__item">
-                      <span>{item.category ? item.category.name : ""}</span>
+                      <span>{item[`name_${i18n.language}`] ?? item.name ?? ""}</span>
                       <i>
                         <svg width="26" height="26" viewBox="0 0 26 26">
                           <use xlinkHref="#download"></use>

@@ -150,7 +150,6 @@ export const ProductCard = () => {
           }
         })
         .catch((err) => {
-          console.log(err);
           toast.error(
             t(
               errorTypes[

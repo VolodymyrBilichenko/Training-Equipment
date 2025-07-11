@@ -60,11 +60,11 @@ export const CartListItem = ({ productInfo }) => {
           product_id: productInfo?.id,
           product_amount: amount,
         })
-        .then((res) => {
-          console.log(res);
-        })
+        .then((res) => {})
         .catch((err) => {
-          if (err.response?.data?.error?.message[0]?.includes("Not enough amount")) {
+          if (
+            err.response?.data?.error?.message[0]?.includes("Not enough amount")
+          ) {
             setProductCount(oldAmount);
             dispatch(updateBasketItem({ ...productInfo, amount: oldAmount }));
             toast.error(

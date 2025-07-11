@@ -46,7 +46,6 @@ export const LoginPopUp = ({ handleClosePopUp }) => {
         setErrorMessage(
           error?.response?.data?.message ?? error?.response?.data?.error ?? ""
         );
-        console.log(error);
       });
   };
 

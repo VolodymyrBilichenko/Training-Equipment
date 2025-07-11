@@ -106,13 +106,13 @@ export const useGetBeginerAPIs = () => {
             return {
               id: item.id,
               name: item.name,
-              files: [
-                {
-                  web_path: item?.files[0]?.web_path,
-                },
-              ],
-              original_price: item.original_price,
+              name_ua: item.name_ua,
+              name_ru: item.name_ru,
+              name_en: item.name_en,
+              files: item?.files,
+              sale_price: item.sale_price,
               price: item.price,
+              amount_in_store: item.amount_in_store,
             };
           });
 

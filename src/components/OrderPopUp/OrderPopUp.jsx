@@ -89,7 +89,6 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
         navigate("/");
       })
       .catch((error) => {
-        console.log("Error:", error);
 
         if (
           error.response.data?.error?.message?.some(
