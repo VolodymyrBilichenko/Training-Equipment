@@ -15,6 +15,7 @@ export const BasketFooter = () => {
 
   const [minOrderPrice, setMinOrderPrice] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [preAmount, setPreAmount] = useState(0);
   const [comment, setComment] = useState("");
   const [discountAmount, setDiscountAmount] = useState(0);
   const [bonus, setBonus] = useState(0);
@@ -31,12 +32,14 @@ export const BasketFooter = () => {
   };
 
   useEffect(() => {
-    setTotalAmount(
-      basketList.reduce(
-        (acc, item) => acc + item.amount * (item.sale_price ?? item.price),
-        0
-      )
-    );
+    setTotalAmount(0)
+    setPreAmount(0)
+
+    for(let i = 0; i < basketList.length; i++) {
+      setTotalAmount(prev => prev + (basketList[i].amount * (basketList[i]?.sale_price ?? basketList[i].price)))
+      setPreAmount(prev => prev + (basketList[i].amount * (basketList[i]?.price)))
+    }
+
 
     // discount amount
     setDiscountAmount(
@@ -88,7 +91,7 @@ export const BasketFooter = () => {
             </tr>
             <tr className="">
               <td>{t("common_total")}</td>
-              <td>{totalAmount.toFixed(2)} ₴</td>
+              <td>{preAmount?.toFixed(2)} ₴</td>
             </tr>
             <tr>
               <td>{t("discount")}</td>

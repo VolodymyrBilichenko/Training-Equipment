@@ -131,7 +131,7 @@ export const ProductItem = ({ data }) => {
         </svg>
       </button>
       <NavLink
-        target="_blank"
+        // target="_blank"
         to={`/product/${data.id}`}
         className="product-card__image image-aspect-ratio"
         aria-label="Глобус-модель 'Будова Сонця'"
@@ -139,7 +139,7 @@ export const ProductItem = ({ data }) => {
         <picture>
           <img
             src={data.files[0]?.web_path ?? photoPlaceholder}
-            alt="ProductCardImg"
+            alt={data?.[`name_${i18n.language}`] ?? data?.name}
             width="300"
             height="300"
             loading="lazy"
@@ -147,7 +147,7 @@ export const ProductItem = ({ data }) => {
         </picture>
       </NavLink>
       <h3 className="product-card__title">
-        <NavLink target="_blank" to={`/product/${data.id}`}>
+        <NavLink to={`/product/${data.id}`}>
           {data?.[`name_${i18n.language}`] ?? data?.name}
         </NavLink>
       </h3>

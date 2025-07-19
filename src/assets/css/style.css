@@ -5604,6 +5604,10 @@ padding-bottom: 0;
         top: 15px;
         right: 15px;
     }
+    .cart__item_info h3 a {
+        max-width: 90%;
+        display: block;
+    }
 }
 
 @media screen and (max-width: 576px) {

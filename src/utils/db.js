@@ -13,6 +13,21 @@ export const getDB = () =>
     },
   });
 
+export const saveProductsFromServer = async (products) => {
+  const db = await getDB();
+  const tx = db.transaction("products", "readwrite");
+  const store = tx.objectStore("products");
+  
+  // Очищаем все существующие товары
+  await store.clear();
+  
+  // Сохраняем новые товары с сервера
+  for (const product of products) {
+    await store.put(product);
+  }
+  await tx.done;
+};
+
 // Добавить или обновить товар
 export const saveProducts = async (products) => {
   const db = await getDB();
@@ -25,6 +40,21 @@ export const saveProducts = async (products) => {
 };
 
 // Favorite products 
+export const saveFavoriteProductsFromServer = async (products) => {
+  const db = await getDB();
+  const tx = db.transaction("favorite-products", "readwrite");
+  const store = tx.objectStore("favorite-products");
+  
+  // Очищаем все существующие товары
+  await store.clear();
+  
+  // Сохраняем новые товары с сервера
+  for (const product of products) {
+    await store.put(product);
+  }
+  await tx.done;
+};
+
 export const saveFavoriteProduct = async (product) => {
   const db = await getDB();
   const tx = db.transaction("favorite-products", "readwrite");

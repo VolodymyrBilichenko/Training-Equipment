@@ -13,6 +13,18 @@ export const ProductsList = ({ ClassNameList, list, isLoading, isShowMore = fals
 
   const handleShowMore = () => {
     setShowCount(showCount + 4);
+    
+    // Скроллим к последней карточке после добавления новых
+    setTimeout(() => {
+      const productCards = document.querySelectorAll('.product-card');
+      if (productCards.length > 0) {
+        const lastCard = productCards[productCards.length - 1];
+        lastCard.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+    }, 100);
   };
 
   return (

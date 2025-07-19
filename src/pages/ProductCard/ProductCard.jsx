@@ -146,6 +146,7 @@ export const ProductCard = () => {
         })
         .then((res) => {
           if (res.status >= 200 && res.status < 300) {
+            dispatch(addBasketItem(dataItem));
             toast.success(t("success_added_to_cart"));
           }
         })

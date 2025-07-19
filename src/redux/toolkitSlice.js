@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import setCookie from "../functions/setCookie";
-import { getProduct, removeFavoriteProduct, removeProduct, saveFavoriteProduct, saveProducts, updateProduct } from "../utils/db";
+import { getProduct, removeFavoriteProduct, removeProduct, saveFavoriteProduct, saveFavoriteProductsFromServer, saveProducts, saveProductsFromServer, updateProduct } from "../utils/db";
 
 
 const toolkitSlice = createSlice({
@@ -37,6 +37,7 @@ const toolkitSlice = createSlice({
 
         setFavorites(state, action) {
             state.favorites = action.payload
+            saveFavoriteProductsFromServer(action.payload)
         },
         addFavorite(state, action) {
             
@@ -116,6 +117,7 @@ const toolkitSlice = createSlice({
 
         setBasket(state, action) {
             state.basket = action.payload
+            saveProductsFromServer(action.payload)
         },
         changeBasketItem(state, action) {
             state.basket = state.basket.map(item => {

@@ -1,5 +1,10 @@
 .certificate_orders {
 
+	@include _992 {
+		padding-top: 0px;
+	}
+	padding-top: 40px;
+
 	// .certificate_orders__title
 
 	&__title {
