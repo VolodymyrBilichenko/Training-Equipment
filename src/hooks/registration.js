@@ -4,8 +4,11 @@ import { useState } from "react";
 import { setUser } from "../redux/toolkitSlice";
 import { useDispatch } from "react-redux";
 import setCookie from "../functions/setCookie";
+import { useTranslation } from "react-i18next";
 
 export const useRegistration = ({ body }) => {
+  const { i18n } = useTranslation();
+
   const [errorMessage, setErrorMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -45,7 +48,11 @@ export const useRegistration = ({ body }) => {
     setErrorMessage("");
 
     axios
-      .post(getApiLink("/api/auth/registration"), body)
+      .post(getApiLink("/api/auth/registration"), body, {
+        headers: {
+          "Accept-Language": i18n.language || "en", // или указать вручную "ru" / "en"
+        },
+      })
       .then((res) => {
         if (res.status >= 200 && res.status < 300) {
           setIsSuccess(true);

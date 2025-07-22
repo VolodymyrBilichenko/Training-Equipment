@@ -1265,8 +1265,8 @@ input[type=password] {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     gap: 10px
 }
 
@@ -5605,7 +5605,7 @@ padding-bottom: 0;
         right: 15px;
     }
     .cart__item_info h3 a {
-        max-width: 90%;
+        max-width: 80%;
         display: block;
     }
 }

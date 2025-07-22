@@ -14,14 +14,14 @@ import { clearProducts } from "../../utils/db";
 import InputMask from "react-input-mask";
 
 export const OrderPopUp = ({ handleClosePopUp }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const SetPopContext = useContext(PopupContext);
   const basketList = useSelector((state) => state.toolkit.basket);
   const basketComment = useSelector((state) => state.toolkit.basketComment);
   const user = useSelector((state) => state.toolkit.user);
   const isUseBonuses = useSelector((state) => state.toolkit.isUseBonuses);
-  
+
   const navigate = useNavigate();
 
   const [email, setEmail] = useState(user?.email ?? "");
@@ -63,7 +63,7 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
       email_not_auth_user: email,
       phone_not_auth_user: phone,
       is_get_example: checkedBill,
-      is_use_bonuses: isUseBonuses
+      is_use_bonuses: isUseBonuses,
     };
 
     const apiString = getCookies("cookieToken")
@@ -74,7 +74,12 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
       "cookieToken"
     )}`;
     axios
-      .post(getApiLink(apiString), dataToSend, { headers: GetApiHeaders() })
+      .post(getApiLink(apiString), dataToSend, {
+        headers: {
+          Authorization: `Bearer ${getCookies("cookieToken")}`,
+          "Accept-Language": i18n.language || "en", // или указать вручную "ru" / "en"
+        },
+      })
       .then(({ data }) => {
         handleNavPopupThx();
 
@@ -89,7 +94,6 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
         navigate("/");
       })
       .catch((error) => {
-
         if (
           error.response.data?.error?.message?.some(
             (mes) =>

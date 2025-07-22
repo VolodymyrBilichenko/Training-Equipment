@@ -12,20 +12,27 @@ export const ProductsList = ({ ClassNameList, list, isLoading, isShowMore = fals
   const [showCount, setShowCount] = useState(8);
 
   const handleShowMore = () => {
-    setShowCount(showCount + 4);
-    
-    // Скроллим к последней карточке после добавления новых
+    const previousCount = showCount;
+    const newCount = previousCount + 4;
+  
+    setShowCount(newCount);
+  
     setTimeout(() => {
       const productCards = document.querySelectorAll('.product-card');
-      if (productCards.length > 0) {
-        const lastCard = productCards[productCards.length - 1];
-        lastCard.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start' 
+      const firstNewCard = productCards[previousCount];
+  
+      if (firstNewCard) {
+        const rect = firstNewCard.getBoundingClientRect();
+        const offsetTop = window.scrollY + rect.top;
+  
+        window.scrollTo({
+          top: offsetTop - 100, // прокручиваем на 100px выше карточки
+          behavior: 'smooth',
         });
       }
     }, 100);
   };
+  
 
   return (
     <>

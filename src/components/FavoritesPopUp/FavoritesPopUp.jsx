@@ -7,7 +7,7 @@ import getCookies from "../../functions/getCookies";
 import { useTranslation } from "react-i18next";
 
 export const FavoritesPopUp = ({ handleClosePopUp }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [email, setEmail] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
@@ -33,7 +33,10 @@ export const FavoritesPopUp = ({ handleClosePopUp }) => {
     )}`;
     axios
       .post(getApiLink("/api/send-commercial-offer"), dataToSend, {
-        headers: GetApiHeaders(),
+        headers: {
+          Authorization: `Bearer ${getCookies("cookieToken")}`,
+          "Accept-Language": i18n.language || "en", // или указать вручную "ru" / "en"
+        },
       })
       .then(({ data }) => {
         setIsSuccess(true);
