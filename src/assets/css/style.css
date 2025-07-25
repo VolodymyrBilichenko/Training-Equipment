@@ -4259,8 +4259,8 @@ border-radius: 25px;
     }
 
     .main {
-        padding-top: var(--height-header,183px);
-        margin-top: calc(0px - var(--height-header,183px))
+        padding-top: 183px;
+        margin-top: -183px
     }
 
     .main__footer_decor {
@@ -4965,12 +4965,12 @@ border-radius: 25px;
     }
 
     .header__drop-down:hover .header__drop-down--target svg:nth-child(3),.header__nav--list>li>a:hover {
-        color: var(--accent-hover)
+        /* color: var(--accent-hover) */
     }
 
     .header__drop-down:hover .header__drop-down--block {
-        opacity: 1;
-        visibility: visible
+        /* opacity: 1;
+        visibility: visible */
     }
 
     .header__drop-down--list a {

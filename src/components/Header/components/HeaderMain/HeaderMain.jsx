@@ -54,7 +54,7 @@ export const HeaderMain = () => {
 
       <HeaderAddNavMob />
 
-      <HeaderNavigation isOpen={isOpen} />
+      <HeaderNavigation isOpen={isOpen} handleOpenMenu={handleOpen} />
 
       <HeaderAddNavDesk />
 

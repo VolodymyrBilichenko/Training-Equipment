@@ -273,11 +273,11 @@
 		@media (any-hover: hover) {
 			&:hover & {
 				&--target svg:nth-child(3) {
-					color: var(--accent-hover);
+					// color: var(--accent-hover);
 				}
 
 				&--block {
-					opacity: 1; visibility: visible;
+					// opacity: 1; visibility: visible;
 				}
 			}
 		}

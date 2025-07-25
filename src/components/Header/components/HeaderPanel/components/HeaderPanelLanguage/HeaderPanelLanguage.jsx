@@ -31,15 +31,21 @@ i18n
 export const HeaderPanelLanguage = () => {
 
     const [lang, setLang] = useState(i18n.language)
+    const [isOpenLanguage, setIsOpenLanguage] = useState(false);
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang)
         setLang(lang)
+        handleOpenLanguage()
     }
 
+    const handleOpenLanguage = () => {
+        setIsOpenLanguage(!isOpenLanguage);
+    };
+
     return (
-        <div className="header__drop-down">
-            <button className="header__drop-down--target" type="button">
+        <div className={"header__drop-down " + (isOpenLanguage ? "is-active" : "")}>
+            <button className="header__drop-down--target" onClick={handleOpenLanguage} type="button">
                 <svg width="20" height="20" viewBox="0 0 48 48">
                     <use xlinkHref="#language"></use>
                 </svg>

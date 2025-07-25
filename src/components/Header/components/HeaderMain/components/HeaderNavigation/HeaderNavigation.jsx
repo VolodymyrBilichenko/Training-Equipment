@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { getLocalizedText } from "../../../../../../utils/getLocalizedText";
 import { useSelector } from "react-redux";
 
-export const HeaderNavigation = ({ isOpen }) => {
+export const HeaderNavigation = ({ isOpen, handleOpenMenu }) => {
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (lang) => {
@@ -50,19 +50,19 @@ export const HeaderNavigation = ({ isOpen }) => {
       <div className="header__nav--body">
         <ul className="header__nav--list">
           <li>
-            <NavLink className={({isActive}) => isActive ? "is-active" : ""} to={"/about"}>{t("menu_point_1")}</NavLink>
+            <NavLink className={({isActive}) => isActive ? "is-active" : ""} onClick={handleOpenMenu} to={"/about"}>{t("menu_point_1")}</NavLink>
           </li>
           <li>
-            <NavLink className={({isActive}) => isActive ? "is-active" : ""} to={"/catalog"}>{t("menu_point_2")}</NavLink>
+            <NavLink className={({isActive}) => isActive ? "is-active" : ""} onClick={handleOpenMenu} to={"/catalog"}>{t("menu_point_2")}</NavLink>
           </li>
           <li>
-            <NavLink className={({isActive}) => isActive ? "is-active" : ""} to={"/pricelist"}>{t("menu_point_3")}</NavLink>
+            <NavLink className={({isActive}) => isActive ? "is-active" : ""} onClick={handleOpenMenu} to={"/pricelist"}>{t("menu_point_3")}</NavLink>
           </li>
           <li>
-            <NavLink to={"/about/#consultation"}>{t("menu_point_4")}</NavLink>
+            <NavLink onClick={handleOpenMenu} to={"/about/#consultation"}>{t("menu_point_4")}</NavLink>
           </li>
           <li>
-            <NavLink className={({isActive}) => isActive ? "is-active" : ""} to={"/certificate"}>{t("menu_point_5")}</NavLink>
+            <NavLink className={({isActive}) => isActive ? "is-active" : ""} onClick={handleOpenMenu} to={"/certificate"}>{t("menu_point_5")}</NavLink>
           </li>
         </ul>
         <div className="header__add visible-on-mob">

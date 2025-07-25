@@ -97,7 +97,7 @@ section {
 
 	padding-top: var(--height-header, 50px); margin-top: calc(0px - var(--height-header,50px));
 	@include _992 {
-		padding-top: var(--height-header, 183px); margin-top: calc(0px - var(--height-header,183px));
+		padding-top: var(--height-header, 183px); margin-top: calc(0px - var(0,183px));
 	}
 
 	padding-bottom: 73px;
