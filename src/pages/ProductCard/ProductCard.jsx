@@ -364,7 +364,7 @@ export const ProductCard = () => {
               <div className="product__description">
                 <h3>{t("description")}</h3>
                 {HTMLReactParser(
-                  dataCard["name_" + i18n.language] ?? dataCard?.description ?? ""
+                  dataCard["description_" + i18n.language] ?? dataCard?.description ?? ""
                 )}
               </div>
             </div>

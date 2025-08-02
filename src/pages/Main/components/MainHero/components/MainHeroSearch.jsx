@@ -19,6 +19,19 @@ export const MainHeroSearch = ({ searchPlaceholder }) => {
     setSearchQuery(evt.target.value);
   };
 
+  const handleInputFocus = () => {
+    setIsShowList(true);
+    setIsFocus(true);
+  };
+
+  const handleInputBlur = () => {
+    // Добавляем задержку, чтобы пользователь успел кликнуть на элемент списка
+    setTimeout(() => {
+      setIsShowList(false);
+      setIsFocus(false);
+    }, 200);
+  };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -39,7 +52,8 @@ export const MainHeroSearch = ({ searchPlaceholder }) => {
 
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isShowList, setIsShowList] = useState(true);
+  const [isShowList, setIsShowList] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
 
   useEffect(() => {
     if(searchQuery.length < 2) return setIsShowList(false);
@@ -54,13 +68,15 @@ export const MainHeroSearch = ({ searchPlaceholder }) => {
       .then(({ data }) => {
         setProducts(data.data);
         setIsLoading(false);
-        setIsShowList(!!data.data)
+        setIsShowList(!!data.data && isFocus)
       })
       .catch((error) => {
         toast.error("Произошла неизвестная ошибка", error);
         setIsLoading(false);
       });
   }, [searchQuery]);
+
+  
   
 
   return (
@@ -73,6 +89,8 @@ export const MainHeroSearch = ({ searchPlaceholder }) => {
         <label>
           <input
             onChange={handleInputQuery}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
             type="search"
             name="search"
             placeholder={searchPlaceholder}
