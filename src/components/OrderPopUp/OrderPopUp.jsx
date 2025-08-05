@@ -188,7 +188,8 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
                 </InputMask>
               </span>
             </label>
-            <label className="popup-form__checkbox checkbox">
+            
+            {/* <label className="popup-form__checkbox checkbox">
               <input
                 type="checkbox"
                 checked={checkedBill}
@@ -202,7 +203,7 @@ export const OrderPopUp = ({ handleClosePopUp }) => {
                 </svg>
               </span>
               <span className="checkbox-text">{t("want_to_get")}</span>
-            </label>
+            </label> */}
             <button
               disabled={isLoading}
               className="popup-form__submit button is-mode-1"
