@@ -20,10 +20,21 @@ export const ProductItem = ({ data }) => {
   const { t, i18n } = useTranslation();
 
   const favorites = useSelector((state) => state.toolkit.favorites);
+  const basket = useSelector((state) => state.toolkit.basket);
 
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleAddBasket = async () => {
+    if (
+      basket.some(
+        (item) => data.id === item.id && item.amount >= item.amount_in_store
+      )
+    ) {
+      return toast.error(
+        t("not_enough_amount_of_product_in_store_to_add_into_basket")
+      );
+    }
+
     const dataItem = {
       id: data?.id,
       photo: data?.files[0]?.web_path,
